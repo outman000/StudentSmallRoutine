@@ -8,7 +8,7 @@ namespace Dtol.dtol
     {
         public int id { set; get; }
         public string username { get; set; }
-        public string userid { get; set; }
+        public string Idnumber { get; set; }
         public string password { get; set; }
         public string openid { get; set; }
      

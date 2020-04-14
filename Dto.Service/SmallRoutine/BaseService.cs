@@ -58,21 +58,14 @@ namespace Dto.Service.AutoMapper.SmallRoutine
             _schoolInfoRespository.AddListBase(schoolInsertList);//插入学校
             _stationInfoRespository.AddListBase(staffInsertList);//插入岗位
             _departInfoRespository.AddListBase(departInsertList);//插入部门
-
-
-
-
             _StudentInfoRepository.SaveChanges();//所有的save都是全局的用哪个都行。
-
-
-
 
             //还差一个所有岗位
         }
 
         public void structUserInfo()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
