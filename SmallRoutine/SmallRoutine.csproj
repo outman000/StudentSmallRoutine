@@ -8,15 +8,15 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\公司\开发区小程序\SmallRoutine\SmallRoutine\SmallRoutine.xml</DocumentationFile>
-    <OutputPath>bin\Debug\netcoreapp2.2\</OutputPath>
+    <DocumentationFile>bin\Debug\netcoreapp2.2\netcoreapp2.2\SmallRoutine.xml</DocumentationFile>
+    <OutputPath>bin\Debug\netcoreapp2.2\netcoreapp2.2\</OutputPath>
     <NoWarn>1701;1702;1591</NoWarn>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <WarningLevel>3</WarningLevel>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>D:\公司\开发区小程序\SmallRoutine\SmallRoutine\SmallRoutine.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\netcoreapp2.2\SmallRoutine.xml</DocumentationFile>
     <OutputPath>bin\Release\netcoreapp2.2\</OutputPath>
   </PropertyGroup>
 

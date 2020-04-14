@@ -7,5 +7,6 @@ namespace Dto.IService.SmallRoutine
     public interface IBaseService
     {
         void structSystemInfo();
+        void structUserInfo();
     }
 }

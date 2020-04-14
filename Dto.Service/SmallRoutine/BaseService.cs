@@ -70,7 +70,9 @@ namespace Dto.Service.AutoMapper.SmallRoutine
             //还差一个所有岗位
         }
 
-
-
+        public void structUserInfo()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

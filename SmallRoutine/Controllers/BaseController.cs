@@ -113,14 +113,23 @@ namespace SmallRoutine.Controllers
 
 
         /// <summary>
-        /// 
+        /// 结构化基础数据
         /// </summary>
         /// <returns></returns>
         [HttpPost]
         public ActionResult StructDatabase()
         {
-           _baseService.structSystemInfo();
+            _baseService.structSystemInfo();
             return Ok();
+        }
+
+
+
+        public ActionResult GenerateUserLoginInfo()
+         {
+
+            return Ok();
+
         }
 
 
