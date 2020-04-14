@@ -1,0 +1,1268 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ViewModel</name>
+    </assembly>
+    <members>
+        <member name="P:ViewModel.SmallRoutine.FileUploadViewModel.PhysisticName">
+            <summary>
+            物理地址（不用传）
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.FileUploadViewModel.FileName">
+            <summary>
+            文件上传时名称，包括扩展名
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.FileUploadViewModel.InternalName">
+            <summary>
+            文件上传成功后生产的名称，包括扩展名
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.FileUploadViewModel.Url">
+            <summary>
+            浏览路径
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.FileUploadViewModel.Path">
+            <summary>
+            物理路径
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.FileUploadViewModel.pathMobile">
+            <summary>
+            手机物理路径
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.FileUploadViewModel.path_server">
+            <summary>
+            网址路径
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.FileUploadViewModel.upload_percent">
+            <summary>
+            上传进度
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.FileUploadViewModel.Length">
+            <summary>
+            上传的图片的大小
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.FIleinfoMiddle.FileName">
+            <summary>
+            文件上传时名称，包括扩展名
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.FIleinfoMiddle.InternalName">
+            <summary>
+            文件上传成功后生产的名称，包括扩展名
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.FIleinfoMiddle.Url">
+            <summary>
+            浏览路径
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.FIleinfoMiddle.Path">
+            <summary>
+            物理路径
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.FIleinfoMiddle.pathMobile">
+            <summary>
+            手机物理路径
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.FIleinfoMiddle.path_server">
+            <summary>
+            网址路径
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.FIleinfoMiddle.upload_percent">
+            <summary>
+            上传进度
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.FIleinfoMiddle.ImgIndex">
+            <summary>
+            上传的图片编号(提供给前端判断图片是否全部上传完)
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.FIleinfoMiddle.Length">
+            <summary>
+            上传的图片的大小
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.id">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.ResponsibleDepartment">
+            <summary>
+            责任部门
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.CompanyName">
+            <summary>
+            单位名称
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.PeopleName">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.IsHubeiOrigin">
+            <summary>
+            是否湖北籍贯
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.DetailSituation">
+            <summary>
+            详细情况
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.IsPassHubei">
+            <summary>
+            是否湖北
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.HuBeiLicence">
+            <summary>
+            搭乘过的途经湖北航班火车汽车牌照
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.LeaveJinDate">
+            <summary>
+            离津日期
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.BackJinLDate">
+            <summary>
+            抵津时间
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.IsInZone">
+            <summary>
+            是否在开发区
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.NowAddress">
+            <summary>
+            现住址
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.IsHot">
+            <summary>
+            身体
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.RemarkSituation">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.Gender">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.National">
+            <summary>
+            民族
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.Age">
+            <summary>
+            年龄
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.Duties">
+            <summary>
+            职务
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.IDnumber">
+            <summary>
+            身份证号
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.ContactMethod">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.Griddepartment">
+            <summary>
+            所属网格部门
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.GriddepartmentNum">
+            <summary>
+            所属网格编号
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.IndustrySector">
+            <summary>
+            所属行业部门
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.backJinInformation">
+            <summary>
+            回津状况（未离开，外地回津等）
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.isIsolation">
+             <summary>
+            是否隔离
+             </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.color">
+            <summary>
+            红绿牌
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSearchMiddle.url">
+            <summary>
+            头像路径
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.ResponsibleDepartment">
+            <summary>
+            责任部门
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.CompanyName">
+            <summary>
+            企业名称
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.PeopleName">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.IsHubeiOrigin">
+            <summary>
+            是否湖北籍贯
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.DetailSituation">
+            <summary>
+            详细情况
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.IsPassHubei">
+            <summary>
+            三十日内是否途经湖北
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.HuBeiLicence">
+            <summary>
+            搭乘过的途经湖北航班火车汽车牌照
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.LeaveJinDate">
+            <summary>
+            离津日期
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.BackJinLDate">
+            <summary>
+            返津日期
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.IsInZone">
+            <summary>
+            目前是否在开发区
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.NowAddress">
+            <summary>
+            现住址
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.IsHot">
+            <summary>
+            是否发烧
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.RemarkSituation">
+            <summary>
+            备注情况
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.Gender">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.National">
+            <summary>
+            民族
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.Age">
+            <summary>
+            年龄
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.Duties">
+            <summary>
+            职务
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.IDnumber">
+            <summary>
+            身份证号
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.ContactMethod">
+            <summary>
+            联系方式
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.Griddepartment">
+            <summary>
+            所属网格部门
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.GriddepartmentNum">
+            <summary>
+            所属网格编号
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.IndustrySector">
+            <summary>
+            所属行业部门
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.backJinInformation">
+            <summary>
+            回津状况（未离开，外地回津等）
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.isIsolation">
+             <summary>
+            是否隔离
+             </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.color">
+            <summary>
+            颜色
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.PeopleSingeMiddle.UploadFileId">
+            <summary>
+            附件id
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.id">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.ResponsibleDepartment">
+            <summary>
+            责任部门
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.CompanyName">
+            <summary>
+            企业名称
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.PeopleName">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.IsHubeiOrigin">
+            <summary>
+            是否湖北籍贯
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.DetailSituation">
+            <summary>
+            详细情况
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.IsPassHubei">
+            <summary>
+            三十日内是否途经湖北
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.HuBeiLicence">
+            <summary>
+            搭乘过的途经湖北航班火车汽车牌照
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.LeaveJinDate">
+            <summary>
+            离津日期
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.BackJinLDate">
+            <summary>
+            返津日期
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.IsInZone">
+            <summary>
+            目前是否在开发区
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.NowAddress">
+            <summary>
+            现住址
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.IsHot">
+            <summary>
+            是否发烧
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.RemarkSituation">
+            <summary>
+            备注情况
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.Gender">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.National">
+            <summary>
+            民族
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.Age">
+            <summary>
+            年龄
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.Duties">
+            <summary>
+            职务
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.IDnumber">
+            <summary>
+            身份证号
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.ContactMethod">
+            <summary>
+            联系方式
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.Griddepartment">
+            <summary>
+            所属网格部门
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.GriddepartmentNum">
+            <summary>
+            所属网格编号
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.IndustrySector">
+            <summary>
+            所属行业部门
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.backJinInformation">
+            <summary>
+            回津状况（未离开，外地回津等）
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.url">
+            <summary>
+            头像路径
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.MiddelViewModel.ValideMiddleViewModel.result">
+            <summary>
+            同行拍照 红绿黄
+            </summary>
+        </member>
+        <member name="T:ViewModel.SmallRoutine.PublicViewModel.PageViewModel">
+            <summary>
+            页码属性
+            </summary>
+        </member>
+        <member name="F:ViewModel.SmallRoutine.PublicViewModel.PageViewModel.needpage">
+            <summary>
+            是否需要分页
+            </summary>
+        </member>
+        <member name="F:ViewModel.SmallRoutine.PublicViewModel.PageViewModel.PageSize">
+            <summary>
+            篇幅
+            </summary>
+        </member>
+        <member name="F:ViewModel.SmallRoutine.PublicViewModel.PageViewModel.CurrentPageNum">
+            <summary>
+            当前页
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterAddViewModel.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterAddViewModel.IDnumber">
+            <summary>
+            身份证号
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterAddViewModel.GridName">
+            <summary>
+            网格名称
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterAddViewModel.CompanyName">
+            <summary>
+            企业名称
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterAddViewModel.CompanyAddress">
+            <summary>
+            企业地址
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterAddViewModel.CreateDate">
+            <summary>
+            时间
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterAddViewModel.ContactMethod">
+            <summary>
+            联系电话
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterAddViewModel.residenttype">
+            <summary>
+            来津类型
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterAddViewModel.goBaoDI">
+            <summary>
+            是否去过保底
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterAddViewModel.AimCompanyName">
+            <summary>
+            目的企业
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterSearchViewModel.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterSearchViewModel.IDnumber">
+            <summary>
+            身份证
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterSearchViewModel.GridName">
+            <summary>
+            网格名称
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterSearchViewModel.CompanyName">
+            <summary>
+            企业名称
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterSearchViewModel.CompanyAddress">
+            <summary>
+            企业地址
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterSearchViewModel.StartCreateDate">
+            <summary>
+            开始进入时间
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterSearchViewModel.EndCreateDate">
+            <summary>
+            结束进入时间
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterSearchViewModel.ContactMethod">
+            <summary>
+            联系电话
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterSearchViewModel.residenttype">
+            <summary>
+            居民类型
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterSearchViewModel.goBaoDI">
+            <summary>
+            是否去过保底
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterSearchViewModel.AimCompanyName">
+            <summary>
+            目的企业
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterSearchViewModel.pageViewModel">
+            <summary>
+            页码
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterValideViewModel.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterValideViewModel.IDnumber">
+            <summary>
+            身份证
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterValideViewModel.GridName">
+            <summary>
+            网格名称
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterValideViewModel.CompanyName">
+            <summary>
+            企业名称
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterValideViewModel.CompanyAddress">
+            <summary>
+            企业地址
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterValideViewModel.CreateDate">
+            <summary>
+            进入时间
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterValideViewModel.ContactMethod">
+            <summary>
+            联系电话
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterValideViewModel.residenttype">
+            <summary>
+            居民类型
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterValideViewModel.goBaoDI">
+            <summary>
+            是否去过保底
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.EnterValideViewModel.pageViewModel">
+            <summary>
+            页码
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.LoginUpdateViewModel.username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.LoginUpdateViewModel.userid">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.LoginUpdateViewModel.password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.LoginViewModel.username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.LoginViewModel.userid">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.LoginViewModel.password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.LoginViewModel.telephone">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.LoginViewModel.code">
+            <summary>
+            code
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.LoginViewModel.openid">
+            <summary>
+            opeid
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.ResponsibleDepartment">
+            <summary>
+            责任部门
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.CompanyName">
+            <summary>
+            企业名称
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.PeopleName">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.IsHubeiOrigin">
+            <summary>
+            是否湖北籍贯
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.DetailSituation">
+            <summary>
+            详细情况
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.IsPassHubei">
+            <summary>
+            三十日内是否途经湖北
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.HuBeiLicence">
+            <summary>
+            搭乘过的途经湖北航班火车汽车牌照
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.LeaveJinDate">
+            <summary>
+            离津日期
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.BackJinLDate">
+            <summary>
+            返津日期
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.IsInZone">
+            <summary>
+            目前是否在开发区
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.NowAddress">
+            <summary>
+            现住址
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.IsHot">
+            <summary>
+            是否发烧
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.RemarkSituation">
+            <summary>
+            备注情况
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.Gender">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.National">
+            <summary>
+            民族
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.Age">
+            <summary>
+            年龄
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.Duties">
+            <summary>
+            职务
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.IDnumber">
+            <summary>
+            身份证号
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.ContactMethod">
+            <summary>
+            联系方式
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.Griddepartment">
+            <summary>
+            所属网格部门
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.GriddepartmentNum">
+            <summary>
+            所属网格编号
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.IndustrySector">
+            <summary>
+            所属行业部门
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.backJinInformation">
+            <summary>
+            回津状况（未离开，外地回津等）
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.color">
+            <summary>
+            颜色
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.pageViewModel">
+            <summary>
+            页码
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel.isIsolation">
+             <summary>
+            是否隔离
+             </summary>
+        </member>
+        <member name="T:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel">
+            <summary>
+            用户白名单信息查询视图
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.ResponsibleDepartment">
+            <summary>
+            责任部门
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.CompanyName">
+            <summary>
+            企业名称
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.PeopleName">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.IsHubeiOrigin">
+            <summary>
+            是否湖北籍贯
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.DetailSituation">
+            <summary>
+            详细情况
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.IsPassHubei">
+            <summary>
+            三十日内是否途经湖北
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.HuBeiLicence">
+            <summary>
+            搭乘过的途经湖北航班火车汽车牌照
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.LeaveJinDate">
+            <summary>
+            离津日期
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.BackJinLDate">
+            <summary>
+            返津日期
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.IsInZone">
+            <summary>
+            目前是否在开发区
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.NowAddress">
+            <summary>
+            现住址
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.IsHot">
+            <summary>
+            身体是否异常
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.RemarkSituation">
+            <summary>
+            备注情况
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.Gender">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.National">
+            <summary>
+            民族
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.Age">
+            <summary>
+            年龄
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.Duties">
+            <summary>
+            职务
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.IDnumber">
+            <summary>
+            身份证号
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.ContactMethod">
+            <summary>
+            联系方式
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.Griddepartment">
+            <summary>
+            所属网格部门
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.GriddepartmentNum">
+            <summary>
+            所属网格编号
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.IndustrySector">
+            <summary>
+            所属行业部门
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.backJinInformation">
+            <summary>
+            回津状况（未离开，外地回津等）
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.pageViewModel">
+            <summary>
+            页码
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.isIsolation">
+             <summary>
+            是否隔离
+             </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel.isregister">
+             <summary>
+            是否注册
+             </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.ResponsibleDepartment">
+            <summary>
+            责任部门
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.CompanyName">
+            <summary>
+            企业名称
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.PeopleName">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.IsHubeiOrigin">
+            <summary>
+            是否湖北籍贯
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.DetailSituation">
+            <summary>
+            详细情况
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.IsPassHubei">
+            <summary>
+            三十日内是否途经湖北
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.HuBeiLicence">
+            <summary>
+            搭乘过的途经湖北航班火车汽车牌照
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.LeaveJinDate">
+            <summary>
+            离津日期
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.BackJinLDate">
+            <summary>
+            返津日期
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.IsInZone">
+            <summary>
+            目前是否在开发区
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.NowAddress">
+            <summary>
+            现住址
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.IsHot">
+            <summary>
+            是否发烧
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.RemarkSituation">
+            <summary>
+            备注情况
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.Gender">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.National">
+            <summary>
+            民族
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.Age">
+            <summary>
+            年龄
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.Duties">
+            <summary>
+            职务
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.IDnumber">
+            <summary>
+            身份证号
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.ContactMethod">
+            <summary>
+            联系方式
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.Griddepartment">
+            <summary>
+            所属网格部门
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.GriddepartmentNum">
+            <summary>
+            所属网格编号
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.IndustrySector">
+            <summary>
+            所属行业部门
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.backJinInformation">
+            <summary>
+            回津状况（未离开，外地回津等）
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.isIsolation">
+             <summary>
+            是否隔离
+             </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.color">
+            <summary>
+            颜色
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel.UploadFileId">
+            <summary>
+            附件id
+            </summary>
+        </member>
+        <member name="F:ViewModel.SmallRoutine.RequestViewModel.SearchCompayByGridViewModel.GridName">
+            <summary>
+            网格名称
+            </summary>
+        </member>
+        <member name="F:ViewModel.SmallRoutine.RequestViewModel.SearchCompayByGridViewModel.GridID">
+            <summary>
+            网格编号
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.ValidePeopleViewModel.IDnumber">
+            <summary>
+            身份证
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.ValidePeopleViewModel.GridName">
+            <summary>
+            网格名称
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.ValidePeopleViewModel.CompanyName">
+            <summary>
+            企业名称
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.ValidePeopleViewModel.CompanyAddress">
+            <summary>
+            企业地址
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.ValidePeopleViewModel.StartCreateDate">
+            <summary>
+            开始进入时间
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.ValidePeopleViewModel.EndCreateDate">
+            <summary>
+            结束进入时间
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.ValidePeopleViewModel.ContactMethod">
+            <summary>
+            联系电话
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.ValidePeopleViewModel.residenttype">
+            <summary>
+            居民类型
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.ValidePeopleViewModel.goBaoDI">
+            <summary>
+            是否去过保底
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.ValidePeopleViewModel.pageViewModel">
+            <summary>
+            页码
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.WeChatEnployLoginViewModel.CompanyName">
+            <summary>
+            企业名称
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.WeChatEnployLoginViewModel.Idnumber">
+            <summary>
+            身份证号
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.WeChatEnployLoginViewModel.telephone">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.WeChatEnployLoginViewModel.code">
+            <summary>
+            code
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.WeChatEnployLoginViewModel.openid">
+            <summary>
+            opeid
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.RequestViewModel.WeChatEnployLoginViewModel.whiteListId">
+            <summary>
+            对应白名单的id
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.ResponseViewModel.FileImgResViewModel.id">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.ResponseViewModel.FileImgResViewModel.PhysisticName">
+            <summary>
+            物理地址（不用传）
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.ResponseViewModel.FileImgResViewModel.FileName">
+            <summary>
+            文件上传时名称，包括扩展名
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.ResponseViewModel.FileImgResViewModel.InternalName">
+            <summary>
+            文件上传成功后生产的名称，包括扩展名
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.ResponseViewModel.FileImgResViewModel.Url">
+            <summary>
+            浏览路径
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.ResponseViewModel.FileImgResViewModel.Path">
+            <summary>
+            物理路径
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.ResponseViewModel.FileImgResViewModel.pathMobile">
+            <summary>
+            手机物理路径
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.ResponseViewModel.FileImgResViewModel.path_server">
+            <summary>
+            网址路径
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.ResponseViewModel.FileImgResViewModel.upload_percent">
+            <summary>
+            上传进度
+            </summary>
+        </member>
+        <member name="P:ViewModel.SmallRoutine.ResponseViewModel.FileImgResViewModel.Length">
+            <summary>
+            上传的图片的大小
+            </summary>
+        </member>
+        <member name="T:ViewModel.SmallRoutine.ResponseViewModel.WeChatEnployValideResModel">
+            <summary>
+            企业员工登录验证code返回接口
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SmallRoutine</name>
+    </assembly>
+    <members>
+        <member name="M:SmallRoutine.Controllers.AdminController.UploadFileToService(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+             文件上传（头像小程序）
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.AdminController.UploadFile_WhiteList(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            文件上传并导入数据
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.AdminController.test(System.Int32,System.Int32)">
+            <summary>
+            测试
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.EntrepreController.addEnterInformation(ViewModel.SmallRoutine.RequestViewModel.EnterAddViewModel)">
+            <summary>
+            添加进入信息
+            </summary>
+            <param name="enterAddViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.EntrepreController.SearchEnterInformation(ViewModel.SmallRoutine.RequestViewModel.EnterSearchViewModel)">
+            <summary>
+            查询进入信息
+            </summary>
+            <param name="enterSearchViewModel"></param>
+        </member>
+        <member name="M:SmallRoutine.Controllers.EntrepreController.LoginWechat(ViewModel.SmallRoutine.RequestViewModel.LoginViewModel)">
+            <summary>
+            登录验证接口
+            </summary>
+            <param name="loginViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.EntrepreController.LoginCodeWechat(ViewModel.SmallRoutine.RequestViewModel.LoginCodeViewModel)">
+            <summary>
+            登录验证code
+            </summary>
+            <param name="loginCodeViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.EntrepreController.LoginUpdateWechat(ViewModel.SmallRoutine.RequestViewModel.LoginUpdateViewModel)">
+            <summary>
+            修改密码接口
+            </summary>
+            <param name="loginUpdateViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.EntrepreController.WechatUpdate(ViewModel.SmallRoutine.RequestViewModel.LoginUpdateViewModel)">
+            <summary>
+            更新微信信息
+            </summary>
+            <param name="loginUpdateViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.PeopleController.test(System.String)">
+            <summary>
+            在白名单中查询用户信息(单一)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.PeopleController.GetPeopleInfoSingle(ViewModel.SmallRoutine.RequestViewModel.PeopleSearchSingleViewModel)">
+            <summary>
+            在白名单中查询用户信息(单一)
+            </summary>
+            <param name="peopleSearchSingleViewModel">条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.PeopleController.GetPeopleInfo(ViewModel.SmallRoutine.RequestViewModel.PeopleSearchViewModel)">
+            <summary>
+            在白名单中查询用户信息
+            </summary>
+            <param name="peopleSearchViewModel">条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.PeopleController.UpdatePeopleInfo(ViewModel.SmallRoutine.RequestViewModel.PeopleUpdateViewModel)">
+            <summary>
+            更新白名单中的信息
+            </summary>
+            <param name="peopleUpdateViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.PeopleController.SearchAllGird">
+            <summary>
+            查询所有网格
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.PeopleController.SearchCompanyNameByGrid(ViewModel.SmallRoutine.RequestViewModel.SearchCompayByGridViewModel)">
+            <summary>
+            根据网格查询所有企业
+            </summary>
+            <param name="searchCompayByGridViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.PeopleController.EmployeesLogin(ViewModel.SmallRoutine.RequestViewModel.WeChatEnployLoginViewModel)">
+            <summary>
+             企业员工登录账号绑定
+            </summary>
+            <param name="weChatEnployLoginViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.PeopleController.EmployeesLoginCode(ViewModel.SmallRoutine.RequestViewModel.WeChatEnployLoginCodeViewModel)">
+            <summary>
+             企业员工验证code
+            </summary>
+            <param name="weChatEnployLoginCodeViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.PeopleController.AddUserInfo(ViewModel.SmallRoutine.RequestViewModel.UserInfoAddViewModel)">
+            <summary>
+            添加用户信息
+            </summary>
+            <param name="userInfoAddViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.PeopleController.GetPeopleInfoByTelephone(System.String)">
+            <summary>
+            通过手机号查询信息
+            </summary>
+            <param name="telephone"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.PeopleController.GetPeopleInfoByIdCard(System.String)">
+            <summary>
+            通过身份证号查询信息
+            </summary>
+            <param name="IdNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.PeopleController.GetPeopleInfoByIdCardSingle(System.String)">
+            <summary>
+            通过身份证号获取单一信息
+            </summary>
+            <param name="Idnumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmallRoutine.Controllers.WechatController.GetPeopleInfoSingle(ViewModel.SmallRoutine.RequestViewModel.WeChatGetTeleViewModel)">
+            <summary>
+             获取手机号
+            </summary>
+            <param name="weChatGetTeleViewModel">条件</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

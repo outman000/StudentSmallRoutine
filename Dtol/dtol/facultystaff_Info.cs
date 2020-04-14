@@ -1,0 +1,46 @@
+﻿using Dtol.Attribute;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Dtol.dtol
+{
+    public class facultystaff_Info
+    {
+        public int id { get; set; }
+        [ExcelAttribute("姓名")]
+        public string Name { get; set; }
+        [ExcelAttribute("性别")]
+        public string Sex { get; set; }
+        [ExcelAttribute("出生年月")]
+        public DateTime? Birthday { get; set; }
+        [ExcelAttribute("学校标识")]
+        public string SchoolCode { get; set; }
+        [ExcelAttribute("学校名称")]
+        public string SchoolName { get; set; }
+
+
+        [ExcelAttribute("部门编号")]
+        public string DepartCode { get; set; }
+        [ExcelAttribute("部门")]
+        public string DepartName { get; set; }
+        [ExcelAttribute("岗位编号")]
+        public string StaffCode { get; set; }
+        [ExcelAttribute("岗位")]
+        public string StaffName { get; set; }
+
+
+
+        [ExcelAttribute("国籍")]
+        public string Country { get; set; }
+        [ExcelAttribute("身份证号/护照号")]
+        public string IdNumber { get; set; }
+        public DateTime? CreateDate { get; set; } = DateTime.Now;
+
+        public int? station_InfoId { get; set; }
+        public Station_Info station_Info { get; set; }
+       
+        public int? Health_InfoId { get; set; }
+        public Health_Info Health_Info { get; set; }
+    }
+}
