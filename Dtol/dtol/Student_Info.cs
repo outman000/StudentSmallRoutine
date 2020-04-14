@@ -35,7 +35,7 @@ namespace Dtol.dtol
         public string PermanentAddress  { get; set; }
         public DateTime? CreateDate { get; set; } = DateTime.Now;
 
-        public Class_Info class_InfoId { get; set; }
+        public int? class_InfoId { get; set; }
         public Class_Info class_Info { get; set; }
 
         public int? Health_InfoId { get; set; }

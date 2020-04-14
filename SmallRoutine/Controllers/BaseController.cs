@@ -26,12 +26,6 @@ namespace SmallRoutine.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
-
-
-
-
-
-
         /// <summary>
         /// 文件上传并导入数据（学生）
         /// </summary>
