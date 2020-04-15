@@ -7,6 +7,7 @@ using ViewModel.SmallRoutine;
 using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.MiddelViewModel.SecondMiddleViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.HealthEveryViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.HealthViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel;
 using ViewModel.SmallRoutine.ServiceDTO.SmallRoutine;
@@ -57,17 +58,29 @@ namespace Dto.Service.AutoMapper.SmallRoutine
 
 
             CreateMap<StudentRegisterHeath_Info, StudentRegisterHeathInfoViewModel>();
-            CreateMap<StudentRegisterHeath_Info, HealthInfoSearchMiddle>();
+            CreateMap<StudentRegisterHeath_Info, HealthInfoSearchMiddle>()
+
+                .ForMember(a => a.Idnumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.Idnumber)));
 
 
-            CreateMap<HealthInfoUpdateViewModel, StudentRegisterHeath_Info > ();
+            CreateMap<HealthInfoUpdateViewModel, StudentRegisterHeath_Info > ()
+                 .ForMember(a => a.Idnumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.Idnumber)));
 
 
             CreateMap<HealthInfoAddViewModel, StudentRegisterHeath_Info>()
                  .ForMember(a => a.Idnumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.Idnumber)))
                  ;
-       
-      
+
+
+            CreateMap<HealthEveryAddViewModel, Health_Info>()
+                 .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.IdNumber)));
+
+            
+            CreateMap< Health_Info, HealthEverySearchMiddleModel>()
+                 .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.IdNumber)));
+
+            CreateMap< HealthEveryUpdateViewModel, Health_Info >()
+                .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.IdNumber)));
 
         }
     }

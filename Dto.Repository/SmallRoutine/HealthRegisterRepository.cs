@@ -82,8 +82,17 @@ namespace Dto.Repository.SmallRoutine
     
         private Expression<Func<StudentRegisterHeath_Info, bool>> SearchLineWhere(HealthInfoSearchViewModel  healthInfoSearchViewModel)
         {
+            var aa = DateTime.Now;
+
+            var aaaaaaa = aa.ToString();
+
+         
             var predicate = WhereExtension.True<StudentRegisterHeath_Info>();//初始化where表达式
-            predicate = predicate.And(p => p.Idnumber.Trim().Contains(healthInfoSearchViewModel.Idnumber.Trim()));
+
+          
+            predicate = predicate.And(p => p.Idnumber.Trim().Contains(healthInfoSearchViewModel.Idnumber.Trim()==""?"":Dtol.Helper.MD5.Md5Hash(healthInfoSearchViewModel.Idnumber.Trim())));
+            
+           
             predicate = predicate.And(p => p.IsleaveJin.Contains(healthInfoSearchViewModel.IsleaveJin));
             predicate = predicate.And(p => p.IsPassHubei.Contains(healthInfoSearchViewModel.IsPassHubei));
             predicate = predicate.And(p => p.PassHubeiDetail.Contains(healthInfoSearchViewModel.IsPassHubei));
@@ -93,12 +102,12 @@ namespace Dto.Repository.SmallRoutine
             predicate = predicate.And(p => p.Telephone.Contains(healthInfoSearchViewModel.Telephone));
             predicate = predicate.And(p => p.Temperature.Contains(healthInfoSearchViewModel.Temperature));
             predicate = predicate.And(p => p.Traffic.Contains(healthInfoSearchViewModel.Traffic));
-            predicate = predicate.And(p => p.BackJinDate.ToString().Contains(healthInfoSearchViewModel.Traffic.ToString()));
-            //predicate = predicate.And(p => p.BeforeTianjin .Contains(healthInfoSearchViewModel.Traffic));
-            //predicate = predicate.And(p => p.Guardian.Contains(healthInfoSearchViewModel.Guardian));
-            //predicate = predicate.And(p => p.Destination.Contains(healthInfoSearchViewModel.Destination));
-            //predicate = predicate.And(p => p.ForteenDaysExcepting.Contains(healthInfoSearchViewModel.ForteenDaysExcepting));
-            //predicate = predicate.And(p => p.CreateDate.ToString().Contains(healthInfoSearchViewModel.CreateDate.ToString()));
+            predicate = predicate.And(p => p.BackJinDate.ToString().Contains(healthInfoSearchViewModel.BackJinDate==null? "": healthInfoSearchViewModel.BackJinDate.Value.ToString("yyyy-MM-dd")));
+            predicate = predicate.And(p => p.BeforeTianjin.Contains(healthInfoSearchViewModel.Traffic));
+            predicate = predicate.And(p => p.Guardian.Contains(healthInfoSearchViewModel.Guardian));
+            predicate = predicate.And(p => p.Destination.Contains(healthInfoSearchViewModel.Destination));
+            predicate = predicate.And(p => p.ForteenDaysExcepting.Contains(healthInfoSearchViewModel.ForteenDaysExcepting));
+            predicate = predicate.And(p => p.CreateDate.ToString().Contains(healthInfoSearchViewModel.CreateDate == null ? "" : healthInfoSearchViewModel.CreateDate.Value.ToString("yyyy-MM-dd")));
 
 
 

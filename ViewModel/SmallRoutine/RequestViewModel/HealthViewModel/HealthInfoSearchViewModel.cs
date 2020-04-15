@@ -8,10 +8,6 @@ namespace ViewModel.SmallRoutine.RequestViewModel.HealthViewModel
     public   class HealthInfoSearchViewModel
     {
         /// <summary>
-        /// id
-        /// </summary>
-        public int id { get; set; }
-        /// <summary>
         /// 身份证号
         /// </summary>
         public string Idnumber { get; set; }
