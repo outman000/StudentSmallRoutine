@@ -71,7 +71,7 @@ namespace Dto.Service.AutoMapper.SmallRoutine
         {
             var studentInfoAll = _StudentInfoRepository.GetAll().ToList();
             var facultystaff = _facultystaffInfoRepository.GetAll().ToList();
-            var schoolInsertList = _IMapper.Map<List<School_Info>, List<User_Info>>(studentInfoAll);//需要插入的学校集合
+            var schoolInsertList = _IMapper.Map<List<Student_Info>, List<User_Info>>(studentInfoAll);//需要插入的学校集合
             var facultystafInfoInsertList = _IMapper.Map<List<facultystaff_Info>, List<User_Info>>(facultystaff);//需要插入的学校集合
             _userInfoRepository.AddListBase(schoolInsertList);
             _userInfoRepository.AddListBase(facultystafInfoInsertList);

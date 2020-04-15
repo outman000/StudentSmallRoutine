@@ -14,15 +14,15 @@ namespace Dto.Repository.SmallRoutine
     {
 
         protected readonly DtolContext Db;
-        protected readonly DbSet<School_Info> DbSet;
+        protected readonly DbSet<Student_Info> DbSet;
 
         public StudentInfoRepository(DtolContext context)
         {
             Db = context;
-            DbSet = Db.Set<School_Info>();
+            DbSet = Db.Set<Student_Info>();
         }
         #region 基本查询
-        public void Add(School_Info obj)
+        public void Add(Student_Info obj)
         {
             DbSet.Add(obj);
         }
@@ -37,12 +37,12 @@ namespace Dto.Repository.SmallRoutine
             throw new NotImplementedException();
         }
 
-        public IQueryable<School_Info> GetAll()
+        public IQueryable<Student_Info> GetAll()
         {
             return DbSet;
         }
 
-        public School_Info GetById(Guid id)
+        public Student_Info GetById(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -59,7 +59,7 @@ namespace Dto.Repository.SmallRoutine
             return Db.SaveChanges();
         }
 
-        public void Update(School_Info obj)
+        public void Update(Student_Info obj)
         {
             throw new NotImplementedException();
         }

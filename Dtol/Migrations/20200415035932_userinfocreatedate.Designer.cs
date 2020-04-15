@@ -4,14 +4,16 @@ using Dtol;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dtol.Migrations
 {
     [DbContext(typeof(DtolContext))]
-    partial class DtolContextModelSnapshot : ModelSnapshot
+    [Migration("20200415035932_userinfocreatedate")]
+    partial class userinfocreatedate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,8 +84,6 @@ namespace Dtol.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("Createdate");
-
                     b.Property<string>("IdNumber");
 
                     b.Property<string>("IsFamilyHot");
@@ -98,11 +98,7 @@ namespace Dtol.Migrations
 
                     b.Property<string>("IsWeak");
 
-                    b.Property<int>("Student_InfoId");
-
                     b.HasKey("id");
-
-                    b.HasIndex("Student_InfoId");
 
                     b.ToTable("Health_Info");
                 });
@@ -145,49 +141,6 @@ namespace Dtol.Migrations
                     b.ToTable("Station_Info");
                 });
 
-            modelBuilder.Entity("Dtol.dtol.StudentRegisterHeath_Info", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("BackJinDate");
-
-                    b.Property<string>("BeforeTianjin");
-
-                    b.Property<DateTime?>("CreateDate");
-
-                    b.Property<string>("Destination");
-
-                    b.Property<string>("ForteenDaysExcepting");
-
-                    b.Property<string>("Guardian");
-
-                    b.Property<string>("Idnumber");
-
-                    b.Property<string>("IsPassHubei");
-
-                    b.Property<string>("IsleaveJin");
-
-                    b.Property<string>("PassHubeiDetail");
-
-                    b.Property<string>("Peers");
-
-                    b.Property<string>("PeersTelephone");
-
-                    b.Property<string>("Residencetemporary");
-
-                    b.Property<string>("Telephone");
-
-                    b.Property<string>("Temperature");
-
-                    b.Property<string>("Traffic");
-
-                    b.HasKey("id");
-
-                    b.ToTable("StudentRegisterHeath_Info");
-                });
-
             modelBuilder.Entity("Dtol.dtol.Student_Info", b =>
                 {
                     b.Property<int>("id")
@@ -208,6 +161,8 @@ namespace Dtol.Migrations
 
                     b.Property<string>("GradeName");
 
+                    b.Property<int?>("Health_InfoId");
+
                     b.Property<string>("IdNumber");
 
                     b.Property<string>("Name");
@@ -220,15 +175,13 @@ namespace Dtol.Migrations
 
                     b.Property<string>("Sex");
 
-                    b.Property<int?>("StudentRegisterHeath_InfoId");
-
                     b.Property<int?>("class_InfoId");
 
                     b.Property<string>("tag");
 
                     b.HasKey("id");
 
-                    b.HasIndex("StudentRegisterHeath_InfoId");
+                    b.HasIndex("Health_InfoId");
 
                     b.HasIndex("class_InfoId");
 
@@ -307,8 +260,6 @@ namespace Dtol.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("PermanentAddress");
-
                     b.Property<string>("SchoolCode");
 
                     b.Property<string>("SchoolName");
@@ -351,14 +302,6 @@ namespace Dtol.Migrations
                         .HasForeignKey("Station_InfoId");
                 });
 
-            modelBuilder.Entity("Dtol.dtol.Health_Info", b =>
-                {
-                    b.HasOne("Dtol.dtol.Student_Info", "Student_Info")
-                        .WithMany("Health_Info")
-                        .HasForeignKey("Student_InfoId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("Dtol.dtol.Station_Info", b =>
                 {
                     b.HasOne("Dtol.dtol.Depart_Info", "Depart_Info")
@@ -372,9 +315,9 @@ namespace Dtol.Migrations
 
             modelBuilder.Entity("Dtol.dtol.Student_Info", b =>
                 {
-                    b.HasOne("Dtol.dtol.StudentRegisterHeath_Info", "StudentRegisterHeath_Info")
+                    b.HasOne("Dtol.dtol.Health_Info", "Health_Info")
                         .WithMany()
-                        .HasForeignKey("StudentRegisterHeath_InfoId");
+                        .HasForeignKey("Health_InfoId");
 
                     b.HasOne("Dtol.dtol.Class_Info", "class_Info")
                         .WithMany()

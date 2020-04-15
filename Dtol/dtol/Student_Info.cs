@@ -39,9 +39,14 @@ namespace Dtol.dtol
 
         public int? class_InfoId { get; set; }
         public Class_Info class_Info { get; set; }
+        //健康信息外键
 
-        public int? Health_InfoId { get; set; }
-        public Health_Info Health_Info { get; set; }
+        public int? StudentRegisterHeath_InfoId { get; set; }
+        public StudentRegisterHeath_Info StudentRegisterHeath_Info { get; set; }
+        
+        //每日信息集合
+         public List<Health_Info> Health_Info { get; set; }
+
         [ExcelAttribute("附件id")]
         public string tag { get; set; }
     }

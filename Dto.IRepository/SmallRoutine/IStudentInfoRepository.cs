@@ -6,7 +6,7 @@ using ViewModel.SmallRoutine.ServiceDTO.SmallRoutine;
 
 namespace Dto.IRepository.SmallRoutine
 {
-    public interface IStudentInfoRepository : IRepository<School_Info>
+    public interface IStudentInfoRepository : IRepository<Student_Info>
     {
         void AddList(List<Student_Info> studentInfo);
         /// <summary>
