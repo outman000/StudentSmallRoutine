@@ -153,6 +153,8 @@ namespace Dto.Service.SmallRoutine
             foreach (var item in lists)
             {
                 var info = _IMapper.Map<Student_Info, StudentMiddle>(item);
+
+                info.IdNumber = Dtol.Helper.MD5.Decrypt(info.IdNumber);
                 nlists.Add(info);
             }
 
