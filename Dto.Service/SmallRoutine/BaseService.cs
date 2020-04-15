@@ -69,7 +69,7 @@ namespace Dto.Service.AutoMapper.SmallRoutine
         public void structUserInfo()
         {
             var studentInfoAll = _userInfoRepository.GetAll();
-            var schoolInsertList = _IMapper.Map<List<SchoolInfoServiceDTO>, List<School_Info>>(schoolList);//需要插入的学校集合
+           // var schoolInsertList = _IMapper.Map<List<SchoolInfoServiceDTO>, List<School_Info>>(schoolList);//需要插入的学校集合
             //_userInfoRepository.AddListBase(studentInfoAll);
         }
     }
