@@ -41,7 +41,7 @@ namespace Dto.Repository.SmallRoutine
 
         public IQueryable<facultystaff_Info> GetAll()
         {
-            throw new NotImplementedException();
+            return DbSet;
         }
 
         public facultystaff_Info GetById(Guid id)

@@ -10,6 +10,6 @@ namespace Dtol.dtol
         public string Idnumber { get; set; }
         public string password { get; set ; } 
         public DateTime? CreateDate { get; set; }
-     
+
     }
 }

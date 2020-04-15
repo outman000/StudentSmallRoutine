@@ -28,9 +28,11 @@ namespace Dtol.dtol
         [ExcelAttribute("班级")]
         public string ClassName { get; set; }
         [ExcelAttribute("国籍")]
-        public string Country { get; set; }
+        public string Country { get ; set; }
         [ExcelAttribute("身份证号/护照号")]
-        public string IdNumber { get; set; }
+        public string IdNumber { get ; set; }
+
+      
         [ExcelAttribute("户籍地址")]
         public string PermanentAddress  { get; set; }
         public DateTime? CreateDate { get; set; } = DateTime.Now;

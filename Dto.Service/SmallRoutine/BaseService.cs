@@ -4,6 +4,7 @@ using Dto.IService.SmallRoutine;
 using Dtol.dtol;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using ViewModel.SmallRoutine.ServiceDTO.SmallRoutine;
 
@@ -68,9 +69,13 @@ namespace Dto.Service.AutoMapper.SmallRoutine
 
         public void structUserInfo()
         {
-            var studentInfoAll = _userInfoRepository.GetAll();
-           // var schoolInsertList = _IMapper.Map<List<SchoolInfoServiceDTO>, List<School_Info>>(schoolList);//需要插入的学校集合
-            //_userInfoRepository.AddListBase(studentInfoAll);
+            var studentInfoAll = _StudentInfoRepository.GetAll().ToList();
+            var facultystaff = _facultystaffInfoRepository.GetAll().ToList();
+            var schoolInsertList = _IMapper.Map<List<School_Info>, List<User_Info>>(studentInfoAll);//需要插入的学校集合
+            var facultystafInfoInsertList = _IMapper.Map<List<facultystaff_Info>, List<User_Info>>(facultystaff);//需要插入的学校集合
+            _userInfoRepository.AddListBase(schoolInsertList);
+            _userInfoRepository.AddListBase(facultystafInfoInsertList);
+            _userInfoRepository.SaveChanges();
         }
     }
 }

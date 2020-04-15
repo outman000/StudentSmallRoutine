@@ -1,4 +1,5 @@
 ﻿using Dtol.Attribute;
+using Dtol.Helper;
 using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
@@ -75,6 +76,8 @@ namespace Dto.Service.Extension
                             col.Property.SetValue(tnew, tag);
                             return;
                         }
+                       
+
                         //表里不存在列
                         if (GetColumnByName(worksheet, col.Column) == -1)
                         {
@@ -83,7 +86,11 @@ namespace Dto.Service.Extension
                         //根据列名定位列，然后通过迭代定位行
                         var val = worksheet.Cells[row, GetColumnByName(worksheet, col.Column)];
                         //  var aaaaa = val.GetValue();
-
+                        if (col.Column.Equals("身份证号/护照号"))
+                        {
+                            col.Property.SetValue(tnew, MD5.Md5Hash(val.GetValue<string>().Trim()));
+                            return;
+                        }
                         if (val.Value == null && col.Property.PropertyType == typeof(decimal?))
                         {
                             col.Property.SetValue(tnew, Convert.ToDecimal(0));

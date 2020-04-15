@@ -119,7 +119,7 @@ namespace SmallRoutine.Controllers
 
 
         /// <summary>
-        /// 结构化基础数据
+        /// 结构化基础数据用户名和密码
         /// </summary>
         /// <returns></returns>
         [HttpPost("/struct/GenerateUserLoginInfo")]
