@@ -55,11 +55,18 @@ namespace Dto.Service.AutoMapper.SmallRoutine
                 .ForMember(a => a.Password, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.Password)))
                 ;
 
+
             CreateMap<StudentRegisterHeath_Info, StudentRegisterHeathInfoViewModel>();
+            CreateMap<StudentRegisterHeath_Info, HealthInfoSearchMiddle>();
+
 
             CreateMap<HealthInfoUpdateViewModel, StudentRegisterHeath_Info > ();
 
-            CreateMap<StudentRegisterHeath_Info, HealthInfoSearchMiddle>();
+
+            CreateMap<HealthInfoAddViewModel, StudentRegisterHeath_Info>()
+                 .ForMember(a => a.Idnumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.Idnumber)))
+                 ;
+       
       
 
         }

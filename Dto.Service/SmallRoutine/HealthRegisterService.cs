@@ -29,6 +29,7 @@ namespace Dto.Service.SmallRoutine
         {
             var insertInfo= _IMapper.Map<HealthInfoAddViewModel, StudentRegisterHeath_Info>(healthViewModel);
             healthRegisterRepository.Add(insertInfo);
+            healthRegisterRepository.SaveChanges();
         }
         /// <summary>
         /// 删除登记健康信息
