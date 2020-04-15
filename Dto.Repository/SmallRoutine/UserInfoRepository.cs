@@ -60,6 +60,11 @@ namespace Dto.Repository.SmallRoutine
             throw new NotImplementedException();
         }
 
+        public bool Login()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Remove(Guid id)
         {
             throw new NotImplementedException();
