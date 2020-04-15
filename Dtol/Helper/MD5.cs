@@ -18,7 +18,7 @@ namespace Dtol.Helper
         {
             DESCryptoServiceProvider des = new DESCryptoServiceProvider();
             int len;
-            len = Text.Length / 2;
+            len = Text.Length/2 ;
             byte[] inputByteArray = new byte[len];
             int x, i;
             for (x = 0; x < len; x++)
