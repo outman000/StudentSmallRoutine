@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ViewModel.SmallRoutine.ResponseViewModel;
 using ViewModel.SmallRoutine.ServiceDTO.SmallRoutine;
 
 namespace Dto.Repository.SmallRoutine
@@ -101,6 +102,10 @@ namespace Dto.Repository.SmallRoutine
             }).Distinct().ToList();
         }
 
-
+        public Student_Info GetStudentInfoAndHealthInfo(string Idnumber)
+        {
+            return DbSet.Where(a => a.IdNumber == Idnumber).Include(a=>a.StudentRegisterHeath_Info).FirstOrDefault();
+          
+        }
     }
 }

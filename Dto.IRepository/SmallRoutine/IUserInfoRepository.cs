@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ViewModel.SmallRoutine.RequestViewModel;
 
 namespace Dto.IRepository.SmallRoutine
 {
@@ -9,6 +10,6 @@ namespace Dto.IRepository.SmallRoutine
     {
         void AddListBase(List<User_Info> insertUserInfoList);
 
-        bool Login();
+        bool Login(LoginViewModel loginViewModel);
     }
 }

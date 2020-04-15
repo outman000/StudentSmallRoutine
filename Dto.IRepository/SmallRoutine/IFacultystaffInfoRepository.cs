@@ -22,5 +22,6 @@ namespace Dto.IRepository.SmallRoutine
         /// <param name="studentInfo"></param>
         /// <returns></returns>
         List<StationInfoServiceDTO> GetStationlList();
+        facultystaff_Info GetStudentInfoAndHealthInfo(string Idnumber);
     }
 }

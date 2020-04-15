@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using ViewModel.SmallRoutine.RequestViewModel;
 
 namespace Dto.Repository.SmallRoutine
 {
@@ -60,9 +61,10 @@ namespace Dto.Repository.SmallRoutine
             throw new NotImplementedException();
         }
 
-        public bool Login()
+    
+        public bool Login(LoginViewModel loginViewModel)
         {
-            throw new NotImplementedException();
+            return DbSet.Any(a => a.Idnumber == loginViewModel.Idnumber && a.password == loginViewModel.Password);
         }
 
         public void Remove(Guid id)

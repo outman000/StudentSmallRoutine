@@ -18,8 +18,6 @@ namespace Dtol.dtol
         public string SchoolCode { get; set; }
         [ExcelAttribute("学校名称")]
         public string SchoolName { get; set; }
-
-
         [ExcelAttribute("部门编号")]
         public string DepartCode { get; set; }
         [ExcelAttribute("部门")]
@@ -40,8 +38,15 @@ namespace Dtol.dtol
 
         public int? station_InfoId { get; set; }
         public Station_Info station_Info { get; set; }
-       
-        public int? Health_InfoId { get; set; }
-        public Health_Info Health_Info { get; set; }
+
+        //健康信息外键
+
+        public int? StudentRegisterHeath_InfoId { get; set; }
+        public StudentRegisterHeath_Info StudentRegisterHeath_Info { get; set; }
+
+        //每日信息集合
+        public List<Health_Info> Health_Info { get; set; }
+
+ 
     }
 }

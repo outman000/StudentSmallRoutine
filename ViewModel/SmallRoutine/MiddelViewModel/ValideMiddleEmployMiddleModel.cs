@@ -5,10 +5,7 @@ using ViewModel.SmallRoutine.MiddelViewModel.SecondMiddleViewModel;
 
 namespace ViewModel.SmallRoutine.MiddelViewModel
 {
-    /// <summary>
-    /// 用户基础信息
-    /// </summary>
-    public class ValideMiddleViewModel
+    public class ValideMiddleEmployMiddleModel
     {
         /// <summary>
         /// id
@@ -35,22 +32,6 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// </summary>
         public string SchoolName { get; set; }
         /// <summary>
-        /// 年级编号
-        /// </summary>
-        public string GradeCode { get; set; }
-        /// <summary>
-        /// 年级
-        /// </summary>
-        public string GradeName { get; set; }
-        /// <summary>
-        /// 班级编号
-        /// </summary>
-        public string ClassCode { get; set; }
-        /// <summary>
-        /// 班级名称
-        /// </summary>
-        public string ClassName { get; set; }
-        /// <summary>
         /// 国际
         /// </summary>
         public string Country { get; set; }
@@ -58,6 +39,22 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// 身份证号
         /// </summary>
         public string IdNumber { get; set; }
+        /// <summary>
+        /// 部门编号
+        /// </summary>
+        public string DepartCode { get; set; }
+        /// <summary>
+        /// 部门
+        /// </summary>
+        public string DepartName { get; set; }
+        /// <summary>
+        /// 岗位编号
+        /// </summary>
+        public string StaffCode { get; set; }
+        /// <summary>
+        /// 岗位
+        /// </summary>
+        public string StaffName { get; set; }
         /// <summary>
         /// 户籍地址
         /// </summary>
@@ -69,10 +66,6 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// <summary>
         /// 健康上报信息
         /// </summary>
-        public StudentRegisterHeathInfoViewModel StudentRegisterHeathInfoViewModel { get; set; }
-
-
-
-
+        public StudentRegisterHeathInfoViewModel  studentRegisterHeathInfoViewModel { get; set; }
     }
 }

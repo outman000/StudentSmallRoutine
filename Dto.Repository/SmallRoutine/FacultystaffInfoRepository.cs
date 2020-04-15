@@ -69,6 +69,11 @@ namespace Dto.Repository.SmallRoutine
             }).Distinct().ToList();
         }
 
+        public facultystaff_Info GetStudentInfoAndHealthInfo(string Idnumber)
+        {
+            return DbSet.Where(a => a.IdNumber == Idnumber).Include(a => a.StudentRegisterHeath_Info).FirstOrDefault();
+        }
+
         public void Remove(Guid id)
         {
             throw new NotImplementedException();

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ViewModel.SmallRoutine.ResponseViewModel;
 using ViewModel.SmallRoutine.ServiceDTO.SmallRoutine;
 
 namespace Dto.IRepository.SmallRoutine
@@ -28,6 +29,14 @@ namespace Dto.IRepository.SmallRoutine
         /// <param name="studentInfo"></param>
         /// <returns></returns>
         List<ClassInfoServiceDTO> GetClasslList();
+        /// <summary>
+        /// 获取用户信息保活健康信息，每日健康信息等
+        /// </summary>
+        /// <param name="student"></param>
+        /// <returns></returns>
+
+
+        Student_Info GetStudentInfoAndHealthInfo(String Idnumber);
 
 
 

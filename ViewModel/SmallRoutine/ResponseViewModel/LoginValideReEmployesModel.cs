@@ -6,8 +6,9 @@ using ViewModel.SmallRoutine.PublicViewModel;
 
 namespace ViewModel.SmallRoutine.ResponseViewModel
 {
-    public class LoginValideResModel
+    public class LoginValideReEmployesModel
     {
+
         /// <summary>
         /// 是否成功
         /// </summary>
@@ -15,17 +16,15 @@ namespace ViewModel.SmallRoutine.ResponseViewModel
         /// <summary>
         /// 用户相关信息
         /// </summary>
-        public ValideMiddleViewModel Data;
+        public ValideMiddleEmployMiddleModel Data;
         /// <summary>
         /// 基础信息
         /// </summary>
         public BaseViewModel baseViewModel;
-        public  LoginValideResModel()
+        public LoginValideReEmployesModel()
         {
-            Data = new ValideMiddleViewModel();
+            Data = new ValideMiddleEmployMiddleModel();
             baseViewModel = new BaseViewModel();
         }
-
-
     }
 }

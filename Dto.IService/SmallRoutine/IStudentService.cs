@@ -11,5 +11,9 @@ namespace Dto.IService.SmallRoutine
 
         //添加学生信息 
         BaseViewModel addStudentInfo(StudentAddModel student);
+
+
+        
+
     }
 }
