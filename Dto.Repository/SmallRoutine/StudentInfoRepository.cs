@@ -64,7 +64,7 @@ namespace Dto.Repository.SmallRoutine
 
         public void Update(Student_Info obj)
         {
-            throw new NotImplementedException();
+            DbSet.Update(obj);
         }
         #endregion
 

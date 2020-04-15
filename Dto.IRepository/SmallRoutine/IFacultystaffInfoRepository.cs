@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ViewModel.SmallRoutine.RequestViewModel;
 using ViewModel.SmallRoutine.ServiceDTO.SmallRoutine;
 
 namespace Dto.IRepository.SmallRoutine
@@ -23,5 +24,13 @@ namespace Dto.IRepository.SmallRoutine
         /// <returns></returns>
         List<StationInfoServiceDTO> GetStationlList();
         facultystaff_Info GetStudentInfoAndHealthInfo(string Idnumber);
+
+        //根据id获取教职工信息
+        facultystaff_Info getbyID(int id);
+         
+        //删除信息
+        void RemoveInfo(facultystaff_Info info);
+        //根据条件查询
+        List<facultystaff_Info> GetByModel(FacultystaffSearchModel model);
     }
 }

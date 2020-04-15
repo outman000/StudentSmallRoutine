@@ -5,31 +5,28 @@ using System.Collections.Generic;
 using System.Text;
 using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
-
 namespace Dto.Service.AutoMapper.SmallRoutine
 {
-    public class StudentMapper: Profile
+    public class FacultystaffMapper : Profile
     {
-        public StudentMapper()
+        public FacultystaffMapper()
         {
 
-            CreateMap<Student_Info, StudentBaseModel>();
+            CreateMap<facultystaff_Info, FacultystaffBaseModel>();
 
-            CreateMap<StudentBaseModel, Student_Info>()
+            CreateMap<FacultystaffBaseModel, facultystaff_Info>()
                 .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.IdNumber)));
 
-            CreateMap<StudentSearchModel, StudentSearchModel>()
+            CreateMap<FacultystaffSearchModel, FacultystaffSearchModel>()
                .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.IdNumber)));
 
 
-            //CreateMap<Student_Info, StudentMiddle>()
-            //   .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.IdNumber,"test")));
-
-            CreateMap<Student_Info, StudentMiddle>();
+            CreateMap<facultystaff_Info, FacultystaffMiddle>();
 
 
-            CreateMap<StudentMiddle, Student_Info>()
+            CreateMap<FacultystaffMiddle, facultystaff_Info>()
                 .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.IdNumber)));
+
 
 
         }

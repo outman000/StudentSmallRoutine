@@ -101,18 +101,28 @@ namespace Dto.Service.SmallRoutine
         public BaseViewModel delStudentInfo(int id)
         {
             BaseViewModel baseView = new BaseViewModel();
-            _studentInfoRepository.RemoveInfo(_studentInfoRepository.getbyID(id));
-            int i = _studentInfoRepository.SaveChanges();
-            if (i > 0)
+            Student_Info info = _studentInfoRepository.getbyID(id);
+            if (info != null)
             {
-                baseView.ResponseCode = 0;
-                baseView.Message = "删除成功";
+                _studentInfoRepository.RemoveInfo(info);
+                int i = _studentInfoRepository.SaveChanges();
+                if (i > 0)
+                {
+                    baseView.ResponseCode = 0;
+                    baseView.Message = "删除成功";
+                }
+                else
+                {
+                    baseView.ResponseCode = 1;
+                    baseView.Message = "删除失败";
+                }
             }
             else
             {
                 baseView.ResponseCode = 1;
                 baseView.Message = "删除失败";
             }
+            
             return baseView;
         }
 

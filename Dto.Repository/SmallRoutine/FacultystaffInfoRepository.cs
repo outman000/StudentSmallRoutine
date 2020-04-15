@@ -1,11 +1,13 @@
 ﻿using Dto.IRepository.SmallRoutine;
 using Dtol;
 using Dtol.dtol;
+using Dtol.Extension;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ViewModel.SmallRoutine.RequestViewModel;
 using ViewModel.SmallRoutine.ServiceDTO.SmallRoutine;
 
 namespace Dto.Repository.SmallRoutine
@@ -26,7 +28,7 @@ namespace Dto.Repository.SmallRoutine
 
         public void Add(facultystaff_Info obj)
         {
-            throw new NotImplementedException();
+            DbSet.Add(obj);
         }
 
         public void AddList(List<facultystaff_Info> facultystaff_Infos)
@@ -86,7 +88,80 @@ namespace Dto.Repository.SmallRoutine
 
         public void Update(facultystaff_Info obj)
         {
-            throw new NotImplementedException();
+            DbSet.Update(obj);
         }
+
+
+        //根据id获取教职工信息
+        public facultystaff_Info getbyID(int id)
+        {
+            facultystaff_Info info = new facultystaff_Info();
+
+            //查询条件
+            var predicate = WhereExtension.True<facultystaff_Info>();//初始化where表达式
+            predicate = predicate.And(p => p.id.Equals(id));
+
+            var result = DbSet.Where(predicate).ToList();
+            if (result.Count > 0)
+            {
+                info = result.First();
+            }
+            else
+            {
+                info = null;
+            }
+
+            return info;
+        }
+
+        //删除信息
+        public void RemoveInfo(facultystaff_Info info)
+        {
+            DbSet.Remove(info);
+        }
+
+
+        //根据条件查询
+        public List<facultystaff_Info> GetByModel(FacultystaffSearchModel model)
+        {
+            //查询条件
+            var predicate = WhereExtension.True<facultystaff_Info>();//初始化where表达式
+                                                                //姓名
+            if (!String.IsNullOrEmpty(model.Name))
+            {
+                predicate = predicate.And(p => p.Name.Contains(model.Name));
+            }
+            //身份证
+            if (!String.IsNullOrEmpty(model.IdNumber))
+            {
+                predicate = predicate.And(p => p.IdNumber.Equals(model.IdNumber));
+            }
+            //学校
+            if (!String.IsNullOrEmpty(model.SchoolCode))
+            {
+                predicate = predicate.And(p => p.SchoolCode.Equals(model.SchoolCode));
+            }
+            //部门
+            if (!String.IsNullOrEmpty(model.DepartCode))
+            {
+                predicate = predicate.And(p => p.DepartCode.Equals(model.DepartCode));
+            }
+            //岗位
+            if (!String.IsNullOrEmpty(model.StaffCode))
+            {
+                predicate = predicate.And(p => p.StaffCode.Equals(model.StaffCode));
+            }
+            //住址
+            if (!String.IsNullOrEmpty(model.PermanentAddress))
+            {
+                predicate = predicate.And(p => p.PermanentAddress.Contains(model.PermanentAddress));
+            }
+            var result = DbSet.Where(predicate).ToList();
+
+
+            return result;
+        }
+
+
     }
 }
