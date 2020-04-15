@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ViewModel.SmallRoutine.RequestViewModel.HealthViewModel
+namespace ViewModel.SmallRoutine.MiddelViewModel
 {
-    public  class HealthInfoAddViewModel
+    public  class HealthInfoSearchMiddle
     {
+        /// <summary>
+        /// id
+        /// </summary>
+        public int id { get; set; }
         /// <summary>
         /// 身份证号
         /// </summary>

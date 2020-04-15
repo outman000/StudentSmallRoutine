@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.PublicViewModel;
 
 namespace ViewModel.SmallRoutine.ResponseViewModel
 {
-    public class LoginViewResModel
+    public class EnterSearchResModel
     {
         public bool IsSuccess;
-        public string openid;
-        public string userid;
+        public List<EnterMiddelViewModel>  enterMiddelViewModels;
         public BaseViewModel baseViewModel;
         public int TotalNum;
-        public LoginViewResModel()
+        public EnterSearchResModel()
         {
             baseViewModel = new BaseViewModel();
         }

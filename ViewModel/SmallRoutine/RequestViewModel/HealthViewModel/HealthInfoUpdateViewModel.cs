@@ -4,8 +4,12 @@ using System.Text;
 
 namespace ViewModel.SmallRoutine.RequestViewModel.HealthViewModel
 {
-    public  class HealthInfoAddViewModel
+    public class HealthInfoUpdateViewModel
     {
+        /// <summary>
+        /// id
+        /// </summary>
+        public int id { get; set; }
         /// <summary>
         /// 身份证号
         /// </summary>
