@@ -27,6 +27,25 @@ namespace Dto.Repository.SmallRoutine
             DbSet.Add(obj);
         }
 
+        public void AddListBase(List<User_Info> insertUserInfoList)
+        {
+            //var tempresult = DbSet.ToList();
+            //var realinsertList = new List<User_Info>();
+            //for (int i = 0; i < insertUserInfoList.Count; i++)
+            //{
+            //    if (!tempresult.Exists(a => a.Idnumber == insertUserInfoList[i].Idnumber))//如果数据库存在，就不再插入了
+            //    {
+            //        realinsertList.Add(insertUserInfoList[i]);
+            //    }
+            //}
+
+
+
+
+         //   DbSet.AddRange(insertUserInfoList);
+        }
+
+
         public void Dispose()
         {
             throw new NotImplementedException();

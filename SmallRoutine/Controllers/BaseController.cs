@@ -110,7 +110,7 @@ namespace SmallRoutine.Controllers
         /// 结构化基础数据
         /// </summary>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("/struct/StructDatabase")]
         public ActionResult StructDatabase()
         {
             _baseService.structSystemInfo();
@@ -118,10 +118,14 @@ namespace SmallRoutine.Controllers
         }
 
 
-
+        /// <summary>
+        /// 结构化基础数据
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("/struct/GenerateUserLoginInfo")]
         public ActionResult GenerateUserLoginInfo()
          {
-
+            _baseService.structUserInfo();
             return Ok();
 
         }
