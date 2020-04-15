@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ViewModel.SmallRoutine.RequestViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel;
 using ViewModel.SmallRoutine.ServiceDTO.SmallRoutine;
 
@@ -39,6 +40,14 @@ namespace Dto.IRepository.SmallRoutine
         Student_Info GetStudentInfoAndHealthInfo(String Idnumber);
 
 
+        //根据id获取学生信息
+        Student_Info getbyID(int id);
+
+        //删除信息
+        void RemoveInfo(Student_Info info);
+
+        //根据条件查询
+        List<Student_Info> GetByModel(StudentSearchModel model);
 
 
     }

@@ -1,11 +1,13 @@
 ﻿using Dto.IRepository.SmallRoutine;
 using Dtol;
 using Dtol.dtol;
+using Dtol.Extension;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ViewModel.SmallRoutine.RequestViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel;
 using ViewModel.SmallRoutine.ServiceDTO.SmallRoutine;
 
@@ -107,5 +109,78 @@ namespace Dto.Repository.SmallRoutine
             return DbSet.Where(a => a.IdNumber == Idnumber).Include(a=>a.StudentRegisterHeath_Info).FirstOrDefault();
           
         }
+
+
+
+        //根据id获取学生信息
+        public Student_Info getbyID(int id)
+        {
+            Student_Info info = new Student_Info();
+
+            //查询条件
+            var predicate = WhereExtension.True<Student_Info>();//初始化where表达式
+            predicate = predicate.And(p => p.id.Equals(id));
+
+            var result = DbSet.Where(predicate).ToList();
+            if (result.Count > 0)
+            {
+                info = result.First();
+            }
+            else
+            {
+                info = null;
+            }
+
+            return info;
+        }
+
+        //删除信息
+        public void RemoveInfo(Student_Info info)
+        {
+            DbSet.Remove(info);
+        }
+
+
+        //根据条件查询
+        public List<Student_Info> GetByModel(StudentSearchModel model)
+        {
+            //查询条件
+            var predicate = WhereExtension.True<Student_Info>();//初始化where表达式
+                                                                //姓名
+            if (!String.IsNullOrEmpty(model.Name))
+            {
+                predicate = predicate.And(p => p.Name.Contains(model.Name));
+            }
+            //身份证
+            if (!String.IsNullOrEmpty(model.IdNumber))
+            {
+                predicate = predicate.And(p => p.IdNumber.Equals(model.IdNumber));
+            }
+            //学校
+            if (!String.IsNullOrEmpty(model.SchoolCode))
+            {
+                predicate = predicate.And(p => p.SchoolCode.Equals(model.SchoolCode));
+            }
+            //年级
+            if (!String.IsNullOrEmpty(model.GradeCode))
+            {
+                predicate = predicate.And(p => p.GradeCode.Equals(model.GradeCode));
+            }
+            //班级
+            if (!String.IsNullOrEmpty(model.ClassCode))
+            {
+                predicate = predicate.And(p => p.ClassCode.Equals(model.ClassCode));
+            }
+            //住址
+            if (!String.IsNullOrEmpty(model.PermanentAddress))
+            {
+                predicate = predicate.And(p => p.PermanentAddress.Contains(model.PermanentAddress));
+            }
+            var result = DbSet.Where(predicate).ToList();
+
+
+            return result;
+        }
+
     }
 }

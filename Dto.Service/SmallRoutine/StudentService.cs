@@ -2,11 +2,10 @@
 using Dto.IRepository.SmallRoutine;
 using Dto.IService.SmallRoutine;
 using Dtol.dtol;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Text
-    ;
+using System.Text;
+using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.PublicViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
 
@@ -16,29 +15,27 @@ namespace Dto.Service.SmallRoutine
     {
         private readonly IStudentInfoRepository _studentInfoRepository;
         private readonly IMapper _IMapper;
-        private readonly ILogger _ILogger;
+
         private readonly ISchoolInfoRepository _schoolInfoRepository;
         private readonly IGradeInfoRepository _gradeInfoRepository;
         private readonly IClassInfoRepository _classInfoRepository;
 
-        public StudentService(IStudentInfoRepository studentInfo, IMapper mapper, ILogger logger, ISchoolInfoRepository schoolInfo, 
+        public StudentService(IStudentInfoRepository studentInfo, IMapper mapper,  ISchoolInfoRepository schoolInfo, 
             IGradeInfoRepository gradeInfo, IClassInfoRepository  classInfo)
         {
             _studentInfoRepository = studentInfo;
             _IMapper = mapper;
-            _ILogger = logger;
             _schoolInfoRepository = schoolInfo;
             _gradeInfoRepository = gradeInfo;
             _classInfoRepository = classInfo;
         }
 
 
-
         //添加学生信息 
-        public BaseViewModel addStudentInfo(StudentAddModel student)
+        public BaseViewModel addStudentInfo(StudentBaseModel student)
         {
             BaseViewModel viewModel = new BaseViewModel();
-            if(String.IsNullOrEmpty(student.Name) || String.IsNullOrEmpty(student.IdNumber) || String.IsNullOrEmpty(student.SchoolCode)|| String.IsNullOrEmpty(student.GradeCode) || String.IsNullOrEmpty(student.ClassCode) || String.IsNullOrEmpty(student.PermanentAddress))
+            if (String.IsNullOrEmpty(student.Name) || String.IsNullOrEmpty(student.IdNumber) || String.IsNullOrEmpty(student.SchoolCode) || String.IsNullOrEmpty(student.GradeCode) || String.IsNullOrEmpty(student.ClassCode) || String.IsNullOrEmpty(student.PermanentAddress))
             {
                 viewModel.ResponseCode = 2;
                 viewModel.Message = "参数信息为空";
@@ -55,7 +52,7 @@ namespace Dto.Service.SmallRoutine
                             if (_classInfoRepository.CheckInfo(student.ClassCode, student.ClassName))
                             {
                                 Student_Info info = new Student_Info();
-                                info = _IMapper.Map<StudentAddModel, Student_Info>(student);
+                                info = _IMapper.Map<StudentBaseModel, Student_Info>(student);
                                 info.CreateDate = DateTime.Now;
                                 _studentInfoRepository.Add(info);
                                 int i = _studentInfoRepository.SaveChanges();
@@ -94,11 +91,75 @@ namespace Dto.Service.SmallRoutine
                     viewModel.ResponseCode = 3;
                     viewModel.Message = "出现异常";
                 }
-               
+
             }
             return viewModel;
         }
 
+
+        //根据 id 删除 学生信息
+        public BaseViewModel delStudentInfo(int id)
+        {
+            BaseViewModel baseView = new BaseViewModel();
+            _studentInfoRepository.RemoveInfo(_studentInfoRepository.getbyID(id));
+            int i = _studentInfoRepository.SaveChanges();
+            if (i > 0)
+            {
+                baseView.ResponseCode = 0;
+                baseView.Message = "删除成功";
+            }
+            else
+            {
+                baseView.ResponseCode = 1;
+                baseView.Message = "删除失败";
+            }
+            return baseView;
+        }
+
+
+        //修改 学生信息
+        public BaseViewModel updateStudentInfo(StudentMiddle student)
+        {
+            BaseViewModel baseView = new BaseViewModel();
+            var info = _IMapper.Map<StudentMiddle, Student_Info>(student);
+            _studentInfoRepository.Update(info);
+            int i = _studentInfoRepository.SaveChanges();
+            if (i > 0)
+            {
+                baseView.ResponseCode = 0;
+                baseView.Message = "修改成功";
+            }
+            else
+            {
+                baseView.ResponseCode = 1;
+                baseView.Message = "修改失败";
+            }
+            return baseView;
+        }
+
+
+        //根据条件查询
+        public List<StudentMiddle> GetListByParas(StudentSearchModel model)
+        {
+            List<Student_Info> lists = new List<Student_Info>();
+            List<StudentMiddle> nlists = new List<StudentMiddle>();
+            if (!string.IsNullOrEmpty(model.IdNumber))
+            {
+                model.IdNumber = Dtol.Helper.MD5.Md5Hash(model.IdNumber);
+            }
+
+            lists = _studentInfoRepository.GetByModel(model);
+
+            foreach (var item in lists)
+            {
+                var info = _IMapper.Map<Student_Info, StudentMiddle>(item);
+
+                info.IdNumber = Dtol.Helper.MD5.Decrypt(info.IdNumber);
+                nlists.Add(info);
+            }
+
+            return nlists;
+        }
 
     }
 }
