@@ -92,6 +92,15 @@ namespace Dto.Repository.SmallRoutine
             }).Distinct().ToList();
         }
 
+        public List<SchoolInfoServiceDTO> GetIdNumberList()
+        {
+            return Db.Student_Info.Select(a => new SchoolInfoServiceDTO
+            {
+                SchoolCode = a.SchoolCode,
+                SchoolName = a.SchoolName
+            }).Distinct().ToList();
+        }
+
 
     }
 }

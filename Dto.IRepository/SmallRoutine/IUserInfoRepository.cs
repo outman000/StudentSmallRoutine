@@ -7,5 +7,6 @@ namespace Dto.IRepository.SmallRoutine
 {
     public   interface IUserInfoRepository: IRepository<User_Info>
     {
+        void AddListBase(List<User_Info> insertUserInfoList);
     }
 }

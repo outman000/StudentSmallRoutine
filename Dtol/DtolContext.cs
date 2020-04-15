@@ -26,7 +26,7 @@ namespace Dtol
         public DbSet<Student_Info> Student_Info { get; set; }
         public DbSet<UploadFile> UploadFile { get; set; }
         public DbSet<Depart_Info> Depart_Info { get; set; }
-        
+        public DbSet<User_Info> User_Info { get; set; }
         public DtolContext(DbContextOptions<DtolContext> options)
        : base(options)
         {

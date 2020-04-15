@@ -17,10 +17,11 @@ namespace Dto.Service.AutoMapper.SmallRoutine
         private readonly ISchoolInfoRepository _schoolInfoRespository;
         private readonly IStationInfoRepository _stationInfoRespository;
         private readonly IDepartInfoRepository _departInfoRespository;
+        private readonly IUserInfoRepository _userInfoRepository;
+
 
         private IFacultystaffInfoRepository _facultystaffInfoRepository;
         private readonly IMapper _IMapper;
-
 
         public BaseService(IStudentInfoRepository studentInfoRepository,
             IClassInfoRepository classInfoRepository,
@@ -28,6 +29,7 @@ namespace Dto.Service.AutoMapper.SmallRoutine
             ISchoolInfoRepository schoolInfoRespository,
             IStationInfoRepository stationInfoRespository,
             IDepartInfoRepository departInfoRespository,
+            IUserInfoRepository userInfoRepository,
             IFacultystaffInfoRepository facultystaffInfoRepository,
             IMapper iMapper)
         {
@@ -37,6 +39,7 @@ namespace Dto.Service.AutoMapper.SmallRoutine
             _schoolInfoRespository = schoolInfoRespository;
             _stationInfoRespository = stationInfoRespository;
             _departInfoRespository = departInfoRespository;
+            _userInfoRepository = userInfoRepository;
             _facultystaffInfoRepository = facultystaffInfoRepository;
             _IMapper = iMapper;
         }
@@ -65,7 +68,9 @@ namespace Dto.Service.AutoMapper.SmallRoutine
 
         public void structUserInfo()
         {
-            
+            var studentInfoAll = _userInfoRepository.GetAll();
+           // var schoolInsertList = _IMapper.Map<List<SchoolInfoServiceDTO>, List<School_Info>>(schoolList);//需要插入的学校集合
+            //_userInfoRepository.AddListBase(studentInfoAll);
         }
     }
 }
