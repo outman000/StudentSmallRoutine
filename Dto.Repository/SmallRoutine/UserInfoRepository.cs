@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Dto.Repository.SmallRoutine
@@ -29,20 +30,18 @@ namespace Dto.Repository.SmallRoutine
 
         public void AddListBase(List<User_Info> insertUserInfoList)
         {
-            //var tempresult = DbSet.ToList();
-            //var realinsertList = new List<User_Info>();
-            //for (int i = 0; i < insertUserInfoList.Count; i++)
-            //{
-            //    if (!tempresult.Exists(a => a.Idnumber == insertUserInfoList[i].Idnumber))//如果数据库存在，就不再插入了
-            //    {
-            //        realinsertList.Add(insertUserInfoList[i]);
-            //    }
-            //}
-
-
-
-
-         //   DbSet.AddRange(insertUserInfoList);
+            var tempresult = DbSet.ToList();
+            var realinsertList = new List<User_Info>();
+            for (int i = 0; i < insertUserInfoList.Count; i++)
+            {
+                if (!tempresult.Exists(a => a.Idnumber == insertUserInfoList[i].Idnumber))//如果数据库存在，就不再插入了
+                {
+             
+                    insertUserInfoList[i].password = Dtol.Helper.MD5.Md5Hash("ET2020666");
+                    realinsertList.Add(insertUserInfoList[i]);
+                }
+            }
+            DbSet.AddRange(realinsertList);
         }
 
 
@@ -53,7 +52,7 @@ namespace Dto.Repository.SmallRoutine
 
         public IQueryable<User_Info> GetAll()
         {
-            throw new NotImplementedException();
+            return DbSet;
         }
 
         public User_Info GetById(Guid id)
@@ -68,7 +67,7 @@ namespace Dto.Repository.SmallRoutine
 
         public int SaveChanges()
         {
-            throw new NotImplementedException();
+            return Db.SaveChanges();
         }
 
         public void Update(User_Info obj)

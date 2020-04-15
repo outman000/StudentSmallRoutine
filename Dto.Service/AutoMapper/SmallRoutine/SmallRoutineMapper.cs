@@ -34,6 +34,10 @@ namespace Dto.Service.AutoMapper.SmallRoutine
 
             CreateMap<StationInfoServiceDTO, Station_Info>();
 
+            CreateMap<Student_Info, User_Info>().ForMember(a=>a.id, opt => opt.Ignore());
+
+            CreateMap<facultystaff_Info, User_Info>().ForMember(a => a.id, opt => opt.Ignore());
+
         }
     }
 }

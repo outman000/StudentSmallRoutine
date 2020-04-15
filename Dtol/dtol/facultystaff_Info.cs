@@ -29,7 +29,8 @@ namespace Dtol.dtol
         [ExcelAttribute("岗位")]
         public string StaffName { get; set; }
 
-
+        [ExcelAttribute("户籍地址")]
+        public string PermanentAddress { get; set; }
 
         [ExcelAttribute("国籍")]
         public string Country { get; set; }

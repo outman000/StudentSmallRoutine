@@ -22,7 +22,7 @@ namespace Dto.Repository.SmallRoutine
             DbSet = Db.Set<Student_Info>();
         }
         #region 基本查询
-        public   void Add(Student_Info obj)
+        public void Add(Student_Info obj)
         {
             DbSet.Add(obj);
         }
@@ -54,7 +54,7 @@ namespace Dto.Repository.SmallRoutine
             throw new NotImplementedException();
         }
 
-        public   int SaveChanges()
+        public int SaveChanges()
         {
             return Db.SaveChanges();
         }

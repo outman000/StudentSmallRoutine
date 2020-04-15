@@ -14,5 +14,9 @@ namespace Dtol.dtol
         public string IsFamilyHot { get; set; }
         public string IsFamilyThroat { get; set; }
         public string IsFamilyWeakt { get; set; }
+        public DateTime? Createdate { get; set; } = DateTime.Now;
+
+        public int Student_InfoId { get; set; }
+        public Student_Info Student_Info { get; set; } 
     }
 }
