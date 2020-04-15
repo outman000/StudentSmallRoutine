@@ -18,8 +18,4 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation.AspNetCore" Version="8.4.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="SmallRoutine\ResponseViewModel\HealthViewModel\" />
-  </ItemGroup>
 </Project>

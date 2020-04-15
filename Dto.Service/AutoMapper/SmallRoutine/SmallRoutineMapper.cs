@@ -7,6 +7,7 @@ using ViewModel.SmallRoutine;
 using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.MiddelViewModel.SecondMiddleViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.HealthViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel;
 using ViewModel.SmallRoutine.ServiceDTO.SmallRoutine;
 
@@ -43,8 +44,7 @@ namespace Dto.Service.AutoMapper.SmallRoutine
             CreateMap<Student_Info, ValideMiddleViewModel>()
                  .ForMember(a => a.StudentRegisterHeathInfoViewModel, opt => opt.MapFrom(src => src.StudentRegisterHeath_Info));
 
-            CreateMap<StudentRegisterHeath_Info, StudentRegisterHeathInfoViewModel>();
-
+          
 
             CreateMap<Student_Info, User_Info>().ForMember(a=>a.id, opt => opt.Ignore());
 
@@ -54,6 +54,13 @@ namespace Dto.Service.AutoMapper.SmallRoutine
                 .ForMember(a => a.Idnumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.Idnumber)))
                 .ForMember(a => a.Password, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.Password)))
                 ;
+
+            CreateMap<StudentRegisterHeath_Info, StudentRegisterHeathInfoViewModel>();
+
+            CreateMap<HealthInfoUpdateViewModel, StudentRegisterHeath_Info > ();
+
+            CreateMap<StudentRegisterHeath_Info, HealthInfoSearchMiddle>();
+      
 
         }
     }

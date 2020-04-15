@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ViewModel.SmallRoutine.PublicViewModel;
 
 namespace ViewModel.SmallRoutine.RequestViewModel.HealthViewModel
 {
-    public  class HealthInfoAddViewModel
+    public   class HealthInfoSearchViewModel
     {
+        /// <summary>
+        /// id
+        /// </summary>
+        public int id { get; set; }
         /// <summary>
         /// 身份证号
         /// </summary>
@@ -66,5 +71,19 @@ namespace ViewModel.SmallRoutine.RequestViewModel.HealthViewModel
         /// 体温计
         /// </summary>
         public string Temperature { get; set; }//体温
+
+
+        /// <summary>
+        /// 分页
+        /// </summary>
+        public PageViewModel pageViewModel { get; set; }
+        /// <summary>
+        /// 构造方法
+        /// </summary>
+        HealthInfoSearchViewModel()
+        {
+            pageViewModel = new PageViewModel();
+        }
+        public DateTime? CreateDate { get; set; }//体温
     }
 }
