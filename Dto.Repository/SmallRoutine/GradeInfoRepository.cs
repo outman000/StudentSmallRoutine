@@ -1,6 +1,7 @@
 ﻿using Dto.IRepository.SmallRoutine;
 using Dtol;
 using Dtol.dtol;
+using Dtol.Extension;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -76,5 +77,26 @@ namespace Dto.Repository.SmallRoutine
         {
             throw new NotImplementedException();
         }
+
+        //验证是否年级信息是否存在
+        public bool CheckInfo(string code, string name)
+        {
+            //查询条件
+            var predicate = WhereExtension.True<Grade_Info>();//初始化where表达式
+           
+            predicate = predicate.And(p => p.GradeCode.Equals(code));
+            predicate = predicate.And(p => p.GradeName.Equals(name));
+
+            var result = DbSet.Where(predicate).ToList();
+            if (result.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }

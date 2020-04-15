@@ -10,5 +10,8 @@ namespace Dto.IRepository.SmallRoutine
     {
         void AddList(List<Grade_Info>  grade_Infos);
         void AddListBase(List<Grade_Info> gradeInsertList);
+
+        //验证是否年级信息是否存在
+        bool CheckInfo(string code, string name);
     }
 }
