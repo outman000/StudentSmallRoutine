@@ -126,7 +126,7 @@ namespace SmallRoutine.Controllers
         /// 根据当前人分管的班级查询所管理的学生的每日健康信息
         /// </summary>
         /// <returns></returns>
-        [HttpPost("/RelateStaffToClass/GetInfoAndHeathEveryInfo")]
+        [HttpPost("/RelateStaffToClass/GetInfoByClassAndHeathEveryInfo")]
 
         public ActionResult<StaffClassRelateResModel> getRelateFromStaffToClass(StaffClassRelateSearchViewModel staffClassRelateSearchView)
         {
@@ -139,7 +139,7 @@ namespace SmallRoutine.Controllers
             staffClassRelateResModel.baseViewModel.Message = "查询成功";
             staffClassRelateResModel.baseViewModel.ResponseCode = 200;
 
-            return null;
+            return Ok(staffClassRelateResModel);
         }
 
 
@@ -147,9 +147,9 @@ namespace SmallRoutine.Controllers
         /// 根据当前人分管的岗位获取员工每日健康信息
         /// </summary>
         /// <returns></returns>
-        [HttpPost("/RelateStationToClass/GetInfoAndHeathEveryInfo")]
+        [HttpPost("/RelateStationToClass/GetInfoByStationAndHeathEveryInfo")]
 
-        public ActionResult<StaffClassRelateResModel> getStationFromStaffToClass(StaffStationRelateSearchViewModel  staffStationRelateSearchViewModel)
+        public ActionResult<StaffStationRelateResModel> getStationFromStaffToClass(StaffStationRelateSearchViewModel  staffStationRelateSearchViewModel)
         {
             StaffStationRelateResModel staffStationRelateResModel = new StaffStationRelateResModel();
            var result= _facultystaffService.GetRelateToStationInfo(staffStationRelateSearchViewModel);
@@ -160,7 +160,7 @@ namespace SmallRoutine.Controllers
             staffStationRelateResModel.baseViewModel.Message = "查询成功";
             staffStationRelateResModel.baseViewModel.ResponseCode = 200;
 
-            return null;
+            return Ok(staffStationRelateResModel);
         }
 
 

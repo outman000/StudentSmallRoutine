@@ -10,7 +10,7 @@ namespace ViewModel.SmallRoutine.ResponseViewModel.StaffClassRelateViewModel
     {
 
         public bool IsSuccess;
-        public List<StaffStationMiddleModel>   staffStationMiddleModels;
+        public List<StaffClassMiddleModel>    staffClassMiddleModels;
         public BaseViewModel baseViewModel;
         public int TotalNum;
         public StaffClassRelateResModel()

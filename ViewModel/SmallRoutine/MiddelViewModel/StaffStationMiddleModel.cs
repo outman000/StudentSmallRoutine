@@ -6,7 +6,7 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
 {
     public class StaffStationMiddleModel
     {
-       
+
         /// <summary>
         /// 部门
         /// </summary>
