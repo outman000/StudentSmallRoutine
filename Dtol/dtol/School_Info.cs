@@ -14,6 +14,6 @@ namespace Dtol.dtol
 
 
    
-        public List<Station_Info> class_Infos { get; set; }
+        public List<Station_Info> Station_Info { get; set; }
     }
 }

@@ -19,6 +19,25 @@ namespace Dtol.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Dtol.dtol.ClassManager_Relate", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("Class_InfoId");
+
+                    b.Property<int?>("facultystaff_InfoId");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Class_InfoId");
+
+                    b.HasIndex("facultystaff_InfoId");
+
+                    b.ToTable("ClassManager_Relate");
+                });
+
             modelBuilder.Entity("Dtol.dtol.Class_Info", b =>
                 {
                     b.Property<int>("id")
@@ -67,11 +86,7 @@ namespace Dtol.Migrations
 
                     b.Property<string>("GradeName");
 
-                    b.Property<int?>("Station_InfoId");
-
                     b.HasKey("id");
-
-                    b.HasIndex("Station_InfoId");
 
                     b.ToTable("Grade_Info");
                 });
@@ -86,6 +101,8 @@ namespace Dtol.Migrations
 
                     b.Property<string>("IdNumber");
 
+                    b.Property<string>("IsComeSchool");
+
                     b.Property<string>("IsFamilyHot");
 
                     b.Property<string>("IsFamilyThroat");
@@ -96,17 +113,21 @@ namespace Dtol.Migrations
 
                     b.Property<string>("IsThroat");
 
+                    b.Property<string>("IsTouch");
+
                     b.Property<string>("IsWeak");
 
-                    b.Property<int>("Student_InfoId");
+                    b.Property<int?>("Student_InfoId");
 
-                    b.Property<int?>("facultystaff_Infoid");
+                    b.Property<string>("Temperature");
+
+                    b.Property<int?>("facultystaff_InfoId");
 
                     b.HasKey("id");
 
                     b.HasIndex("Student_InfoId");
 
-                    b.HasIndex("facultystaff_Infoid");
+                    b.HasIndex("facultystaff_InfoId");
 
                     b.ToTable("Health_Info");
                 });
@@ -124,6 +145,25 @@ namespace Dtol.Migrations
                     b.HasKey("id");
 
                     b.ToTable("School_Info");
+                });
+
+            modelBuilder.Entity("Dtol.dtol.StaffStation_Relate", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("Station_InfoId");
+
+                    b.Property<int?>("facultystaff_InfoId");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Station_InfoId");
+
+                    b.HasIndex("facultystaff_InfoId");
+
+                    b.ToTable("StaffStation_Relate");
                 });
 
             modelBuilder.Entity("Dtol.dtol.Station_Info", b =>
@@ -334,6 +374,17 @@ namespace Dtol.Migrations
                     b.ToTable("facultystaff_Info");
                 });
 
+            modelBuilder.Entity("Dtol.dtol.ClassManager_Relate", b =>
+                {
+                    b.HasOne("Dtol.dtol.Class_Info", "Class_Info")
+                        .WithMany()
+                        .HasForeignKey("Class_InfoId");
+
+                    b.HasOne("Dtol.dtol.facultystaff_Info", "facultystaff_Info")
+                        .WithMany()
+                        .HasForeignKey("facultystaff_InfoId");
+                });
+
             modelBuilder.Entity("Dtol.dtol.Class_Info", b =>
                 {
                     b.HasOne("Dtol.dtol.Grade_Info", "Grade_Info")
@@ -348,23 +399,26 @@ namespace Dtol.Migrations
                         .HasForeignKey("Student_InfoId");
                 });
 
-            modelBuilder.Entity("Dtol.dtol.Grade_Info", b =>
-                {
-                    b.HasOne("Dtol.dtol.Station_Info", "Station_Info")
-                        .WithMany("Grade_Info")
-                        .HasForeignKey("Station_InfoId");
-                });
-
             modelBuilder.Entity("Dtol.dtol.Health_Info", b =>
                 {
                     b.HasOne("Dtol.dtol.Student_Info", "Student_Info")
                         .WithMany("Health_Info")
-                        .HasForeignKey("Student_InfoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("Student_InfoId");
 
-                    b.HasOne("Dtol.dtol.facultystaff_Info")
+                    b.HasOne("Dtol.dtol.facultystaff_Info", "facultystaff_Info")
                         .WithMany("Health_Info")
-                        .HasForeignKey("facultystaff_Infoid");
+                        .HasForeignKey("facultystaff_InfoId");
+                });
+
+            modelBuilder.Entity("Dtol.dtol.StaffStation_Relate", b =>
+                {
+                    b.HasOne("Dtol.dtol.Station_Info", "Station_Info")
+                        .WithMany()
+                        .HasForeignKey("Station_InfoId");
+
+                    b.HasOne("Dtol.dtol.facultystaff_Info", "facultystaff_Info")
+                        .WithMany()
+                        .HasForeignKey("facultystaff_InfoId");
                 });
 
             modelBuilder.Entity("Dtol.dtol.Station_Info", b =>
@@ -374,7 +428,7 @@ namespace Dtol.Migrations
                         .HasForeignKey("Depart_InfoId");
 
                     b.HasOne("Dtol.dtol.School_Info")
-                        .WithMany("class_Infos")
+                        .WithMany("Station_Info")
                         .HasForeignKey("School_Infoid");
                 });
 
@@ -385,7 +439,7 @@ namespace Dtol.Migrations
                         .HasForeignKey("StudentRegisterHeath_InfoId");
 
                     b.HasOne("Dtol.dtol.Class_Info", "class_Info")
-                        .WithMany()
+                        .WithMany("Student_Info")
                         .HasForeignKey("class_InfoId");
                 });
 

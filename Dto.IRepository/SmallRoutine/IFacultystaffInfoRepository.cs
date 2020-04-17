@@ -32,5 +32,6 @@ namespace Dto.IRepository.SmallRoutine
         void RemoveInfo(facultystaff_Info info);
         //根据条件查询
         List<facultystaff_Info> GetByModel(FacultystaffSearchModel model);
+        facultystaff_Info getByidNumber(string idnumber);
     }
 }

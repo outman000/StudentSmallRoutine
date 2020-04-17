@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.BaseControlViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel;
 using ViewModel.SmallRoutine.ServiceDTO.SmallRoutine;
 
@@ -42,13 +44,14 @@ namespace Dto.IRepository.SmallRoutine
 
         //根据id获取学生信息
         Student_Info getbyID(int id);
+        Student_Info getByidNumber(string idnumber);
 
         //删除信息
         void RemoveInfo(Student_Info info);
 
         //根据条件查询
         List<Student_Info> GetByModel(StudentSearchModel model);
-
-
+        List<ClassInfoSearchMiddleModel> GetClasslListContainId(GradeAndClassSearchViewModel gradeAndClassSearchViewModel);
+        List<GradeInfoSearchMiddleModel> GetGradeListContainId(GradeAndClassSearchViewModel gradeAndClassSearchViewModel);
     }
 }

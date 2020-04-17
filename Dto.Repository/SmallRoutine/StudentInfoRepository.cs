@@ -7,7 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.BaseControlViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel;
 using ViewModel.SmallRoutine.ServiceDTO.SmallRoutine;
 
@@ -182,5 +184,30 @@ namespace Dto.Repository.SmallRoutine
             return result;
         }
 
+        public Student_Info getByidNumber(string idnumber)
+        {
+            return DbSet.FirstOrDefault(a => a.IdNumber== idnumber);
+        }
+        //写错地方了。。。。。就这样吧
+        public List<ClassInfoSearchMiddleModel> GetClasslListContainId(GradeAndClassSearchViewModel gradeAndClassSearchViewModel)
+        {
+             return Db.Student_Info.Where(a=>a.SchoolCode== gradeAndClassSearchViewModel.SchoolCode).Select(a => new ClassInfoSearchMiddleModel
+             {
+                
+                ClassCode = a.ClassCode,
+                ClassName = a.ClassName
+            }).Distinct().ToList();
+        }
+
+        public List<GradeInfoSearchMiddleModel> GetGradeListContainId(GradeAndClassSearchViewModel gradeAndClassSearchViewModel)
+        {
+            return Db.Student_Info.Where(a => a.SchoolCode == gradeAndClassSearchViewModel.SchoolCode).Select(a => new GradeInfoSearchMiddleModel
+            {
+               
+                GradeCode = a.GradeCode,
+                GradeName = a.GradeName
+
+            }).Distinct().ToList();
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.ServiceDTO.SmallRoutine;
 
 namespace Dto.IRepository.SmallRoutine
@@ -13,5 +14,6 @@ namespace Dto.IRepository.SmallRoutine
 
         //验证是否年级信息是否存在
         bool CheckInfo(string code, string name);
+        List<Grade_Info> getclassInfoBycode(string code);
     }
 }

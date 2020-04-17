@@ -4,6 +4,9 @@ using System.Text;
 using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.PublicViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.FacultystaffViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.StaffClassRelateViewModel;
+
 namespace Dto.IService.SmallRoutine
 {
     public interface IFacultystaffService
@@ -22,5 +25,8 @@ namespace Dto.IService.SmallRoutine
 
         //根据条件查询
         List<FacultystaffMiddle> GetListByParas(FacultystaffSearchModel model);
+        void AddRelateToClass(AddRelateFromStaffToClassViewModel model);
+        void DeleteRelateToClass(DeleteRelateFromStaffToClassViewModel model);
+        List<StaffClassMiddleModel> GetRelateToClassInfo(StaffClassRelateSearchViewModel staffClassRelateSearchView);
     }
 }

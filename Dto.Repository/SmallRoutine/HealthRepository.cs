@@ -96,6 +96,8 @@ namespace Dto.Repository.SmallRoutine
             predicate = predicate.And(p => p.IsHot.Contains(healthEverySearchViewModel.IsHot));
             predicate = predicate.And(p => p.IsThroat.Contains(healthEverySearchViewModel.IsThroat));
             predicate = predicate.And(p => p.IsWeak.Contains(healthEverySearchViewModel.IsWeak));
+            predicate = predicate.And(p => p.IsComeSchool .Contains(healthEverySearchViewModel.IsComeSchool));
+            predicate = predicate.And(p => p.IsTouch.Contains(healthEverySearchViewModel.IsTouch));
             predicate = predicate.And(p => p.Createdate.ToString().Contains(healthEverySearchViewModel.Createdate == null ? "" : healthEverySearchViewModel.Createdate.Value.ToString("yyyy-MM-dd")));
             // predicate = predicate.And(p => p.Id==lineSearchViewModel.Id);
 

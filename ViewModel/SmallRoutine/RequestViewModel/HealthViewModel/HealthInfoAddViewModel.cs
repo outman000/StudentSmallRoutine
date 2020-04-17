@@ -6,6 +6,8 @@ namespace ViewModel.SmallRoutine.RequestViewModel.HealthViewModel
 {
     public  class HealthInfoAddViewModel
     {
+
+
         /// <summary>
         /// 身份证号
         /// </summary>

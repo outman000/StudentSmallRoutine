@@ -39,14 +39,16 @@ namespace Dtol.dtol
         public int? station_InfoId { get; set; }
         public Station_Info station_Info { get; set; }
 
-        //健康信息外键
 
+
+        //健康信息外键
         public int? StudentRegisterHeath_InfoId { get; set; }
         public StudentRegisterHeath_Info StudentRegisterHeath_Info { get; set; }
-
         //每日信息集合
         public List<Health_Info> Health_Info { get; set; }
 
- 
+      //  public List<ClassManager_Relate>  classManager_Relates { get; set; }
+
+
     }
 }

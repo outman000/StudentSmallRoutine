@@ -31,6 +31,7 @@ namespace Dto.Repository.SmallRoutine
             DbSet.Add(obj);
         }
 
+
         public void AddList(List<facultystaff_Info> facultystaff_Infos)
         {
             DbSet.AddRange(facultystaff_Infos);
@@ -162,6 +163,9 @@ namespace Dto.Repository.SmallRoutine
             return result;
         }
 
-
+        public facultystaff_Info getByidNumber(string idnumber)
+        {
+            return DbSet.FirstOrDefault(a => a.IdNumber == idnumber);
+        }
     }
 }

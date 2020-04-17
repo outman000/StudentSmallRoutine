@@ -12,6 +12,5 @@ namespace Dtol.dtol
         public string StaffCode { get; set; }
         public int? Depart_InfoId { get; set; }
         public Depart_Info Depart_Info { get; set; }
-        public List<Grade_Info> Grade_Info { get; set; }
     }
 }

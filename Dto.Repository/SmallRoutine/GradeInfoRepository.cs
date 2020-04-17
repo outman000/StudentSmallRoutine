@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.ServiceDTO.SmallRoutine;
 
 namespace Dto.Repository.SmallRoutine
@@ -96,6 +97,18 @@ namespace Dto.Repository.SmallRoutine
             {
                 return false;
             }
+        }
+
+        //验证是否学校信息是否存在
+        public List<Grade_Info> getclassInfoBycode(string code)
+        {
+            //查询条件
+            var predicate = WhereExtension.True<Grade_Info>();//初始化where表达式
+
+            predicate = predicate.And(p =>p.GradeCode.Substring(0,2).Equals(code));
+
+            var result = DbSet.Where(predicate).ToList();
+            return result;
         }
 
     }

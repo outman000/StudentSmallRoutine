@@ -35,8 +35,25 @@ namespace ViewModel.SmallRoutine.RequestViewModel.HealthEveryViewModel
         /// </summary>
         public string IsFamilyWeakt { get; set; }
         /// <summary>
-        /// 登陆人的标识id
+        /// 登陆人的标识id(学生)
         /// </summary>
         public int Student_InfoId { get; set; }
+        /// <summary>
+        /// 员工标识id
+        /// </summary>
+        public int facultystaff_InfoId { get; set; }
+        /// <summary>
+        /// 体温
+        /// </summary>
+        public string Temperature { get; set; }//体温
+
+        /// <summary>
+        /// 是否到校
+        /// </summary>
+        public string IsComeSchool { get; set; }
+        /// <summary>
+        /// 是否接触
+        /// </summary>
+        public string IsTouch { get; set; }
     }
 }

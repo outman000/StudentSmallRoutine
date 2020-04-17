@@ -39,5 +39,18 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// 创建日期
         /// </summary>
         public DateTime? Createdate { get; set; }
+
+        /// <summary>
+        /// 是否到校
+        /// </summary>
+        public string IsComeSchool { get; set; }
+        /// <summary>
+        /// 是否接触
+        /// </summary>
+        public string IsTouch { get; set; }
+        /// <summary>
+        /// 体温
+        /// </summary>
+        public string Temperature { get; set; }//体温
     }
 }

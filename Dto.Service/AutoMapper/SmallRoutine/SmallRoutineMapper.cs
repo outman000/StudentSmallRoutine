@@ -7,6 +7,7 @@ using ViewModel.SmallRoutine;
 using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.MiddelViewModel.SecondMiddleViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.FacultystaffViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.HealthEveryViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.HealthViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel;
@@ -40,10 +41,12 @@ namespace Dto.Service.AutoMapper.SmallRoutine
             CreateMap<StationInfoServiceDTO, Station_Info>();//LoginValideReEmployesModel
 
             CreateMap<facultystaff_Info, ValideMiddleEmployMiddleModel>()
-               .ForMember(a => a.studentRegisterHeathInfoViewModel, opt => opt.MapFrom(src => src.StudentRegisterHeath_Info));
+               .ForMember(a => a.studentRegisterHeathInfoViewModel, opt => opt.MapFrom(src => src.StudentRegisterHeath_Info))
+                .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.IdNumber)));
 
             CreateMap<Student_Info, ValideMiddleViewModel>()
-                 .ForMember(a => a.StudentRegisterHeathInfoViewModel, opt => opt.MapFrom(src => src.StudentRegisterHeath_Info));
+                 .ForMember(a => a.StudentRegisterHeathInfoViewModel, opt => opt.MapFrom(src => src.StudentRegisterHeath_Info))
+                  .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.IdNumber)));
 
           
 
@@ -81,6 +84,18 @@ namespace Dto.Service.AutoMapper.SmallRoutine
 
             CreateMap< HealthEveryUpdateViewModel, Health_Info >()
                 .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.IdNumber)));
+
+            CreateMap<AddRelateFromStaffToClassViewModel, ClassManager_Relate>();
+
+
+            CreateMap<Grade_Info, GradeInfoSearchMiddleModel>();
+            CreateMap<Class_Info, ClassInfoSearchMiddleModel>();
+
+            CreateMap<Health_Info, StaffClassMiddleModel>()
+
+                .ForMember(a => a.GradeName, opt => opt.MapFrom(src => src.Student_Info.GradeCode))
+                .ForMember(a => a.ClassName, opt => opt.MapFrom(src => src.Student_Info.ClassName))
+                .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.IdNumber)));
 
         }
     }

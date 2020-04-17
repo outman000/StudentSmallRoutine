@@ -219,7 +219,7 @@ namespace SmallRoutine
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
-       //     app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             //，启用中间件为生成的 JSON 文档和 Swagger UI 提供服务
             // Enable middleware to serve generated Swagger as a JSON endpoint.

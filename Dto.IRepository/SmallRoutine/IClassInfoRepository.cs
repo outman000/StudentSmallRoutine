@@ -13,5 +13,7 @@ namespace Dto.IRepository.SmallRoutine
 
         //验证是否班级信息是否存在
         bool CheckInfo(string code, string name);
+        List<Class_Info> getclassInfoBycode(string code);
+
     }
 }

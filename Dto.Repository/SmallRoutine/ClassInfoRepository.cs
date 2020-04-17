@@ -99,5 +99,18 @@ namespace Dto.Repository.SmallRoutine
                 return false;
             }
         }
+
+
+        //根据code查找学校
+        public List<Class_Info> getclassInfoBycode(string code)
+        {
+            //查询条件
+            var predicate = WhereExtension.True<Class_Info>();//初始化where表达式
+
+            predicate = predicate.And(p => p.ClassCode.Substring(0,4).Equals(code));
+
+            var result = DbSet.Where(predicate).ToList();
+            return result;
+        }
     }
 }

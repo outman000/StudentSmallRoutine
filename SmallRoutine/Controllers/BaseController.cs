@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ViewModel.SmallRoutine;
+using ViewModel.SmallRoutine.RequestViewModel.BaseControlViewModel;
+using ViewModel.SmallRoutine.ResponseViewModel.BaseControlViewModel;
 
 namespace SmallRoutine.Controllers
 {
@@ -127,6 +129,23 @@ namespace SmallRoutine.Controllers
          {
             _baseService.structUserInfo();
             return Ok();
+
+        }
+
+
+        /// <summary>
+        /// 获取年级，班级列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("/struct/BaseSelectInfo")]
+        public ActionResult<GradeAndClassResModel> getBaseSelectInfo(GradeAndClassSearchViewModel gradeAndClassSearchViewModel)
+        {
+            var gradeAndClassResModel= _baseService.getGradeAndClass(gradeAndClassSearchViewModel);
+
+            gradeAndClassResModel.IsSuccess = true;
+            gradeAndClassResModel.baseViewModel.Message = "查询成功";
+            gradeAndClassResModel.baseViewModel.ResponseCode = 200;
+            return Ok(gradeAndClassResModel);
 
         }
 

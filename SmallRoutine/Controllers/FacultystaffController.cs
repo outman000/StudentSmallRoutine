@@ -9,6 +9,8 @@ using SystemFilter.PublicFilter;
 using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.PublicViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.FacultystaffViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.StaffClassRelateViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel;
 
 
@@ -83,5 +85,58 @@ namespace SmallRoutine.Controllers
             resModel.baseViewModel.ResponseCode = 200;
             return resModel;
         }
+
+
+        /// <summary>
+        /// 添加关系（班级负责人和班级）
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("/RelateStaffToClass/Add")]
+
+        public ActionResult<BaseViewModel> SetRelateFromStaffToClass(AddRelateFromStaffToClassViewModel model)
+        {
+            BaseViewModel baseViewModel = new BaseViewModel();
+            _facultystaffService.AddRelateToClass(model);
+           
+            baseViewModel.Message = "添加成功";
+            baseViewModel.ResponseCode = 200;
+            return baseViewModel;
+        }
+
+        /// <summary>
+        /// 删除关系（班级负责人和班级）
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("/RelateStaffToClass/Delete")]
+
+        public ActionResult<BaseViewModel> DeleteRelateFromStaffToClass(DeleteRelateFromStaffToClassViewModel model)
+        {
+            BaseViewModel baseViewModel = new BaseViewModel();
+            _facultystaffService.DeleteRelateToClass(model);
+
+            baseViewModel.Message = "删除成功";
+            baseViewModel.ResponseCode = 200;
+            return baseViewModel;
+        }
+
+
+        /// <summary>
+        /// 根据当前人分管的班级查询所管理的学生的每日健康信息
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("/RelateStaffToClass/GetStudentInfoAndHeathEveryInfo")]
+
+        public ActionResult<BaseViewModel> getRelateFromStaffToClass(StaffClassRelateSearchViewModel staffClassRelateSearchView)
+        {
+            BaseViewModel baseViewModel = new BaseViewModel();
+            _facultystaffService.GetRelateToClassInfo(staffClassRelateSearchView);
+
+            baseViewModel.Message = "删除成功";
+            baseViewModel.ResponseCode = 200;
+            return null;
+        }
+        //查一套人和岗位的
+
+
     }
 }

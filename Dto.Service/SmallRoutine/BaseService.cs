@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ViewModel.SmallRoutine.RequestViewModel.BaseControlViewModel;
+using ViewModel.SmallRoutine.ResponseViewModel.BaseControlViewModel;
 using ViewModel.SmallRoutine.ServiceDTO.SmallRoutine;
 
 namespace Dto.Service.AutoMapper.SmallRoutine
@@ -76,6 +78,20 @@ namespace Dto.Service.AutoMapper.SmallRoutine
             _userInfoRepository.AddListBase(schoolInsertList);
             _userInfoRepository.AddListBase(facultystafInfoInsertList);
             _userInfoRepository.SaveChanges();
+        }
+
+        public GradeAndClassResModel getGradeAndClass(GradeAndClassSearchViewModel gradeAndClassSearchViewModel)
+        {
+            GradeAndClassResModel gradeAndClassResModel = new GradeAndClassResModel();
+            var classList = _StudentInfoRepository.GetClasslListContainId(gradeAndClassSearchViewModel);
+            var GradeList = _StudentInfoRepository.GetGradeListContainId(gradeAndClassSearchViewModel);
+
+            gradeAndClassResModel.classInfoSearchMiddleModels = classList;
+            gradeAndClassResModel.gradeInfoSearchMiddleModels = GradeList;
+
+            return gradeAndClassResModel;
+
+
         }
     }
 }

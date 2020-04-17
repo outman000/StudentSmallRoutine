@@ -124,5 +124,10 @@ namespace Dto.Repository.SmallRoutine
         {
             DbSet.Update(obj);
         }
+
+        public StudentRegisterHeath_Info getByidNumber(string idnumber)
+        {
+           return  DbSet.FirstOrDefault(a => a.Idnumber== idnumber);
+        }
     }
 }

@@ -2,28 +2,34 @@
 using Dto.IRepository.SmallRoutine;
 using Dto.IService.SmallRoutine;
 using Dtol.dtol;
+using Dtol.Extension;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.PublicViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.FacultystaffViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.StaffClassRelateViewModel;
 
 namespace Dto.Service.SmallRoutine
 {
     public class FacultystaffService: IFacultystaffService
     {
+        private readonly IStaffClassRelateRepository staffClassRelateRepository;
         private readonly IFacultystaffInfoRepository  _facultystaffInfoRepository;
         private readonly IMapper _IMapper;
         private readonly ISchoolInfoRepository _schoolInfoRepository;
- 
 
-        public FacultystaffService(IFacultystaffInfoRepository  facultystaffInfo, IMapper mapper, ISchoolInfoRepository schoolInfo)
+        public FacultystaffService(IStaffClassRelateRepository staffClassRelateRepository, IFacultystaffInfoRepository facultystaffInfoRepository, IMapper iMapper, ISchoolInfoRepository schoolInfoRepository)
         {
-            _facultystaffInfoRepository = facultystaffInfo;
-            _IMapper = mapper;
-            _schoolInfoRepository = schoolInfo;
+            this.staffClassRelateRepository = staffClassRelateRepository;
+            _facultystaffInfoRepository = facultystaffInfoRepository;
+            _IMapper = iMapper;
+            _schoolInfoRepository = schoolInfoRepository;
         }
+
+
 
 
         //添加教职工信息 
@@ -142,5 +148,30 @@ namespace Dto.Service.SmallRoutine
 
             return nlists;
         }
+
+        public void AddRelateToClass(AddRelateFromStaffToClassViewModel model)
+        {
+            var insert = _IMapper.Map<AddRelateFromStaffToClassViewModel, ClassManager_Relate>(model);
+            staffClassRelateRepository.Add(insert);
+            staffClassRelateRepository.SaveChanges();
+        }
+
+        public void DeleteRelateToClass(DeleteRelateFromStaffToClassViewModel model)
+        {
+            staffClassRelateRepository.RemoveByid(model.DeleteIdList);
+            staffClassRelateRepository.SaveChanges();
+        }
+
+        public List<StaffClassMiddleModel> GetRelateToClassInfo(StaffClassRelateSearchViewModel staffClassRelateSearchView)
+        {
+            var searchResult = staffClassRelateRepository.GetStudentsByStaff(staffClassRelateSearchView);
+            var result = _IMapper.Map<List<Health_Info>, List<StaffClassMiddleModel>>(searchResult);
+            return result;
+        }
+
+       
+
+
+
     }
 }

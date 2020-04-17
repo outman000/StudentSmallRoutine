@@ -14,21 +14,43 @@ namespace Dto.Service.SmallRoutine
     {
         private readonly IMapper _IMapper;
         private readonly IHealthRegisterRepository healthRegisterRepository;
+        private readonly IFacultystaffInfoRepository  facultystaffInfoRepository;
+        private readonly IStudentInfoRepository  studentInfoRepository;
 
-        public HealthRegisterService(IMapper iMapper, IHealthRegisterRepository healthRegisterRepository)
+        public HealthRegisterService(IMapper iMapper, IHealthRegisterRepository healthRegisterRepository, IFacultystaffInfoRepository facultystaffInfoRepository, IStudentInfoRepository studentInfoRepository)
         {
             _IMapper = iMapper;
             this.healthRegisterRepository = healthRegisterRepository;
+            this.facultystaffInfoRepository = facultystaffInfoRepository;
+            this.studentInfoRepository = studentInfoRepository;
         }
+
+
         /// <summary>
         /// 添加登记健康信息
         /// </summary>
         /// <param name="healthViewModel"></param>
-        
+
         public void addHealthRegisterInfo(HealthInfoAddViewModel healthViewModel)
         {
             var insertInfo= _IMapper.Map<HealthInfoAddViewModel, StudentRegisterHeath_Info>(healthViewModel);
             healthRegisterRepository.Add(insertInfo);
+            healthRegisterRepository.SaveChanges();//保存数据
+
+
+            var insertHealth = healthRegisterRepository.getByidNumber(insertInfo.Idnumber);//查询插入的 mapper中加密
+            var facultystaff = facultystaffInfoRepository.getByidNumber(insertInfo.Idnumber);//查询白绑定的基础信息
+            var studentInfo = studentInfoRepository.getByidNumber(insertInfo.Idnumber);
+            if (facultystaff != null)//不为空复制键值
+            {
+                facultystaff.StudentRegisterHeath_InfoId = insertHealth.id;
+                facultystaffInfoRepository.Update(facultystaff);
+            }
+            if (studentInfo != null)
+            {
+                studentInfo.StudentRegisterHeath_InfoId = insertHealth.id;
+                studentInfoRepository.Update(studentInfo);
+            }
             healthRegisterRepository.SaveChanges();
         }
         /// <summary>
