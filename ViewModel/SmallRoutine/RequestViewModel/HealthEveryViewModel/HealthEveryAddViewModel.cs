@@ -7,6 +7,10 @@ namespace ViewModel.SmallRoutine.RequestViewModel.HealthEveryViewModel
     public  class HealthEveryAddViewModel
     {
         /// <summary>
+        /// 姓名
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
         /// 身份证号
         /// </summary>
         public string IdNumber { get; set; }

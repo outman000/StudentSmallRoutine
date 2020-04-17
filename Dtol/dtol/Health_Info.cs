@@ -7,8 +7,10 @@ namespace Dtol.dtol
     public class Health_Info
     {
         public int id { get; set; }
+
+        public string Name { get; set; }
+
         public string IdNumber { get; set; }
-    
         public string IsHot { get; set; }
         public string IsThroat { get; set; }
         public string IsWeak { get; set; }

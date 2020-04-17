@@ -14,12 +14,17 @@ namespace Dto.Service.SmallRoutine
     {
         private readonly IMapper _IMapper;
         private readonly IHealthRepository  healthRepository;
+        private readonly IFacultystaffInfoRepository facultystaffInfoRepository;
+        private readonly IStudentInfoRepository studentInfoRepository;
 
-        public HealthService(IMapper iMapper, IHealthRepository  healthRepository)
+        public HealthService(IMapper iMapper, IHealthRepository healthRepository, IFacultystaffInfoRepository facultystaffInfoRepository, IStudentInfoRepository studentInfoRepository)
         {
             _IMapper = iMapper;
             this.healthRepository = healthRepository;
+            this.facultystaffInfoRepository = facultystaffInfoRepository;
+            this.studentInfoRepository = studentInfoRepository;
         }
+
         //Health_Info
         public void addHealthEveryRegisterInfo(HealthEveryAddViewModel healthEveryAddViewModel)
         {
@@ -30,7 +35,23 @@ namespace Dto.Service.SmallRoutine
 
             healthRepository.SaveChanges();
 
+            var insertHealth = healthRepository.getByidNumber(insertInfo.IdNumber);//查询插入的 mapper中加密
+            var facultystaff = facultystaffInfoRepository.getByidNumber(insertInfo.IdNumber);//查询白绑定的基础信息
+            var studentInfo = studentInfoRepository.getByidNumber(insertInfo.IdNumber);
+            if (facultystaff != null)//不复制键值
+            {
+                facultystaff.StudentRegisterHeath_InfoId = insertHealth.id;
+                facultystaffInfoRepository.Update(facultystaff);
+            }
+            if (studentInfo != null)
+            {
+                studentInfo.StudentRegisterHeath_InfoId = insertHealth.id;
+                studentInfoRepository.Update(studentInfo);
+            }
+            healthRepository.SaveChanges();
         }
+
+
 
         public void DeleteHealthEveryRegisterInfo(HealthEveryDeleteViewModel healthEveryDeleteViewModel)
         {

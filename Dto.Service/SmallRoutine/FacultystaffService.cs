@@ -11,19 +11,24 @@ using ViewModel.SmallRoutine.PublicViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.FacultystaffViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.StaffClassRelateViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.StaffStationRelateViewModel;
+using ViewModel.SmallRoutine.ResponseViewModel.StaffStationRelateViewModel;
 
 namespace Dto.Service.SmallRoutine
 {
     public class FacultystaffService: IFacultystaffService
     {
         private readonly IStaffClassRelateRepository staffClassRelateRepository;
+        private readonly IStaffStationRelateRepository staffStationRelateRepository;
+        
         private readonly IFacultystaffInfoRepository  _facultystaffInfoRepository;
         private readonly IMapper _IMapper;
         private readonly ISchoolInfoRepository _schoolInfoRepository;
 
-        public FacultystaffService(IStaffClassRelateRepository staffClassRelateRepository, IFacultystaffInfoRepository facultystaffInfoRepository, IMapper iMapper, ISchoolInfoRepository schoolInfoRepository)
+        public FacultystaffService(IStaffClassRelateRepository staffClassRelateRepository, IStaffStationRelateRepository staffStationRelateRepository, IFacultystaffInfoRepository facultystaffInfoRepository, IMapper iMapper, ISchoolInfoRepository schoolInfoRepository)
         {
             this.staffClassRelateRepository = staffClassRelateRepository;
+            this.staffStationRelateRepository = staffStationRelateRepository;
             _facultystaffInfoRepository = facultystaffInfoRepository;
             _IMapper = iMapper;
             _schoolInfoRepository = schoolInfoRepository;
@@ -169,9 +174,13 @@ namespace Dto.Service.SmallRoutine
             return result;
         }
 
-       
+        public List<StaffStationMiddleModel> GetRelateToStationInfo(StaffStationRelateSearchViewModel staffStationRelateSearchViewModel)
+        {
 
+            var searchResult = staffStationRelateRepository.GethealthByStaff(staffStationRelateSearchViewModel);
+            var result = _IMapper.Map<List<Health_Info>, List<StaffStationMiddleModel>>(searchResult);
+            return result;
 
-
+        }
     }
 }

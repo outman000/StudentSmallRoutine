@@ -6,6 +6,8 @@ using ViewModel.SmallRoutine.PublicViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.FacultystaffViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.StaffClassRelateViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.StaffStationRelateViewModel;
+using ViewModel.SmallRoutine.ResponseViewModel.StaffStationRelateViewModel;
 
 namespace Dto.IService.SmallRoutine
 {
@@ -28,5 +30,6 @@ namespace Dto.IService.SmallRoutine
         void AddRelateToClass(AddRelateFromStaffToClassViewModel model);
         void DeleteRelateToClass(DeleteRelateFromStaffToClassViewModel model);
         List<StaffClassMiddleModel> GetRelateToClassInfo(StaffClassRelateSearchViewModel staffClassRelateSearchView);
+        List<StaffStationMiddleModel> GetRelateToStationInfo(StaffStationRelateSearchViewModel staffStationRelateSearchViewModel);
     }
 }

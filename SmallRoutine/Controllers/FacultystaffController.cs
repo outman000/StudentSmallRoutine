@@ -11,8 +11,10 @@ using ViewModel.SmallRoutine.PublicViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.FacultystaffViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.StaffClassRelateViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.StaffStationRelateViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel;
-
+using ViewModel.SmallRoutine.ResponseViewModel.StaffClassRelateViewModel;
+using ViewModel.SmallRoutine.ResponseViewModel.StaffStationRelateViewModel;
 
 namespace SmallRoutine.Controllers
 {
@@ -107,14 +109,14 @@ namespace SmallRoutine.Controllers
         /// 删除关系（班级负责人和班级）
         /// </summary>
         /// <returns></returns>
-        [HttpPost("/RelateStaffToClass/Delete")]
+        [HttpPost("/RelateStaffToClass/GetInfoAndHeathEveryInfo")]
 
         public ActionResult<BaseViewModel> DeleteRelateFromStaffToClass(DeleteRelateFromStaffToClassViewModel model)
         {
             BaseViewModel baseViewModel = new BaseViewModel();
             _facultystaffService.DeleteRelateToClass(model);
 
-            baseViewModel.Message = "删除成功";
+            baseViewModel.Message = "查询成功";
             baseViewModel.ResponseCode = 200;
             return baseViewModel;
         }
@@ -124,18 +126,42 @@ namespace SmallRoutine.Controllers
         /// 根据当前人分管的班级查询所管理的学生的每日健康信息
         /// </summary>
         /// <returns></returns>
-        [HttpPost("/RelateStaffToClass/GetStudentInfoAndHeathEveryInfo")]
+        [HttpPost("/RelateStaffToClass/GetInfoAndHeathEveryInfo")]
 
-        public ActionResult<BaseViewModel> getRelateFromStaffToClass(StaffClassRelateSearchViewModel staffClassRelateSearchView)
+        public ActionResult<StaffClassRelateResModel> getRelateFromStaffToClass(StaffClassRelateSearchViewModel staffClassRelateSearchView)
         {
-            BaseViewModel baseViewModel = new BaseViewModel();
-            _facultystaffService.GetRelateToClassInfo(staffClassRelateSearchView);
+            StaffClassRelateResModel staffClassRelateResModel = new StaffClassRelateResModel();
+            var result= _facultystaffService.GetRelateToClassInfo(staffClassRelateSearchView);
 
-            baseViewModel.Message = "删除成功";
-            baseViewModel.ResponseCode = 200;
+            staffClassRelateResModel.IsSuccess = true;
+            staffClassRelateResModel.staffClassMiddleModels = result;
+            staffClassRelateResModel.TotalNum = result.Count();
+            staffClassRelateResModel.baseViewModel.Message = "查询成功";
+            staffClassRelateResModel.baseViewModel.ResponseCode = 200;
+
             return null;
         }
-        //查一套人和岗位的
+
+
+        /// <summary>
+        /// 根据当前人分管的岗位获取员工每日健康信息
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("/RelateStationToClass/GetInfoAndHeathEveryInfo")]
+
+        public ActionResult<StaffClassRelateResModel> getStationFromStaffToClass(StaffStationRelateSearchViewModel  staffStationRelateSearchViewModel)
+        {
+            StaffStationRelateResModel staffStationRelateResModel = new StaffStationRelateResModel();
+           var result= _facultystaffService.GetRelateToStationInfo(staffStationRelateSearchViewModel);
+          
+            staffStationRelateResModel.IsSuccess = true;
+            staffStationRelateResModel.staffStationRelateResModels = result;
+            staffStationRelateResModel.TotalNum = result.Count();
+            staffStationRelateResModel.baseViewModel.Message = "查询成功";
+            staffStationRelateResModel.baseViewModel.ResponseCode = 200;
+
+            return null;
+        }
 
 
     }

@@ -12,5 +12,6 @@ namespace Dto.IRepository.SmallRoutine
         void DelByList(List<int> deleteList);
 
         List<Health_Info> SearchHealthEveryRegisterInfo(HealthEverySearchViewModel healthEverySearchViewModel);
+        Health_Info getByidNumber(string idNumber);
     }
 }

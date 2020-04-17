@@ -86,7 +86,7 @@ namespace Dto.Service.AutoMapper.SmallRoutine
                 .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.IdNumber)));
 
             CreateMap<AddRelateFromStaffToClassViewModel, ClassManager_Relate>();
-
+          
 
             CreateMap<Grade_Info, GradeInfoSearchMiddleModel>();
             CreateMap<Class_Info, ClassInfoSearchMiddleModel>();
@@ -96,6 +96,12 @@ namespace Dto.Service.AutoMapper.SmallRoutine
                 .ForMember(a => a.GradeName, opt => opt.MapFrom(src => src.Student_Info.GradeCode))
                 .ForMember(a => a.ClassName, opt => opt.MapFrom(src => src.Student_Info.ClassName))
                 .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.IdNumber)));
+
+            CreateMap<Health_Info, StaffStationMiddleModel>()
+                  .ForMember(a => a.DepartName, opt => opt.MapFrom(src => src.facultystaff_Info.DepartName))
+                .ForMember(a => a.StaffName, opt => opt.MapFrom(src => src.facultystaff_Info.StaffName))
+                .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.IdNumber)));
+
 
         }
     }

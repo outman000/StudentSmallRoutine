@@ -2,14 +2,23 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ViewModel.SmallRoutine.RequestViewModel.HealthEveryViewModel
+namespace ViewModel.SmallRoutine.MiddelViewModel
 {
-    public class HealthEveryUpdateViewModel
+    public class StaffStationMiddleModel
     {
+       
         /// <summary>
-        /// 姓名
+        /// 部门
         /// </summary>
-        public string Name { get; set; }
+        public string DepartName { get; set; }
+    
+        /// <summary>
+        /// 岗位
+        /// </summary>
+        public string StaffName { get; set; }
+        /// <summary>
+        /// id
+        /// </summary>
         public int id { get; set; }
         /// <summary>
         /// 身份证号
@@ -40,9 +49,9 @@ namespace ViewModel.SmallRoutine.RequestViewModel.HealthEveryViewModel
         /// </summary>
         public string IsFamilyWeakt { get; set; }
         /// <summary>
-        /// 登陆人的标识id
+        /// 创建日期
         /// </summary>
-        public int Student_InfoId { get; set; }
+        public DateTime? Createdate { get; set; }
 
         /// <summary>
         /// 是否到校
@@ -52,10 +61,5 @@ namespace ViewModel.SmallRoutine.RequestViewModel.HealthEveryViewModel
         /// 是否接触
         /// </summary>
         public string IsTouch { get; set; }
-
-        /// <summary>
-        /// 体温
-        /// </summary>
-        public string Temperature { get; set; }//体温
     }
 }

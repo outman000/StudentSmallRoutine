@@ -6,6 +6,10 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
 {
     public class HealthEverySearchMiddleModel
     {
+        /// <summary>
+        /// 姓名
+        /// </summary>
+        public string Name { get; set; }
         public int id { get; set; }
         /// <summary>
         /// 身份证号

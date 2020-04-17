@@ -67,6 +67,7 @@ namespace Dto.Repository.SmallRoutine
             var searchResult = DbSet
                 .Where(a => a.facultystaff_InfoId == staffStationRelateSearchViewModel.UserKeyId)
                 .Include(a => a.Station_InfoId).ToList();
+
             for (int i = 0; i < searchResult.Count(); i++)
             {
                 var tempresult = Db.Health_Info.Where(a => a.facultystaff_Info.station_InfoId == searchResult[i].Station_InfoId)
