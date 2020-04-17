@@ -16,18 +16,17 @@ using ViewModel.SmallRoutine.ResponseViewModel.StaffStationRelateViewModel;
 
 namespace Dto.Service.SmallRoutine
 {
-    public class FacultystaffService: IFacultystaffService
+    public class FacultystaffService : IFacultystaffService
     {
         private readonly IStaffClassRelateRepository staffClassRelateRepository;
         private readonly IStaffStationRelateRepository staffStationRelateRepository;
-        
-        private readonly IFacultystaffInfoRepository  _facultystaffInfoRepository;
+
+        private readonly IFacultystaffInfoRepository _facultystaffInfoRepository;
         private readonly IMapper _IMapper;
         private readonly ISchoolInfoRepository _schoolInfoRepository;
         private readonly IStaffStationRelateRepository _staffStationRelateRepository;
 
-        public FacultystaffService(IStaffClassRelateRepository staffClassRelateRepository, IFacultystaffInfoRepository facultystaffInfoRepository,
-            IMapper iMapper, ISchoolInfoRepository schoolInfoRepository, IStaffStationRelateRepository staffStation)
+     
         public FacultystaffService(IStaffClassRelateRepository staffClassRelateRepository, IStaffStationRelateRepository staffStationRelateRepository, IFacultystaffInfoRepository facultystaffInfoRepository, IMapper iMapper, ISchoolInfoRepository schoolInfoRepository)
         {
             this.staffClassRelateRepository = staffClassRelateRepository;
@@ -35,14 +34,14 @@ namespace Dto.Service.SmallRoutine
             _facultystaffInfoRepository = facultystaffInfoRepository;
             _IMapper = iMapper;
             _schoolInfoRepository = schoolInfoRepository;
-            _staffStationRelateRepository = staffStation;
+            _staffStationRelateRepository = staffStationRelateRepository;
         }
 
 
 
 
         //添加教职工信息 
-        public BaseViewModel addFacultystaffInfo(FacultystaffBaseModel  model)
+        public BaseViewModel addFacultystaffInfo(FacultystaffBaseModel model)
         {
             BaseViewModel viewModel = new BaseViewModel();
 
@@ -80,7 +79,7 @@ namespace Dto.Service.SmallRoutine
                 viewModel.Message = "出现异常";
             }
 
-         
+
             return viewModel;
         }
 
@@ -115,7 +114,7 @@ namespace Dto.Service.SmallRoutine
 
 
         //修改 教职工信息
-        public BaseViewModel updateFacultystafffo(FacultystaffMiddle  facultystaff)
+        public BaseViewModel updateFacultystafffo(FacultystaffMiddle facultystaff)
         {
             BaseViewModel baseView = new BaseViewModel();
             var info = _IMapper.Map<FacultystaffMiddle, facultystaff_Info>(facultystaff);
@@ -194,12 +193,15 @@ namespace Dto.Service.SmallRoutine
             var result = _IMapper.Map<List<Health_Info>, List<StaffStationMiddleModel>>(searchResult);
             return result;
 
-        //教职工和岗位   关系表删除
+            //教职工和岗位   关系表删除
+          
+
+        }
+
         public void DeleteRelateToStation(DeleteRelateFromStaffToStationViewModel model)
         {
             _staffStationRelateRepository.RemoveByid(model.DeleteIdList);
             _staffStationRelateRepository.SaveChanges();
         }
-
-    }
+    } 
 }
