@@ -103,6 +103,8 @@ namespace Dto.Service.AutoMapper.SmallRoutine
                 .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.IdNumber)));
 
 
+
+            CreateMap<AddRelateFromStaffToStation, StaffStation_Relate>();
         }
     }
 }

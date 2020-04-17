@@ -150,5 +150,22 @@ namespace SmallRoutine.Controllers
         }
 
 
+
+        /// <summary>
+        /// 获取教职工单位，岗位列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("/struct/BaseDepartInfo")]
+        public ActionResult<DepartAndStationResModel> getDepartStationInfo(GradeAndClassSearchViewModel gradeAndClassSearchViewModel)
+        {
+            var gradeAndClassResModel = _baseService.getDepartStation(gradeAndClassSearchViewModel);
+
+            gradeAndClassResModel.IsSuccess = true;
+            gradeAndClassResModel.baseViewModel.Message = "查询成功";
+            gradeAndClassResModel.baseViewModel.ResponseCode = 200;
+            return Ok(gradeAndClassResModel);
+
+        }
+
     }
 }

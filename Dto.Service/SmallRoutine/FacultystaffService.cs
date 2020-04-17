@@ -24,7 +24,10 @@ namespace Dto.Service.SmallRoutine
         private readonly IFacultystaffInfoRepository  _facultystaffInfoRepository;
         private readonly IMapper _IMapper;
         private readonly ISchoolInfoRepository _schoolInfoRepository;
+        private readonly IStaffStationRelateRepository _staffStationRelateRepository;
 
+        public FacultystaffService(IStaffClassRelateRepository staffClassRelateRepository, IFacultystaffInfoRepository facultystaffInfoRepository,
+            IMapper iMapper, ISchoolInfoRepository schoolInfoRepository, IStaffStationRelateRepository staffStation)
         public FacultystaffService(IStaffClassRelateRepository staffClassRelateRepository, IStaffStationRelateRepository staffStationRelateRepository, IFacultystaffInfoRepository facultystaffInfoRepository, IMapper iMapper, ISchoolInfoRepository schoolInfoRepository)
         {
             this.staffClassRelateRepository = staffClassRelateRepository;
@@ -32,6 +35,7 @@ namespace Dto.Service.SmallRoutine
             _facultystaffInfoRepository = facultystaffInfoRepository;
             _IMapper = iMapper;
             _schoolInfoRepository = schoolInfoRepository;
+            _staffStationRelateRepository = staffStation;
         }
 
 
@@ -174,6 +178,15 @@ namespace Dto.Service.SmallRoutine
             return result;
         }
 
+
+
+        //教职工和岗位  关系表增加
+        public void AddRelateToStation(AddRelateFromStaffToStation model)
+        {
+            var insert = _IMapper.Map<AddRelateFromStaffToStation, StaffStation_Relate>(model);
+            _staffStationRelateRepository.Add(insert);
+            _staffStationRelateRepository.SaveChanges();
+        }
         public List<StaffStationMiddleModel> GetRelateToStationInfo(StaffStationRelateSearchViewModel staffStationRelateSearchViewModel)
         {
 
@@ -181,6 +194,12 @@ namespace Dto.Service.SmallRoutine
             var result = _IMapper.Map<List<Health_Info>, List<StaffStationMiddleModel>>(searchResult);
             return result;
 
+        //教职工和岗位   关系表删除
+        public void DeleteRelateToStation(DeleteRelateFromStaffToStationViewModel model)
+        {
+            _staffStationRelateRepository.RemoveByid(model.DeleteIdList);
+            _staffStationRelateRepository.SaveChanges();
         }
+
     }
 }

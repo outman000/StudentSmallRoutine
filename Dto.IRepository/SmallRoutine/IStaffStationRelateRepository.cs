@@ -8,6 +8,7 @@ namespace Dto.IRepository.SmallRoutine
 {
      public  interface IStaffStationRelateRepository : IRepository<StaffStation_Relate>
     {
+        void RemoveByid(List<int> id);
         List<Health_Info> GethealthByStaff(StaffStationRelateSearchViewModel staffStationRelateSearchViewModel);
     }
 }
