@@ -7,7 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.BaseControlViewModel;
 using ViewModel.SmallRoutine.ServiceDTO.SmallRoutine;
 
 namespace Dto.Repository.SmallRoutine
@@ -167,5 +169,27 @@ namespace Dto.Repository.SmallRoutine
         {
             return DbSet.FirstOrDefault(a => a.IdNumber == idnumber);
         }
+
+        public List<DepartInfoSearchMiddleModel> GetDepartlListContainId(GradeAndClassSearchViewModel gradeAndClassSearchViewModel)
+        {
+            return Db.facultystaff_Info.Where(a => a.SchoolCode == gradeAndClassSearchViewModel.SchoolCode).Select(a => new DepartInfoSearchMiddleModel
+            {
+
+                DepartCode = a.DepartCode,
+                DepartName = a.DepartName
+            }).Distinct().ToList();
+        }
+
+        public List<StationInfoSearchMiddleModel> GetStationListContainId(GradeAndClassSearchViewModel gradeAndClassSearchViewModel)
+        {
+            return Db.facultystaff_Info.Where(a => a.SchoolCode == gradeAndClassSearchViewModel.SchoolCode).Select(a => new StationInfoSearchMiddleModel
+            {
+
+                StaffCode = a.StaffCode,
+                StaffName = a.StaffName,
+
+            }).Distinct().ToList();
+        }
+
     }
 }

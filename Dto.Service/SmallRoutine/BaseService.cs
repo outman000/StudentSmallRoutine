@@ -93,5 +93,21 @@ namespace Dto.Service.AutoMapper.SmallRoutine
 
 
         }
+
+
+
+        public DepartAndStationResModel getDepartStation(GradeAndClassSearchViewModel gradeAndClassSearchViewModel)
+        {
+            DepartAndStationResModel ResModel = new DepartAndStationResModel();
+            var DepartList = _facultystaffInfoRepository.GetDepartlListContainId(gradeAndClassSearchViewModel);
+            var StationList = _facultystaffInfoRepository.GetStationListContainId(gradeAndClassSearchViewModel);
+
+            ResModel.departInfoSearchMiddleModels = DepartList;
+            ResModel.stationInfoSearchMiddleModels = StationList;
+
+            return ResModel;
+
+
+        }
     }
 }

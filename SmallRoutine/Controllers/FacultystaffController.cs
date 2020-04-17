@@ -138,5 +138,38 @@ namespace SmallRoutine.Controllers
         //查一套人和岗位的
 
 
+        /// <summary>
+        /// 添加关系（教职工和岗位）zpm
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("/RelateStaffToStation/Add")]
+
+        public ActionResult<BaseViewModel> SetRelateFromStaffToStation(AddRelateFromStaffToStation model)
+        {
+            BaseViewModel baseViewModel = new BaseViewModel();
+            _facultystaffService.AddRelateToStation(model);
+
+            baseViewModel.Message = "添加成功";
+            baseViewModel.ResponseCode = 200;
+            return baseViewModel;
+        }
+
+        /// <summary>
+        /// 删除关系（教职工和岗位）zpm
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("/RelateStaffToStation/Delete")]
+
+        public ActionResult<BaseViewModel> DeleteRelateFromStaffToStation(DeleteRelateFromStaffToStationViewModel model)
+        {
+            BaseViewModel baseViewModel = new BaseViewModel();
+            _facultystaffService.DeleteRelateToStation(model);
+
+            baseViewModel.Message = "删除成功";
+            baseViewModel.ResponseCode = 200;
+            return baseViewModel;
+        }
+
+
     }
 }

@@ -93,6 +93,17 @@ namespace Dto.Repository.SmallRoutine
         }
 
 
+        public void RemoveByid(List<int> id)
+        {
+
+            for (int i = 0; i < id.Count; i++)
+            {
+                var model = DbSet.Single(w => w.id == id[i]);
+
+                DbSet.Remove(model);
+            }
+
+        }
 
 
     }

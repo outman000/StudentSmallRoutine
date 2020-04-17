@@ -11,5 +11,7 @@ namespace Dto.IService.SmallRoutine
         void structSystemInfo();
         void structUserInfo();
         GradeAndClassResModel getGradeAndClass(GradeAndClassSearchViewModel gradeAndClassSearchViewModel);
+
+        DepartAndStationResModel getDepartStation(GradeAndClassSearchViewModel gradeAndClassSearchViewModel);
     }
 }
