@@ -20,6 +20,7 @@ namespace Dtol.dtol
         public string IsComeSchool { get; set; }
         public string IsTouch { get; set; }
         public string Temperature { get; set; }//体温
+        public string CheckType { get; set; }//晨午晚
         public DateTime? Createdate { get; set; } = DateTime.Now;
 
         public int? facultystaff_InfoId { get; set; }

@@ -158,10 +158,10 @@ namespace Dto.Service.SmallRoutine
         {
             List<Student_Info> lists = new List<Student_Info>();
             List<StudentMiddle> nlists = new List<StudentMiddle>();
-            if (!string.IsNullOrEmpty(model.IdNumber))
-            {
-                model.IdNumber = Dtol.Helper.MD5.Md5Hash(model.IdNumber);
-            }
+            //if (!string.IsNullOrEmpty(model.IdNumber))
+            //{
+            //    model.IdNumber = Dtol.Helper.MD5.Md5Hash(model.IdNumber);
+            //}
 
             lists = _studentInfoRepository.GetByModel(model);
 

@@ -156,7 +156,7 @@ namespace Dto.Repository.SmallRoutine
             //身份证
             if (!String.IsNullOrEmpty(model.IdNumber))
             {
-                predicate = predicate.And(p => p.IdNumber.Equals(model.IdNumber));
+                predicate = predicate.And(p => Dtol.Helper.MD5.Decrypt(p.IdNumber).Contains(model.IdNumber));
             }
             //学校
             if (!String.IsNullOrEmpty(model.SchoolCode))
