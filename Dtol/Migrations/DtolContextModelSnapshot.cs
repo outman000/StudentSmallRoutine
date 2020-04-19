@@ -25,7 +25,11 @@ namespace Dtol.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ClassCode");
+
                     b.Property<int?>("Class_InfoId");
+
+                    b.Property<string>("IdNumber");
 
                     b.Property<int?>("facultystaff_InfoId");
 
@@ -155,6 +159,10 @@ namespace Dtol.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("IdNumber");
+
+                    b.Property<string>("StaffCode");
+
                     b.Property<int?>("Station_InfoId");
 
                     b.Property<int?>("facultystaff_InfoId");
@@ -214,6 +222,8 @@ namespace Dtol.Migrations
                     b.Property<string>("IsPassHubei");
 
                     b.Property<string>("IsleaveJin");
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("PassHubeiDetail");
 

@@ -40,5 +40,6 @@ namespace Dto.IRepository.SmallRoutine
          List<DepartInfoSearchMiddleModel> GetDepartlListContainId(GradeAndClassSearchViewModel gradeAndClassSearchViewModel);
 
         List<StationInfoSearchMiddleModel> GetStationListContainId(GradeAndClassSearchViewModel gradeAndClassSearchViewModel);
+        void flushfacultyStationId();
     }
 }

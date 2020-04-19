@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ViewModel.SmallRoutine.PublicViewModel;
+using ViewModel.PublicViewModel;
 
 namespace ViewModel.SmallRoutine.RequestViewModel.StaffStationRelateViewModel
 {
@@ -22,7 +22,7 @@ namespace ViewModel.SmallRoutine.RequestViewModel.StaffStationRelateViewModel
         /// <summary>
         /// 是否异常
         /// </summary>
-       // public String IsEexception { get; set; }
+        public String IsHot { get; set; }
         /// <summary>
         /// 是否到校
         /// </summary>

@@ -14,9 +14,10 @@ namespace Dto.Service.SmallRoutine
         private readonly IClassInfoRepository  classInfoRepository;
         private readonly IMapper  mapper;
 
-        public ClassService(IClassInfoRepository classInfoRepository)
+        public ClassService(IClassInfoRepository classInfoRepository, IMapper mapper)
         {
             this.classInfoRepository = classInfoRepository;
+            this.mapper = mapper;
         }
 
         public List<ClassInfoSearchMiddleModel> GetClassKey(String Code)

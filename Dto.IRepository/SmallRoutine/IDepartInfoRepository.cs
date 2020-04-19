@@ -9,5 +9,6 @@ namespace Dto.IRepository.SmallRoutine
     public  interface IDepartInfoRepository:IRepository<Depart_Info>
     {
         void AddListBase(List<Depart_Info> departInsertList);
+        List<Depart_Info> getdepartInfoBycode(string code);
     }
 }

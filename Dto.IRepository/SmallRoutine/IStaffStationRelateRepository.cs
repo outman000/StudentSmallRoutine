@@ -2,13 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.StaffStationRelateViewModel;
+using ViewModel.SmallRoutine.ResponseViewModel.StaffStationRelateViewModel;
 
 namespace Dto.IRepository.SmallRoutine
 {
      public  interface IStaffStationRelateRepository : IRepository<StaffStation_Relate>
     {
         void RemoveByid(List<int> id);
-        List<Health_Info> GethealthByStaff(StaffStationRelateSearchViewModel staffStationRelateSearchViewModel);
+        List<StaffStationMiddleModel> GethealthByStaff(StaffStationRelateSearchViewModel staffStationRelateSearchViewModel);
+        List<EmploySearchStationMiddle> GetStationbindByEmploy(int userKeyId);
+        List<EmploySearchStationAllMiddle> GetStationbindByEmployAll(int userKeyId);
     }
 }

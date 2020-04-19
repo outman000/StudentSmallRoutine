@@ -65,6 +65,10 @@ namespace Dto.Service.AutoMapper.SmallRoutine
             _stationInfoRespository.AddListBase(staffInsertList);//插入岗位
             _departInfoRespository.AddListBase(departInsertList);//插入部门
             _StudentInfoRepository.SaveChanges();//所有的save都是全局的用哪个都行。
+            _StudentInfoRepository.flushStudentClassId();
+            _facultystaffInfoRepository.flushfacultyStationId();
+
+            _StudentInfoRepository.SaveChanges();
 
             //还差一个所有岗位
         }

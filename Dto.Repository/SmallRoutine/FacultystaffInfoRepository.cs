@@ -191,5 +191,16 @@ namespace Dto.Repository.SmallRoutine
             }).Distinct().ToList();
         }
 
+        public void flushfacultyStationId()
+        {
+            var StationInfoList = Db.Station_Info.ToList();
+            for (int i = 0; i < StationInfoList.Count; i++)
+            {
+                var temp = DbSet.Where(a => a.StaffCode == StationInfoList[i].StaffCode).ToList();
+                temp.ForEach(w => w.station_InfoId = StationInfoList[i].id);
+                DbSet.UpdateRange(temp);
+            }
+
+        }
     }
 }

@@ -41,11 +41,11 @@ namespace ViewModel.SmallRoutine.RequestViewModel.HealthEveryViewModel
         /// <summary>
         /// 登陆人的标识id(学生)
         /// </summary>
-        public int Student_InfoId { get; set; }
+        public int? Student_InfoId { get; set; }
         /// <summary>
         /// 员工标识id
         /// </summary>
-        public int facultystaff_InfoId { get; set; }
+        public int? facultystaff_InfoId { get; set; }
         /// <summary>
         /// 体温
         /// </summary>

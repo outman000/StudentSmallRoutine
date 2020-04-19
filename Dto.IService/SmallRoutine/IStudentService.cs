@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ViewModel.PublicViewModel;
 using ViewModel.SmallRoutine.MiddelViewModel;
-using ViewModel.SmallRoutine.PublicViewModel;
+
 using ViewModel.SmallRoutine.RequestViewModel;
 
 namespace Dto.IService.SmallRoutine

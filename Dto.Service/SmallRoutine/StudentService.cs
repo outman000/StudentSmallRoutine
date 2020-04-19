@@ -5,8 +5,9 @@ using Dtol.dtol;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ViewModel.PublicViewModel;
 using ViewModel.SmallRoutine.MiddelViewModel;
-using ViewModel.SmallRoutine.PublicViewModel;
+
 using ViewModel.SmallRoutine.RequestViewModel;
 
 namespace Dto.Service.SmallRoutine
@@ -131,7 +132,11 @@ namespace Dto.Service.SmallRoutine
         public BaseViewModel updateStudentInfo(StudentMiddle student)
         {
             BaseViewModel baseView = new BaseViewModel();
-            var info = _IMapper.Map<StudentMiddle, Student_Info>(student);
+
+           var originModel= _studentInfoRepository.getbyID(student.id);
+           var info = _IMapper.Map<StudentMiddle, Student_Info>(student, originModel);
+
+
             _studentInfoRepository.Update(info);
             int i = _studentInfoRepository.SaveChanges();
             if (i > 0)

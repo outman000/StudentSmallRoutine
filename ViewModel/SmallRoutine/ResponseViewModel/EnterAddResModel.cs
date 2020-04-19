@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ViewModel.SmallRoutine.PublicViewModel;
+using ViewModel.PublicViewModel;
+
 
 namespace ViewModel.SmallRoutine.ResponseViewModel
 {

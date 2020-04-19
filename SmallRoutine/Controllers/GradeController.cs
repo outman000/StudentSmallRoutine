@@ -24,7 +24,7 @@ namespace SmallRoutine.Controllers
         /// </summary>
         /// <param name="schoolcode"></param>
         /// <returns></returns>
-        [HttpGet("/class/getkey")]
+        [HttpGet("/Grade/getkey")]
         public ActionResult<GradeKeyResViewModel> getGradeZhuKey(String schoolcode)
         {
             GradeKeyResViewModel gradeKeyResView = new GradeKeyResViewModel();

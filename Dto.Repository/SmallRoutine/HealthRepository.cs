@@ -63,7 +63,7 @@ namespace Dto.Repository.SmallRoutine
         {
             for (int i = 0; i < deleteList.Count; i++)
             {
-                var model = DbSet.Single(w => w.id == deleteList[i]);
+                var model = DbSet.FirstOrDefault(w => w.id == deleteList[i]);
 
                 DbSet.Remove(model);
             }
@@ -86,7 +86,7 @@ namespace Dto.Repository.SmallRoutine
         private Expression<Func<Health_Info, bool>> SearchLineWhere(HealthEverySearchViewModel healthEverySearchViewModel)
         {
 
-            var aaaaa = healthEverySearchViewModel.Createdate.Value.ToString("yyyy-MM-dd");
+            
 
             var predicate = WhereExtension.True<Health_Info>();//初始化where表达式
             predicate = predicate.And(p => p.IdNumber.Trim().Contains(healthEverySearchViewModel.IdNumber.Trim() == "" ? "" : Dtol.Helper.MD5.Md5Hash(healthEverySearchViewModel.IdNumber.Trim())));

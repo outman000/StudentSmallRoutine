@@ -63,6 +63,7 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// 创建时间
         /// </summary>
         public DateTime? CreateDate { get; set; }
+
         /// <summary>
         /// 健康上报信息
         /// </summary>

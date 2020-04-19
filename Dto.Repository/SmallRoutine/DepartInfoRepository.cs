@@ -1,6 +1,7 @@
 ﻿using Dto.IRepository.SmallRoutine;
 using Dtol;
 using Dtol.dtol;
+using Dtol.Extension;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,17 @@ namespace Dto.Repository.SmallRoutine
         public Depart_Info GetById(Guid id)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Depart_Info> getdepartInfoBycode(string code)
+        {
+            //查询条件
+            var predicate = WhereExtension.True<Depart_Info>();//初始化where表达式
+
+            predicate = predicate.And(p => p.DepartCode.Substring(0, 2).Equals(code));
+
+            var result = DbSet.Where(predicate).ToList();
+            return result;
         }
 
         public void Remove(Guid id)

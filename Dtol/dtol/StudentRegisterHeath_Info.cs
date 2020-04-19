@@ -7,6 +7,7 @@ namespace Dtol.dtol
     public  class StudentRegisterHeath_Info
     {
         public int id { get; set; }
+        public string Name { get; set; }
         public string Idnumber { get; set; }
         public string Residencetemporary { get; set; }//在津暂住地址
         public string Telephone { get; set; }

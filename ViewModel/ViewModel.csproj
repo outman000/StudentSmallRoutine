@@ -20,6 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="SmallRoutine\RequestViewModel\StudentViewModel\" />
+    <Folder Include="SmallRoutine\PublicViewModel\" />
   </ItemGroup>
 </Project>

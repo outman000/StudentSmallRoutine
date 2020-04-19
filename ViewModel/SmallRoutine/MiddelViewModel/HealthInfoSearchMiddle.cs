@@ -10,6 +10,11 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// id
         /// </summary>
         public int id { get; set; }
+
+        /// <summary>
+        /// 姓名
+        /// </summary>
+        public string name { get; set; }
         /// <summary>
         /// 身份证号
         /// </summary>

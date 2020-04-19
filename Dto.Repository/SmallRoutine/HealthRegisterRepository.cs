@@ -32,8 +32,7 @@ namespace Dto.Repository.SmallRoutine
         {
             for (int i = 0; i < deleteList.Count; i++)
             {
-                var model = DbSet.Single(w => w.id == deleteList[i]);
-                
+                var model = DbSet.FirstOrDefault(w => w.id == deleteList[i]);
                 DbSet.Remove(model);
             }
         }
@@ -128,6 +127,68 @@ namespace Dto.Repository.SmallRoutine
         public StudentRegisterHeath_Info getByidNumber(string idnumber)
         {
            return  DbSet.FirstOrDefault(a => a.Idnumber== idnumber);
+        }
+
+        public List<StudentRegisterHeath_Info> searchHealthByStudentInfo(StudentSearchHealthInfo studentSearchHealthInfo)
+        {
+            List<StudentRegisterHeath_Info> studentRegisterHeath_Infos = new List<StudentRegisterHeath_Info>();
+            var preciate = StudentSearchLineWhere(studentSearchHealthInfo);
+            //需要从学生信息差
+            var result= Db.Student_Info.Include(a => a.StudentRegisterHeath_Info).Where(preciate).ToList();
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                if (result[i].StudentRegisterHeath_Info != null)
+                {
+                    studentRegisterHeath_Infos.Add(result[i].StudentRegisterHeath_Info);
+                }
+               
+            }
+
+
+            return studentRegisterHeath_Infos;
+
+        }
+        private Expression<Func<Student_Info, bool>> StudentSearchLineWhere(StudentSearchHealthInfo studentSearchHealthInfo)
+        {
+            var predicate = WhereExtension.True<Student_Info>();//初始化where表达式
+            predicate = predicate.And(p => p.SchoolCode.Contains(studentSearchHealthInfo.SchoolCode));
+            predicate = predicate.And(p => p.GradeCode.Contains(studentSearchHealthInfo.GradeCode));
+            predicate = predicate.And(p => p.ClassCode.Contains(studentSearchHealthInfo.ClassCode));
+            predicate = predicate.And(p => p.IdNumber .Contains(studentSearchHealthInfo.Idnumber));
+            predicate = predicate.And(p => p.Name  .Contains(studentSearchHealthInfo.Name));
+
+            return predicate;
+        }
+        public List<StudentRegisterHeath_Info> searchHealthByEmployInfo(EmploySearchHealthInfo employSearchHealthInfo)
+        {
+            List<StudentRegisterHeath_Info> studentRegisterHeath_Infos = new List<StudentRegisterHeath_Info>();
+            var preciate = EmploySearchLineWhere(employSearchHealthInfo);
+            //需要从学生信息差
+            var result = Db.facultystaff_Info.Include(a => a.StudentRegisterHeath_Info).Where(preciate).ToList();
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                if (result[i].StudentRegisterHeath_Info != null)
+                {
+                    studentRegisterHeath_Infos.Add(result[i].StudentRegisterHeath_Info);
+                }
+
+            }
+
+
+            return studentRegisterHeath_Infos;
+        }
+        private Expression<Func<facultystaff_Info, bool>> EmploySearchLineWhere(EmploySearchHealthInfo employSearchHealthInfo)
+        {
+            var predicate = WhereExtension.True<facultystaff_Info>();//初始化where表达式
+            predicate = predicate.And(p => p.SchoolCode.Contains(employSearchHealthInfo.SchoolCode));
+            predicate = predicate.And(p => p.StaffCode.Contains(employSearchHealthInfo.StaffCode));
+            predicate = predicate.And(p => p.DepartCode.Contains(employSearchHealthInfo.DepartCode));
+            predicate = predicate.And(p => p.IdNumber.Contains(employSearchHealthInfo.Idnumber));
+            predicate = predicate.And(p => p.Name.Contains(employSearchHealthInfo.Name));
+
+            return predicate;
         }
     }
 }

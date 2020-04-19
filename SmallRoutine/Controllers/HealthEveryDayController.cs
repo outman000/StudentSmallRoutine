@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Dto.IService.SmallRoutine;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ViewModel.SmallRoutine.PublicViewModel;
+using ViewModel.PublicViewModel;
+
 using ViewModel.SmallRoutine.RequestViewModel.HealthEveryViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel.HealthEveryViewModel;
 

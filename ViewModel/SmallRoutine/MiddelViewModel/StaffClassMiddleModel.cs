@@ -9,6 +9,12 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// <summary>
         /// 年级
         /// </summary>
+        public string Name { get; set; }
+
+
+        /// <summary>
+        /// 年级
+        /// </summary>
         public string GradeName { get; set; }
         /// <summary>
         /// 班级

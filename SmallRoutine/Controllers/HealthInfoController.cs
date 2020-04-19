@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Dto.IService.SmallRoutine;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ViewModel.SmallRoutine.PublicViewModel;
+using ViewModel.PublicViewModel;
+
 using ViewModel.SmallRoutine.RequestViewModel.HealthViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel.HealthViewModel;
 
@@ -72,6 +73,52 @@ namespace SmallRoutine.Controllers
 
             return Ok(healthInfoSearchResModel);
         }
+
+
+
+        /// <summary>
+        /// 查询健康信息（学生）
+        /// </summary>
+        /// <param name="studentSearchHealthInfo"></param>
+        /// <returns></returns>
+        [HttpPost("/HealthRegister/StudentSearch")]
+        // GET: HealthInfo/Details/5
+        public ActionResult<StudentHealthInfoSearchResModel> StudentSearchHealthRegister(StudentSearchHealthInfo  studentSearchHealthInfo)
+        {
+            StudentHealthInfoSearchResModel studentHealthInfoSearchResModel = new StudentHealthInfoSearchResModel();
+
+            studentHealthInfoSearchResModel.healthInfoSearchMiddles = healthRegisterService.StudentSearchHealthRegisterInfo(studentSearchHealthInfo);
+            studentHealthInfoSearchResModel.TotalNum = healthRegisterService.StudentSearchHealthRegisterInfo(studentSearchHealthInfo).Count();
+            studentHealthInfoSearchResModel.IsSuccess = true;
+            studentHealthInfoSearchResModel.baseViewModel.Message = "查询成功";
+            studentHealthInfoSearchResModel.baseViewModel.ResponseCode = 200;
+
+            return Ok(studentHealthInfoSearchResModel);
+        }
+        /// <summary>
+        /// 查询健康信息（职工）
+        /// </summary>
+        /// <param name="employSearchHealthInfo"></param>
+        /// <returns></returns>
+        [HttpPost("/HealthRegister/EmploySearch")]
+        // GET: HealthInfo/Details/5
+        public ActionResult<EmployHealthInfoSearchResModel> EmploySearchHealthRegister(EmploySearchHealthInfo  employSearchHealthInfo)
+        {
+            EmployHealthInfoSearchResModel employHealthInfoSearchResModel = new EmployHealthInfoSearchResModel();
+            employHealthInfoSearchResModel.employHealthInfoSearchMiddles = healthRegisterService.EmploySearchHealthRegisterInfo(employSearchHealthInfo);
+            employHealthInfoSearchResModel.TotalNum = healthRegisterService.EmploySearchHealthRegisterInfo(employSearchHealthInfo).Count();
+            employHealthInfoSearchResModel.IsSuccess = true;
+            employHealthInfoSearchResModel.baseViewModel.Message = "查询成功";
+            employHealthInfoSearchResModel.baseViewModel.ResponseCode = 200;
+
+            return Ok(employHealthInfoSearchResModel);
+        }
+
+
+
+
+
+
         /// <summary>
         /// 更新健康信息
         /// </summary>
@@ -87,6 +134,13 @@ namespace SmallRoutine.Controllers
             baseViewModel.ResponseCode = 200;
             return Ok(baseViewModel);
         }
+
+
+
+
+
+
+
 
 
     }

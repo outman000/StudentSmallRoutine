@@ -6,8 +6,10 @@ using Dtol.Extension;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ViewModel.PublicViewModel;
 using ViewModel.SmallRoutine.MiddelViewModel;
-using ViewModel.SmallRoutine.PublicViewModel;
+using ViewModel.SmallRoutine.MiddelViewModel.SecondMiddleViewModel;
+
 using ViewModel.SmallRoutine.RequestViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.FacultystaffViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.StaffClassRelateViewModel;
@@ -172,9 +174,9 @@ namespace Dto.Service.SmallRoutine
 
         public List<StaffClassMiddleModel> GetRelateToClassInfo(StaffClassRelateSearchViewModel staffClassRelateSearchView)
         {
-            var searchResult = staffClassRelateRepository.GetStudentsByStaff(staffClassRelateSearchView);
-            var result = _IMapper.Map<List<Health_Info>, List<StaffClassMiddleModel>>(searchResult);
-            return result;
+            //var searchResult = staffClassRelateRepository.GetStudentsByStaff(staffClassRelateSearchView);
+            //var result = _IMapper.Map<List<Health_Info>, List<StaffClassMiddleModel>>(searchResult);
+            return staffClassRelateRepository.GetStudentsByStaff(staffClassRelateSearchView); 
         }
 
 
@@ -189,12 +191,12 @@ namespace Dto.Service.SmallRoutine
         public List<StaffStationMiddleModel> GetRelateToStationInfo(StaffStationRelateSearchViewModel staffStationRelateSearchViewModel)
         {
 
-            var searchResult = staffStationRelateRepository.GethealthByStaff(staffStationRelateSearchViewModel);
-            var result = _IMapper.Map<List<Health_Info>, List<StaffStationMiddleModel>>(searchResult);
-            return result;
+            //var searchResult = staffStationRelateRepository.GethealthByStaff(staffStationRelateSearchViewModel);
+            //var result = _IMapper.Map<List<Health_Info>, List<StaffStationMiddleModel>>(searchResult);
+            return staffStationRelateRepository.GethealthByStaff(staffStationRelateSearchViewModel);
 
             //教职工和岗位   关系表删除
-          
+
 
         }
 
@@ -202,6 +204,28 @@ namespace Dto.Service.SmallRoutine
         {
             _staffStationRelateRepository.RemoveByid(model.DeleteIdList);
             _staffStationRelateRepository.SaveChanges();
+        }
+
+
+        public List<TeacherSearchClassMiddle> GetClassByTeacher(int UserKey)
+        {
+            return staffClassRelateRepository.GetClassByTeacher(UserKey);
+        }
+
+        public List<EmploySearchStationMiddle> GetStationByEmploy(int userKeyId)
+        {
+
+            return _staffStationRelateRepository.GetStationbindByEmploy(userKeyId);
+        }
+
+        public List<TeacherSearchClassAllMiddle> GetClassAllInfoByTeacher(int userKeyId)
+        {
+            return staffClassRelateRepository.GetClassByTeacherAll(userKeyId);
+        }
+
+        public List<EmploySearchStationAllMiddle> GetStationByEmployAll(int userKeyId)
+        {
+            return _staffStationRelateRepository.GetStationbindByEmployAll(userKeyId);
         }
     } 
 }

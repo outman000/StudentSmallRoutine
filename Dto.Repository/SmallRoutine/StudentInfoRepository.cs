@@ -209,5 +209,19 @@ namespace Dto.Repository.SmallRoutine
 
             }).Distinct().ToList();
         }
+
+        public void flushStudentClassId()
+        {
+           var classlist = Db.Class_Info.ToList();
+           for(int i=0;i< classlist.Count;i++)
+            {
+                var temp= DbSet.Where(a => a.ClassCode == classlist[i].ClassCode).ToList();
+                temp.ForEach(w => w.class_InfoId = classlist[i].id);
+                DbSet.UpdateRange(temp);
+            }
+
+
+         
+        }
     }
 }

@@ -89,15 +89,19 @@ namespace Dto.Service.AutoMapper.SmallRoutine
           
 
             CreateMap<Grade_Info, GradeInfoSearchMiddleModel>();
-            CreateMap<Class_Info, ClassInfoSearchMiddleModel>();
+            CreateMap<Class_Info, ClassInfoSearchMiddleModel>()
+                .ForMember(a => a.ClassCode, opt => opt.MapFrom(src => src.ClassCode))
+           ;
+           
 
             CreateMap<Health_Info, StaffClassMiddleModel>()
-
+                 .ForMember(a => a.Name, opt => opt.MapFrom(src => src.Student_Info.Name))
                 .ForMember(a => a.GradeName, opt => opt.MapFrom(src => src.Student_Info.GradeCode))
                 .ForMember(a => a.ClassName, opt => opt.MapFrom(src => src.Student_Info.ClassName))
                 .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.IdNumber)));
 
             CreateMap<Health_Info, StaffStationMiddleModel>()
+                 .ForMember(a => a.Name, opt => opt.MapFrom(src => src.facultystaff_Info.Name))
                   .ForMember(a => a.DepartName, opt => opt.MapFrom(src => src.facultystaff_Info.DepartName))
                 .ForMember(a => a.StaffName, opt => opt.MapFrom(src => src.facultystaff_Info.StaffName))
                 .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.IdNumber)));
@@ -105,6 +109,27 @@ namespace Dto.Service.AutoMapper.SmallRoutine
 
 
             CreateMap<AddRelateFromStaffToStation, StaffStation_Relate>();
+            CreateMap<Station_Info, StationInfoSearchMiddleModel>();
+
+
+            CreateMap<StudentRegisterHeath_Info, StudentHealthInfoSearchMiddle>()
+                .ForMember(a => a.Idnumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.Idnumber)));
+
+
+            CreateMap<StudentRegisterHeath_Info, EmployHealthInfoSearchMiddle>()
+                .ForMember(a => a.Idnumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.Idnumber)));
+
+
+
+
+
+            CreateMap<Depart_Info, DepartInfoSearchMiddleModel>();
+              
+
+
+
+
+
         }
     }
 }

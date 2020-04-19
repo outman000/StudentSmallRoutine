@@ -15,5 +15,7 @@ namespace Dto.IService.SmallRoutine
         List<HealthInfoSearchMiddle> SearchHealthRegisterInfo(HealthInfoSearchViewModel  healthInfoSearchViewModel);
 
         void UpdateHealthRegisterInfo(HealthInfoUpdateViewModel  healthInfoUpdateViewModel);
+        List<StudentHealthInfoSearchMiddle> StudentSearchHealthRegisterInfo(StudentSearchHealthInfo studentSearchHealthInfo);
+        List<EmployHealthInfoSearchMiddle> EmploySearchHealthRegisterInfo(EmploySearchHealthInfo employSearchHealthInfo);
     }
 }

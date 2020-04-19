@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ViewModel.PublicViewModel;
 using ViewModel.SmallRoutine.MiddelViewModel;
-using ViewModel.SmallRoutine.PublicViewModel;
 
 namespace ViewModel.SmallRoutine.ResponseViewModel.GradeViewModel
 {

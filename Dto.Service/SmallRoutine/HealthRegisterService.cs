@@ -29,7 +29,7 @@ namespace Dto.Service.SmallRoutine
         /// <summary>
         /// 添加登记健康信息
         /// </summary>
-        /// <param name="healthViewModel"></param>
+        /// <param name="HealthInfoAddViewModel"></param>
 
         public void addHealthRegisterInfo(HealthInfoAddViewModel healthViewModel)
         {
@@ -49,6 +49,7 @@ namespace Dto.Service.SmallRoutine
             if (studentInfo != null)
             {
                 studentInfo.StudentRegisterHeath_InfoId = insertHealth.id;
+                studentInfo.StudentRegisterHeath_InfoId = insertHealth.id;
                 studentInfoRepository.Update(studentInfo);
             }
             healthRegisterRepository.SaveChanges();
@@ -63,6 +64,8 @@ namespace Dto.Service.SmallRoutine
             healthRegisterRepository.DelByList(healthInfoDeleteViewModel.DeleteList);
             healthRegisterRepository.SaveChanges();
         }
+
+       
         /// <summary>
         /// 查询登记健康信息
         /// </summary>
@@ -75,6 +78,9 @@ namespace Dto.Service.SmallRoutine
             var searchresult = _IMapper.Map<List<StudentRegisterHeath_Info>, List<HealthInfoSearchMiddle>>(searchResult);
             return searchresult;
         }
+
+
+
         /// <summary>
         /// 更新登记健康信息
         /// </summary>
@@ -87,6 +93,23 @@ namespace Dto.Service.SmallRoutine
         }
 
 
+
+        public List<StudentHealthInfoSearchMiddle> StudentSearchHealthRegisterInfo(StudentSearchHealthInfo studentSearchHealthInfo)
+        {
+           var searchResult = healthRegisterRepository.searchHealthByStudentInfo(studentSearchHealthInfo);
+           var searchresult= _IMapper.Map<List<StudentRegisterHeath_Info>, List<StudentHealthInfoSearchMiddle>>(searchResult);
+
+            return searchresult;
+        }
+
+        public List<EmployHealthInfoSearchMiddle> EmploySearchHealthRegisterInfo(EmploySearchHealthInfo employSearchHealthInfo)
+        {
+            var searchResult = healthRegisterRepository.searchHealthByEmployInfo(employSearchHealthInfo);
+
+            var searchresult = _IMapper.Map<List<StudentRegisterHeath_Info>, List<EmployHealthInfoSearchMiddle>>(searchResult);
+            return searchresult;
+
+        }
 
     }
 }

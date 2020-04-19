@@ -33,5 +33,14 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         public string PermanentAddress { get; set; }
         //创建时间
         public DateTime? CreateDate { get; set; }
+
+        public int? station_InfoId { get; set; }
+
+
+
+        //健康信息外键
+        public int? StudentRegisterHeath_InfoId { get; set; }
+
+
     }
 }

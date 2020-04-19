@@ -6,8 +6,9 @@ using Dto.IService.SmallRoutine;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SystemFilter.PublicFilter;
+using ViewModel.PublicViewModel;
 using ViewModel.SmallRoutine.MiddelViewModel;
-using ViewModel.SmallRoutine.PublicViewModel;
+
 using ViewModel.SmallRoutine.RequestViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.FacultystaffViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.StaffClassRelateViewModel;
@@ -194,6 +195,88 @@ namespace SmallRoutine.Controllers
             baseViewModel.Message = "删除成功";
             baseViewModel.ResponseCode = 200;
             return baseViewModel;
+        }
+
+
+
+        /// <summary>
+        ///  根据绑定关系查看教师所绑定的班级
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("/RelateStaffToClass/SearchClassByTeacher")]
+
+        public ActionResult<StaffTeacherClassRelateSearchResModel> GetClassByTeacher(int UserKeyId)
+        {
+            StaffTeacherClassRelateSearchResModel staffTeacherClassRelateSearchResModel = new StaffTeacherClassRelateSearchResModel();
+            var result=_facultystaffService.GetClassByTeacher(UserKeyId);
+            staffTeacherClassRelateSearchResModel.IsSuccess = true;
+            staffTeacherClassRelateSearchResModel.teacherSearchClassMiddles = result;
+            staffTeacherClassRelateSearchResModel.TotalNum = result.Count();
+            staffTeacherClassRelateSearchResModel.baseViewModel.Message = "查询成功";
+            staffTeacherClassRelateSearchResModel.baseViewModel.ResponseCode = 200;
+
+            return Ok(staffTeacherClassRelateSearchResModel);
+        }
+
+
+
+        /// <summary>
+        ///  根据绑定关系查看某个人所绑定的班级
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("/RelateStaffToClass/SearchClassByTeacherAll")]
+
+        public ActionResult<StaffTeacherClassRelateSearchAllResModel> GetClassByTeacherAllInfo(int UserKeyId)
+        {
+            StaffTeacherClassRelateSearchAllResModel staffTeacherClassRelateSearchResModel = new StaffTeacherClassRelateSearchAllResModel();
+            staffTeacherClassRelateSearchResModel.IsSuccess = true;
+            staffTeacherClassRelateSearchResModel.teacherSearchClassAllMiddles = _facultystaffService.GetClassAllInfoByTeacher(UserKeyId);
+            staffTeacherClassRelateSearchResModel.TotalNum = _facultystaffService.GetClassAllInfoByTeacher(UserKeyId).Count();
+            staffTeacherClassRelateSearchResModel.baseViewModel.Message = "查询成功";
+            staffTeacherClassRelateSearchResModel.baseViewModel.ResponseCode = 200;
+            return Ok(staffTeacherClassRelateSearchResModel);
+        }
+
+
+        /// <summary>
+        ///  根据绑定关系查看教职员绑定的岗位
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("/RelateStaffToClass/SearchStaffByEmployment")]
+
+        public ActionResult<EmploySearchStationResModel> GetStationByEmoloyment(int UserKeyId)
+        {
+            EmploySearchStationResModel employSearchStationResModel = new EmploySearchStationResModel();
+            var result = _facultystaffService.GetStationByEmploy(UserKeyId);
+            employSearchStationResModel.IsSuccess = true;
+            employSearchStationResModel.employSearchStationResModels = result;
+            employSearchStationResModel.TotalNum = result.Count();
+            employSearchStationResModel.baseViewModel.Message = "查询成功";
+            employSearchStationResModel.baseViewModel.ResponseCode = 200;
+
+            return Ok(employSearchStationResModel);
+        }
+
+
+
+
+        /// <summary>
+        ///  根据绑定关系查看某个人所绑定的岗位
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("/RelateStaffToClass/SearchStaffByEmploymentAll")]
+
+        public ActionResult<EmploySearchStationAllResModel> GetStationByEmoloymentAllInfo(int UserKeyId)
+        {
+            EmploySearchStationAllResModel staffTeacherClassRelateSearchResModel = new EmploySearchStationAllResModel();
+
+            staffTeacherClassRelateSearchResModel.IsSuccess = true;
+            staffTeacherClassRelateSearchResModel.employSearchStationResModels = _facultystaffService.GetStationByEmployAll(UserKeyId);
+            staffTeacherClassRelateSearchResModel.TotalNum = _facultystaffService.GetStationByEmployAll(UserKeyId).Count();
+            staffTeacherClassRelateSearchResModel.baseViewModel.Message = "查询成功";
+            staffTeacherClassRelateSearchResModel.baseViewModel.ResponseCode = 200;
+
+            return Ok(staffTeacherClassRelateSearchResModel);
         }
 
 

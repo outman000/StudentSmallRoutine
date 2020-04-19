@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ViewModel.SmallRoutine.MiddelViewModel;
-using ViewModel.SmallRoutine.PublicViewModel;
+
 using ViewModel.SmallRoutine.RequestViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.BaseControlViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.FacultystaffViewModel;
@@ -10,6 +10,8 @@ using ViewModel.SmallRoutine.RequestViewModel.StaffClassRelateViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel.BaseControlViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.StaffStationRelateViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel.StaffStationRelateViewModel;
+using ViewModel.SmallRoutine.MiddelViewModel.SecondMiddleViewModel;
+using ViewModel.PublicViewModel;
 
 namespace Dto.IService.SmallRoutine
 {
@@ -40,5 +42,10 @@ namespace Dto.IService.SmallRoutine
         //教职工和岗位   关系表删除
         void DeleteRelateToStation(DeleteRelateFromStaffToStationViewModel model);
         List<StaffStationMiddleModel> GetRelateToStationInfo(StaffStationRelateSearchViewModel staffStationRelateSearchViewModel);
+        //关联关系查询
+        List<TeacherSearchClassMiddle> GetClassByTeacher(int UserKey);
+        List<EmploySearchStationMiddle> GetStationByEmploy(int userKeyId);
+        List<TeacherSearchClassAllMiddle> GetClassAllInfoByTeacher(int userKeyId);
+        List<EmploySearchStationAllMiddle> GetStationByEmployAll(int userKeyId);
     }
 }

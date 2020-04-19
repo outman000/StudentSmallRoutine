@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ViewModel.SmallRoutine.MiddelViewModel.SecondMiddleViewModel;
 
 namespace ViewModel.SmallRoutine.MiddelViewModel
 {
@@ -33,5 +34,13 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         public string PermanentAddress { get; set; }
         //创建时间
         public DateTime? CreateDate { get; set; }
+        //班级外键
+        public int? class_InfoId { get; set; }
+
+        //班级外键
+        public int? StudentRegisterHeath_InfoId { get; set; }
+
+
+
     }
 }

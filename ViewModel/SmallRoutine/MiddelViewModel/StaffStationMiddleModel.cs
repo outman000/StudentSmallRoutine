@@ -6,6 +6,10 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
 {
     public class StaffStationMiddleModel
     {
+        /// <summary>
+        /// 部门
+        /// </summary>
+        public string Name { get; set; }
 
         /// <summary>
         /// 部门
