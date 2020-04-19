@@ -5,6 +5,7 @@ using Dtol.dtol;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ViewModel.PublicViewModel;
 using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel;
@@ -62,5 +63,45 @@ namespace Dto.Service.SmallRoutine
                 return null;
             }
         }
+
+        //修改密码
+        public BaseViewModel EditPwdView(EditPwdViewModel  editPwdView)
+        {
+            BaseViewModel baseView = new BaseViewModel();
+
+            //加密信息
+            LoginViewModel decodeloginInfp = new LoginViewModel();
+            decodeloginInfp.Idnumber = Dtol.Helper.MD5.Md5Hash(editPwdView.Idnumber);
+            decodeloginInfp.Password = Dtol.Helper.MD5.Md5Hash(editPwdView.OldPassword);
+            //验证是否通过
+            var isSuccess = _userInfoRepository.Login(decodeloginInfp);
+            //通过获取相关数据
+            if (isSuccess)//成功则获取相关数据
+            {
+                User_Info Info = new User_Info();
+                Info = _userInfoRepository.GetByIdnumber(editPwdView.Idnumber);
+                Info.password = Dtol.Helper.MD5.Md5Hash(editPwdView.NewPassword);
+                _userInfoRepository.Update(Info);
+                int i = _userInfoRepository.SaveChanges();
+                if (i > 0)
+                {
+                    baseView.Message = "修改成功";
+                    baseView.ResponseCode = 0;
+                }
+                else
+                {
+                    baseView.Message = "修改失败";
+                    baseView.ResponseCode = 1;
+                }
+            }
+            else
+            {
+                baseView.Message = "原密码不对";
+                baseView.ResponseCode = 2;
+
+            }
+            return baseView;
+        }
+
     }
 }

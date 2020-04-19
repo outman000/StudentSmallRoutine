@@ -29,6 +29,9 @@ namespace Dtol
         public DbSet<User_Info> User_Info { get; set; }
         public DbSet<ClassManager_Relate> ClassManager_Relate { get; set; }
         public DbSet<StaffStation_Relate> StaffStation_Relate { get; set; }
+
+        public DbSet<ReadLog> ReadLog { get; set; }
+
         public DtolContext(DbContextOptions<DtolContext> options)
        : base(options)
         {

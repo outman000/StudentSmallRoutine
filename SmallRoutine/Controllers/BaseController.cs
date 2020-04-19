@@ -7,7 +7,10 @@ using Dto.IService.SmallRoutine;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ViewModel.PublicViewModel;
 using ViewModel.SmallRoutine;
+using ViewModel.SmallRoutine.MiddelViewModel;
+using ViewModel.SmallRoutine.RequestViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.BaseControlViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel.BaseControlViewModel;
 
@@ -20,7 +23,7 @@ namespace SmallRoutine.Controllers
         private readonly IFIileService _fileService;
         private readonly IBaseService _baseService;
         private readonly IHostingEnvironment _hostingEnvironment;
-
+ 
         public BaseController(IFIileService fileService, IBaseService baseService, IHostingEnvironment hostingEnvironment)
         {
             _fileService = fileService;
@@ -165,6 +168,50 @@ namespace SmallRoutine.Controllers
             gradeAndClassResModel.baseViewModel.ResponseCode = 200;
             return Ok(gradeAndClassResModel);
 
+        }
+
+
+
+
+        /// <summary>
+        /// 验证 用户是否 阅读隐私政策记录（参数：openid） 
+        /// </summary>
+        /// <param name="userInfo"></param>
+        /// <returns></returns>
+        [HttpPost("/CheckReadLog")]
+        public ActionResult<BaseViewModel> CheckReadLog(openidViewModel userInfo)
+        {
+            BaseViewModel baseView = new BaseViewModel();
+            baseView = _baseService.CheckReadLog(userInfo.openid);
+            return baseView;
+        }
+
+
+        /// <summary>
+        ///记录 用户插入阅读隐私政策记录（参数：openid）
+        /// </summary>
+        /// <param name="userInfo"></param>
+        /// <returns></returns>
+        [HttpPost("/SaveReadLog")]
+        public ActionResult<BaseViewModel> SaveReadLog(openidViewModel userInfo)
+        {
+            BaseViewModel baseView = new BaseViewModel();
+            baseView = _baseService.SaveReadLog(userInfo.openid);
+            return baseView;
+        }
+
+
+        /// <summary>
+        ///获取加密后的身份证号（参数：idnumber）
+        /// </summary>
+        /// <param name="idnumber"></param>
+        /// <returns></returns>
+        [HttpPost("/Md5HashIdnumber")]
+        public ActionResult<BaseViewModel> GetJMSFZ(IDNumberModel idnumber)
+        {
+            BaseViewModel baseView = new BaseViewModel();
+            baseView = _baseService.GetIdnumber(idnumber.Idnumber);
+            return baseView;
         }
 
     }

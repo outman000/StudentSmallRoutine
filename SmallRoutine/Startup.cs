@@ -21,6 +21,7 @@ using Microsoft.IdentityModel.Tokens;
 using AutofacSerilogIntegration;
 using SystemFilter.PublicFilter;
 using Microsoft.Extensions.Logging;
+using ViewModel.SmallRoutine.MiddelViewModel;
 
 namespace SmallRoutine
 {
@@ -45,12 +46,9 @@ namespace SmallRoutine
             var valitorAssembly = Assembly.Load("ViewModel");
             var AuthentValitor = Assembly.Load("AuthentValitor");
 
-            #region
-
-
-
-
-
+            #region 配置文件
+            services.AddOptions();
+            services.Configure<WeChartTokenMiddles>(Configuration.GetSection("WeChatToken"));
             #endregion
 
 

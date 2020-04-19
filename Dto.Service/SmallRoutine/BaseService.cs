@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ViewModel.PublicViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.BaseControlViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel.BaseControlViewModel;
 using ViewModel.SmallRoutine.ServiceDTO.SmallRoutine;
@@ -21,7 +22,7 @@ namespace Dto.Service.AutoMapper.SmallRoutine
         private readonly IStationInfoRepository _stationInfoRespository;
         private readonly IDepartInfoRepository _departInfoRespository;
         private readonly IUserInfoRepository _userInfoRepository;
-
+        private readonly IReadLogRepository _readLogRepository;
 
         private IFacultystaffInfoRepository _facultystaffInfoRepository;
         private readonly IMapper _IMapper;
@@ -34,6 +35,7 @@ namespace Dto.Service.AutoMapper.SmallRoutine
             IDepartInfoRepository departInfoRespository,
             IUserInfoRepository userInfoRepository,
             IFacultystaffInfoRepository facultystaffInfoRepository,
+            IReadLogRepository readLog,
             IMapper iMapper)
         {
             _StudentInfoRepository = studentInfoRepository;
@@ -44,6 +46,7 @@ namespace Dto.Service.AutoMapper.SmallRoutine
             _departInfoRespository = departInfoRespository;
             _userInfoRepository = userInfoRepository;
             _facultystaffInfoRepository = facultystaffInfoRepository;
+            _readLogRepository = readLog;
             _IMapper = iMapper;
         }
 
@@ -113,5 +116,111 @@ namespace Dto.Service.AutoMapper.SmallRoutine
 
 
         }
+
+
+
+
+        //记录 用户插入阅读隐私政策记录（参数：openid） 
+        public BaseViewModel SaveReadLog(string openid)
+        {
+            BaseViewModel baseView = new BaseViewModel();
+            if (openid == "")
+            {
+                baseView.Message = "参数为空";
+                baseView.ResponseCode = 2;
+            }
+            else
+            {
+                try
+                {
+                    ReadLog log = new ReadLog();
+                    log.openid = openid;
+                    log.CreateDate = DateTime.Now;
+                    _readLogRepository.Add(log);
+                    int a = _readLogRepository.SaveChanges();
+                    if (a > 0)
+                    {
+                        baseView.Message = "保存成功";
+                        baseView.ResponseCode = 0;
+                    }
+                    else
+                    {
+                        baseView.Message = "保存失败";
+                        baseView.ResponseCode = 1;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    baseView.Message = "出现异常";
+                    baseView.ResponseCode = 3;
+                }
+            }
+            return baseView;
+        }
+
+
+        //验证 用户是否 阅读隐私政策记录（参数：openid） 
+        public BaseViewModel CheckReadLog(string openid)
+        {
+            BaseViewModel baseView = new BaseViewModel();
+            if (openid == "")
+            {
+                baseView.Message = "参数为空";
+                baseView.ResponseCode = 2;
+            }
+            else
+            {
+                try
+                {
+                    //验证 用户是否 阅读隐私政策记录
+                    ReadLog log = _readLogRepository.GetReadLog(openid);
+
+                    if (log != null)
+                    {
+                        baseView.Message = "我已阅读";
+                        baseView.ResponseCode = 0;
+                    }
+                    else
+                    {
+                        baseView.Message = "我未阅读";
+                        baseView.ResponseCode = 1;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    baseView.Message = "出现异常";
+                    baseView.ResponseCode = 3;
+                }
+            }
+            return baseView;
+        }
+
+
+
+        //获取加密后的身份证号（参数：idnumber） 
+        public BaseViewModel GetIdnumber(string idnumber)
+        {
+            BaseViewModel baseView = new BaseViewModel();
+            if (idnumber == "")
+            {
+                baseView.Message = "参数为空";
+                baseView.ResponseCode = 2;
+            }
+            else
+            {
+                try
+                {
+                    baseView.Message = Dtol.Helper.MD5.Md5Hash(idnumber);
+                    baseView.ResponseCode = 1;
+                }
+                catch (Exception ex)
+                {
+                    baseView.Message = "出现异常";
+                    baseView.ResponseCode = 3;
+                }
+            }
+            return baseView;
+        }
+
     }
 }
