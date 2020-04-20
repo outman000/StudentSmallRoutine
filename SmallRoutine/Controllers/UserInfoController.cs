@@ -7,6 +7,7 @@ using Dto.IService.SmallRoutine;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SystemFilter.PublicFilter;
+using ViewModel.PublicViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel;
 
@@ -88,6 +89,24 @@ namespace SmallRoutine.Controllers
             return Ok(loginValideResModel);
 
         }
+
+
+
+        /// <summary>
+        /// 登录验证接口
+        /// </summary>
+        /// <param name="editPwdView"></param>
+        /// <returns name="BaseViewModel"></returns>
+        [HttpPost("/EditPwd")]
+        [ValidateModel]
+        public ActionResult<BaseViewModel> UserEditPwd(EditPwdViewModel  editPwdView)
+        {
+            BaseViewModel ResModel = new BaseViewModel();
+            var result = _iloginService.EditPwdView(editPwdView);
+            return Ok(ResModel);
+
+        }
+
 
 
     }

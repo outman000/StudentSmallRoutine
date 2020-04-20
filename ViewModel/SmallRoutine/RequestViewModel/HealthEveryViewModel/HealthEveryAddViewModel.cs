@@ -38,6 +38,7 @@ namespace ViewModel.SmallRoutine.RequestViewModel.HealthEveryViewModel
         /// 家庭人员乏力
         /// </summary>
         public string IsFamilyWeakt { get; set; }
+        public string CheckType { get; set; }//晨午晚
         /// <summary>
         /// 登陆人的标识id(学生)
         /// </summary>

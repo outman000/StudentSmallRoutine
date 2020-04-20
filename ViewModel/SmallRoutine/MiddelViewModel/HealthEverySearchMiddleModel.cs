@@ -39,6 +39,7 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// 家庭人员乏力
         /// </summary>
         public string IsFamilyWeakt { get; set; }
+        public string CheckType { get; set; }//晨午晚
         /// <summary>
         /// 创建日期
         /// </summary>

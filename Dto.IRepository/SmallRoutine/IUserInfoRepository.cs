@@ -11,5 +11,8 @@ namespace Dto.IRepository.SmallRoutine
         void AddListBase(List<User_Info> insertUserInfoList);
 
         bool Login(LoginViewModel loginViewModel);
+
+
+        User_Info GetByIdnumber(string idnumber);
     }
 }

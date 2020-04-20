@@ -141,10 +141,10 @@ namespace Dto.Service.SmallRoutine
         {
             List<facultystaff_Info> lists = new List<facultystaff_Info>();
             List<FacultystaffMiddle> nlists = new List<FacultystaffMiddle>();
-            if (!string.IsNullOrEmpty(model.IdNumber))
-            {
-                model.IdNumber = Dtol.Helper.MD5.Md5Hash(model.IdNumber);
-            }
+            //if (!string.IsNullOrEmpty(model.IdNumber))
+            //{
+            //    model.IdNumber = Dtol.Helper.MD5.Md5Hash(model.IdNumber);
+            //}
 
             lists = _facultystaffInfoRepository.GetByModel(model);
 

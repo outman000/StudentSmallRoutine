@@ -124,10 +124,11 @@ namespace Dto.Service.AutoMapper.SmallRoutine
 
 
             CreateMap<Depart_Info, DepartInfoSearchMiddleModel>();
-              
 
 
 
+
+ 
 
 
         }
