@@ -36,5 +36,6 @@ namespace Dto.IService.SmallRoutine
         /// <param name="FileName"></param>
         /// <returns></returns>
         int InputWhiteListIntoDataBase_facultystaffInfo(string FilePath, string FileName);
+        int InputStudentInfoTimeIntervalIntoDataBase(string filePath, string randomname);
     }
 }

@@ -155,7 +155,7 @@ namespace Dto.Repository.SmallRoutine
             predicate = predicate.And(p => p.SchoolCode.Contains(studentSearchHealthInfo.SchoolCode));
             predicate = predicate.And(p => p.GradeCode.Contains(studentSearchHealthInfo.GradeCode));
             predicate = predicate.And(p => p.ClassCode.Contains(studentSearchHealthInfo.ClassCode));
-            predicate = predicate.And(p => p.IdNumber .Contains(studentSearchHealthInfo.Idnumber));
+            predicate = predicate.And(p => p.IdNumber .Contains(Dtol.Helper.MD5.Md5Hash(studentSearchHealthInfo.Idnumber)));
             predicate = predicate.And(p => p.Name  .Contains(studentSearchHealthInfo.Name));
 
             return predicate;
@@ -185,7 +185,7 @@ namespace Dto.Repository.SmallRoutine
             predicate = predicate.And(p => p.SchoolCode.Contains(employSearchHealthInfo.SchoolCode));
             predicate = predicate.And(p => p.StaffCode.Contains(employSearchHealthInfo.StaffCode));
             predicate = predicate.And(p => p.DepartCode.Contains(employSearchHealthInfo.DepartCode));
-            predicate = predicate.And(p => p.IdNumber.Contains(employSearchHealthInfo.Idnumber));
+            predicate = predicate.And(p => p.IdNumber.Contains(Dtol.Helper.MD5.Md5Hash(employSearchHealthInfo.Idnumber)));
             predicate = predicate.And(p => p.Name.Contains(employSearchHealthInfo.Name));
 
             return predicate;

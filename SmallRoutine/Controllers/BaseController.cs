@@ -111,6 +111,48 @@ namespace SmallRoutine.Controllers
         }
 
 
+
+
+        /// <summary>
+        /// 文件上传并导入数据（早午晚检学生）
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        [HttpPost("/StudentInfoDayAndNightUpload")]
+        public ActionResult UploadFile_StudentInfoTimeInterval(IFormFile file)
+        {
+            FileUploadViewModel fileUploadViewModel = new FileUploadViewModel();
+            var files = Request.Form.Files;
+            String filePath = "";//上传文件的路径
+
+            if (files.Count == 0)
+            {
+                throw new ArgumentException("找不到上传的文件");
+            }
+            // full path to file in temp location
+            foreach (var formFile in files)
+            {
+                string randomname = _fileService.fileRandName(formFile.FileName);
+                filePath = Directory.GetCurrentDirectory() + "\\files\\" + randomname;
+                if (formFile.Length > 0)
+                {
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        formFile.CopyTo(stream);
+                    }
+                }
+                fileUploadViewModel.FileName = formFile.FileName;
+                //fileUploadViewModel.Url = "http://60.28.108.84:3000/toufiles/" + formFile.FileName;
+                //fileUploadViewModel.Url = "https://bhteda.com.cn/toufiles/" + formFile.FileName;
+                fileUploadViewModel.PhysisticName = randomname;
+                _fileService.SaveFileInfo(fileUploadViewModel);
+                _fileService.InputStudentInfoTimeIntervalIntoDataBase(filePath, randomname);
+
+            }
+            return Ok("导入成功");
+
+        }
+
         /// <summary>
         /// 结构化基础数据
         /// </summary>

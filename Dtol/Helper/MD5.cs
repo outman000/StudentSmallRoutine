@@ -72,6 +72,10 @@ namespace Dtol.Helper
         /// <returns>密文</returns>
         public static string Md5Hash(string original)
         {
+            if (original == "")
+            {
+                return "";
+            }
             return Encrypt(original, "MATICSOFT");
         }
         /// <summary>

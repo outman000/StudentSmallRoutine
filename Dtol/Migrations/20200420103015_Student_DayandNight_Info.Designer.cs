@@ -4,14 +4,16 @@ using Dtol;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dtol.Migrations
 {
     [DbContext(typeof(DtolContext))]
-    partial class DtolContextModelSnapshot : ModelSnapshot
+    [Migration("20200420103015_Student_DayandNight_Info")]
+    partial class Student_DayandNight_Info
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -269,7 +271,7 @@ namespace Dtol.Migrations
 
                     b.Property<DateTime?>("AddCreateDate");
 
-                    b.Property<DateTime?>("AddTimeInterval");
+                    b.Property<string>("AddTimeInterval");
 
                     b.Property<string>("ClassName");
 

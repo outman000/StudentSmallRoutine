@@ -17,18 +17,18 @@ namespace Dto.Service.SmallRoutine
     {
         private readonly IMapper _IMapper;
         private readonly IFileRepository _fileRepository;
+        private readonly IDayandNightRepository _dayandNightRepository;
         private readonly IStudentInfoRepository _studentInfoRepository;
         private readonly IFacultystaffInfoRepository _facultystaffInfoRepository;
 
-        public FileService(IMapper iMapper, IFileRepository fileRepository,
-            IStudentInfoRepository studentInfoRepository, IFacultystaffInfoRepository facultystaffInfoRepository)
+        public FileService(IMapper iMapper, IFileRepository fileRepository, IDayandNightRepository dayandNightRepository, IStudentInfoRepository studentInfoRepository, IFacultystaffInfoRepository facultystaffInfoRepository)
         {
             _IMapper = iMapper;
             _fileRepository = fileRepository;
+            _dayandNightRepository = dayandNightRepository;
             _studentInfoRepository = studentInfoRepository;
             _facultystaffInfoRepository = facultystaffInfoRepository;
         }
-
 
 
 
@@ -39,6 +39,19 @@ namespace Dto.Service.SmallRoutine
             String[] fileTail = fileRealname.Split('.');
             RandName = DateTime.Now.ToString("yyyyMMddHHmmssffff") + "." + fileTail[1];
             return RandName;
+        }
+
+      
+
+        public int InputStudentInfoTimeIntervalIntoDataBase(string filePath, string randomname)
+        {
+         
+            var package = new ExcelPackage(new System.IO.FileInfo(filePath));
+            var workbook = package.Workbook;
+            var worksheet = workbook.Worksheets.First();
+            var StudentInfo = worksheet.ConvertSheetToObjects<Student_DayandNight_Info>(filePath).ToList();
+            _dayandNightRepository.AddList(StudentInfo);
+            return _dayandNightRepository.SaveChanges();
         }
         //学生信息导入
         public int InputWhiteListIntoDataBase(string FilePath,string FileName)
@@ -66,7 +79,7 @@ namespace Dto.Service.SmallRoutine
             _facultystaffInfoRepository.AddList(facultystaffInfo);
             return _facultystaffInfoRepository.SaveChanges();
         }
-
+     
 
         public FileImgResViewModel SaveFileInfo(FileUploadViewModel fileUploadViewModel)
         {

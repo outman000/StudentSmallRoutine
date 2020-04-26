@@ -32,6 +32,8 @@ namespace Dtol
 
         public DbSet<ReadLog> ReadLog { get; set; }
 
+        public DbSet<Student_DayandNight_Info> Student_DayandNight_Info { get; set; }
+        
         public DtolContext(DbContextOptions<DtolContext> options)
        : base(options)
         {

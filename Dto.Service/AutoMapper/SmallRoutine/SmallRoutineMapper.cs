@@ -7,6 +7,7 @@ using ViewModel.SmallRoutine;
 using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.MiddelViewModel.SecondMiddleViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.FacultystaffViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.HealthEveryViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.HealthViewModel;
@@ -126,9 +127,9 @@ namespace Dto.Service.AutoMapper.SmallRoutine
             CreateMap<Depart_Info, DepartInfoSearchMiddleModel>();
 
 
+            CreateMap<Student_DayandNight_Info, DayandNightInfoMiddle>();
 
-
- 
+            CreateMap<DayAndNightUpdateViewModel, Student_DayandNight_Info>();
 
 
         }
