@@ -29,7 +29,7 @@ namespace SmallRoutine.Controllers
         /// <param name="loginViewModel"></param>
         /// <returns name="loginValideResModel"></returns>
         [HttpPost("/Login")]
-        [ValidateModel]
+
         public ActionResult<LoginValideResModel> UserLogin(LoginViewModel loginViewModel)
         {
             LoginValideResModel loginValideResModel = new LoginValideResModel();
@@ -64,7 +64,7 @@ namespace SmallRoutine.Controllers
         /// <param name="loginViewModel"></param>
         /// <returns name="loginValideResModel"></returns>
         [HttpPost("/LoginEmploy")]
-        [ValidateModel]
+     
         public ActionResult<LoginValideResModel> UserLoginEmploy(LoginViewModel loginViewModel)
         {
             LoginValideReEmployesModel loginValideResModel = new LoginValideReEmployesModel();
@@ -95,14 +95,51 @@ namespace SmallRoutine.Controllers
         /// <summary>
         /// 登录验证接口
         /// </summary>
+        /// <param name="loginViewModel"></param>
+        /// <returns name="loginValideResModel"></returns>
+        [HttpPost("/LoginAdmin")]
+
+        public ActionResult<LoginValideResModel> UserLoginAdmin(LoginViewModel loginViewModel)
+        {
+            LoginValideReEmployesModel loginValideResModel = new LoginValideReEmployesModel();
+            var result = _iloginService.LoginAdmin(loginViewModel);
+            if (result)
+            {
+                loginValideResModel.Data.IdNumber="admin";
+                loginValideResModel.baseViewModel.Message = "登录成功";
+                loginValideResModel.baseViewModel.ResponseCode = 200;
+                loginValideResModel.IsSuccess = true;
+
+            }
+            else
+            {
+                loginValideResModel.Data = null;
+                loginValideResModel.baseViewModel.Message = "登录失败";
+                loginValideResModel.baseViewModel.ResponseCode = 210;
+                loginValideResModel.IsSuccess = false;
+            }
+
+
+            return Ok(loginValideResModel);
+
+        }
+
+
+
+
+
+
+
+        /// <summary>
+        /// 登录验证接口
+        /// </summary>
         /// <param name="editPwdView"></param>
         /// <returns name="BaseViewModel"></returns>
         [HttpPost("/EditPwd")]
-        [ValidateModel]
         public ActionResult<BaseViewModel> UserEditPwd(EditPwdViewModel  editPwdView)
         {
             BaseViewModel ResModel = new BaseViewModel();
-            var result = _iloginService.EditPwdView(editPwdView);
+            ResModel = _iloginService.EditPwdView(editPwdView);
             return Ok(ResModel);
 
         }

@@ -9,9 +9,9 @@ namespace Dtol.dtol
       
         public int Id { get; set; }
 
-        public int User_SystemId { get; set; }
+        public int User_InfoId { get; set; }
 
-        public User_System User_System { get; set; }
+        public User_Info User_Info { get; set; }
 
         public int Station_InfoId { get; set; }
 

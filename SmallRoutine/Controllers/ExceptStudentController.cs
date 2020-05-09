@@ -24,7 +24,11 @@ namespace SmallRoutine.Controllers
             this.exceptStudentService = exceptStudentService;
             this.mapper = mapper;
         }
-
+        /// <summary>
+        /// 添加学生异常信息
+        /// </summary>
+        /// <param name="exceptStudentAddViewModel"></param>
+        /// <returns></returns>
         [HttpPost("StudentExcept/Add")]
         public ActionResult ExceptStudentAdd(ExceptStudentAddViewModel exceptStudentAddViewModel)
         {
@@ -33,6 +37,11 @@ namespace SmallRoutine.Controllers
 
             return Ok("添加成功");
         }
+        /// <summary>
+        /// 更新学生异常信息
+        /// </summary>
+        /// <param name="exceptStudentUpdateViewModel"></param>
+        /// <returns></returns>
         [HttpPost("StudentExcept/Update")]
 
         public ActionResult ExceptStudentUpdate(ExceptStudentUpdateViewModel exceptStudentUpdateViewModel)
@@ -40,19 +49,35 @@ namespace SmallRoutine.Controllers
             exceptStudentService.updateExceptStudentUpdateServide(exceptStudentUpdateViewModel);
 
             return Ok("更新成功");
-               
+            
+     
         }
+        /// <summary>
+        /// 查询学生异常信息
+        /// </summary>
+        /// <param name="exceptStudentSearchInfoVIewModel"></param>
+        /// <returns></returns>
         [HttpPost("StudentExcept/Search")]
         
         public ActionResult<ExceptStudentSearchResModel> ExceptStudengSearch(ExceptStudengSearchInfoVIewModel exceptStudentSearchInfoVIewModel)
         {
             ExceptStudentSearchResModel exceptStudentSearchResModel = new ExceptStudentSearchResModel();
-            exceptStudentSearchResModel.exceptStudentSearchMiddles = exceptStudentService.SearchExceptStudengSearchService(exceptStudentSearchInfoVIewModel);
+            var result = exceptStudentService.SearchExceptStudengSearchService(exceptStudentSearchInfoVIewModel);
+
+            exceptStudentSearchResModel.IsSuccess = true;
+            exceptStudentSearchResModel.exceptStudentSearchMiddles = result;
+            exceptStudentSearchResModel.baseViewModel.Message = "查询成功";
+            exceptStudentSearchResModel.baseViewModel.ResponseCode = 200;
+
             return Ok(exceptStudentSearchResModel);
 
         
         }
-
+        /// <summary>
+        /// 删除学生异常信息
+        /// </summary>
+        /// <param name="exceptStudentDeleteInfoVIewModel"></param>
+        /// <returns></returns>
         [HttpPost("StudentExcept/Delete")]
 
         public ActionResult ExceptStudengDelete(ExceptStudengDeleteInfoVIewModel exceptStudentDeleteInfoVIewModel)

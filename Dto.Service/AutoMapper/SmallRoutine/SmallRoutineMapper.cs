@@ -8,6 +8,8 @@ using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.MiddelViewModel.SecondMiddleViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.ExceptEmployViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.ExceptStudentViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.FacultystaffViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.HealthEveryViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.HealthViewModel;
@@ -132,6 +134,35 @@ namespace Dto.Service.AutoMapper.SmallRoutine
             CreateMap<DayAndNightUpdateViewModel, Student_DayandNight_Info>();
 
 
+            CreateMap<ExceptStudentAddViewModel, Except_Info_Student>()
+                 .ForMember(a => a.Idnumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.Idnumber)));
+
+            CreateMap<ExceptStudentUpdateViewModel, Except_Info_Student>()
+                  .ForMember(a => a.Idnumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash (src.Idnumber)));
+
+            CreateMap<Except_Info_Student, ExceptStudentSearchMiddle>()
+                 .ForMember(a => a.UserFiles_InfoId, opt => opt.MapFrom(src => src.UserFiles_Info.id))
+                  .ForMember(a => a.Url, opt => opt.MapFrom(src => src.UserFiles_Info.Url))
+                .ForMember(a => a.ClassName, opt => opt.MapFrom(src => src.student_Info.ClassName))
+                  .ForMember(a => a.GradeName, opt => opt.MapFrom(src => src.student_Info.GradeName))
+                .ForMember(a => a.Idnumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.Idnumber)));
+
+
+            CreateMap<ExceptEmployAddViewModel, Except_Info_Employ>()
+                 .ForMember(a => a.Idnumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.Idnumber)));
+
+            CreateMap<Except_Info_Employ, ExceptEmploySearchMiddle>()
+                  .ForMember(a => a.UserFiles_InfoId, opt => opt.MapFrom(src => src.UserFiles_Info.id))
+                   .ForMember(a => a.Url, opt => opt.MapFrom(src => src.UserFiles_Info.Url))
+                 .ForMember(a => a.StaffCode, opt => opt.MapFrom(src =>src.facultystaff_Info.StaffCode ))
+                  .ForMember(a => a.DepartName, opt => opt.MapFrom(src => src.facultystaff_Info.DepartName))
+                .ForMember(a => a.Idnumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.Idnumber)));
+
+            CreateMap<ExceptEmployUpdateViewModel, Except_Info_Employ>()
+                  .ForMember(a => a.Idnumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.Idnumber)));
+
+            CreateMap<FileImageUploadViewModel, UserFiles_Info>()
+                 .ForMember(a => a.Idnumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.Idnumber)));
         }
     }
 }

@@ -10,24 +10,18 @@ namespace ViewModel.UserViewModel.RequsetModel
     public class UserRoleUpdateViewModel
     {
         /// <summary>
-        /// id
+        /// 主键
         /// </summary>
-        public int Id { get; set; }
+        public int id { get; set; }
         /// <summary>
-        /// 角色名称
+        /// 岗位名称
         /// </summary>
-        public string RoleName { get; set; }
+        public string StaffName { get; set; }
         /// <summary>
-        /// 角色类型
+        /// 岗位code
         /// </summary>
-        public string RoleType { get; set; }
-        /// <summary>
-        /// 0为启用1为停用
-        /// </summary>
-        public string Status { get; set; }
-        /// <summary>
-        /// 更新时间
-        /// </summary>
-        public DateTime? UpdateTime { get; set; }
+        public string StaffCode { get; set; }
+   
+
     }
 }

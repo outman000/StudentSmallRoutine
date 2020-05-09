@@ -70,5 +70,10 @@ namespace ViewModel.SmallRoutine.RequestViewModel.HealthViewModel
         /// 体温计
         /// </summary>
         public string Temperature { get; set; }//体温
+
+        /// <summary>
+        /// 户籍地址
+        /// </summary>
+        public string PermanentAddress { get; set; }
     }
 }

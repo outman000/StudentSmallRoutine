@@ -65,5 +65,22 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// 是否接触
         /// </summary>
         public string IsTouch { get; set; }
+
+        /// <summary>
+        /// 早午晚
+        /// </summary>
+        public string CheckType { get; set; }
+        /// <summary>
+        /// 体温
+        /// </summary>
+        public string Temperature { get; set; }
+        /// <summary>
+        /// 是否参加聚合
+        /// </summary>
+        public string IsAggregate { get; set; }
+        /// <summary>
+        /// 是否参加聚合具体情况
+        /// </summary>
+        public string IsAggregateContain { get; set; }
     }
 }

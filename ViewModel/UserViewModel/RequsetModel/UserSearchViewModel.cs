@@ -19,17 +19,6 @@ namespace ViewModel.UserViewModel.RequsetModel
         /// 用户登录账号
         /// </summary>
         public string UserId { get; set; }
-        //public string PhoneCall { get; set; }
-       //public string Email { get; set; }
-       /// <summary>
-       /// 账号状态，0启用1停用
-       /// </summary>
-        public string status { get; set; }
-       /// <summary>
-       /// 账号身份0普通身份1临时身份
-       /// </summary>
-        public string Levels { get; set; }
-
         ///// <summary>
         ///// 部门id
         ///// </summary>

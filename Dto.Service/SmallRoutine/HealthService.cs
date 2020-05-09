@@ -33,20 +33,21 @@ namespace Dto.Service.SmallRoutine
 
             healthRepository.Add(insertInfo);
 
-            healthRepository.SaveChanges();
+            healthRepository.SaveChanges();//添加每日健康信息
 
             var insertHealth = healthRepository.getByidNumber(insertInfo.IdNumber);//查询插入的 mapper中加密
             var facultystaff = facultystaffInfoRepository.getByidNumber(insertInfo.IdNumber);//查询白绑定的基础信息
             var studentInfo = studentInfoRepository.getByidNumber(insertInfo.IdNumber);
+
             if (facultystaff != null)//不复制键值
             {
-                facultystaff.StudentRegisterHeath_InfoId = insertHealth.id;
-                facultystaffInfoRepository.Update(facultystaff);
+                insertInfo.facultystaff_InfoId= facultystaff.id;
+                healthRepository.Update(insertInfo);
             }
             if (studentInfo != null)
             {
-                studentInfo.StudentRegisterHeath_InfoId = insertHealth.id;
-                studentInfoRepository.Update(studentInfo);
+                insertInfo.Student_InfoId = studentInfo.id;
+                healthRepository.Update(insertInfo);
             }
             healthRepository.SaveChanges();
         }

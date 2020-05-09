@@ -57,5 +57,14 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// 体温
         /// </summary>
         public string Temperature { get; set; }//体温
+
+        /// <summary>
+        /// 是否参加聚合
+        /// </summary>
+        public string IsAggregate { get; set; }
+        /// <summary>
+        /// 是否参加聚合具体情况
+        /// </summary>
+        public string IsAggregateContain { get; set; }
     }
 }

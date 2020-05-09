@@ -38,6 +38,8 @@ namespace ViewModel.SmallRoutine.RequestViewModel.HealthEveryViewModel
         /// 家庭人员乏力
         /// </summary>
         public string IsFamilyWeakt { get; set; }
+
+
         public string CheckType { get; set; }//晨午晚
         /// <summary>
         /// 登陆人的标识id(学生)
@@ -60,5 +62,13 @@ namespace ViewModel.SmallRoutine.RequestViewModel.HealthEveryViewModel
         /// 是否接触
         /// </summary>
         public string IsTouch { get; set; }
+        /// <summary>
+        /// 是否参加聚合
+        /// </summary>
+        public string IsAggregate { get; set; }
+        /// <summary>
+        /// 是否参加聚合具体情况
+        /// </summary>
+        public string IsAggregateContain { get; set; }
     }
 }

@@ -16,12 +16,13 @@ namespace Dtol.dtol
         public string GradeName { get; set; }
         [ExcelAttribute("班级（需与提供的班级完全一致）")]
         public string ClassName { get; set; }
-        [ExcelAttribute("学生是否到校（默认是）")]
+        [ExcelAttribute("体温")]
         public string Temperature { get; set; }
-        [ExcelAttribute("填报时段（晨/午/晚）")]
+        [ExcelAttribute("学生是否到校（默认是）")] 
         public string IsComeSchool { get; set; }
-        [ExcelAttribute("填报时间")]
-        public DateTime? AddTimeInterval { get; set; }
+     
+        [ExcelAttribute("填报时段（晨/午/晚）")]
+        public string AddTimeInterval { get; set; }
         public DateTime? AddCreateDate { get; set; } = DateTime.Now;
     }
 }

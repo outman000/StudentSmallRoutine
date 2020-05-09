@@ -12,6 +12,10 @@ namespace ViewModel.SmallRoutine.RequestViewModel.ExceptStudentViewModel
         /// </summary>
         public int userKey { get; set; }
         /// <summary>
+        /// 姓名
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
         /// 年级code
         /// </summary>
         public string GradeCode { get; set; }
@@ -23,12 +27,20 @@ namespace ViewModel.SmallRoutine.RequestViewModel.ExceptStudentViewModel
         /// 填报时间
         /// </summary>
         public string CreateDate { get; set; }
+        /// <summary>
+        /// 体温
+        /// </summary>
 
-
+        public string Temperature { get; set; }//体温
         /// <summary>
         /// 分页
         /// </summary>
         public PageViewModel pageViewModel { get; set; }
+        /// <summary>
+        /// 学校编号
+        /// </summary>
+        public string SchoolCode { get; set; }
+
         /// <summary>
         /// 构造方法
         /// </summary>

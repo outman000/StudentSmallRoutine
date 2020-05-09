@@ -36,6 +36,17 @@ namespace ViewModel.SmallRoutine.RequestViewModel.StaffStationRelateViewModel
         /// 分页
         /// </summary>
         public PageViewModel pageViewModel { get; set; }
+
+        /// <summary>
+        /// 填报时段
+        /// </summary>
+        public string CheckType { get; set; }
+        public string Name { get; set; }
+        public string IdNumber { get; set; }
+
+
+
+
         /// <summary>
         /// 构造方法
         /// </summary>

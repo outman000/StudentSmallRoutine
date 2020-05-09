@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using Dto.IService.SmallRoutine;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using ViewModel.PublicViewModel;
 using ViewModel.SmallRoutine;
 using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.BaseControlViewModel;
+using ViewModel.SmallRoutine.ResponseViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel.BaseControlViewModel;
 
 namespace SmallRoutine.Controllers
@@ -30,6 +32,75 @@ namespace SmallRoutine.Controllers
             _baseService = baseService;
             _hostingEnvironment = hostingEnvironment;
         }
+
+
+
+
+      /// <summary>
+      /// 上传图片
+      /// </summary>
+      /// <param name="file"></param>
+      /// <param name="IdNumber"></param>
+      /// <returns></returns>
+        [HttpPost("/UploadImage")]
+        public ActionResult UploadFile_Image(IFormFile file,String IdNumber)
+        {
+            FileImageUploadViewModel fileUploadViewModel = new FileImageUploadViewModel();
+            ImageUploadResModel imageUploadResModel = new ImageUploadResModel();
+
+            var files = Request.Form.Files;
+            String filePath = "";//上传文件的路径
+            if (files.Count == 0)
+            {
+                throw new ArgumentException("找不到上传的文件");
+            }
+            // full path to file in temp location
+            foreach (var formFile in files)
+            {
+                string randomname = _fileService.fileRandName(formFile.FileName);
+
+                filePath = _hostingEnvironment.WebRootPath + "\\files\\" + formFile.FileName;
+
+                if (formFile.Length > 0)
+                {
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        formFile.CopyTo(stream);
+                    }
+                }
+                fileUploadViewModel.Idnumber = IdNumber;
+                fileUploadViewModel.FileName = formFile.FileName;
+                fileUploadViewModel.PhysisticName = randomname;
+                fileUploadViewModel.Path = filePath;
+                fileUploadViewModel.Url = Request.Scheme+"://"+ Request.Host+"/files/" + formFile.FileName;
+
+
+                imageUploadResModel.key= _fileService.SaveImageFileInfo(fileUploadViewModel);//上传成功
+            }
+
+            if (imageUploadResModel.key == 0)
+            {
+                imageUploadResModel.IsSuccess = true;
+                imageUploadResModel.baseViewModel.Message = "身份证号不存在";
+                imageUploadResModel.baseViewModel.ResponseCode = 204;
+                return Ok(imageUploadResModel);
+            }
+            else
+            {
+                imageUploadResModel.IsSuccess = true;
+                imageUploadResModel.baseViewModel.Message = "上传图片成功";
+                imageUploadResModel.baseViewModel.ResponseCode = 200;
+                return Ok(imageUploadResModel);
+            }
+           
+
+        }
+
+
+
+
+
+
 
         /// <summary>
         /// 文件上传并导入数据（学生）

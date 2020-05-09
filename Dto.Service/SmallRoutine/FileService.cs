@@ -21,14 +21,32 @@ namespace Dto.Service.SmallRoutine
         private readonly IStudentInfoRepository _studentInfoRepository;
         private readonly IFacultystaffInfoRepository _facultystaffInfoRepository;
 
-        public FileService(IMapper iMapper, IFileRepository fileRepository, IDayandNightRepository dayandNightRepository, IStudentInfoRepository studentInfoRepository, IFacultystaffInfoRepository facultystaffInfoRepository)
+
+        private readonly IExceptStudentRepository exceptStudentRepository;
+
+        private readonly IExceptEmployRepository  exceptEmployRepository;
+
+        
+
+
+        private readonly IImageRepository _imageRepository;
+
+        public FileService(IMapper iMapper, IFileRepository fileRepository, IDayandNightRepository dayandNightRepository, IStudentInfoRepository studentInfoRepository, IFacultystaffInfoRepository facultystaffInfoRepository, IImageRepository imageRepository)
         {
             _IMapper = iMapper;
             _fileRepository = fileRepository;
             _dayandNightRepository = dayandNightRepository;
             _studentInfoRepository = studentInfoRepository;
             _facultystaffInfoRepository = facultystaffInfoRepository;
+            _imageRepository = imageRepository;
         }
+
+
+
+
+
+
+       
 
 
 
@@ -40,6 +58,9 @@ namespace Dto.Service.SmallRoutine
             RandName = DateTime.Now.ToString("yyyyMMddHHmmssffff") + "." + fileTail[1];
             return RandName;
         }
+
+
+
 
       
 
@@ -97,5 +118,27 @@ namespace Dto.Service.SmallRoutine
         }
 
 
+        public int SaveImageFileInfo(FileImageUploadViewModel fileUploadViewModel)
+        {
+            var UploadFile = _IMapper.Map<FileImageUploadViewModel, UserFiles_Info>(fileUploadViewModel);
+
+            //验证身份证号存在
+            var student = _studentInfoRepository.getByidNumber(Dtol.Helper.MD5.Md5Hash(fileUploadViewModel.Idnumber));
+
+            var employ = _facultystaffInfoRepository.getByidNumber(Dtol.Helper.MD5.Md5Hash(fileUploadViewModel.Idnumber));
+
+            if (student == null && employ == null)
+            {
+                return 0;
+            }
+
+            //先把图片上传上去
+            _imageRepository.Add(UploadFile);
+            _imageRepository.SaveChanges();
+
+            return UploadFile.id;
+        }
+
+     
     }
 }

@@ -12,6 +12,8 @@ namespace Dto.IService.SmallRoutine
         ValideMiddleViewModel Login(LoginViewModel loginViewModel);
         ValideMiddleEmployMiddleModel LoginEmploy(LoginViewModel loginViewModel);
 
+        bool LoginAdmin(LoginViewModel loginViewModel);
+
         //修改密码
         BaseViewModel EditPwdView(EditPwdViewModel editPwdView);
     }

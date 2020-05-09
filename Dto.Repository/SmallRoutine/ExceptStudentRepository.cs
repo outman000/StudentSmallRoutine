@@ -75,21 +75,23 @@ namespace Dto.Repository.SmallRoutine
             List<Except_Info_Student > Except_Info_Students = new List<Except_Info_Student>();
             for (int i = 0; i < searchResult.Count(); i++)//通过班级code查询
             {
-              
+         
                 var tempresult = DbSet.Where(a=>a.student_Info.ClassCode== searchResult[i].Class_Info.ClassCode)
-                    .Where(preciate).ToList();
-
+                    .Where(preciate).Include(a=>a.student_Info).Include(m=>m.UserFiles_Info).ToList();
                 Except_Info_Students.AddRange(tempresult);
             }
-            return Except_Info_Students;
+            return Except_Info_Students.OrderByDescending(a=>a.CreateDate).ToList();
         }
         public Expression<Func<Except_Info_Student, bool>> GetByModelWhere(ExceptStudengSearchInfoVIewModel  exceptStudengSearchInfoVIewModel)
         {
             var predicate = WhereExtension.True<Except_Info_Student>();//初始化where表达式SchoolName
-                                                                            //姓          
+                                                                       //姓          
+            predicate = predicate.And(p => p.student_Info.SchoolCode.Contains(exceptStudengSearchInfoVIewModel.SchoolCode));
             predicate = predicate.And(p => p.student_Info.ClassCode.Contains(exceptStudengSearchInfoVIewModel.ClassCode));
             predicate = predicate.And(p => p.student_Info.GradeCode.Contains(exceptStudengSearchInfoVIewModel.GradeCode));
-            predicate = predicate.And(p => p.student_Info.CreateDate.ToString().Contains(exceptStudengSearchInfoVIewModel.CreateDate));
+            predicate = predicate.And(p => p.CreateDate.ToString().Contains(exceptStudengSearchInfoVIewModel.CreateDate));
+            predicate = predicate.And(p => p.Name.Contains(exceptStudengSearchInfoVIewModel.Name));
+            predicate = predicate.And(p => p.Temperature.Contains(exceptStudengSearchInfoVIewModel.Temperature));
             return predicate;
         }
 

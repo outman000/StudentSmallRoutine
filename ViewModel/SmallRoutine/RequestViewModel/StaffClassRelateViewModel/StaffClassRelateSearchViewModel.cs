@@ -36,6 +36,9 @@ namespace ViewModel.SmallRoutine.RequestViewModel.StaffClassRelateViewModel
         /// 分页
         /// </summary>
         public PageViewModel pageViewModel { get; set; }
+        public String Name { get; set; }
+        public String IdNumber { get; set; }
+
         /// <summary>
         /// 构造方法
         /// </summary>

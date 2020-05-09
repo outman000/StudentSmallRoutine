@@ -10,6 +10,7 @@ using System.Linq.Expressions;
 using System.Text;
 using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.MiddelViewModel.SecondMiddleViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.FacultystaffViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.StaffClassRelateViewModel;
 
 namespace Dto.Repository.SmallRoutine
@@ -74,7 +75,11 @@ namespace Dto.Repository.SmallRoutine
                         IsHot=a.IsHot,
                         IsThroat=a.IsThroat,
                         IsTouch=a.IsTouch,
-                        IsWeak=a.IsWeak
+                        IsWeak=a.IsWeak,
+                        IsAggregate = a.IsAggregate,
+                        IsAggregateContain = a.IsAggregateContain,
+
+                         Temperature = a.Temperature,
                      })
                      
                      .ToList();
@@ -82,9 +87,9 @@ namespace Dto.Repository.SmallRoutine
             }
 
 
-            return staffClassMiddleModel.Skip(SkipNum)
+            return staffClassMiddleModel.OrderByDescending(o => o.Createdate).Skip(SkipNum)
                 .Take(staffClassRelateSearchView.pageViewModel.PageSize)
-                 .OrderByDescending(o => o.Createdate).ToList();
+              .ToList();
 
         }
 
@@ -118,6 +123,9 @@ namespace Dto.Repository.SmallRoutine
                                                                      //姓名
             predicate = predicate.And(p => p.Student_Info .ClassCode .Contains(staffClassRelateSearchView.ClassCode));
             predicate = predicate.And(p => p.Student_Info.GradeCode.Contains(staffClassRelateSearchView.GradeCode));
+            predicate = predicate.And(p => p.Name.Contains(staffClassRelateSearchView.Name));
+            predicate = predicate.And(p => p.IdNumber.Contains(Dtol.Helper.MD5.Md5Hash(staffClassRelateSearchView.IdNumber)));
+
             predicate = predicate.And(p => p.IsHot.Contains(staffClassRelateSearchView.IsHot));
             predicate = predicate.And(p => p.IsComeSchool.Contains(staffClassRelateSearchView.isSchool));
             predicate = predicate.And(p => p.Createdate.ToString().Contains(staffClassRelateSearchView.CreateDate == null ? "" : staffClassRelateSearchView.CreateDate.Value.ToString("yyyy-MM-dd")));
@@ -175,6 +183,20 @@ namespace Dto.Repository.SmallRoutine
                 teacherSearchClassAllMiddles.AddRange(tempresult);
             }
             return teacherSearchClassAllMiddles;
+        }
+
+        public bool isRepeat(AddRelateFromStaffToClassViewModel model)
+        {
+          var result=  DbSet.FirstOrDefault(a => a.ClassCode == model.ClassCode && a.facultystaff_InfoId == model.facultystaff_InfoId);
+            if (result == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
         }
     }
 }

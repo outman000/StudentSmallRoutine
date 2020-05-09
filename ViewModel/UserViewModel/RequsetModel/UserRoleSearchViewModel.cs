@@ -11,18 +11,13 @@ namespace ViewModel.UserViewModel.RequsetModel
     public class UserRoleSearchViewModel
     {
         /// <summary>
-        /// 角色名称
+        /// 岗位名称
         /// </summary>
-        public string RoleName { get; set; }
+        public string StaffName { get; set; }
         /// <summary>
-        /// 角色状态 0停用1启用
+        /// 岗位编号
         /// </summary>
-        public string Status { get; set; }
-
-        /// <summary>
-        /// 角色类型
-        /// </summary>
-        public string RoleType { get; set; }
+        public string StaffCode { get; set; }
         /// <summary>
         /// 页码
         /// </summary>

@@ -9,26 +9,14 @@ namespace ViewModel.UserViewModel.RequsetModel
     /// </summary>
     public partial class UserRoleAddViewModel
     {
+         /// <summary>
+         /// 名称
+         /// </summary>
+        public string StaffName { get; set; }
         /// <summary>
-        /// 角色名称
+        /// 编号
         /// </summary>
-        public string RoleName { get; set; }
-        /// <summary>
-        /// 角色id
-        /// </summary>
-        public string RoleCode { get; set; }
-
-        /// <summary>
-        /// 角色类型
-        /// </summary>
-        public string RoleType { get; set; }
-        /// <summary>
-        /// 角色状态0启用1停用
-        /// </summary>
-        public string Status { get; set; }
-        /// <summary>
-        /// 创建时间
-        /// </summary>
-        public DateTime? Createdate { get; set; }
+        public string StaffCode { get; set; }
+     
     }
 }

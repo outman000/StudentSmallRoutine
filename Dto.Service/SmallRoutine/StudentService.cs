@@ -4,6 +4,7 @@ using Dto.IService.SmallRoutine;
 using Dtol.dtol;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using ViewModel.PublicViewModel;
 using ViewModel.SmallRoutine.MiddelViewModel;
@@ -55,7 +56,12 @@ namespace Dto.Service.SmallRoutine
                                 Student_Info info = new Student_Info();
                                 info = _IMapper.Map<StudentBaseModel, Student_Info>(student);
                                 info.CreateDate = DateTime.Now;
+                             
+
                                 _studentInfoRepository.Add(info);
+
+
+
                                 int i = _studentInfoRepository.SaveChanges();
                                 if (i > 0)
                                 {

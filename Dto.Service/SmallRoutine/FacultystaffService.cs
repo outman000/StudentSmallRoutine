@@ -5,6 +5,7 @@ using Dtol.dtol;
 using Dtol.Extension;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using ViewModel.PublicViewModel;
 using ViewModel.SmallRoutine.MiddelViewModel;
@@ -21,23 +22,26 @@ namespace Dto.Service.SmallRoutine
     public class FacultystaffService : IFacultystaffService
     {
         private readonly IStaffClassRelateRepository staffClassRelateRepository;
-        private readonly IStaffStationRelateRepository staffStationRelateRepository;
 
+        private readonly IStaffRepository staffRepository;
         private readonly IFacultystaffInfoRepository _facultystaffInfoRepository;
         private readonly IMapper _IMapper;
         private readonly ISchoolInfoRepository _schoolInfoRepository;
         private readonly IStaffStationRelateRepository _staffStationRelateRepository;
 
-     
-        public FacultystaffService(IStaffClassRelateRepository staffClassRelateRepository, IStaffStationRelateRepository staffStationRelateRepository, IFacultystaffInfoRepository facultystaffInfoRepository, IMapper iMapper, ISchoolInfoRepository schoolInfoRepository)
+        public FacultystaffService(IStaffClassRelateRepository staffClassRelateRepository, IStaffRepository staffRepository, IFacultystaffInfoRepository facultystaffInfoRepository, IMapper iMapper, ISchoolInfoRepository schoolInfoRepository, IStaffStationRelateRepository staffStationRelateRepository)
         {
             this.staffClassRelateRepository = staffClassRelateRepository;
-            this.staffStationRelateRepository = staffStationRelateRepository;
+            this.staffRepository = staffRepository;
             _facultystaffInfoRepository = facultystaffInfoRepository;
             _IMapper = iMapper;
             _schoolInfoRepository = schoolInfoRepository;
             _staffStationRelateRepository = staffStationRelateRepository;
         }
+
+
+
+
 
 
 
@@ -52,11 +56,12 @@ namespace Dto.Service.SmallRoutine
                 //验证 学校 是否存在
                 if (_schoolInfoRepository.CheckInfo(model.SchoolCode, model.SchoolName))
                 {
-
                     facultystaff_Info info = new facultystaff_Info();
                     info = _IMapper.Map<FacultystaffBaseModel, facultystaff_Info>(model);
                     info.CreateDate = DateTime.Now;
+                 
                     _facultystaffInfoRepository.Add(info);
+
                     int i = _facultystaffInfoRepository.SaveChanges();
                     if (i > 0)
                     {
@@ -161,6 +166,12 @@ namespace Dto.Service.SmallRoutine
 
         public void AddRelateToClass(AddRelateFromStaffToClassViewModel model)
         {
+            bool isrepeat = staffClassRelateRepository.isRepeat(model);
+            if (!isrepeat)
+            {
+                return;
+            }
+
             var insert = _IMapper.Map<AddRelateFromStaffToClassViewModel, ClassManager_Relate>(model);
             staffClassRelateRepository.Add(insert);
             staffClassRelateRepository.SaveChanges();
@@ -184,6 +195,11 @@ namespace Dto.Service.SmallRoutine
         //教职工和岗位  关系表增加
         public void AddRelateToStation(AddRelateFromStaffToStation model)
         {
+            bool isrepeat= _staffStationRelateRepository.isRepeat(model);
+            if (!isrepeat)
+            {
+                return;
+            }
             var insert = _IMapper.Map<AddRelateFromStaffToStation, StaffStation_Relate>(model);
             _staffStationRelateRepository.Add(insert);
             _staffStationRelateRepository.SaveChanges();
@@ -193,7 +209,7 @@ namespace Dto.Service.SmallRoutine
 
             //var searchResult = staffStationRelateRepository.GethealthByStaff(staffStationRelateSearchViewModel);
             //var result = _IMapper.Map<List<Health_Info>, List<StaffStationMiddleModel>>(searchResult);
-            return staffStationRelateRepository.GethealthByStaff(staffStationRelateSearchViewModel);
+            return _staffStationRelateRepository.GethealthByStaff(staffStationRelateSearchViewModel);
 
             //教职工和岗位   关系表删除
 

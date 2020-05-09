@@ -80,6 +80,64 @@ namespace Dtol.Migrations
                     b.ToTable("Depart_Info");
                 });
 
+            modelBuilder.Entity("Dtol.dtol.Except_Info_Employ", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content");
+
+                    b.Property<DateTime?>("CreateDate");
+
+                    b.Property<string>("Idnumber");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Temperature");
+
+                    b.Property<int?>("UserFiles_InfoId");
+
+                    b.Property<int?>("facultystaff_InfoId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserFiles_InfoId");
+
+                    b.HasIndex("facultystaff_InfoId");
+
+                    b.ToTable("Except_Info_Employ");
+                });
+
+            modelBuilder.Entity("Dtol.dtol.Except_Info_Student", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content");
+
+                    b.Property<DateTime?>("CreateDate");
+
+                    b.Property<string>("Idnumber");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Temperature");
+
+                    b.Property<int?>("UserFiles_InfoId");
+
+                    b.Property<int?>("student_InfoId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserFiles_InfoId");
+
+                    b.HasIndex("student_InfoId");
+
+                    b.ToTable("Except_Info_Student");
+                });
+
             modelBuilder.Entity("Dtol.dtol.Grade_Info", b =>
                 {
                     b.Property<int>("id")
@@ -107,6 +165,10 @@ namespace Dtol.Migrations
 
                     b.Property<string>("IdNumber");
 
+                    b.Property<string>("IsAggregate");
+
+                    b.Property<string>("IsAggregateContain");
+
                     b.Property<string>("IsComeSchool");
 
                     b.Property<string>("IsFamilyHot");
@@ -124,6 +186,8 @@ namespace Dtol.Migrations
                     b.Property<string>("IsWeak");
 
                     b.Property<string>("Name");
+
+                    b.Property<string>("PermanentAddress");
 
                     b.Property<int?>("Student_InfoId");
 
@@ -269,7 +333,7 @@ namespace Dtol.Migrations
 
                     b.Property<DateTime?>("AddCreateDate");
 
-                    b.Property<DateTime?>("AddTimeInterval");
+                    b.Property<string>("AddTimeInterval");
 
                     b.Property<string>("ClassName");
 
@@ -368,6 +432,37 @@ namespace Dtol.Migrations
                     b.ToTable("UploadFile");
                 });
 
+            modelBuilder.Entity("Dtol.dtol.UserFiles_Info", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FileName");
+
+                    b.Property<string>("Idnumber");
+
+                    b.Property<int>("ImgIndex");
+
+                    b.Property<string>("InternalName");
+
+                    b.Property<string>("Length");
+
+                    b.Property<string>("Path");
+
+                    b.Property<string>("Url");
+
+                    b.Property<string>("pathMobile");
+
+                    b.Property<string>("path_server");
+
+                    b.Property<string>("upload_percent");
+
+                    b.HasKey("id");
+
+                    b.ToTable("UserFiles_Info");
+                });
+
             modelBuilder.Entity("Dtol.dtol.User_Info", b =>
                 {
                     b.Property<int>("id")
@@ -383,6 +478,44 @@ namespace Dtol.Migrations
                     b.HasKey("id");
 
                     b.ToTable("User_Info");
+                });
+
+            modelBuilder.Entity("Dtol.dtol.User_Relate_Info_Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Station_InfoId");
+
+                    b.Property<int>("User_InfoId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Station_InfoId");
+
+                    b.HasIndex("User_InfoId");
+
+                    b.ToTable("User_Relate_Info_Role");
+                });
+
+            modelBuilder.Entity("Dtol.dtol.User_System", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("AddDate");
+
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("UserPwd");
+
+                    b.Property<DateTime?>("updateDate");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User_System");
                 });
 
             modelBuilder.Entity("Dtol.dtol.facultystaff_Info", b =>
@@ -455,6 +588,28 @@ namespace Dtol.Migrations
                         .HasForeignKey("Student_InfoId");
                 });
 
+            modelBuilder.Entity("Dtol.dtol.Except_Info_Employ", b =>
+                {
+                    b.HasOne("Dtol.dtol.UserFiles_Info", "UserFiles_Info")
+                        .WithMany()
+                        .HasForeignKey("UserFiles_InfoId");
+
+                    b.HasOne("Dtol.dtol.facultystaff_Info", "facultystaff_Info")
+                        .WithMany()
+                        .HasForeignKey("facultystaff_InfoId");
+                });
+
+            modelBuilder.Entity("Dtol.dtol.Except_Info_Student", b =>
+                {
+                    b.HasOne("Dtol.dtol.UserFiles_Info", "UserFiles_Info")
+                        .WithMany()
+                        .HasForeignKey("UserFiles_InfoId");
+
+                    b.HasOne("Dtol.dtol.Student_Info", "student_Info")
+                        .WithMany()
+                        .HasForeignKey("student_InfoId");
+                });
+
             modelBuilder.Entity("Dtol.dtol.Health_Info", b =>
                 {
                     b.HasOne("Dtol.dtol.Student_Info", "Student_Info")
@@ -497,6 +652,19 @@ namespace Dtol.Migrations
                     b.HasOne("Dtol.dtol.Class_Info", "class_Info")
                         .WithMany("Student_Info")
                         .HasForeignKey("class_InfoId");
+                });
+
+            modelBuilder.Entity("Dtol.dtol.User_Relate_Info_Role", b =>
+                {
+                    b.HasOne("Dtol.dtol.Station_Info", "Station_Info")
+                        .WithMany()
+                        .HasForeignKey("Station_InfoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Dtol.dtol.User_Info", "User_Info")
+                        .WithMany("User_Relate_Info_Role")
+                        .HasForeignKey("User_InfoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Dtol.dtol.facultystaff_Info", b =>

@@ -27,6 +27,7 @@
     <PackageReference Include="CSRedisCore" Version="3.4.5" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.HttpsPolicy" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.6">
@@ -55,7 +56,7 @@
 
   <ItemGroup>
     <Folder Include="files\" />
-    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\files\" />
   </ItemGroup>
 
 </Project>

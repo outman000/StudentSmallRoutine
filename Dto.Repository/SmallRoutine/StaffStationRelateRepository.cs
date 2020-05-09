@@ -9,6 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using ViewModel.SmallRoutine.MiddelViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.FacultystaffViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.StaffClassRelateViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.StaffStationRelateViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel.StaffStationRelateViewModel;
@@ -82,7 +83,7 @@ namespace Dto.Repository.SmallRoutine
                           Name = a.facultystaff_Info.Name,
                           Createdate = a.Createdate,
                           IsComeSchool = a.IsComeSchool,
-                          IdNumber = a.IdNumber,
+                          IdNumber = Dtol.Helper.MD5.Decrypt(a.IdNumber),
                           id = a.id,
                           IsFamilyHot = a.IsFamilyHot,
                           IsFamilyThroat = a.IsFamilyThroat,
@@ -90,14 +91,18 @@ namespace Dto.Repository.SmallRoutine
                           IsHot = a.IsHot,
                           IsThroat = a.IsThroat,
                           IsTouch = a.IsTouch,
-                          IsWeak = a.IsWeak
+                          IsWeak = a.IsWeak,
+                          CheckType = a.CheckType,
+                          Temperature = a.Temperature,
+                          IsAggregate = a.IsAggregate,
+                          IsAggregateContain = a.IsAggregateContain,
                       })
                      ;
                 staffStationMiddleModel.AddRange(tempresult);
             }
-            return staffStationMiddleModel.Skip(SkipNum)
+            return staffStationMiddleModel.OrderByDescending(o => o.Createdate).Skip(SkipNum)
                 .Take(staffStationRelateSearchViewModel.pageViewModel.PageSize)
-                 .OrderByDescending(o => o.Createdate).ToList();
+                .ToList();
 
         }
         public Expression<Func<Health_Info, bool>> GetByModelWhere(StaffStationRelateSearchViewModel  staffStationRelateSearchViewModel)
@@ -108,8 +113,13 @@ namespace Dto.Repository.SmallRoutine
 
             predicate = predicate.And(p => p.facultystaff_Info.DepartCode .Contains(staffStationRelateSearchViewModel.DepartCode));
             predicate = predicate.And(p => p.facultystaff_Info.StaffCode.Contains(staffStationRelateSearchViewModel.StationCode));
+
+            predicate = predicate.And(p => p.Name .Contains( staffStationRelateSearchViewModel.Name));
+            predicate = predicate.And(p => p.IdNumber .Contains(Dtol.Helper.MD5.Md5Hash(staffStationRelateSearchViewModel.IdNumber)));
+
             predicate = predicate.And(p => p.IsHot.Contains(staffStationRelateSearchViewModel.IsHot));
             predicate = predicate.And(p => p.IsComeSchool.Contains(staffStationRelateSearchViewModel.isSchool));
+            predicate = predicate.And(p => p.CheckType.Contains(staffStationRelateSearchViewModel.CheckType));
             predicate = predicate.And(p => p.Createdate.ToString().Contains(staffStationRelateSearchViewModel.CreateDate == null ? "" : staffStationRelateSearchViewModel.CreateDate.Value.ToString("yyyy-MM-dd")));
             return predicate;
         }
@@ -173,6 +183,20 @@ namespace Dto.Repository.SmallRoutine
             }
 
             return employSearchStationAllMiddles;
+        }
+
+        public bool isRepeat(AddRelateFromStaffToStation model)
+        {
+           var result= DbSet.FirstOrDefault(a => a.StaffCode == model.StaffCode && a.facultystaff_InfoId == model.facultystaff_InfoId);
+            if (result == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+          
         }
     }
 }

@@ -17,19 +17,22 @@ namespace Dto.Service.SmallRoutine
 
         private readonly IMapper _IMapper;
 
-        public ExceptStudentService(IExceptStudentRepository exceptStudentRepository, IMapper iMapper)
+        public ExceptStudentService(IExceptStudentRepository exceptStudentRepository, IStudentInfoRepository studentInfoRepository, IMapper iMapper)
         {
             this.exceptStudentRepository = exceptStudentRepository;
+            this.studentInfoRepository = studentInfoRepository;
             _IMapper = iMapper;
         }
 
         public void addExceptStudentAddService(ExceptStudentAddViewModel exceptStudentAddViewModel)
         {
             var  insertmodel= _IMapper.Map<ExceptStudentAddViewModel, Except_Info_Student>(exceptStudentAddViewModel);
-            
-            exceptStudentRepository.Add(insertmodel);
-
-            exceptStudentRepository.SaveChanges();
+            var studentInfo = studentInfoRepository.getByidNumber(Dtol.Helper.MD5.Md5Hash(exceptStudentAddViewModel.Idnumber));
+        
+                insertmodel.student_InfoId = studentInfo.id;
+                exceptStudentRepository.Add(insertmodel);
+                exceptStudentRepository.SaveChanges();
+          
         }
 
         public void SearchExceptStudengDeleteService(List<int> deleteList)
@@ -40,9 +43,10 @@ namespace Dto.Service.SmallRoutine
 
         public List<ExceptStudentSearchMiddle> SearchExceptStudengSearchService(ExceptStudengSearchInfoVIewModel exceptStudentSearchInfoVIewModel)
         {
-         var result=  exceptStudentRepository.searchByemploytoclass(exceptStudentSearchInfoVIewModel);
+         var resultsearch=  exceptStudentRepository.searchByemploytoclass(exceptStudentSearchInfoVIewModel);
+          var result= _IMapper.Map<List<Except_Info_Student>,List<ExceptStudentSearchMiddle> >(resultsearch); 
 
-            return null; 
+            return result; 
         }
 
         public void updateExceptStudentUpdateServide(ExceptStudentUpdateViewModel exceptStudentUpdateViewModel)

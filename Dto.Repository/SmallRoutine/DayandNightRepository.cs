@@ -82,14 +82,14 @@ namespace Dto.Repository.SmallRoutine
                 var gradeName =int.Parse(searchResult[i].Class_Info.ClassCode.Substring(2, 2)).ToString() ;
                 var className = int.Parse(searchResult[i].Class_Info.ClassCode.Substring(4, 2)).ToString();
                 var preciatechild = GetByModelChildWhere(className,gradeName);
-                var tempresult = Db.Student_DayandNight_Info.Where(preciate).ToList();
-                tempresult= Db.Student_DayandNight_Info.Where(preciatechild).ToList();
+                var tempresult = Db.Student_DayandNight_Info.Where(preciate);
+                tempresult= tempresult.Where(preciatechild);
                 //.Where(a => a.SchoolName == dayAndNightSearchViewModel.SchoolName
                 //  && a.GradeName == gradeName
                 //   && a.ClassName == dayAndNightSearchViewModel.ClassName
                 //).ToList();
 
-                Student_DayandNight_Infos.AddRange(tempresult);
+                Student_DayandNight_Infos.AddRange(tempresult.ToList());
             }
 
            
@@ -106,7 +106,7 @@ namespace Dto.Repository.SmallRoutine
             predicate = predicate.And(p => p.Name.Contains(dayAndNightSearchViewModel.Name));
             predicate = predicate.And(p => p.SchoolName.Contains(dayAndNightSearchViewModel.SchoolName));
             predicate = predicate.And(p => p.Temperature.Contains(dayAndNightSearchViewModel.Temperature));
-            predicate = predicate.And(p => p.AddTimeInterval.ToString().Contains(dayAndNightSearchViewModel.AddTimeInterval));
+            predicate = predicate.And(p => p.AddTimeInterval.Contains(dayAndNightSearchViewModel.AddTimeInterval));
             return predicate;
         }
 
@@ -134,6 +134,13 @@ namespace Dto.Repository.SmallRoutine
           
             return predicate;
         }
+
+        //public int GetComeSchoolCount()
+        //{
+        //    DbSet.Where(a=>a.IsComeSchool=="是")
+
+        //    return 0;
+        //}
 
 
 

@@ -108,7 +108,7 @@ namespace Dto.Repository.IntellUser
         {
             int SkipNum = userByRoleSearchViewModel.pageViewModel.CurrentPageNum * userByRoleSearchViewModel.pageViewModel.PageSize;
             int roleid = userByRoleSearchViewModel.RoleId;
-            var queryResult = DbSet.Where(k => k.Station_InfoId == roleid).Include(p => p.User_System)
+            var queryResult = DbSet.Where(k => k.Station_InfoId == roleid).Include(p => p.User_Info)
                      .Skip(SkipNum)
                     .Take(userByRoleSearchViewModel.pageViewModel.PageSize)
                       .OrderBy(o => o.Id)
@@ -121,21 +121,21 @@ namespace Dto.Repository.IntellUser
         /// </summary>
         /// <param name="userByRoleSearchViewModel"></param>
         /// <returns></returns>
-        public List<User_System> SearchUserInfoByListWhere(List<int> RoleList)
+        public List<User_Info> SearchUserInfoByListWhere(List<int> RoleList)
         {
           
             int roleid;
-            User_System Result;
-            List<User_System> queryResult = new List<User_System>();
+            User_Info Result;
+            List<User_Info> queryResult = new List<User_Info>();
           
             for (int i=0;i< RoleList.Count;i++)
             {
                     roleid = RoleList[i];
-                int count = DbSet.Where(k => k.Station_InfoId == roleid ).Include(p => p.User_System).ToList().Count;
+                int count = DbSet.Where(k => k.Station_InfoId == roleid ).Include(p => p.User_Info).ToList().Count;
                 
                 for (int j = 0; j < count; j++)
                 {
-                        Result = DbSet.Where(k => k.Station_InfoId == roleid ).Include(p => p.User_System).ToList()[j].User_System;
+                        Result = DbSet.Where(k => k.Station_InfoId == roleid ).Include(p => p.User_Info).ToList()[j].User_Info;
                         queryResult.Add(Result);      
                 }
             }
@@ -173,7 +173,7 @@ namespace Dto.Repository.IntellUser
         private Expression<Func<User_Relate_Info_Role, bool>> SearchDelRelateWhere(RelateRoleUserDelMiddlecs  relateRoleUserDelMiddlecs)
         {
             var predicate = WhereExtension.True<User_Relate_Info_Role>();//初始化where表达式
-            predicate = predicate.And(p => p.User_SystemId== relateRoleUserDelMiddlecs.User_SystemId);
+            predicate = predicate.And(p => p.User_InfoId== relateRoleUserDelMiddlecs.User_InfoId);
             predicate = predicate.And(p =>p.Station_InfoId == relateRoleUserDelMiddlecs.Station_InfoId);
             return predicate;
         }

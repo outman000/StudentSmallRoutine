@@ -54,6 +54,7 @@ namespace ViewModel.SmallRoutine.RequestViewModel.HealthEveryViewModel
         /// </summary>
         public string IsTouch { get; set; }
 
+
         /// <summary>
         /// 体温
         /// </summary>

@@ -85,6 +85,10 @@ namespace Dtol.Helper
         /// <returns>明文</returns>
         public static string Decrypt(string original)
         {
+            if (original == "" || original == null)
+            {
+                return "";
+            }
             return Decrypt(original, "MATICSOFT", System.Text.Encoding.Default);
         }
 

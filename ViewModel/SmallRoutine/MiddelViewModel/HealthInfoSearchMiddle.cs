@@ -75,5 +75,7 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// 体温计
         /// </summary>
         public string Temperature { get; set; }//体温
+
+
     }
 }

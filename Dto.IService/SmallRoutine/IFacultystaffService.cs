@@ -32,6 +32,7 @@ namespace Dto.IService.SmallRoutine
         //根据条件查询
         List<FacultystaffMiddle> GetListByParas(FacultystaffSearchModel model);
         void AddRelateToClass(AddRelateFromStaffToClassViewModel model);
+ 
         void DeleteRelateToClass(DeleteRelateFromStaffToClassViewModel model);
 
 

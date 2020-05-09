@@ -30,5 +30,7 @@ namespace ViewModel.SmallRoutine.RequestViewModel
         public string IdNumber { get; set; }
         //户籍地址
         public string PermanentAddress { get; set; }
+        //班级id
+        public int? class_InfoId { get; set; }
     }
 }

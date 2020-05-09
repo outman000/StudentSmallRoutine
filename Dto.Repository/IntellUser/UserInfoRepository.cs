@@ -17,32 +17,32 @@ namespace Dto.Repository.IntellUser
     public class UserInfoRepository : IUserInfoRepository
     {
         protected readonly DtolContext Db;
-        protected readonly DbSet<User_System> DbSet;
+        protected readonly DbSet<User_Info> DbSet;
 
         public UserInfoRepository(DtolContext context)
         {
             Db = context;
-            DbSet = Db.Set<User_System>();
+            DbSet = Db.Set<User_Info>();
         }
 
-        public virtual void Add(User_System obj)
+        public virtual void Add(User_Info obj)
         {
-            DbSet.Add(obj);
+             DbSet.Add(obj);
         }
 
-        public virtual User_System GetById(Guid id)
+        public virtual User_Info GetById(Guid id)
         {
             return DbSet.Find(id);
         }
 
-        public  IQueryable<User_System> GetUserAll(UserSearchViewModel userSearchViewModel)
+        public  IQueryable<User_Info> GetUserAll(UserSearchViewModel userSearchViewModel)
         {
             var predicate = SearchUserWhere(userSearchViewModel);
 
             return DbSet.Where(predicate);
         }
 
-        public virtual void Update(User_System obj)
+        public virtual void Update(User_Info obj)
         {
             DbSet.Update(obj);
         }
@@ -57,33 +57,33 @@ namespace Dto.Repository.IntellUser
             int DeleteRowNum = 1;
             for (int i = 0; i < IdList.Count; i++)
             {
-               var model= DbSet.Single(w => w.Id == IdList[i]);
+               var model= DbSet.Single(w => w.id == IdList[i]);
                // model.status = "1";
-                DbSet.Update(model);
-                SaveChanges();
-                DeleteRowNum = i+1;
+                DbSet.Remove(model);
+
             }
+            SaveChanges();
             return DeleteRowNum;
         
 
         }
 
 
-        public IQueryable<User_System> GetInfoByUserid(string userid)
+        public IQueryable<User_Info> GetInfoByUserid(string userid)
         {
-            IQueryable<User_System> User_Systems = DbSet.Where(uid => uid.UserId.Equals(userid));
+            IQueryable<User_Info> User_Systems = DbSet.Where(uid => uid.Idnumber.Equals(userid));
             return User_Systems;
         }
         //根据用户主键id查询
-        public User_System GetInfoByUserid(int id)
+        public User_Info GetInfoByUserid(int id)
         {
-            User_System User_System = DbSet.Single(uid => uid.Id.Equals(id));
-            return User_System;
+            User_Info User_Info = DbSet.Single(uid => uid.id.Equals(id));
+            return User_Info;
         }
 
         //根据条件查询
 
-        public List<User_System> SearchInfoByWhere(UserSearchViewModel userSearchViewModel)
+        public List<User_Info> SearchInfoByWhere(UserSearchViewModel userSearchViewModel)
         {
             int SkipNum = userSearchViewModel.pageViewModel.CurrentPageNum * userSearchViewModel.pageViewModel.PageSize;
 
@@ -91,10 +91,12 @@ namespace Dto.Repository.IntellUser
             var predicate = SearchUserWhere(userSearchViewModel);
            
             var result= DbSet.Where(predicate)
+                 .OrderBy(o => o.CreateDate)
                 .Skip(SkipNum)
-                .Take(userSearchViewModel.pageViewModel.PageSize)
-                .OrderBy(o => o.AddDate).ToList();
-            
+                .Take(userSearchViewModel.pageViewModel.PageSize).ToList();
+
+
+
 
             return result;
         }
@@ -113,10 +115,10 @@ namespace Dto.Repository.IntellUser
 
         #region 查询条件
         //根据条件查询用户
-        private Expression<Func<User_System, bool>> SearchUserWhere(UserSearchViewModel userSearchViewModel)
+        private Expression<Func<User_Info, bool>> SearchUserWhere(UserSearchViewModel userSearchViewModel)
         {
-            var predicate = WhereExtension.True<User_System>();//初始化where表达式
-                predicate = predicate.And(p => p.UserId.Contains(userSearchViewModel.UserId));
+            var predicate = WhereExtension.True<User_Info>();//初始化where表达式
+                predicate = predicate.And(p => p.Idnumber .Contains(userSearchViewModel.UserId));
                 //predicate = predicate.And(p => p.UserName.Contains(userSearchViewModel.UserName));
                 //predicate = predicate.And(p => p.Levels.Contains(userSearchViewModel.Levels));
                 //predicate = predicate.And(p => p.status.Contains(userSearchViewModel.status));
@@ -124,24 +126,24 @@ namespace Dto.Repository.IntellUser
             return predicate;
         }
 
-        public IQueryable<User_System> GetAll()
+        public IQueryable<User_Info> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        //public User_System GetInfoAndDepartByUserid(int id)
+        //public User_Info GetInfoAndDepartByUserid(int id)
         //{
-        //    User_System User_System = DbSet.Include(a=>a.User_Depart)
+        //    User_Info User_Info = DbSet.Include(a=>a.User_Depart)
         //                         .Single(uid => uid.Id.Equals(id))       
         //        ;
-        //    return User_System;
+        //    return User_Info;
         //}
         /// <summary>
         /// 根据部门查用户
         /// </summary>
         /// <param name="userByDepartSearchViewModel"></param>
         /// <returns></returns>
-        //public List<User_System> SearchUserInfoByDepartWhere(UserByDepartSearchViewModel userByDepartSearchViewModel)
+        //public List<User_Info> SearchUserInfoByDepartWhere(UserByDepartSearchViewModel userByDepartSearchViewModel)
         //{
         //    int SkipNum = userByDepartSearchViewModel.pageViewModel.CurrentPageNum * userByDepartSearchViewModel.pageViewModel.PageSize;
         //    int lineid = userByDepartSearchViewModel.User_DepartId;
@@ -156,7 +158,7 @@ namespace Dto.Repository.IntellUser
         /// </summary>
         /// <param name="userByDepartSearchViewModel"></param>
         /// <returns></returns>
-        //public IQueryable<User_System> GetUserByDepartAll(UserByDepartSearchViewModel userByDepartSearchViewModel)
+        //public IQueryable<User_Info> GetUserByDepartAll(UserByDepartSearchViewModel userByDepartSearchViewModel)
         //{
         //    int departId = userByDepartSearchViewModel.User_DepartId;
         //    var queryResult = DbSet.Where(k => k.User_DepartId == departId && k.status == "0");

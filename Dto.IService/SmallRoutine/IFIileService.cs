@@ -22,12 +22,19 @@ namespace Dto.IService.SmallRoutine
         /// <returns></returns>
         FileImgResViewModel SaveFileInfo(FileUploadViewModel  fileUploadViewModel);
 
+        /// <summary>
+        /// 保存图片文件信息
+        /// </summary>
+        /// <param name="fileRealname"></param>
+        /// <returns></returns>
+        int SaveImageFileInfo(FileImageUploadViewModel fileUploadViewModel);
 
-    /// <summary>
-    /// 导入白名单数据到数据库
-    /// </summary>
-    /// <param name="fileUploadViewModel"></param>
-    /// <returns></returns>
+
+        /// <summary>
+        /// 导入白名单数据到数据库
+        /// </summary>
+        /// <param name="fileUploadViewModel"></param>
+        /// <returns></returns>
         int InputWhiteListIntoDataBase(String FilePath,String FileName);
         /// <summary>
         /// 员工信息导入

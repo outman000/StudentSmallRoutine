@@ -80,6 +80,7 @@ namespace Dto.Service.SmallRoutine
             {
                 User_Info Info = new User_Info();
                 Info = _userInfoRepository.GetByIdnumber(editPwdView.Idnumber);
+                Info.Idnumber = Dtol.Helper.MD5.Md5Hash (editPwdView.Idnumber);
                 Info.password = Dtol.Helper.MD5.Md5Hash(editPwdView.NewPassword);
                 _userInfoRepository.Update(Info);
                 int i = _userInfoRepository.SaveChanges();
@@ -103,5 +104,11 @@ namespace Dto.Service.SmallRoutine
             return baseView;
         }
 
+        public bool LoginAdmin(LoginViewModel loginViewModel)
+        {
+            var decodeloginInfp = _IMapper.Map<LoginViewModel, LoginViewModel>(loginViewModel);
+            //验证是否通过
+            return _userInfoRepository.Login(decodeloginInfp);
+        }
     }
 }

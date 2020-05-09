@@ -13,6 +13,6 @@ namespace Dtol.dtol
         public DateTime? AddDate { get; set; }
         public DateTime? updateDate { get; set; }
 
-        public virtual ICollection<User_Relate_Info_Role> User_Relate_Info_Role { get; set; }
+        //public virtual ICollection<User_Relate_Info_Role> User_Relate_Info_Role { get; set; }
     }
 }

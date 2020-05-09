@@ -12,8 +12,13 @@ namespace Dtol.dtol
 
         public string Idnumber { get; set; }
         public string Content { get; set; }
+
+        public string Temperature { get; set; }//体温
         public DateTime? CreateDate { get; set; } = DateTime.Now;
         public int? facultystaff_InfoId { get; set; }
-        facultystaff_Info  facultystaff_Info { get; set; }
+        public facultystaff_Info  facultystaff_Info { get; set; }
+
+        public int? UserFiles_InfoId { get; set; }
+        public UserFiles_Info UserFiles_Info { get; set; }
     }
 }

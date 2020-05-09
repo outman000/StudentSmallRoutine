@@ -13,6 +13,6 @@ namespace ViewModel.UserViewModel.MiddleModel
         /// <summary>
         /// 角色id
         /// </summary>
-        public int User_RoleId { get; set; }
+        public int Station_InfoId { get; set; }
     }
 }

@@ -16,7 +16,9 @@ namespace Dtol
         public DtolContext()
         {
         }
-
+        public DbSet<UserFiles_Info> UserFiles_Info { get; set; }
+        public DbSet<Except_Info_Employ> Except_Info_Employ { get; set; }
+        public DbSet<Except_Info_Student> Except_Info_Student { get; set; }
         public DbSet<Class_Info> Class_Info { get; set; }
         public DbSet<facultystaff_Info> facultystaff_Info { get; set; }
         public DbSet<Grade_Info> Grade_Info { get; set; }
@@ -33,7 +35,10 @@ namespace Dtol
         public DbSet<ReadLog> ReadLog { get; set; }
 
         public DbSet<Student_DayandNight_Info> Student_DayandNight_Info { get; set; }
+
+        public DbSet<User_System> User_System { get; set; }
         
+
         public DtolContext(DbContextOptions<DtolContext> options)
        : base(options)
         {

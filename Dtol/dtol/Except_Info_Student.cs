@@ -11,6 +11,8 @@ namespace Dtol.dtol
 
         public string Idnumber { get; set; }
 
+        public string Temperature { get; set; }
+
         public string Content { get; set; }
 
         public DateTime? CreateDate { get; set; } = DateTime.Now;
@@ -18,5 +20,8 @@ namespace Dtol.dtol
         public int? student_InfoId { get; set; }
 
         public Student_Info student_Info { get; set; }
+
+        public int? UserFiles_InfoId { get; set; }
+        public UserFiles_Info UserFiles_Info { get; set; }
     }
 }

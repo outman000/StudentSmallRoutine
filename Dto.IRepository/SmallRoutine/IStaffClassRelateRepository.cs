@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.MiddelViewModel.SecondMiddleViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.FacultystaffViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.StaffClassRelateViewModel;
 
 namespace Dto.IRepository.SmallRoutine
@@ -15,5 +16,6 @@ namespace Dto.IRepository.SmallRoutine
 
         List<TeacherSearchClassMiddle> GetClassByTeacher(int UserKey);
         List<TeacherSearchClassAllMiddle> GetClassByTeacherAll(int userKeyId);
+        bool isRepeat(AddRelateFromStaffToClassViewModel model);
     }
 }

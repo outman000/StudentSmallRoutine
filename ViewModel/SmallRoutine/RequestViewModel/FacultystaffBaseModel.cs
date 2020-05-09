@@ -30,5 +30,6 @@ namespace ViewModel.SmallRoutine.RequestViewModel
         public string IdNumber { get; set; }
         //户籍地址
         public string PermanentAddress { get; set; }
+        public int? station_InfoId { get; set; }
     }
 }

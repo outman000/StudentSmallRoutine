@@ -112,5 +112,12 @@ namespace Dto.Repository.SmallRoutine
             var result = DbSet.Where(predicate).ToList();
             return result;
         }
+
+
+
+
+      
+
+
     }
 }
