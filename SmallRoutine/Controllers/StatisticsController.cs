@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.IService.SmallRoutine;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,11 +12,11 @@ namespace SmallRoutine.Controllers
     [ApiController]
     public class StatisticsController : ControllerBase
     {
-        private readonly IStatisticsService StatisticsService;
+        private readonly IStatisticsService   istatisticsService;
 
         public StatisticsController(IStatisticsService statisticsService)
         {
-            StatisticsService = statisticsService;
+            istatisticsService = statisticsService;
         }
     }
 }
