@@ -47,7 +47,10 @@ namespace Dtol.dtol
         //每日信息集合
         public List<Health_Info> Health_Info { get; set; }
 
-      //  public List<ClassManager_Relate>  classManager_Relates { get; set; }
+        [ExcelAttribute("附件id")]
+        public string tag { get; set; }
+
+        //  public List<ClassManager_Relate>  classManager_Relates { get; set; }
 
 
     }

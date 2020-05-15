@@ -169,6 +169,8 @@ namespace Dtol.Migrations
 
                     b.Property<string>("IsAggregateContain");
 
+                    b.Property<string>("IsBulu");
+
                     b.Property<string>("IsComeSchool");
 
                     b.Property<string>("IsFamilyHot");
@@ -181,11 +183,15 @@ namespace Dtol.Migrations
 
                     b.Property<string>("IsThroat");
 
+                    b.Property<string>("IsTianJin");
+
                     b.Property<string>("IsTouch");
 
                     b.Property<string>("IsWeak");
 
                     b.Property<string>("Name");
+
+                    b.Property<string>("NotComeSchoolReason");
 
                     b.Property<string>("PermanentAddress");
 
@@ -312,6 +318,8 @@ namespace Dtol.Migrations
 
                     b.Property<string>("PeersTelephone");
 
+                    b.Property<string>("PermanentAddress");
+
                     b.Property<string>("Residencetemporary");
 
                     b.Property<string>("Telephone");
@@ -339,9 +347,15 @@ namespace Dtol.Migrations
 
                     b.Property<string>("GradeName");
 
+                    b.Property<string>("IdNumber");
+
                     b.Property<string>("IsComeSchool");
 
+                    b.Property<string>("IsTianJin");
+
                     b.Property<string>("Name");
+
+                    b.Property<string>("NotComeJinReason");
 
                     b.Property<string>("SchoolName");
 
@@ -397,6 +411,92 @@ namespace Dtol.Migrations
                     b.HasIndex("class_InfoId");
 
                     b.ToTable("Student_Info");
+                });
+
+            modelBuilder.Entity("Dtol.dtol.Template_Employment", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ActualComeSchoolCount");
+
+                    b.Property<int?>("ComeSchoolHotCount");
+
+                    b.Property<DateTime?>("CreateDate");
+
+                    b.Property<DateTime?>("Date");
+
+                    b.Property<string>("DepartCode");
+
+                    b.Property<string>("DepartName");
+
+                    b.Property<int?>("NotComeSchoolByHotCount");
+
+                    b.Property<int?>("NotComeSchoolByOtherCount");
+
+                    b.Property<int?>("NotComeSchoolByOutCount");
+
+                    b.Property<int?>("NotComeSchoolCount");
+
+                    b.Property<string>("SchoolCode");
+
+                    b.Property<string>("SchoolName");
+
+                    b.Property<int?>("ShouldComeSchoolCount");
+
+                    b.Property<string>("StaffCode");
+
+                    b.Property<string>("StaffName");
+
+                    b.Property<string>("type");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Template_Employment");
+                });
+
+            modelBuilder.Entity("Dtol.dtol.Template_Student", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ActualComeSchoolCount");
+
+                    b.Property<string>("ClassCode");
+
+                    b.Property<string>("ClassName");
+
+                    b.Property<int?>("ComeSchoolHotCount");
+
+                    b.Property<DateTime?>("CreateDate");
+
+                    b.Property<DateTime?>("Date");
+
+                    b.Property<string>("GradeCode");
+
+                    b.Property<string>("GradeName");
+
+                    b.Property<int?>("NotComeSchoolByHotCount");
+
+                    b.Property<int?>("NotComeSchoolByOtherCount");
+
+                    b.Property<int?>("NotComeSchoolByOutCount");
+
+                    b.Property<int?>("NotComeSchoolCount");
+
+                    b.Property<string>("SchoolCode");
+
+                    b.Property<string>("SchoolName");
+
+                    b.Property<int?>("ShouldComeSchoolCount");
+
+                    b.Property<string>("type");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Template_Student");
                 });
 
             modelBuilder.Entity("Dtol.dtol.UploadFile", b =>
@@ -499,6 +599,31 @@ namespace Dtol.Migrations
                     b.ToTable("User_Relate_Info_Role");
                 });
 
+            modelBuilder.Entity("Dtol.dtol.User_Rights", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ParentId");
+
+                    b.Property<string>("Remark");
+
+                    b.Property<string>("RightsName");
+
+                    b.Property<string>("RightsValue");
+
+                    b.Property<int?>("Sort");
+
+                    b.Property<string>("Type");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User_Rights");
+                });
+
             modelBuilder.Entity("Dtol.dtol.User_System", b =>
                 {
                     b.Property<int>("Id")
@@ -553,6 +678,8 @@ namespace Dtol.Migrations
                     b.Property<int?>("StudentRegisterHeath_InfoId");
 
                     b.Property<int?>("station_InfoId");
+
+                    b.Property<string>("tag");
 
                     b.HasKey("id");
 

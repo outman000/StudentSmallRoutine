@@ -26,5 +26,10 @@ namespace Dtol.dtol
 
         public DateTime? CreateDate { get; set; } = DateTime.Now;
 
+        /// <summary>
+        /// 户籍地址
+        /// </summary>
+        public string PermanentAddress { get; set; }
+
     }
 }

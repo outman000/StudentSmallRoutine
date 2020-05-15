@@ -62,6 +62,10 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// </summary>
         public string IsComeSchool { get; set; }
         /// <summary>
+        /// 未到校原因
+        /// </summary>
+        public string NotComeSchoolReason { get; set; }
+        /// <summary>
         /// 是否接触
         /// </summary>
         public string IsTouch { get; set; }
@@ -82,5 +86,16 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// 是否参加聚合具体情况
         /// </summary>
         public string IsAggregateContain { get; set; }
+        /// <summary>
+        /// 是否在天津
+        /// </summary>
+
+        public string IsTianJin { get; set; }
+
+
+        /// <summary>
+        /// 补录
+        /// </summary>
+        public string IsBulu { get; set; }
     }
 }

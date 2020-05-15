@@ -37,7 +37,9 @@ namespace Dtol
         public DbSet<Student_DayandNight_Info> Student_DayandNight_Info { get; set; }
 
         public DbSet<User_System> User_System { get; set; }
-        
+        public DbSet<User_Rights> User_Rights { get; set; }
+        public DbSet<Template_Employment> Template_Employment { get; set; }
+        public DbSet<Template_Student> Template_Student { get; set; }
 
         public DtolContext(DbContextOptions<DtolContext> options)
        : base(options)

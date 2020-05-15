@@ -57,8 +57,25 @@ namespace Dto.Service.SmallRoutine
         /// <param name="healthInfoDeleteViewModel"></param>
         public void DeleteHealthRegisterInfo(HealthInfoDeleteViewModel healthInfoDeleteViewModel)
         {
-          
+            
             healthRegisterRepository.DelByList(healthInfoDeleteViewModel.DeleteList);
+
+            for (int i = 0; i < healthInfoDeleteViewModel.DeleteList.Count; i++)
+            {
+                var facultystaff = facultystaffInfoRepository.getbyID(healthInfoDeleteViewModel.DeleteList[i]);//查询白绑定的基础信息
+                var studentInfo = studentInfoRepository.getbyID(healthInfoDeleteViewModel.DeleteList[i]);
+                if (facultystaff != null)//不为空复制键值
+                {
+                    facultystaff.StudentRegisterHeath_InfoId = null;
+                    facultystaffInfoRepository.Update(facultystaff);
+                }
+                if (studentInfo != null)
+                {
+                    studentInfo.StudentRegisterHeath_InfoId = null;
+                    studentInfoRepository.Update(studentInfo);
+                }
+
+            }
             healthRegisterRepository.SaveChanges();
         }
 

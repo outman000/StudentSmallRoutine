@@ -18,20 +18,24 @@ namespace Dtol.dtol
         public string IsFamilyThroat { get; set; }
         public string IsFamilyWeakt { get; set; }
         public string IsComeSchool { get; set; }
+
+        public string IsTianJin { get; set; }
+
+        public string NotComeSchoolReason { get; set; }
+
         public string IsTouch { get; set; }
         public string Temperature { get; set; }//体温
         public string CheckType { get; set; }//晨午晚
         public string IsAggregate { get; set; }//是否参加聚合
         public string IsAggregateContain { get; set; }//是否参加聚合具体情况
         public DateTime? Createdate { get; set; } = DateTime.Now;
-
-   
-
-
         public int? facultystaff_InfoId { get; set; }
         public facultystaff_Info facultystaff_Info { get; set; }
         public int? Student_InfoId { get; set; }
         public Student_Info Student_Info { get; set; }
+
+
+        public string IsBulu { get; set; }
 
         /// <summary>
         /// 户籍地址

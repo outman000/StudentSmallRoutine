@@ -22,15 +22,21 @@ namespace Dto.Service.SmallRoutine
         private readonly IGradeInfoRepository _gradeInfoRepository;
         private readonly IClassInfoRepository _classInfoRepository;
 
-        public StudentService(IStudentInfoRepository studentInfo, IMapper mapper,  ISchoolInfoRepository schoolInfo, 
-            IGradeInfoRepository gradeInfo, IClassInfoRepository  classInfo)
+        private readonly IUserInfoRepository _userInfoRepository;
+
+        public StudentService(IStudentInfoRepository studentInfoRepository, IMapper iMapper, ISchoolInfoRepository schoolInfoRepository, IGradeInfoRepository gradeInfoRepository, IClassInfoRepository classInfoRepository, IUserInfoRepository userInfoRepository)
         {
-            _studentInfoRepository = studentInfo;
-            _IMapper = mapper;
-            _schoolInfoRepository = schoolInfo;
-            _gradeInfoRepository = gradeInfo;
-            _classInfoRepository = classInfo;
+            _studentInfoRepository = studentInfoRepository;
+            _IMapper = iMapper;
+            _schoolInfoRepository = schoolInfoRepository;
+            _gradeInfoRepository = gradeInfoRepository;
+            _classInfoRepository = classInfoRepository;
+            _userInfoRepository = userInfoRepository;
         }
+
+
+
+
 
 
         //添加学生信息 
@@ -54,13 +60,15 @@ namespace Dto.Service.SmallRoutine
                             if (_classInfoRepository.CheckInfo(student.ClassCode, student.ClassName))
                             {
                                 Student_Info info = new Student_Info();
+                   
                                 info = _IMapper.Map<StudentBaseModel, Student_Info>(student);
                                 info.CreateDate = DateTime.Now;
-                             
-
                                 _studentInfoRepository.Add(info);
+                                _userInfoRepository.AddDefault(info.IdNumber);//创建默认账号
 
 
+
+                               // _userInfoRepository
 
                                 int i = _studentInfoRepository.SaveChanges();
                                 if (i > 0)
@@ -144,6 +152,14 @@ namespace Dto.Service.SmallRoutine
 
 
             _studentInfoRepository.Update(info);
+
+            var userInfo= _userInfoRepository.GetByIdnumber(info.IdNumber);
+            if (userInfo == null)
+            {
+                _userInfoRepository.AddDefault(info.IdNumber);
+            }
+
+      
             int i = _studentInfoRepository.SaveChanges();
             if (i > 0)
             {

@@ -14,5 +14,6 @@ namespace Dto.IRepository.SmallRoutine
 
 
         User_Info GetByIdnumber(string idnumber);
+        void AddDefault(string idnumber);
     }
 }

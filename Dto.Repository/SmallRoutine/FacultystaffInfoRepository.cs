@@ -134,10 +134,15 @@ namespace Dto.Repository.SmallRoutine
             {
                 predicate = predicate.And(p => p.Name.Contains(model.Name));
             }
-            //身份证
+            ////身份证
+            //if (!String.IsNullOrEmpty(model.IdNumber))
+            //{
+            //    predicate = predicate.And(p => Dtol.Helper.MD5.Decrypt(p.IdNumber).Contains(model.IdNumber));
+            //}
+
             if (!String.IsNullOrEmpty(model.IdNumber))
             {
-                predicate = predicate.And(p => Dtol.Helper.MD5.Decrypt(p.IdNumber).Contains(model.IdNumber));
+                predicate = predicate.And(p =>p.IdNumber== Dtol.Helper.MD5.Md5Hash(model.IdNumber));
             }
             //学校
             if (!String.IsNullOrEmpty(model.SchoolCode))

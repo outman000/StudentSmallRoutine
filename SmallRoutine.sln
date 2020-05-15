@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModel", "ViewModel\View
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmallRoutineFile", "SmallRoutineFile\SmallRoutineFile.csproj", "{9F49BB76-1E33-482A-A85C-A325B0097A33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntellUser", "IntellUser\IntellUser.csproj", "{781CBB3C-85F6-4554-BA45-700967C17D95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntellUser", "IntellUser\IntellUser.csproj", "{781CBB3C-85F6-4554-BA45-700967C17D95}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmallRoutine.ConsoleGeneral", "SmallRoutine.Console\SmallRoutine.ConsoleGeneral.csproj", "{97E161E9-8607-43EB-B563-2D563A526473}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{781CBB3C-85F6-4554-BA45-700967C17D95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{781CBB3C-85F6-4554-BA45-700967C17D95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{781CBB3C-85F6-4554-BA45-700967C17D95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97E161E9-8607-43EB-B563-2D563A526473}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97E161E9-8607-43EB-B563-2D563A526473}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97E161E9-8607-43EB-B563-2D563A526473}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97E161E9-8607-43EB-B563-2D563A526473}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

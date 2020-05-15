@@ -95,7 +95,11 @@ namespace Dto.Repository.SmallRoutine
                           CheckType = a.CheckType,
                           Temperature = a.Temperature,
                           IsAggregate = a.IsAggregate,
+                          IsTianJin = a.IsTianJin,
                           IsAggregateContain = a.IsAggregateContain,
+                          NotComeSchoolReason = a.NotComeSchoolReason,
+                          IsBulu = a.IsBulu
+
                       })
                      ;
                 staffStationMiddleModel.AddRange(tempresult);

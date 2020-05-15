@@ -110,5 +110,13 @@ namespace Dto.Service.SmallRoutine
             //验证是否通过
             return _userInfoRepository.Login(decodeloginInfp);
         }
+
+        public void ResetPwd(string idnumber)
+        {
+            var result= _userInfoRepository.GetByIdnumber(idnumber);
+            result.password = Dtol.Helper.MD5.Md5Hash("ET2020666");
+            _userInfoRepository.Update(result);
+            _userInfoRepository.SaveChanges();
+        }
     }
 }

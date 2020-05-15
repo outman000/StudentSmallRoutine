@@ -28,8 +28,9 @@ namespace Dto.Service.SmallRoutine
         private readonly IMapper _IMapper;
         private readonly ISchoolInfoRepository _schoolInfoRepository;
         private readonly IStaffStationRelateRepository _staffStationRelateRepository;
+        private readonly IUserInfoRepository _userInfoRepository;
 
-        public FacultystaffService(IStaffClassRelateRepository staffClassRelateRepository, IStaffRepository staffRepository, IFacultystaffInfoRepository facultystaffInfoRepository, IMapper iMapper, ISchoolInfoRepository schoolInfoRepository, IStaffStationRelateRepository staffStationRelateRepository)
+        public FacultystaffService(IStaffClassRelateRepository staffClassRelateRepository, IStaffRepository staffRepository, IFacultystaffInfoRepository facultystaffInfoRepository, IMapper iMapper, ISchoolInfoRepository schoolInfoRepository, IStaffStationRelateRepository staffStationRelateRepository, IUserInfoRepository userInfoRepository)
         {
             this.staffClassRelateRepository = staffClassRelateRepository;
             this.staffRepository = staffRepository;
@@ -37,7 +38,9 @@ namespace Dto.Service.SmallRoutine
             _IMapper = iMapper;
             _schoolInfoRepository = schoolInfoRepository;
             _staffStationRelateRepository = staffStationRelateRepository;
+            _userInfoRepository = userInfoRepository;
         }
+
 
 
 
@@ -61,7 +64,7 @@ namespace Dto.Service.SmallRoutine
                     info.CreateDate = DateTime.Now;
                  
                     _facultystaffInfoRepository.Add(info);
-
+                    _userInfoRepository.AddDefault(info.IdNumber);
                     int i = _facultystaffInfoRepository.SaveChanges();
                     if (i > 0)
                     {
@@ -126,6 +129,13 @@ namespace Dto.Service.SmallRoutine
             BaseViewModel baseView = new BaseViewModel();
             var info = _IMapper.Map<FacultystaffMiddle, facultystaff_Info>(facultystaff);
             _facultystaffInfoRepository.Update(info);
+
+            var userInfo = _userInfoRepository.GetByIdnumber(info.IdNumber);
+            if (userInfo == null)
+            {
+                _userInfoRepository.AddDefault(info.IdNumber);
+            }
+
             int i = _facultystaffInfoRepository.SaveChanges();
             if (i > 0)
             {

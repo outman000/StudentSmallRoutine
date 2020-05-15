@@ -78,8 +78,10 @@ namespace Dto.Repository.SmallRoutine
                         IsWeak=a.IsWeak,
                         IsAggregate = a.IsAggregate,
                         IsAggregateContain = a.IsAggregateContain,
-
+                          IsTianJin = a.IsTianJin,
                          Temperature = a.Temperature,
+                         NotComeSchoolReason=a.NotComeSchoolReason,
+                         IsBulu = a.IsBulu
                      })
                      
                      .ToList();

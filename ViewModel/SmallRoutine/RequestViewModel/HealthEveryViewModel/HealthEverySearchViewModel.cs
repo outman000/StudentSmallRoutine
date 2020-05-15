@@ -60,6 +60,12 @@ namespace ViewModel.SmallRoutine.RequestViewModel.HealthEveryViewModel
         /// </summary>
         public string Temperature { get; set; }//体温
 
+
+        /// <summary>
+        /// 早午晚
+        /// </summary>
+        public string CheckType { get; set; }//体温
+
         /// <summary>
         /// 分页
         /// </summary>

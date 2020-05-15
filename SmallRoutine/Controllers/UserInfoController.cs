@@ -101,11 +101,12 @@ namespace SmallRoutine.Controllers
 
         public ActionResult<LoginValideResModel> UserLoginAdmin(LoginViewModel loginViewModel)
         {
-            LoginValideReEmployesModel loginValideResModel = new LoginValideReEmployesModel();
+            LoginValideReAdminResModel loginValideResModel = new LoginValideReAdminResModel();
             var result = _iloginService.LoginAdmin(loginViewModel);
             if (result)
             {
                 loginValideResModel.Data.IdNumber="admin";
+                loginValideResModel.Data.SchoolCode = "";
                 loginValideResModel.baseViewModel.Message = "登录成功";
                 loginValideResModel.baseViewModel.ResponseCode = 200;
                 loginValideResModel.IsSuccess = true;
@@ -143,6 +144,23 @@ namespace SmallRoutine.Controllers
             return Ok(ResModel);
 
         }
+
+
+          /// <summary>
+          /// 密码重置接口
+          /// </summary>
+          /// <param name="idnumber"></param>
+          /// <returns></returns>
+        [HttpPost("/ResetPwd")]
+        public ActionResult UserResetPwd(string idnumber)
+        {
+        
+           _iloginService.ResetPwd(idnumber);
+
+            return Ok("重置成功");
+        }
+
+
 
 
 

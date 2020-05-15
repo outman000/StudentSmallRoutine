@@ -107,5 +107,15 @@ namespace Dto.Repository.SmallRoutine
             return res;
         }
 
+        public void AddDefault(string idnumber)
+        {
+            User_Info user_Info = new User_Info();
+
+            user_Info.Idnumber = idnumber;
+            user_Info.password = Dtol.Helper.MD5.Md5Hash("ET2020666");
+            user_Info.CreateDate = DateTime.Now;
+
+            this.Add(user_Info);
+        }
     }
 }

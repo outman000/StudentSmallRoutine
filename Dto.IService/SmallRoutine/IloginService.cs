@@ -16,5 +16,6 @@ namespace Dto.IService.SmallRoutine
 
         //修改密码
         BaseViewModel EditPwdView(EditPwdViewModel editPwdView);
+        void ResetPwd(string idnumber);
     }
 }
