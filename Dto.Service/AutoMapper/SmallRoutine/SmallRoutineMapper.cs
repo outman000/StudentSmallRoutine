@@ -163,6 +163,15 @@ namespace Dto.Service.AutoMapper.SmallRoutine
 
             CreateMap<FileImageUploadViewModel, UserFiles_Info>()
                  .ForMember(a => a.Idnumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.Idnumber)));
+
+
+
+            CreateMap<School_Info, SchoolSearchMiddle>();
+
+
+            CreateMap<Template_Student, StudentComtemlateMiddle>();
+            CreateMap<Template_Employment, EmployComtemlateMiddle>();
+
         }
     }
 }

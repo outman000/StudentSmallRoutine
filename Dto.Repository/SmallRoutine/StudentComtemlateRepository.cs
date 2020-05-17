@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ViewModel.SmallRoutine.RequestViewModel.StatasticViewModel;
 
 namespace Dto.Repository.SmallRoutine
 {
@@ -271,6 +272,8 @@ namespace Dto.Repository.SmallRoutine
                 DbSet.Add(template_Student);
             }
         }
+
+
         public void ComtemplateDaySchool()
         {
           
@@ -328,14 +331,419 @@ namespace Dto.Repository.SmallRoutine
                 DbSet.Add(template_Student);
             }
         }
-        public object GetReportStatisticData()
+
+
+
+        public List<Template_Student> GetCompTemplateStudent(BaseStudentStasticViewModel baseStudentStasticViewModel)
         {
-            // DbSet.where(a=>a.)
-            return null;
-            
+            List<Template_Student> template_Students = new List<Template_Student>();
+
+            template_Students.AddRange(GetReportStatisticData(baseStudentStasticViewModel));//到校前初中高中小学
+            template_Students.AddRange(GetReportStatisticMorningData(baseStudentStasticViewModel));//早初中高中小学
+            template_Students.AddRange(GetReportStatistiNoonData(baseStudentStasticViewModel));//午初中高中小学
+            template_Students.AddRange(GetReportStatistiNightData(baseStudentStasticViewModel));//晚高中小学
+            return template_Students;
+
+        }
+        //到校前
+
+        public List<Template_Student> GetReportStatisticData(BaseStudentStasticViewModel baseStudentStasticViewModel)
+        {
+            List<Template_Student> template_Students = new List<Template_Student>();
+            //到校前
+            var searchresultGao = DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                    && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                    && a.type == "到校前"
+                                                    && (a.ClassCode=="10"|| a.ClassCode == "11" || a.ClassCode == "12")
+                                                    )
+                                                    .GroupBy(m=>new { m.SchoolCode,m.type,m.SchoolName})
+                                                    .Select(a => new Template_Student
+                                                    {
+                                                        SchoolName = a.Key.SchoolName,
+                                                        SchoolCode = a.Key.SchoolCode,
+                                                        type = a.Key.type,
+                                                        ShouldComeSchoolCount = a.Sum(w=>w.ShouldComeSchoolCount),
+                                                        ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                                        ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                                        NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                                        NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                                        NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                                        NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                                     }
+                                                    );
+            template_Students.AddRange(searchresultGao);
+
+            var searchresultZhong = DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                  && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                  && a.type == "到校前"
+                                                  && (a.ClassCode == "7" || a.ClassCode == "8" || a.ClassCode == "9")
+                                                  )
+                                                  .GroupBy(m => new { m.SchoolCode, m.type, m.SchoolName })
+                                  .Select(a => new Template_Student
+                                  {
+                                      SchoolName = a.Key.SchoolName,
+                                      SchoolCode = a.Key.SchoolCode,
+                                      type = a.Key.type,
+                                      ShouldComeSchoolCount = a.Sum(w => w.ShouldComeSchoolCount),
+                                      ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                      ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                      NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                      NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                      NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                      NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                  }
+                                  );
+            template_Students.AddRange(searchresultZhong);
+
+            var searchresultXiao = DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                  && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                  && a.type == "到校前"
+                                                  && (a.ClassCode == "1" || a.ClassCode == "2" || a.ClassCode == "3"
+                                                        || a.ClassCode == "4" || a.ClassCode == "5" || a.ClassCode == "6")
+                                                  )
+                                                  .GroupBy(m => new { m.SchoolCode, m.type, m.SchoolName })
+                                  .Select(a => new Template_Student
+                                  {
+                                      SchoolName = a.Key.SchoolName,
+                                      SchoolCode = a.Key.SchoolCode,
+                                      type = a.Key.type,
+                                      ShouldComeSchoolCount = a.Sum(w => w.ShouldComeSchoolCount),
+                                      ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                      ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                      NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                      NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                      NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                      NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                  }
+                                  );
+
+            var searchresultXiaosum = DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                 && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                 && a.type == "到校前"
+                                          
+                                                 )
+                                                 .GroupBy(m => new { m.SchoolCode, m.type, m.SchoolName })
+                                 .Select(a => new Template_Student
+                                 {
+                                     SchoolName = a.Key.SchoolName,
+                                     SchoolCode = a.Key.SchoolCode,
+                                     type = a.Key.type,
+                                     ShouldComeSchoolCount = a.Sum(w => w.ShouldComeSchoolCount),
+                                     ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                     ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                     NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                     NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                     NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                     NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                 }
+                                 );
+
+            template_Students.AddRange(searchresultXiaosum);
+            //早
+            return template_Students;
+           }
+
+        //早
+
+        public List<Template_Student> GetReportStatisticMorningData(BaseStudentStasticViewModel baseStudentStasticViewModel)
+        {
+            List<Template_Student> template_Students = new List<Template_Student>();
+            //到校前
+            var searchresultGao = DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                    && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                    && a.type == "早"
+                                                    && (a.ClassCode == "10" || a.ClassCode == "11" || a.ClassCode == "12")
+                                                    )
+                                                    .GroupBy(m => new { m.SchoolCode, m.type, m.SchoolName })
+                                                    .Select(a => new Template_Student
+                                                    {
+                                                        SchoolName = a.Key.SchoolName,
+                                                        SchoolCode = a.Key.SchoolCode,
+                                                        type = a.Key.type,
+                                                        ShouldComeSchoolCount = a.Sum(w => w.ShouldComeSchoolCount),
+                                                        ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                                        ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                                        NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                                        NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                                        NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                                        NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                                    }
+                                                    );
+            template_Students.AddRange(searchresultGao);
+
+            var searchresultZhong = DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                  && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                  && a.type == "早"
+                                                  && (a.ClassCode == "7" || a.ClassCode == "8" || a.ClassCode == "9")
+                                                  )
+                                                  .GroupBy(m => new { m.SchoolCode, m.type, m.SchoolName })
+                                  .Select(a => new Template_Student
+                                  {
+                                      SchoolName = a.Key.SchoolName,
+                                      SchoolCode = a.Key.SchoolCode,
+                                      type = a.Key.type,
+                                      ShouldComeSchoolCount = a.Sum(w => w.ShouldComeSchoolCount),
+                                      ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                      ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                      NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                      NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                      NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                      NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                  }
+                                  );
+            template_Students.AddRange(searchresultZhong);
+
+            var searchresultXiao = DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                  && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                  && a.type == "早"
+                                                  && (a.ClassCode == "1" || a.ClassCode == "2" || a.ClassCode == "3"
+                                                        || a.ClassCode == "4" || a.ClassCode == "5" || a.ClassCode == "6")
+                                                  )
+                                                  .GroupBy(m => new { m.SchoolCode, m.type, m.SchoolName })
+                                  .Select(a => new Template_Student
+                                  {
+                                      SchoolName = a.Key.SchoolName,
+                                      SchoolCode = a.Key.SchoolCode,
+                                      type = a.Key.type,
+                                      ShouldComeSchoolCount = a.Sum(w => w.ShouldComeSchoolCount),
+                                      ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                      ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                      NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                      NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                      NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                      NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                  }
+                                  );
+            template_Students.AddRange(searchresultXiao);
+
+
+            var searchresultsum = DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                 && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                 && a.type == "早"
+                                              
+                                                 )
+                                                 .GroupBy(m => new { m.SchoolCode, m.type, m.SchoolName })
+                                 .Select(a => new Template_Student
+                                 {
+                                     SchoolName = a.Key.SchoolName,
+                                     SchoolCode = a.Key.SchoolCode,
+                                     type = a.Key.type,
+                                     ShouldComeSchoolCount = a.Sum(w => w.ShouldComeSchoolCount),
+                                     ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                     ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                     NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                     NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                     NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                     NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                 }
+                                 );
+            template_Students.AddRange(searchresultXiao);
+
+
+            //早
+            return template_Students;
         }
 
+        //午
+
+        public List<Template_Student> GetReportStatistiNoonData(BaseStudentStasticViewModel baseStudentStasticViewModel)
+        {
+            List<Template_Student> template_Students = new List<Template_Student>();
+            //到校前
+            var searchresultGao = DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                    && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                    && a.type == "午"
+                                                    && (a.ClassCode == "10" || a.ClassCode == "11" || a.ClassCode == "12")
+                                                    )
+                                                    .GroupBy(m => new { m.SchoolCode, m.type, m.SchoolName })
+                                                    .Select(a => new Template_Student
+                                                    {
+                                                        SchoolName = a.Key.SchoolName,
+                                                        SchoolCode = a.Key.SchoolCode,
+                                                        type = a.Key.type,
+                                                        ShouldComeSchoolCount = a.Sum(w => w.ShouldComeSchoolCount),
+                                                        ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                                        ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                                        NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                                        NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                                        NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                                        NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                                    }
+                                                    );
+            template_Students.AddRange(searchresultGao);
+
+            var searchresultZhong = DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                  && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                  && a.type == "午"
+                                                  && (a.ClassCode == "7" || a.ClassCode == "8" || a.ClassCode == "9")
+                                                  )
+                                                  .GroupBy(m => new { m.SchoolCode, m.type, m.SchoolName })
+                                  .Select(a => new Template_Student
+                                  {
+                                      SchoolName = a.Key.SchoolName,
+                                      SchoolCode = a.Key.SchoolCode,
+                                      type = a.Key.type,
+                                      ShouldComeSchoolCount = a.Sum(w => w.ShouldComeSchoolCount),
+                                      ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                      ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                      NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                      NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                      NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                      NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                  }
+                                  );
+            template_Students.AddRange(searchresultZhong);
+
+            var searchresultXiao = DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                  && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                  && a.type == "午"
+                                                  && (a.ClassCode == "1" || a.ClassCode == "2" || a.ClassCode == "3"
+                                                        || a.ClassCode == "4" || a.ClassCode == "5" || a.ClassCode == "6")
+                                                  )
+                                                  .GroupBy(m => new { m.SchoolCode, m.type, m.SchoolName })
+                                  .Select(a => new Template_Student
+                                  {
+                                      SchoolName = a.Key.SchoolName,
+                                      SchoolCode = a.Key.SchoolCode,
+                                      type = a.Key.type,
+                                      ShouldComeSchoolCount = a.Sum(w => w.ShouldComeSchoolCount),
+                                      ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                      ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                      NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                      NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                      NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                      NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                  }
+                                  );
+            template_Students.AddRange(searchresultXiao);
 
 
+
+            var searchresultsum= DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                && a.type == "午"
+                                                )
+                                                .GroupBy(m => new { m.SchoolCode, m.type, m.SchoolName })
+                                .Select(a => new Template_Student
+                                {
+                                    SchoolName = a.Key.SchoolName,
+                                    SchoolCode = a.Key.SchoolCode,
+                                    type = a.Key.type,
+                                    ShouldComeSchoolCount = a.Sum(w => w.ShouldComeSchoolCount),
+                                    ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                    ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                    NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                    NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                    NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                    NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                }
+                                );
+            template_Students.AddRange(searchresultXiao);
+
+
+
+            //早
+            return template_Students;
+        }
+        //晚
+
+        public List<Template_Student> GetReportStatistiNightData(BaseStudentStasticViewModel baseStudentStasticViewModel)
+        {
+            List<Template_Student> template_Students = new List<Template_Student>();
+            //到校前
+            var searchresultGao = DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                    && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                    && a.type == "晚"
+                                                    && (a.ClassCode == "10" || a.ClassCode == "11" || a.ClassCode == "12")
+                                                    )
+                                                    .GroupBy(m => new { m.SchoolCode, m.type, m.SchoolName })
+                                                    .Select(a => new Template_Student
+                                                    {
+                                                        SchoolName = a.Key.SchoolName,
+                                                        SchoolCode = a.Key.SchoolCode,
+                                                        type = a.Key.type,
+                                                        ShouldComeSchoolCount = a.Sum(w => w.ShouldComeSchoolCount),
+                                                        ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                                        ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                                        NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                                        NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                                        NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                                        NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                                    }
+                                                    );
+            template_Students.AddRange(searchresultGao);
+
+            var searchresultZhong = DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                  && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                  && a.type == "晚"
+                                                  && (a.ClassCode == "7" || a.ClassCode == "8" || a.ClassCode == "9")
+                                                  )
+                                                  .GroupBy(m => new { m.SchoolCode, m.type, m.SchoolName })
+                                  .Select(a => new Template_Student
+                                  {
+                                      SchoolName = a.Key.SchoolName,
+                                      SchoolCode = a.Key.SchoolCode,
+                                      type = a.Key.type,
+                                      ShouldComeSchoolCount = a.Sum(w => w.ShouldComeSchoolCount),
+                                      ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                      ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                      NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                      NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                      NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                      NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                  }
+                                  );
+            template_Students.AddRange(searchresultZhong);
+
+            var searchresultXiao = DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                  && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                  && a.type == "晚"
+                                                  && (a.ClassCode == "1" || a.ClassCode == "2" || a.ClassCode == "3"
+                                                        || a.ClassCode == "4" || a.ClassCode == "5" || a.ClassCode == "6")
+                                                  )
+                                                  .GroupBy(m => new { m.SchoolCode, m.type, m.SchoolName })
+                                  .Select(a => new Template_Student
+                                  {
+                                      SchoolName = a.Key.SchoolName,
+                                      SchoolCode = a.Key.SchoolCode,
+                                      type = a.Key.type,
+                                      ShouldComeSchoolCount = a.Sum(w => w.ShouldComeSchoolCount),
+                                      ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                      ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                      NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                      NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                      NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                      NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                  }
+                                  );
+            template_Students.AddRange(searchresultXiao);
+
+
+            var searchresultSum = DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                 && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                 && a.type == "晚"
+                                                 
+                                                 )
+                                                 .GroupBy(m => new { m.SchoolCode, m.type, m.SchoolName })
+                                 .Select(a => new Template_Student
+                                 {
+                                     SchoolName = a.Key.SchoolName,
+                                     SchoolCode = a.Key.SchoolCode,
+                                     type = a.Key.type,
+                                     ShouldComeSchoolCount = a.Sum(w => w.ShouldComeSchoolCount),
+                                     ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                     ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                     NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                     NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                     NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                     NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                 }
+                                 );
+            template_Students.AddRange(searchresultXiao);
+            //早
+            return template_Students;
+        }
+
+       
     }
 }

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ViewModel.SmallRoutine.RequestViewModel.StatasticViewModel;
 
 namespace Dto.Repository.SmallRoutine
 {
@@ -390,12 +391,139 @@ namespace Dto.Repository.SmallRoutine
         }
 
 
-        public object GetReportStatisticData()
+   
+
+        public List<Template_Employment> GetCompTemplateEmploy(BaseStudentStasticViewModel baseStudentStasticViewModel)
         {
+            List<Template_Employment> template_Students = new List<Template_Employment>();
 
-            return null;
+            template_Students.AddRange(GetReportStatisticData(baseStudentStasticViewModel));//到校前初中高中小学
+            template_Students.AddRange(GetReportStatisticMorningData(baseStudentStasticViewModel));//早初中高中小学
+            template_Students.AddRange(GetReportStatistiNoonData(baseStudentStasticViewModel));//午初中高中小学
+            template_Students.AddRange(GetReportStatistiNightData(baseStudentStasticViewModel));//晚高中小学
+            return template_Students;
+
         }
+        //到校前
+        private List<Template_Employment> GetReportStatisticData(BaseStudentStasticViewModel baseStudentStasticViewModel)
+        {
+            List<Template_Employment> template_Students = new List<Template_Employment>();
+            //到校前
+            var searchresultGao = DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                    && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                    && a.type == "到校前"
+                                                    )
+                                                    .GroupBy(m => new { m.SchoolCode, m.type, m.SchoolName })
+                                                    .Select(a => new Template_Employment
+                                                    {
+                                                        SchoolName = a.Key.SchoolName,
+                                                        SchoolCode = a.Key.SchoolCode,
+                                                        type = a.Key.type,
+                                                        ShouldComeSchoolCount = a.Sum(w => w.ShouldComeSchoolCount),
+                                                        ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                                        ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                                        NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                                        NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                                        NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                                        NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                                    }
+                                                    );
+            template_Students.AddRange(searchresultGao);
 
+
+            //早
+            return template_Students;
+        }
+        //早
+        private List<Template_Employment> GetReportStatisticMorningData(BaseStudentStasticViewModel baseStudentStasticViewModel)
+        {
+            List<Template_Employment> template_Students = new List<Template_Employment>();
+            //到校前
+            var searchresultGao = DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                    && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                    && a.type == "早"
+                                                    )
+                                                    .GroupBy(m => new { m.SchoolCode, m.type, m.SchoolName })
+                                                    .Select(a => new Template_Employment
+                                                    {
+                                                        SchoolName = a.Key.SchoolName,
+                                                        SchoolCode = a.Key.SchoolCode,
+                                                        type = a.Key.type,
+                                                        ShouldComeSchoolCount = a.Sum(w => w.ShouldComeSchoolCount),
+                                                        ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                                        ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                                        NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                                        NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                                        NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                                        NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                                    }
+                                                    );
+            template_Students.AddRange(searchresultGao);
+            //早
+            return template_Students;
+        }
+        //午
+        private List<Template_Employment> GetReportStatistiNoonData(BaseStudentStasticViewModel baseStudentStasticViewModel)
+        {
+            List<Template_Employment> template_Students = new List<Template_Employment>();
+            //到校前
+            var searchresultGao = DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                    && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                    && a.type == "午"
+                                                    )
+                                                    .GroupBy(m => new { m.SchoolCode, m.type, m.SchoolName })
+                                                    .Select(a => new Template_Employment
+                                                    {
+                                                        SchoolName = a.Key.SchoolName,
+                                                        SchoolCode = a.Key.SchoolCode,
+                                                        type = a.Key.type,
+                                                        ShouldComeSchoolCount = a.Sum(w => w.ShouldComeSchoolCount),
+                                                        ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                                        ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                                        NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                                        NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                                        NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                                        NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                                    }
+                                                    );
+            template_Students.AddRange(searchresultGao);
+
+   
+
+
+
+            //早
+            return template_Students;
+        }
+        //晚
+        private List<Template_Employment> GetReportStatistiNightData(BaseStudentStasticViewModel baseStudentStasticViewModel)
+        {
+            List<Template_Employment> template_Students = new List<Template_Employment>();
+          
+            var searchresultGao = DbSet.Where(a => a.SchoolCode == baseStudentStasticViewModel.SchoolCode
+                                                    && a.CreateDate.Value.ToString("yyyy-MM-dd") == baseStudentStasticViewModel.createdate.Value.ToString("yyyy-MM-dd")
+                                                    && a.type == "晚"
+                                                    )
+                                                    .GroupBy(m => new { m.SchoolCode, m.type, m.SchoolName })
+                                                    .Select(a => new Template_Employment
+                                                    {
+                                                        SchoolName = a.Key.SchoolName,
+                                                        SchoolCode = a.Key.SchoolCode,
+                                                        type = a.Key.type,
+                                                        ShouldComeSchoolCount = a.Sum(w => w.ShouldComeSchoolCount),
+                                                        ActualComeSchoolCount = a.Sum(w => w.ActualComeSchoolCount),
+                                                        ComeSchoolHotCount = a.Sum(w => w.ComeSchoolHotCount),
+                                                        NotComeSchoolCount = a.Sum(w => w.NotComeSchoolCount),
+                                                        NotComeSchoolByHotCount = a.Sum(w => w.NotComeSchoolByHotCount),
+                                                        NotComeSchoolByOutCount = a.Sum(w => w.NotComeSchoolByOutCount),
+                                                        NotComeSchoolByOtherCount = a.Sum(w => w.NotComeSchoolByOtherCount)
+                                                    }
+                                                    );
+            template_Students.AddRange(searchresultGao);
+
+            //早
+            return template_Students;
+        }
 
 
     }

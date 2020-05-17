@@ -107,7 +107,7 @@ namespace Dto.Repository.SmallRoutine
 
             predicate = predicate.And(p =>p.GradeCode.Substring(0,2).Equals(code));
 
-            var result = DbSet.Where(predicate).ToList();
+            var result = DbSet.Where(predicate).OrderBy(a=>a.GradeCode).ToList();
             return result;
         }
 

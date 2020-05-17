@@ -55,7 +55,7 @@ namespace Dto.Repository.SmallRoutine
 
         public IQueryable<School_Info> GetAll()
         {
-            throw new NotImplementedException();
+            return DbSet.OrderBy(a=>a.SchoolCode).AsQueryable();
         }
 
         public School_Info GetById(Guid id)
