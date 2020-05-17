@@ -1,6 +1,6 @@
 2020-05-17 13:21:18.952 +08:00 [INF] host is start
 2020-05-17 13:21:41.935 +08:00 [FTL] Host terminated unexpectedly
-System.Data.SqlClient.SqlException (0x80131904): æ•°æ®åº“ä¸­å·²å­˜åœ¨åä¸º 'Health_Info' çš„å¯¹è±¡ã€‚
+System.Data.SqlClient.SqlException (0x80131904): Êı¾İ¿âÖĞÒÑ´æÔÚÃûÎª 'Health_Info' µÄ¶ÔÏó¡£
    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
    at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
    at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
@@ -14,7 +14,7 @@ System.Data.SqlClient.SqlException (0x80131904): æ•°æ®åº“ä¸­å·²å­˜åœ¨åä¸º 'He
    at Microsoft.EntityFrameworkCore.Migrations.Internal.MigrationCommandExecutor.ExecuteNonQuery(IEnumerable`1 migrationCommands, IRelationalConnection connection)
    at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.Migrate(String targetMigration)
    at Microsoft.EntityFrameworkCore.RelationalDatabaseFacadeExtensions.Migrate(DatabaseFacade databaseFacade)
-   at SmallRoutine.Startup.Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory) in E:\å·¥ä½œ\2020å¹´é¡¹ç›®\æ³°è¾¾è¡—å°ç¨‹åº\å­¦ç”Ÿå¤è¯¾\SmallRoutine\Startup.cs:line 238
+   at SmallRoutine.Startup.Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory) in E:\¹¤×÷\2020ÄêÏîÄ¿\Ì©´ï½ÖĞ¡³ÌĞò\Ñ§Éú¸´¿Î\SmallRoutine\Startup.cs:line 238
 --- End of stack trace from previous location where exception was thrown ---
    at Microsoft.AspNetCore.Hosting.ConventionBasedStartup.Configure(IApplicationBuilder app)
    at Microsoft.AspNetCore.Mvc.Internal.MiddlewareFilterBuilderStartupFilter.<>c__DisplayClass0_0.<Configure>g__MiddlewareFilterBuilder|0(IApplicationBuilder builder)
@@ -25,7 +25,7 @@ System.Data.SqlClient.SqlException (0x80131904): æ•°æ®åº“ä¸­å·²å­˜åœ¨åä¸º 'He
    at Microsoft.AspNetCore.Hosting.WebHostExtensions.RunAsync(IWebHost host, CancellationToken token, String shutdownMessage)
    at Microsoft.AspNetCore.Hosting.WebHostExtensions.RunAsync(IWebHost host, CancellationToken token)
    at Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(IWebHost host)
-   at SmallRoutine.Program.Main(String[] args) in E:\å·¥ä½œ\2020å¹´é¡¹ç›®\æ³°è¾¾è¡—å°ç¨‹åº\å­¦ç”Ÿå¤è¯¾\SmallRoutine\Program.cs:line 39
+   at SmallRoutine.Program.Main(String[] args) in E:\¹¤×÷\2020ÄêÏîÄ¿\Ì©´ï½ÖĞ¡³ÌĞò\Ñ§Éú¸´¿Î\SmallRoutine\Program.cs:line 39
 ClientConnectionId:e5860508-85a4-4887-84e3-dcdb40648961
 Error Number:2714,State:6,Class:16
 2020-05-17 13:21:59.289 +08:00 [INF] host is start
@@ -36,6 +36,3 @@ Error Number:2714,State:6,Class:16
 2020-05-17 16:34:15.695 +08:00 [INF] host is start
 2020-05-17 16:37:15.368 +08:00 [INF] host is start
 2020-05-17 16:39:18.033 +08:00 [INF] host is start
-2020-05-17 16:46:43.717 +08:00 [INF] host is start
-2020-05-17 17:16:53.482 +08:00 [INF] host is start
-2020-05-17 17:20:12.733 +08:00 [INF] host is start
