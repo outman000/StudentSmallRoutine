@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Dto.IService.SmallRoutine;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SmallRoutine.Application;
 using ViewModel.SmallRoutine.RequestViewModel.StatasticViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel.StatasticViewModel;
 
@@ -15,10 +16,12 @@ namespace SmallRoutine.Controllers
     public class StatisticsController : ControllerBase
     {
         private readonly IStatisticsService   istatisticsService;
+        private readonly IStudentReportQueries _studentReportQueries;
 
-        public StatisticsController(IStatisticsService statisticsService)
+        public StatisticsController(IStatisticsService statisticsService, IStudentReportQueries studentReportQueries)
         {
             istatisticsService = statisticsService;
+            _studentReportQueries = studentReportQueries;
         }
 
         [HttpPost("/report/StudentBaseReport")]
@@ -47,5 +50,31 @@ namespace SmallRoutine.Controllers
             return Ok(employBaseResModel);
         }
 
+        /// <summary>
+        /// 获取某一个学校下的教职员工和学生数据
+        /// </summary>
+        /// <param name="studentStasticSearchViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("/report/GetSecondListReport")]
+        public ActionResult<StudentReportResModel> GetSecondListReport(StudentStasticSearchViewModel studentStasticSearchViewModel)
+        {
+            try
+            {
+                StudentReportResModel result = new StudentReportResModel();
+                var listStudent = _studentReportQueries.GetStudentReportList(studentStasticSearchViewModel);
+                var listEmployee = _studentReportQueries.GetEmployeeeReportList(studentStasticSearchViewModel);
+
+                result.studentComtemlateMiddles = listStudent;
+                result.employReportMiddles = listEmployee;
+                result.IsSuccess = true;
+                result.baseViewModel.Message = "查询成功";
+                result.baseViewModel.ResponseCode = 200;
+                return Ok(result);
+            }
+            catch(Exception e)
+            {
+                return NotFound("系统错误请联系管理员");
+            }
+        }
     }
 }

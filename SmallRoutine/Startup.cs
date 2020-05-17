@@ -22,6 +22,7 @@ using AutofacSerilogIntegration;
 using SystemFilter.PublicFilter;
 using Microsoft.Extensions.Logging;
 using ViewModel.SmallRoutine.MiddelViewModel;
+using SmallRoutine.Application;
 
 namespace SmallRoutine
 {
@@ -180,7 +181,10 @@ namespace SmallRoutine
               .AsImplementedInterfaces();
 
 
-
+            //注入dapper查询
+            builder.Register(c=>new StudentReportQueries(connection))
+                .As<IStudentReportQueries>()
+                .InstancePerLifetimeScope();
 
             builder.RegisterLogger(autowireProperties: true);
             //将services填充到Autofac容器生成器中
