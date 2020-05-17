@@ -7,7 +7,7 @@ namespace ViewModel.SmallRoutine.RequestViewModel.StatasticViewModel
     public  class BaseStudentStasticViewModel
     {
         /// <summary>
-        /// 日期
+        /// 日期 
         /// </summary>
         public DateTime? createdate { get; set; }
         /// <summary>
