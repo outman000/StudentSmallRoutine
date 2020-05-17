@@ -53,7 +53,7 @@ namespace SmallRoutine.Controllers
         /// <summary>
         /// 获取某一个学校下的教职员工和学生数据
         /// </summary>
-        /// <param name="studentStasticSearchViewModel"></param>
+        /// <param name="studentStasticSearchViewModel">查询模型</param>
         /// <returns></returns>
         [HttpPost("/report/GetSecondListReport")]
         public ActionResult<StudentReportResModel> GetSecondListReport(StudentStasticSearchViewModel studentStasticSearchViewModel)
@@ -75,6 +75,32 @@ namespace SmallRoutine.Controllers
             {
                 return NotFound("系统错误请联系管理员");
             }
+        }
+
+        /// <summary>
+        /// 获取教职员工及学生总体数据
+        /// </summary>
+        /// <param name="studentStasticSearchViewModel">查询模型</param>
+        /// <returns></returns>
+        [HttpPost("/report/GetStudentAndEmployeeListReport")]
+        public ActionResult<StudentAndEmployeeReportResModel> GetStudentAndEmployeeListReport(StudentStasticSearchViewModel studentStasticSearchViewModel)
+        {
+            try
+            {
+                StudentAndEmployeeReportResModel result = new StudentAndEmployeeReportResModel();
+                var list = _studentReportQueries.GetListBySearchModel(studentStasticSearchViewModel);
+                result.studentAndEmployeeReportMiddles = list;
+                result.IsSuccess = true;
+                result.baseViewModel.Message = "查询成功";
+                result.baseViewModel.ResponseCode = 200;
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return NotFound("系统错误请联系管理员");
+            }
+
         }
     }
 }

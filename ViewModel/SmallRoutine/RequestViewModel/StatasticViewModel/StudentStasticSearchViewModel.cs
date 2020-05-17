@@ -15,15 +15,15 @@ namespace ViewModel.SmallRoutine.RequestViewModel.StatasticViewModel
         /// </summary>
         public DateTime? EndDate { get; set; }
         /// <summary>
-        /// 学校编号
+        /// 学校编号  查询全部教职工和学生数据时该字段为空
         /// </summary>
         public string SchoolCode { get; set; }
         /// <summary>
-        /// 到校前 早午晚类型
+        /// 到校前 早午晚类型   
         /// </summary>
         public string Type { get; set; }
         /// <summary>
-        /// 年级 默认传递空值  空值、高中、初中、小学 
+        /// 年级（延展字段） 默认传递空值  --空值、高中、初中、小学 --
         /// </summary>
         public string GradeName { get; set; }
     }
