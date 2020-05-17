@@ -10,7 +10,7 @@ using ViewModel.SmallRoutine.RequestViewModel.StatasticViewModel;
 
 namespace SmallRoutine.Application
 {
-    public class StudentReportQueries: IStudentReportQueries
+    public class StudentReportQueries : IStudentReportQueries
     {
         private string _connectionString = string.Empty;
 
@@ -29,9 +29,9 @@ namespace SmallRoutine.Application
         {
             List<StudentReportMiddle> result = new List<StudentReportMiddle>();
 
-            if(searchModel.GradeName==null|| searchModel.GradeName =="")
+            if (searchModel.GradeName == null || searchModel.GradeName == "")
             {
-                var gz = GetStudentListBySearchModel(searchModel, "'10','11','12'","高中");
+                var gz = GetStudentListBySearchModel(searchModel, "'10','11','12'", "高中");
                 result.AddRange(gz);
                 var cz = GetStudentListBySearchModel(searchModel, "'7','8','9'", "初中");
                 result.AddRange(cz);
@@ -82,7 +82,7 @@ namespace SmallRoutine.Application
                 strSql.Append(" and  CreateDate<'" + searchModel.EndDate + "'");
             //if (grade != "")
             //    strSql.Append(" and GradeName in(" + grade + ")");
-            if(searchModel.Type != null && searchModel.Type != "")
+            if (searchModel.Type != null && searchModel.Type != "")
                 strSql.Append(" and type='" + searchModel.Type + "'");
 
             strSql.Append("  Group By SchoolCode,SchoolName");
@@ -94,10 +94,10 @@ namespace SmallRoutine.Application
                 connection.Close();
             }
 
-                return result;
+            return result;
         }
 
-        private List<StudentReportMiddle> GetStudentListBySearchModel(StudentStasticSearchViewModel searchModel, string grade,string gradeName)
+        private List<StudentReportMiddle> GetStudentListBySearchModel(StudentStasticSearchViewModel searchModel, string grade, string gradeName)
         {
             List<StudentReportMiddle> result = new List<StudentReportMiddle>();
             StringBuilder strSql = new StringBuilder();
@@ -129,6 +129,60 @@ namespace SmallRoutine.Application
             {
                 connection.Open();
                 result = connection.Query<StudentReportMiddle>(strSql.ToString()).ToList();
+                connection.Close();
+            }
+
+            return result;
+        }
+
+
+        public List<StudentAndEmployeeReportMiddles> GetListBySearchModel(StudentStasticSearchViewModel searchModel)
+        {
+            List<StudentAndEmployeeReportMiddles> result = new List<StudentAndEmployeeReportMiddles>();
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select info.* from( ");
+            strSql.Append("select SchoolCode,SchoolName, '学生' as Name, SUM(ShouldComeSchoolCount) as ShouldComeSchoolCount");
+            strSql.Append(",SUM(ActualComeSchoolCount) ActualComeSchoolCount,SUM(ComeSchoolHotCount) ComeSchoolHotCount");
+            strSql.Append(",SUM(NotComeSchoolCount) NotComeSchoolCount,SUM(NotComeSchoolByOutCount) NotComeSchoolByOutCount");
+            strSql.Append(",SUM(NotComeSchoolByHotCount) NotComeSchoolByHotCount,SUM(NotComeSchoolByOtherCount)  NotComeSchoolByOtherCount ");
+            strSql.Append("  from  Template_Student where 1=1");
+            if (searchModel.SchoolCode != null && searchModel.SchoolCode != "")
+                strSql.Append(" and SchoolCode='" + searchModel.SchoolCode + "'");
+            if (searchModel.StartDate != null && searchModel.EndDate != null)
+                strSql.Append(" and  CreateDate between '" + searchModel.StartDate + "' and '" + searchModel.EndDate + "'");
+            else if (searchModel.StartDate != null && searchModel.EndDate == null)
+                strSql.Append(" and  CreateDate>'" + searchModel.StartDate + "'");
+            else if (searchModel.StartDate == null && searchModel.EndDate != null)
+                strSql.Append(" and  CreateDate<'" + searchModel.EndDate + "'");
+            if (searchModel.Type != null && searchModel.Type != "")
+                strSql.Append(" and type='" + searchModel.Type + "'");
+
+            strSql.Append("  Group By SchoolCode,SchoolName");
+            strSql.Append(" union ");
+            strSql.Append("select SchoolCode,SchoolName, '教职工' as Name, SUM(ShouldComeSchoolCount) as ShouldComeSchoolCount");
+            strSql.Append(",SUM(ActualComeSchoolCount) ActualComeSchoolCount,SUM(ComeSchoolHotCount) ComeSchoolHotCount");
+            strSql.Append(",SUM(NotComeSchoolCount) NotComeSchoolCount,SUM(NotComeSchoolByOutCount) NotComeSchoolByOutCount");
+            strSql.Append(",SUM(NotComeSchoolByHotCount) NotComeSchoolByHotCount,SUM(NotComeSchoolByOtherCount)  NotComeSchoolByOtherCount ");
+            strSql.Append("  from  Template_Employment where 1=1");
+            if (searchModel.SchoolCode != null && searchModel.SchoolCode != "")
+                strSql.Append(" and SchoolCode='" + searchModel.SchoolCode + "'");
+            if (searchModel.StartDate != null && searchModel.EndDate != null)
+                strSql.Append(" and  CreateDate between '" + searchModel.StartDate + "' and '" + searchModel.EndDate + "'");
+            else if (searchModel.StartDate != null && searchModel.EndDate == null)
+                strSql.Append(" and  CreateDate>'" + searchModel.StartDate + "'");
+            else if (searchModel.StartDate == null && searchModel.EndDate != null)
+                strSql.Append(" and  CreateDate<'" + searchModel.EndDate + "'");
+            if (searchModel.Type != null && searchModel.Type != "")
+                strSql.Append(" and type='" + searchModel.Type + "'");
+
+            strSql.Append("  Group By SchoolCode,SchoolName");
+
+            strSql.Append(" ) as info ");
+            strSql.Append(" order by info.SchoolCode,info.Name desc");
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                result = connection.Query<StudentAndEmployeeReportMiddles>(strSql.ToString()).ToList();
                 connection.Close();
             }
 
