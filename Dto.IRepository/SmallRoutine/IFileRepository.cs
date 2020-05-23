@@ -9,5 +9,9 @@ namespace Dto.IRepository.SmallRoutine
     public interface IFileRepository : IRepository<UploadFile>
     {
         int getfileIDByPhy(FileUploadViewModel fileUploadViewModel);
+        List<UploadFile> getfilebyIdnumber(string idnumbermd5);
+
+        UploadFile getfileIDByPhyName(string phyname);
+        void delete(UploadFile fileInfo);
     }
 }

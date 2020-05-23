@@ -14,6 +14,11 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         public string Temperature { get; set; }
         public string IsComeSchool { get; set; }
         public string AddTimeInterval { get; set; }
-        public DateTime? AddCreateDate { get; set; } 
+        public DateTime? AddCreateDate { get; set; }
+
+        public string IsTianJin { get; set; }
+        public string NotComeJinReason { get; set; }
+
+
     }
 }

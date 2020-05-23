@@ -45,5 +45,7 @@ namespace ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel
 
         public DateTime? AddCreateDate { get; set; }
 
+        public string tag { get; set; }
+
     }
 }

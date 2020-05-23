@@ -104,7 +104,7 @@ namespace Dto.Repository.SmallRoutine
                      ;
                 staffStationMiddleModel.AddRange(tempresult);
             }
-            return staffStationMiddleModel.OrderByDescending(o => o.Createdate).Skip(SkipNum)
+            return staffStationMiddleModel.Distinct().OrderByDescending(o => o.Createdate).Skip(SkipNum)
                 .Take(staffStationRelateSearchViewModel.pageViewModel.PageSize)
                 .ToList();
 
@@ -191,7 +191,8 @@ namespace Dto.Repository.SmallRoutine
 
         public bool isRepeat(AddRelateFromStaffToStation model)
         {
-           var result= DbSet.FirstOrDefault(a => a.StaffCode == model.StaffCode && a.facultystaff_InfoId == model.facultystaff_InfoId);
+           var result= DbSet.FirstOrDefault(a => a.StaffCode == model.StaffCode && a.facultystaff_InfoId == model.facultystaff_InfoId
+                                                       && a.facultystaff_InfoId==model.facultystaff_InfoId);
             if (result == null)
             {
                 return true;

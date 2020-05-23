@@ -13,6 +13,7 @@ namespace Dto.IRepository.SmallRoutine
         void   RemoveList(List<int> ids);
          
         List<Student_DayandNight_Info> SearchDayAndNightList(DayAndNightSearchViewModel dayAndNightSearchViewModel);
-
+        List<Student_DayandNight_Info> getInfoByTag(string tag);
+        void deleteRange(List<Student_DayandNight_Info> list);
     }
 }

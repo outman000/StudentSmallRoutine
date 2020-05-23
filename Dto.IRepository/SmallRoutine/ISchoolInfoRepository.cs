@@ -13,5 +13,9 @@ namespace Dto.IRepository.SmallRoutine
 
         //验证是否学校信息是否存在
         bool CheckInfo(string code, string name);
+
+        bool CheckInfoByname(string name);
+        School_Info GetSchoolCodeByName(string v);
+      
     }
 }

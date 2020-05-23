@@ -44,6 +44,11 @@ namespace ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel
         /// </summary>
         public string AddTimeInterval { get; set; }
 
+        /// <summary>
+        /// 标签
+        /// </summary>
+        public string tag { get; set; }
+
 
         /// <summary>
         /// 分页

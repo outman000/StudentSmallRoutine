@@ -30,26 +30,30 @@ namespace Dto.Service.SmallRoutine
         {
 
             var insertInfo = _IMapper.Map<HealthEveryAddViewModel, Health_Info>(healthEveryAddViewModel);
+            var isexist= healthRepository.existhealthInfo(healthEveryAddViewModel);
 
-            healthRepository.Add(insertInfo);
-
-            healthRepository.SaveChanges();//添加每日健康信息
-
-            var insertHealth = healthRepository.getByidNumber(insertInfo.IdNumber);//查询插入的 mapper中加密
-            var facultystaff = facultystaffInfoRepository.getByidNumber(insertInfo.IdNumber);//查询白绑定的基础信息
-            var studentInfo = studentInfoRepository.getByidNumber(insertInfo.IdNumber);
-
-            if (facultystaff != null)//不复制键值
+            if (!isexist)
             {
-                insertInfo.facultystaff_InfoId= facultystaff.id;
-                healthRepository.Update(insertInfo);
+                healthRepository.Add(insertInfo);
+                healthRepository.SaveChanges();//添加每日健康信息
+
+
+                var insertHealth = healthRepository.getByidNumber(insertInfo.IdNumber);//查询插入的 mapper中加密
+                var facultystaff = facultystaffInfoRepository.getByidNumber(insertInfo.IdNumber);//查询白绑定的基础信息
+                var studentInfo = studentInfoRepository.getByidNumber(insertInfo.IdNumber);
+
+                if (facultystaff != null)//不复制键值
+                {
+                    insertInfo.facultystaff_InfoId = facultystaff.id;
+                    healthRepository.Update(insertInfo);
+                }
+                if (studentInfo != null)
+                {
+                    insertInfo.Student_InfoId = studentInfo.id;
+                    healthRepository.Update(insertInfo);
+                }
+                healthRepository.SaveChanges();
             }
-            if (studentInfo != null)
-            {
-                insertInfo.Student_InfoId = studentInfo.id;
-                healthRepository.Update(insertInfo);
-            }
-            healthRepository.SaveChanges();
         }
 
 

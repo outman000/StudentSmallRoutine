@@ -86,6 +86,30 @@ namespace Dto.Service.Extension
                         //根据列名定位列，然后通过迭代定位行
                         var val = worksheet.Cells[row, GetColumnByName(worksheet, col.Column)];
                         //  var aaaaa = val.GetValue();
+                     
+
+
+
+                        if (col.Column.Equals("身份证号"))
+                        {
+                            col.Property.SetValue(tnew, MD5.Md5Hash(val.GetValue<string>().Trim()));
+                            return;
+                        }
+                        if (col.Column.Equals("应填报时间"))
+                        {
+                            var aa = val.GetValue<string>();
+                            if (val.GetValue<string>() == null)
+                            {
+                                col.Property.SetValue(tnew, DateTime.Now);
+                            }
+                            else
+                            {
+                                col.Property.SetValue(tnew, val.GetValue<DateTime?>());
+                            }
+                            return;
+                        }
+
+
                         if (col.Column.Equals("身份证号/护照号"))
                         {
                             col.Property.SetValue(tnew, MD5.Md5Hash(val.GetValue<string>().Trim()));

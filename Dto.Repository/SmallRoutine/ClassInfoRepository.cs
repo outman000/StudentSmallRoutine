@@ -113,11 +113,12 @@ namespace Dto.Repository.SmallRoutine
             return result;
         }
 
+        public Class_Info GetClassCodeByGradeCode(Grade_Info gradeCode, string v)
+        {
+            if (gradeCode == null)
+                return null;
 
-
-
-      
-
-
+           return DbSet.FirstOrDefault(a => a.ClassCode.StartsWith(gradeCode.GradeCode) && a.ClassName == v);
+        }
     }
 }

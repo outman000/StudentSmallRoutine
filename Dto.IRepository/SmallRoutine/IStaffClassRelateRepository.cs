@@ -17,5 +17,11 @@ namespace Dto.IRepository.SmallRoutine
         List<TeacherSearchClassMiddle> GetClassByTeacher(int UserKey);
         List<TeacherSearchClassAllMiddle> GetClassByTeacherAll(int userKeyId);
         bool isRepeat(AddRelateFromStaffToClassViewModel model);
+
+        List<string> GetResponsibleClassByIdnumber(String idnumber);
+        List<string> GetResponsibleGradeByIdnumber(String idnumber);
+
+        int GetResponsibleClassPeopleNumber(String ClassCode);
+
     }
 }

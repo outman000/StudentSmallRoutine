@@ -84,7 +84,7 @@ namespace Dto.Repository.SmallRoutine
         {
             //查询条件
             var predicate = WhereExtension.True<Grade_Info>();//初始化where表达式
-           
+
             predicate = predicate.And(p => p.GradeCode.Equals(code));
             predicate = predicate.And(p => p.GradeName.Equals(name));
 
@@ -105,11 +105,19 @@ namespace Dto.Repository.SmallRoutine
             //查询条件
             var predicate = WhereExtension.True<Grade_Info>();//初始化where表达式
 
-            predicate = predicate.And(p =>p.GradeCode.Substring(0,2).Equals(code));
+            predicate = predicate.And(p => p.GradeCode.Substring(0, 2).Equals(code));
 
-            var result = DbSet.Where(predicate).OrderBy(a=>a.GradeCode).ToList();
+            var result = DbSet.Where(predicate).OrderBy(a => a.GradeCode).ToList();
             return result;
         }
 
+        public Grade_Info GetGradeCodeBySchoolCode(School_Info school_Info, string v)
+        {
+            if (school_Info == null)
+            {
+                return null;
+            }
+            return DbSet.FirstOrDefault(a => a.GradeCode.StartsWith(school_Info.SchoolCode) && a.GradeName == v);
+        } 
     }
 }

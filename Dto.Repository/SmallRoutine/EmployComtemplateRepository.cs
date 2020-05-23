@@ -51,6 +51,11 @@ namespace Dto.Repository.SmallRoutine
             {
                 Template_Employment template_Student = new Template_Employment();
 
+                if (station_Infos[i].StaffCode == "050601")
+                {
+                    var aa = "aaa";
+                }
+
 
 
                 var worker = Db.facultystaff_Info.FirstOrDefault(a => a.StaffCode == station_Infos[i].StaffCode);
@@ -74,21 +79,27 @@ namespace Dto.Repository.SmallRoutine
                 //到了发热
                 template_Student.ComeSchoolHotCount = 0;
                 //未到
-                template_Student.NotComeSchoolCount = Db.facultystaff_Info.Where(a => a.StaffCode == station_Infos[i].StaffCode)
-                                                       .Count();
-             
+                template_Student.NotComeSchoolCount = Db.Health_Info.Where(a => a.CheckType == "到校前" && a.facultystaff_Info != null && a.IsComeSchool=="否"
+                                                                                && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                                                                                && a.facultystaff_Info.station_Info.StaffCode == station_Infos[i].StaffCode
+                                                                     ).Count();
+
                 //因为发热没到
                 template_Student.NotComeSchoolByHotCount = Db.Health_Info.Where(a => a.CheckType == "到校前" && a.facultystaff_Info != null && Convert.ToDecimal(a.Temperature) >= 37.2m
-                                                                                 && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                                                                                 && a.IsComeSchool == "否"
+                                                                                && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
                                                                                 && a.facultystaff_Info.station_Info.StaffCode == station_Infos[i].StaffCode
                                                                      ).Count();
                 //其他原因没到      
-                template_Student.NotComeSchoolByOtherCount = Db.Health_Info.Where(a => a.CheckType == "到校前" && a.facultystaff_Info != null && a.NotComeSchoolReason == "其他"
+                template_Student.NotComeSchoolByOtherCount = Db.Health_Info.Where(a => a.CheckType == "到校前" && a.facultystaff_Info != null
+                                                                                    && a.IsComeSchool == "否"
+                                                                                    && a.NotComeSchoolReason == "其他"
                                                                                    && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
                                                                                     && a.facultystaff_Info.station_Info.StaffCode == station_Infos[i].StaffCode
                                                                                 ).Count();
                 //因为在外地没到
-                template_Student.NotComeSchoolByOutCount = Db.Health_Info.Where(a => a.CheckType == "到校前" && a.facultystaff_Info != null && a.IsTianJin == "未在津"
+                template_Student.NotComeSchoolByOutCount = Db.Health_Info.Where(a => a.CheckType == "到校前" && a.facultystaff_Info != null && a.IsTianJin == "否"
+                                                                                   && a.IsComeSchool == "否"
                                                                                 && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
                                                                                  && a.facultystaff_Info.station_Info.StaffCode == station_Infos[i].StaffCode
                                                                              ).Count();
@@ -109,8 +120,11 @@ namespace Dto.Repository.SmallRoutine
             for (int i = 0; i < station_Infos.Count(); i++)
             {
                 Template_Employment template_Student = new Template_Employment();
+                if (i == 83) {
 
-                if (station_Infos[i].StaffCode == "010704")
+                    var aa33 = "aaa";
+                }
+                if (station_Infos[i].StaffCode == "010601")
                 {
                     var aa = "aaa";
                 }
@@ -119,7 +133,7 @@ namespace Dto.Repository.SmallRoutine
                 var worker = Db.facultystaff_Info.FirstOrDefault(a => a.StaffCode == station_Infos[i].StaffCode);
                 if (worker == null)
                 {
-                    return;
+                    continue;
                 }
 
                 template_Student.SchoolName = worker.SchoolName;
@@ -156,7 +170,9 @@ namespace Dto.Repository.SmallRoutine
                                                                                       ).Count();
                 //未到
                 template_Student.NotComeSchoolCount = Db.Health_Info.Where(a => a.IsComeSchool == "否" && a.CheckType == "晨" && a.facultystaff_Info != null
-                                                                                        && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")).Count();
+                                                                                        && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                                                                                         && a.facultystaff_Info.station_Info.StaffCode == station_Infos[i].StaffCode
+                                                                                        ).Count();
                 //因为发热没到
                 template_Student.NotComeSchoolByHotCount = Db.Health_Info.Where(a => a.CheckType == "晨" && Convert.ToDecimal(a.Temperature) >= 37.2m
                                                                                  && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
@@ -170,7 +186,7 @@ namespace Dto.Repository.SmallRoutine
                                                                                    && a.facultystaff_Info.station_Info.StaffCode == station_Infos[i].StaffCode
                                                                      ).Count();
                 //因为在外地没到
-                template_Student.NotComeSchoolByOutCount = Db.Health_Info.Where(a => a.CheckType == "晨" && a.IsTianJin == "未在津" && a.facultystaff_Info != null
+                template_Student.NotComeSchoolByOutCount = Db.Health_Info.Where(a => a.CheckType == "晨" && a.IsTianJin == "否" && a.IsComeSchool == "否"  && a.facultystaff_Info != null
                                                                                 && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
                                                                                   && a.facultystaff_Info.station_Info.StaffCode == station_Infos[i].StaffCode
                                                                              ).Count();
@@ -192,7 +208,7 @@ namespace Dto.Repository.SmallRoutine
                 var worker = Db.facultystaff_Info.FirstOrDefault(a => a.StaffCode == station_Infos[i].StaffCode);
                 if (worker == null)
                 {
-                    return;
+                    continue;
                 }
 
                 template_Student.SchoolName = worker.SchoolName;
@@ -219,7 +235,7 @@ namespace Dto.Repository.SmallRoutine
                                                                                     && a.facultystaff_Info != null
                                                                                       && a.facultystaff_Info.station_Info.StaffCode == station_Infos[i].StaffCode
                                                                                       ).Count();
-                //未到 （未到+异常上报）
+                //未到 
                 template_Student.NotComeSchoolCount = Db.Health_Info.Where(a => a.IsComeSchool == "否" && a.CheckType == "午"
                                                                             && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
                                                                             && a.facultystaff_Info != null
@@ -240,7 +256,7 @@ namespace Dto.Repository.SmallRoutine
                                                                                    && a.facultystaff_Info.station_Info.StaffCode == station_Infos[i].StaffCode
                                                                      ).Count();
                 //因为在外地没到
-                template_Student.NotComeSchoolByOutCount = Db.Health_Info.Where(a => a.CheckType == "午" && a.IsTianJin == "未在津"
+                template_Student.NotComeSchoolByOutCount = Db.Health_Info.Where(a => a.CheckType == "午" && a.IsTianJin == "否" && a.IsComeSchool == "否"
                                                                                 && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
                                                                                 && a.facultystaff_Info != null
                                                                                   && a.facultystaff_Info.station_Info.StaffCode == station_Infos[i].StaffCode
@@ -264,7 +280,7 @@ namespace Dto.Repository.SmallRoutine
 
                 if (worker == null)
                 {
-                    return;
+                    continue;
                 }
                 template_Student.SchoolName = worker.SchoolName;
                 template_Student.SchoolCode = worker.SchoolCode;
@@ -309,7 +325,7 @@ namespace Dto.Repository.SmallRoutine
                                                                                    && a.facultystaff_Info.station_Info.StaffCode == station_Infos[i].StaffCode
                                                                      ).Count();
                 //因为在外地没到
-                template_Student.NotComeSchoolByOutCount = Db.Health_Info.Where(a => a.CheckType == "晚" && a.IsTianJin == "未在津"
+                template_Student.NotComeSchoolByOutCount = Db.Health_Info.Where(a => a.CheckType == "晚" && a.IsTianJin == "否" && a.IsComeSchool == "否"
                                                                                 && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
                                                                                 && a.facultystaff_Info != null
                                                                                   && a.facultystaff_Info.station_Info.StaffCode == station_Infos[i].StaffCode
@@ -323,16 +339,29 @@ namespace Dto.Repository.SmallRoutine
         {
 
             var station_Infos = Db.Station_Info.ToList();
+
+
             //所有班级生成早午晚见
             for (int i = 0; i < station_Infos.Count(); i++)
             {
                 Template_Employment template_Student = new Template_Employment();
-
+                var allschoolNight = DbSetHealth.Where(a => a.CheckType == "晚"
+                       && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                        && a.facultystaff_Info.station_Info.StaffCode == station_Infos[i].StaffCode).Count();
+                //午检查最晚的时间
+                var maxNoontime = Db.Health_Info.Where(a => a.CheckType == "午"
+                                                        && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                                                        && a.facultystaff_Info != null
+                                                            && a.facultystaff_Info.station_Info.StaffCode == station_Infos[i].StaffCode
+                                                        ).Select(w=>w.Createdate).Max();
+                //午检查后的异常人数
+                var exceptnum = Db.Except_Info_Employ.Where(a => a.CreateDate > maxNoontime 
+                                                && a.facultystaff_Info.StaffCode == station_Infos[i].StaffCode).Count();
 
                 var worker = Db.facultystaff_Info.FirstOrDefault(a => a.StaffCode == station_Infos[i].StaffCode);
                 if (worker == null)
                 {
-                    return;
+                    continue;
                 }
 
                 template_Student.SchoolName = worker.SchoolName;
@@ -345,25 +374,30 @@ namespace Dto.Repository.SmallRoutine
                 // 应道人数
                 template_Student.ShouldComeSchoolCount = Db.facultystaff_Info.Where(a => a.StaffCode == station_Infos[i].StaffCode)
                                                        .Count();
-                //实到
-                template_Student.ActualComeSchoolCount = Db.Health_Info.Where(a => a.IsComeSchool == "是"
+              
+
+
+                //实到(午-异常上报)
+                template_Student.ActualComeSchoolCount = Db.Health_Info.Where(a => a.IsComeSchool == "是" && a.CheckType == "午"
                                                                                     && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
                                                                                     && a.facultystaff_Info != null
                                                                                       && a.facultystaff_Info.station_Info.StaffCode == station_Infos[i].StaffCode
-                                                                                   ).Count();
+                                                                                   ).Count()- exceptnum;
+               
+
                 //到了发热
                 template_Student.ComeSchoolHotCount = Db.Health_Info.Where(a => a.IsComeSchool == "是" &&
                                                                                      a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd") &&
                                                                                     Convert.ToDecimal(a.Temperature) >= 37.2m
                                                                                     && a.facultystaff_Info != null
                                                                                       && a.facultystaff_Info.station_Info.StaffCode == station_Infos[i].StaffCode
-                                                                                    ).Count();
+                                                                                    ).Count()+exceptnum;
                 //未到
                 template_Student.NotComeSchoolCount = Db.Health_Info.Where(a => a.IsComeSchool == "否"
                                                                                         && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
                                                                                         && a.facultystaff_Info != null
                                                                                           && a.facultystaff_Info.station_Info.StaffCode == station_Infos[i].StaffCode
-                                                                                        ).Count();
+                                                                                        ).Count()+ exceptnum;
                 //因为发热没到
                 template_Student.NotComeSchoolByHotCount = Db.Health_Info.Where(a => Convert.ToDecimal(a.Temperature) >= 37.2m
                                                                                  && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
@@ -379,9 +413,10 @@ namespace Dto.Repository.SmallRoutine
                                                                                    && a.facultystaff_Info.station_Info.StaffCode == station_Infos[i].StaffCode
                                                                      ).Count();
                 //因为在外地没到
-                template_Student.NotComeSchoolByOutCount = Db.Health_Info.Where(a => a.IsTianJin == "未在津"
+                template_Student.NotComeSchoolByOutCount = Db.Health_Info.Where(a => a.IsTianJin == "否"
                                                                                 && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
                                                                                 && a.facultystaff_Info != null
+                                                                                 && a.IsComeSchool == "否"
                                                                                   && a.facultystaff_Info.station_Info.StaffCode == station_Infos[i].StaffCode
                                                                              ).Count();
                 template_Student.type = "天";

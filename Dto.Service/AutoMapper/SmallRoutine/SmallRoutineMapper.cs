@@ -172,6 +172,8 @@ namespace Dto.Service.AutoMapper.SmallRoutine
             CreateMap<Template_Student, StudentComtemlateMiddle>();
             CreateMap<Template_Employment, EmployComtemlateMiddle>();
 
+            CreateMap<UploadFile, FIleinfoMiddle>();
+
         }
     }
 }

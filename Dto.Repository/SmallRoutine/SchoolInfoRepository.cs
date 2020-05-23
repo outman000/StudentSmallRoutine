@@ -78,6 +78,25 @@ namespace Dto.Repository.SmallRoutine
             throw new NotImplementedException();
         }
 
+        //验证是否学校信息是否存在
+        public bool CheckInfoByname(string name)
+        {
+            //查询条件
+            var predicate = WhereExtension.True<School_Info>();//初始化where表达式
+            predicate = predicate.And(p => p.SchoolName.Equals(name));
+
+            var result = DbSet.Where(predicate).ToList();
+            if (result.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
 
         //验证是否学校信息是否存在
         public bool CheckInfo(string code, string name)
@@ -98,5 +117,12 @@ namespace Dto.Repository.SmallRoutine
                 return false;
             }
         }
+
+        public School_Info GetSchoolCodeByName(string v)
+        {
+            return DbSet.FirstOrDefault(a => a.SchoolName == v);
+        }
+
+     
     }
 }

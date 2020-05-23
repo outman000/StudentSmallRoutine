@@ -106,7 +106,7 @@ namespace SmallRoutine.Controllers
             if (result)
             {
                 loginValideResModel.Data.IdNumber="admin";
-                loginValideResModel.Data.SchoolCode = "";
+                loginValideResModel.Data.SchoolCode = "admin";
                 loginValideResModel.baseViewModel.Message = "登录成功";
                 loginValideResModel.baseViewModel.ResponseCode = 200;
                 loginValideResModel.IsSuccess = true;

@@ -23,7 +23,7 @@ namespace Dtol.dtol
         public string ClassName { get; set; }
         [ExcelAttribute("体温")]
         public string Temperature { get; set; }
-        [ExcelAttribute("是否到校（默认是）")] 
+        [ExcelAttribute("学生是否到校（默认是）")] 
         public string IsComeSchool { get; set; }
      
         [ExcelAttribute("填报时段（晨/午/晚）")]
@@ -32,10 +32,14 @@ namespace Dtol.dtol
 
         [ExcelAttribute("是否在津")]
         public string IsTianJin { get; set; }
-        [ExcelAttribute("未到津原因（是否在津选择是，这里勾选无）")]
+        [ExcelAttribute("未到校原因（是否到校选择是，这里勾选无）")]
         public string NotComeJinReason { get; set; }
         
         [ExcelAttribute("应填报时间")]
         public DateTime? AddCreateDate { get; set; } = DateTime.Now;
+
+
+        [ExcelAttribute("附件id")]
+        public string tag { get; set; }
     }
 }

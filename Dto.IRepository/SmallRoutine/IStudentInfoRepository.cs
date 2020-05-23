@@ -54,5 +54,9 @@ namespace Dto.IRepository.SmallRoutine
         List<ClassInfoSearchMiddleModel> GetClasslListContainId(GradeAndClassSearchViewModel gradeAndClassSearchViewModel);
         List<GradeInfoSearchMiddleModel> GetGradeListContainId(GradeAndClassSearchViewModel gradeAndClassSearchViewModel);
         void flushStudentClassId();
+
+
+        List<StudentIdnumberDTO> GetByAllIdnumbers();
+        List<Student_Info> getAllClassByCode(string classCode);
     }
 }

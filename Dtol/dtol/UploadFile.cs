@@ -36,7 +36,7 @@ namespace Dtol.dtol
         public string path_server { set; get; }
 
         /// <summary>
-        /// 上传进度
+        /// 上传人
         /// </summary>
         public string upload_percent { set; get; }
 

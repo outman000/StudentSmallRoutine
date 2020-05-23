@@ -223,5 +223,20 @@ namespace Dto.Repository.SmallRoutine
 
          
         }
+
+        public List<StudentIdnumberDTO> GetByAllIdnumbers()
+        {
+            List<StudentIdnumberDTO> result = DbSet.Where(a => a.IdNumber != null && a.IdNumber != "").Select(
+                   w => new StudentIdnumberDTO {
+                       Idnumber = w.IdNumber
+                   }
+                ).Distinct().ToList();
+            return result;
+        }
+
+        public List<Student_Info> getAllClassByCode(string classCode)
+        {
+           return DbSet.Where(a => a.ClassCode == classCode).ToList();
+        }
     }
 }
