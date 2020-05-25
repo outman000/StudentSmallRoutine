@@ -101,16 +101,14 @@ namespace Dto.Repository.SmallRoutine
         public List<DefaultDayAndNightMiddle> GetDefaultStudentsInfosByStaff(DayAndNightDefaultSearchViewModel dayAndNightDefaultSearchViewModel)
         {
             int SkipNum = dayAndNightDefaultSearchViewModel.pageViewModel.CurrentPageNum * dayAndNightDefaultSearchViewModel.pageViewModel.PageSize;
-            var preciaateStudent = GeInfoWhere(dayAndNightDefaultSearchViewModel);
-            List<Student_Info> student_Infos = new List<Student_Info>();
-            List<Health_Info> Health_Info = new List<Health_Info>();
+
+
             List<DefaultDayAndNightMiddle> staffClassMiddleModel = new List<DefaultDayAndNightMiddle>();
-            var searchResult = DbSet
-                .Where(a => a.facultystaff_InfoId == dayAndNightDefaultSearchViewModel.userKey)
-                .Include(a => a.Class_Info).ToList();
+            
             var dayandnightpreciate = GeInfoDayAndNightWhere(dayAndNightDefaultSearchViewModel);
 
             var wsssw = Db.Student_DayandNight_Info.Where(dayandnightpreciate);
+
             var wwwww = from relate in DbSet
                               .Where(a => a.facultystaff_InfoId == dayAndNightDefaultSearchViewModel.userKey)
                               .Include(a => a.Class_Info)
@@ -122,8 +120,9 @@ namespace Dto.Repository.SmallRoutine
                         into mergeinfoin  //这里是是班级对应当日的早午晚检查
                         from result in mergeinfoin.DefaultIfEmpty()
                         select new { studentinfo.IdNumber }
-
                         ;
+
+
 
             var aa = from relate in DbSet
                               .Where(a => a.facultystaff_InfoId == dayAndNightDefaultSearchViewModel.userKey)
