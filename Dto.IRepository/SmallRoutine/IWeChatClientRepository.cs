@@ -16,5 +16,7 @@ namespace Dto.IRepository.SmallRoutine
 
  
         WeChatInfoModel Decrypt(string code, string appId, string appSecret);
+
+        WechatUserInfo DecryptUserInfo(string encryptedData, string iv, string sessionKey);
     }
 }

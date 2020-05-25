@@ -31,6 +31,18 @@ namespace SmallRoutine.Controllers
             return resModel;
         }
 
+
+        /// <summary>
+        ///  (小程序端接口)  根据 code,iv,encryptedData   等信息获取用户基本信息
+        /// </summary>
+        [HttpPost("/GetOpenidAndUnionid")]
+        public ActionResult<WechatUserInfo> GetWeChartUserInfoNew(WeChatUserModel  weChatUser)
+        {
+            WechatUserInfo resModel = _weChatHttpClient.GetWeChartUserInfoNew(weChatUser);
+            return resModel;
+        }
+
+
         /// <summary>
         ///  (小程序端接口)  根据 登录用户名判断是否已经绑定该微信接收消息推送
         ///  /// </summary>
