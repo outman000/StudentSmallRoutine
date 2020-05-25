@@ -39,6 +39,17 @@ namespace Dto.Service.SmallRoutine
 
 
         /// <summary>
+        /// 获取用户基本信息 20200525
+        /// </summary>
+        public WechatUserInfo GetWeChartUserInfoNew(WeChatUserModel   userModel)
+        {
+            WeChatInfoModel InfoModel = _IWeChatClientRepository.Decrypt(userModel.code, _IOptions.Value.appid, _IOptions.Value.secret);
+            WechatUserInfo wechatUser = _IWeChatClientRepository.DecryptUserInfo(userModel.encryptedData, userModel.iv, InfoModel.session_key);
+            return wechatUser;
+        }
+
+
+        /// <summary>
         /// 根据 登录用户名判断是否已经绑定该微信接收消息推送  20200523
         /// </summary>
         public BaseViewModel CheckBindMsg(LoginViewModel  loginView)
