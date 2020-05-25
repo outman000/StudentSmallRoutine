@@ -98,7 +98,7 @@ namespace Dto.Repository.SmallRoutine
 
 
 
-        public List<DefaultDayAndNightMiddle> GetStudentsInfosByStaff(DayAndNightDefaultSearchViewModel dayAndNightDefaultSearchViewModel)
+        public List<DefaultDayAndNightMiddle> GetDefaultStudentsInfosByStaff(DayAndNightDefaultSearchViewModel dayAndNightDefaultSearchViewModel)
         {
             int SkipNum = dayAndNightDefaultSearchViewModel.pageViewModel.CurrentPageNum * dayAndNightDefaultSearchViewModel.pageViewModel.PageSize;
             var preciaateStudent = GeInfoWhere(dayAndNightDefaultSearchViewModel);
@@ -108,39 +108,52 @@ namespace Dto.Repository.SmallRoutine
             var searchResult = DbSet
                 .Where(a => a.facultystaff_InfoId == dayAndNightDefaultSearchViewModel.userKey)
                 .Include(a => a.Class_Info).ToList();
-            for (int i = 0; i < searchResult.Count(); i++)
-            {
-                var tempresult = Db.Student_Info.Where(a => a.class_InfoId == searchResult[i].Class_InfoId)
-                     .Where(preciaateStudent)
-                     .Select(a => new DefaultDayAndNightMiddle
-                     {
-                         id = a.id,
-                         ClassName = a.ClassName,
-                         GradeName = a.GradeName,
-                         IdNumber = a.IdNumber,
-                         Name = a.Name, 
-                         SchoolName=a.SchoolName
-                     }) 
-                     .ToList();
-                staffClassMiddleModel.AddRange(tempresult);
-            }
             var dayandnightpreciate = GeInfoDayAndNightWhere(dayAndNightDefaultSearchViewModel);
 
-            //var aa = from student in staffClassMiddleModel
-            //         join dayandnight in Db.Student_DayandNight_Info.Where(dayandnightpreciate)
-            //         on student.IdNumber equals dayandnight.IdNumber
-            //         into mergeinfo ;
+            var wsssw = Db.Student_DayandNight_Info.Where(dayandnightpreciate);
+            var wwwww = from relate in DbSet
+                              .Where(a => a.facultystaff_InfoId == dayAndNightDefaultSearchViewModel.userKey)
+                              .Include(a => a.Class_Info)
+                        join student in Db.Student_Info on relate.Class_InfoId equals student.class_InfoId
+                        into sth  //到这里是老师负责的所有班级的信息
+                        from studentinfo in sth
+                        join dayandnight in Db.Student_DayandNight_Info.Where(dayandnightpreciate)
+                         on studentinfo.IdNumber equals dayandnight.IdNumber
+                        into mergeinfoin  //这里是是班级对应当日的早午晚检查
+                        from result in mergeinfoin.DefaultIfEmpty()
+                        select new { studentinfo.IdNumber }
 
+                        ;
 
-
-
-
+            var aa = from relate in DbSet
+                              .Where(a => a.facultystaff_InfoId == dayAndNightDefaultSearchViewModel.userKey)
+                              .Include(a => a.Class_Info)
+                     join student in Db.Student_Info on relate.Class_InfoId equals student.class_InfoId
+                     into sth  //到这里是老师负责的所有班级的信息
+                     from studentinfo in sth
+                     join dayandnight in Db.Student_DayandNight_Info.Where(dayandnightpreciate)
+                      on studentinfo.IdNumber equals dayandnight.IdNumber
+                     into mergeinfo //这里是是班级对应当日的早午晚检查
+                     from result in mergeinfo.DefaultIfEmpty()//以基本信息为基础左关联查询
+                     select new DefaultDayAndNightMiddle
+                     {
+                         ClassName = studentinfo.ClassName,
+                         GradeName = studentinfo.GradeName,
+                         IdNumber = studentinfo.IdNumber,
+                         Name = studentinfo.Name,
+                         SchoolName = studentinfo.SchoolName,
+                         IsComeSchool = result.IsComeSchool==null? result.IsComeSchool:"",
+                         IsTianJin = result.IsTianJin == null ? result.IsTianJin : "",
+                         NotComeJinReason = result.NotComeJinReason == null ? result.NotComeJinReason : "",
+                         Temperature = result.Temperature == null ? result.Temperature : "",
+                         isup= result.IdNumber==null?"未上传" : "已上传"
+                     };
 
             staffClassMiddleModel = staffClassMiddleModel.Distinct().OrderBy(o => o.ClassName).Skip(SkipNum)
                 .Take(dayAndNightDefaultSearchViewModel.pageViewModel.PageSize)
               .ToList();
 
-            return null;
+            return staffClassMiddleModel;
 
         }
         public Expression<Func<Student_Info, bool>> GeInfoWhere(DayAndNightDefaultSearchViewModel  dayAndNightDefaultSearchViewModel)
@@ -160,9 +173,8 @@ namespace Dto.Repository.SmallRoutine
 
             var predicate = WhereExtension.True<Student_DayandNight_Info>();//初始化where表达式
                                                                 //姓名
-            predicate = predicate.And(p => p.ClassName.Contains(dayAndNightDefaultSearchViewModel.ClassCode));
-            predicate = predicate.And(p => p.GradeName.Contains(dayAndNightDefaultSearchViewModel.GradeCode));
-            predicate = predicate.And(p => p.Name.Contains(dayAndNightDefaultSearchViewModel.Name));
+            predicate = predicate.And(p => p.AddCreateDate.Value.ToString("yyyy-MM-dd").Contains(dayAndNightDefaultSearchViewModel.AddCreateDate.Value.ToString("yyyy-MM-dd")));
+            predicate = predicate.And(p => p.AddTimeInterval.Contains(dayAndNightDefaultSearchViewModel.AddTimeInterval));
             predicate = predicate.And(p => p.IdNumber.Contains(Dtol.Helper.MD5.Md5Hash(dayAndNightDefaultSearchViewModel.Idnumber)));
             return predicate;
         }

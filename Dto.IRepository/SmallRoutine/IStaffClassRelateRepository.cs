@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.MiddelViewModel.SecondMiddleViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.FacultystaffViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.StaffClassRelateViewModel;
 
@@ -22,6 +23,8 @@ namespace Dto.IRepository.SmallRoutine
         List<string> GetResponsibleGradeByIdnumber(String idnumber);
 
         int GetResponsibleClassPeopleNumber(String ClassCode);
+
+        List<DefaultDayAndNightMiddle> GetDefaultStudentsInfosByStaff(DayAndNightDefaultSearchViewModel dayAndNightDefaultSearchViewModel);
 
     }
 }
