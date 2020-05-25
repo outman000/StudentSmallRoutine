@@ -338,3 +338,5 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/Dtol/Migrations/20200523072126_updatetablen.cs
+/Dtol/Migrations/20200523072126_updatetablen.Designer.cs
