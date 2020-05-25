@@ -18,10 +18,6 @@ namespace ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel
         public string Idnumber { get; set; }
 
         /// <summary>
-        /// 早午晚检主键
-        /// </summary>
-        public int id { get; set; }
-        /// <summary>
         /// 学校名称
         /// </summary>
         public string SchoolCode { get; set; }
@@ -37,18 +33,15 @@ namespace ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel
         /// 班级编号
         /// </summary>
         public string ClassCode { get; set; }
-
-
         /// <summary>
         /// 时段
         /// </summary>
         public string AddTimeInterval { get; set; }
+
         /// <summary>
-        /// 应填报时间
+        /// 填报时间
         /// </summary>
-        public DateTime? AddCreateDate { get; set; } 
-
-
+        public DateTime? addCreatedate { get; set; }
 
         /// <summary>
         /// 分页
