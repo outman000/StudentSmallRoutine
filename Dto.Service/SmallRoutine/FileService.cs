@@ -102,40 +102,34 @@ namespace Dto.Service.SmallRoutine
             return _dayandNightRepository.SaveChanges();
         }
 
-        public DayAndNightStudentImportResModel InputStudentInfoTimeIntervalIntoDataBaseValide(string filePath, string randomname, string Idnumber)
+      
+        public DayAndNightStudentImportResModel InputStudentInfoTimeIntervalIntoDataBaseValide(DayAndNightAddViewModel dayAndNightAddViewModel)
         {
             DayAndNightStudentImportResModel dayAndNightStudentImportResModel = new DayAndNightStudentImportResModel();
 
+            var insetlist= _IMapper.Map<List<DayAndNightAddMiddle>, List<Student_DayandNight_Info>>(dayAndNightAddViewModel.dayAndNightAddMiddles);
 
-            var package = new ExcelPackage(new System.IO.FileInfo(filePath));
-            var workbook = package.Workbook;
-            var worksheet = workbook.Worksheets.First();
-            var StudentInfo = worksheet.ConvertSheetToObjects<Student_DayandNight_Info>(randomname).ToList();
-
-            var errorinfo = _valideService.ValideListDayAndNight<Student_DayandNight_Info>(StudentInfo, Idnumber);
-            errorinfo = _valideService.ValideListDayAndNightOverRall<Student_DayandNight_Info>(StudentInfo, Idnumber, errorinfo);
-            errorinfo = _valideService.ValideListDayAndNightNum<Student_DayandNight_Info>(StudentInfo, Idnumber, errorinfo);
-            errorinfo = _valideService.ValideListDayAndNightNumIdInClass<Student_DayandNight_Info>(StudentInfo, errorinfo);
+            var errorinfo = _valideService.ValideListDayAndNight<Student_DayandNight_Info>(insetlist, dayAndNightAddViewModel.idNumber);
+            errorinfo = _valideService.ValideListDayAndNightOverRall<Student_DayandNight_Info>(insetlist, dayAndNightAddViewModel.idNumber, errorinfo);
+            errorinfo = _valideService.ValideListDayAndNightNum<Student_DayandNight_Info>(insetlist, dayAndNightAddViewModel.idNumber, errorinfo);
+            errorinfo = _valideService.ValideListDayAndNightNumIdInClass<Student_DayandNight_Info>(insetlist, errorinfo);
 
             if (errorinfo.Length == 0)
             {
                 dayAndNightStudentImportResModel.IsSuccess = true;
                 dayAndNightStudentImportResModel.StringBuilder.Append("数据格式正确");
-                _dayandNightRepository.AddList(StudentInfo);
+                _dayandNightRepository.AddList(insetlist);
                 _dayandNightRepository.SaveChanges();
+                return dayAndNightStudentImportResModel;
             }
             else
             {
                 dayAndNightStudentImportResModel.IsSuccess = false;
-                dayAndNightStudentImportResModel.StringBuilder= errorinfo;
+                dayAndNightStudentImportResModel.StringBuilder = errorinfo;
+                return dayAndNightStudentImportResModel;
             }
-
-
-            //_dayandNightRepository.AddList(StudentInfo);
-            return dayAndNightStudentImportResModel;
-
-
         }
+
 
 
 
@@ -219,5 +213,6 @@ namespace Dto.Service.SmallRoutine
 
         }
 
+       
     }
 }

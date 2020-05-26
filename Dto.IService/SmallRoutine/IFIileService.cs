@@ -52,7 +52,7 @@ namespace Dto.IService.SmallRoutine
         void deleteDayandNightInfoByFile(DayAndNightDeleteByFIlesViewModel dayAndNightDeleteByFIlesViewModel);
 
 
-        DayAndNightStudentImportResModel InputStudentInfoTimeIntervalIntoDataBaseValide(string filePath, string randomname, string Idnumber);
+        DayAndNightStudentImportResModel InputStudentInfoTimeIntervalIntoDataBaseValide(DayAndNightAddViewModel dayAndNightAddViewModel);
 
 
         void deletebyfilephyid(string phyname);

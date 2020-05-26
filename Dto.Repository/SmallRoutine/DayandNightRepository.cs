@@ -30,6 +30,15 @@ namespace Dto.Repository.SmallRoutine
 
         public void AddList(List<Student_DayandNight_Info> obj)
         {
+            //for (int i = 0; i < obj.Count; i++)
+            //{
+            //    if (DbSet.FirstOrDefault(a => a.IdNumber == obj[i].IdNumber
+            //                                 && a.AddTimeInterval == obj[i].AddTimeInterval
+            //                                 && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == obj[i].AddCreateDate.Value.ToString("yyyy-MM-dd")
+            //                                )) 
+            //}
+
+
             DbSet.AddRange(obj);
         }
 
