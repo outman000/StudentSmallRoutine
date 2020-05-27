@@ -40,6 +40,27 @@ namespace SmallRoutine.Controllers
         }
 
         /// <summary>
+        /// 获取早午晚检信息(默认导入)
+        /// </summary>
+        /// <param name="dayAndNightDefaultSearchViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("/DayAndNight/DefaultDayAndNightInfo")]
+        public ActionResult<DefaultDayAndNightSearchResViewModel> getDefaultDayAndNightInfo(DayAndNightDefaultSearchViewModel   dayAndNightDefaultSearchViewModel)
+        {
+            DefaultDayAndNightSearchResViewModel dayAndNightSearchResViewModel = new DefaultDayAndNightSearchResViewModel();
+            var result = dayAndNightService.DefaultSearchDayAndNightListService(dayAndNightDefaultSearchViewModel);
+            dayAndNightSearchResViewModel.defaultDayAndNightMiddles = result;
+            dayAndNightSearchResViewModel.TotalNum = result.Count();
+            dayAndNightSearchResViewModel.baseViewModel.Message = "查询成功";
+            dayAndNightSearchResViewModel.baseViewModel.ResponseCode = 200;
+            return Ok(dayAndNightSearchResViewModel);
+        }
+
+
+
+
+
+        /// <summary>
         /// 更新早午晚检信息
         /// </summary>
         /// <param name="dayAndNightUpdateViewModel"></param>

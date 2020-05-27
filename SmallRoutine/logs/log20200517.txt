@@ -1,40 +1,12 @@
-2020-05-17 13:21:18.952 +08:00 [INF] host is start
-2020-05-17 13:21:41.935 +08:00 [FTL] Host terminated unexpectedly
-System.Data.SqlClient.SqlException (0x80131904): 数据库中已存在名为 'Health_Info' 的对象。
-   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
-   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
-   at System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
-   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite, String methodName)
-   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
-   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.Execute(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues)
-   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteNonQuery(IRelationalConnection connection, IReadOnlyDictionary`2 parameterValues)
-   at Microsoft.EntityFrameworkCore.Migrations.MigrationCommand.ExecuteNonQuery(IRelationalConnection connection, IReadOnlyDictionary`2 parameterValues)
-   at Microsoft.EntityFrameworkCore.Migrations.Internal.MigrationCommandExecutor.ExecuteNonQuery(IEnumerable`1 migrationCommands, IRelationalConnection connection)
-   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.Migrate(String targetMigration)
-   at Microsoft.EntityFrameworkCore.RelationalDatabaseFacadeExtensions.Migrate(DatabaseFacade databaseFacade)
-   at SmallRoutine.Startup.Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory) in E:\工作\2020年项目\泰达街小程序\学生复课\SmallRoutine\Startup.cs:line 238
---- End of stack trace from previous location where exception was thrown ---
-   at Microsoft.AspNetCore.Hosting.ConventionBasedStartup.Configure(IApplicationBuilder app)
-   at Microsoft.AspNetCore.Mvc.Internal.MiddlewareFilterBuilderStartupFilter.<>c__DisplayClass0_0.<Configure>g__MiddlewareFilterBuilder|0(IApplicationBuilder builder)
-   at Microsoft.AspNetCore.HostFilteringStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder app)
-   at Microsoft.AspNetCore.Hosting.Internal.AutoRequestServicesStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder builder)
-   at Microsoft.AspNetCore.Hosting.Internal.WebHost.BuildApplication()
-   at Microsoft.AspNetCore.Hosting.Internal.WebHost.StartAsync(CancellationToken cancellationToken)
-   at Microsoft.AspNetCore.Hosting.WebHostExtensions.RunAsync(IWebHost host, CancellationToken token, String shutdownMessage)
-   at Microsoft.AspNetCore.Hosting.WebHostExtensions.RunAsync(IWebHost host, CancellationToken token)
-   at Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(IWebHost host)
-   at SmallRoutine.Program.Main(String[] args) in E:\工作\2020年项目\泰达街小程序\学生复课\SmallRoutine\Program.cs:line 39
-ClientConnectionId:e5860508-85a4-4887-84e3-dcdb40648961
-Error Number:2714,State:6,Class:16
-2020-05-17 13:21:59.289 +08:00 [INF] host is start
-2020-05-17 13:23:01.340 +08:00 [INF] host is start
-2020-05-17 13:23:42.267 +08:00 [INF] host is start
-2020-05-17 13:38:22.112 +08:00 [INF] host is start
-2020-05-17 16:28:32.463 +08:00 [INF] host is start
-2020-05-17 16:34:15.695 +08:00 [INF] host is start
-2020-05-17 16:37:15.368 +08:00 [INF] host is start
-2020-05-17 16:39:18.033 +08:00 [INF] host is start
-2020-05-17 17:27:22.122 +08:00 [INF] host is start
-2020-05-17 17:27:58.342 +08:00 [INF] host is start
+2020-05-17 16:44:28.027 +08:00 [INF] host is start
+2020-05-17 17:00:24.595 +08:00 [INF] host is start
+2020-05-17 17:03:05.542 +08:00 [INF] host is start
+2020-05-17 17:03:24.597 +08:00 [INF] host is start
+2020-05-17 19:25:33.258 +08:00 [INF] host is start
+2020-05-17 19:30:21.888 +08:00 [INF] host is start
+2020-05-17 21:06:36.672 +08:00 [INF] host is start
+2020-05-17 21:18:19.819 +08:00 [INF] host is start
+2020-05-17 21:19:11.886 +08:00 [INF] host is start
+2020-05-17 21:19:32.887 +08:00 [INF] host is start
+2020-05-17 21:22:51.106 +08:00 [INF] host is start
+2020-05-17 21:37:32.568 +08:00 [INF] host is start

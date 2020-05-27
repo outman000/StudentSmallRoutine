@@ -8,13 +8,16 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using SystemFilter.PublicFilter;
 using ViewModel.PublicViewModel;
 using ViewModel.SmallRoutine;
 using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.RequestViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.BaseControlViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel.BaseControlViewModel;
+using ViewModel.SmallRoutine.ResponseViewModel.FileViewModel;
 
 namespace SmallRoutine.Controllers
 {
@@ -190,7 +193,7 @@ namespace SmallRoutine.Controllers
         /// <param name="file"></param>
         /// <returns></returns>
         [HttpPost("/StudentInfoDayAndNightUpload")]
-        public ActionResult UploadFile_StudentInfoTimeInterval(IFormFile file)
+        public ActionResult UploadFile_StudentInfoTimeInterval(IFormFile file,String idNumber)
         {
             FileUploadViewModel fileUploadViewModel = new FileUploadViewModel();
             var files = Request.Form.Files;
@@ -216,6 +219,7 @@ namespace SmallRoutine.Controllers
                 //fileUploadViewModel.Url = "http://60.28.108.84:3000/toufiles/" + formFile.FileName;
                 //fileUploadViewModel.Url = "https://bhteda.com.cn/toufiles/" + formFile.FileName;
                 fileUploadViewModel.PhysisticName = randomname;
+                fileUploadViewModel.upload_percent = Dtol.Helper.MD5.Md5Hash(idNumber);
                 _fileService.SaveFileInfo(fileUploadViewModel);
                 _fileService.InputStudentInfoTimeIntervalIntoDataBase(filePath, randomname);
 
@@ -223,6 +227,34 @@ namespace SmallRoutine.Controllers
             return Ok("导入成功");
 
         }
+        /// <summary>
+        /// 文件上传并导入数据（早午晚检学生）带验证
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="idNumber"></param>
+        /// <returns></returns>
+        [HttpPost("/StudentInfoDayAndNightUploadValide")]
+        public ActionResult UploadFile_StudentInfoTimeIntervalValide(DayAndNightAddViewModel dayAndNightAddViewModel)
+        {
+            FileUploadViewModel fileUploadViewModel = new FileUploadViewModel();
+            var files = Request.Form.Files;
+            String filePath = "";//上传文件的路径
+
+            if (files.Count == 0)
+            {
+                throw new ArgumentException("找不到上传的文件");
+            }
+            
+       
+                var result=  _fileService.InputStudentInfoTimeIntervalIntoDataBaseValide(dayAndNightAddViewModel);
+       
+            return Ok("未找到文件");
+
+        }
+
+
+
+
 
         /// <summary>
         /// 结构化基础数据
@@ -326,6 +358,32 @@ namespace SmallRoutine.Controllers
             baseView = _baseService.GetIdnumber(idnumber.Idnumber);
             return baseView;
         }
+
+
+        [HttpGet("/getMyFiles")]
+        public ActionResult<FileSearchResModel> GetFileInfoBy(string idnumber)
+        {
+            FileSearchResModel fileSearchResModel = new FileSearchResModel();
+            fileSearchResModel.fIleinfoMiddles = _fileService.GetFileInfoBy(idnumber);
+            fileSearchResModel.baseViewModel.Message = "查询成功";
+            fileSearchResModel.baseViewModel.ResponseCode = 200;
+            fileSearchResModel.IsSuccess = true;
+            return fileSearchResModel;
+        }
+
+        [HttpPost("/deleteMyFiles")]
+        [ValidateModel]
+
+        public ActionResult DeletefilesAndInfo (DayAndNightDeleteByFIlesViewModel dayAndNightDeleteByFIlesViewModel)
+        {
+
+            _fileService.deleteDayandNightInfoByFile(dayAndNightDeleteByFIlesViewModel);
+
+            return Ok("删除文件以及相关信息成功");
+        
+        }
+
+
 
     }
 }

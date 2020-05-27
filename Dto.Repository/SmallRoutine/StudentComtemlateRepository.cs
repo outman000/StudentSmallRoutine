@@ -43,7 +43,6 @@ namespace Dto.Repository.SmallRoutine
 
         public void ComtemplateNotComeSchool()
         {
-           
             var dbsetclass = DbSetClass.ToList();
             //所有班级生成早午晚见
             for (int i = 0; i < dbsetclass.Count(); i++)
@@ -56,17 +55,12 @@ namespace Dto.Repository.SmallRoutine
                 var firstinfo = classStudents.FirstOrDefault();//一个班的班级都是一样的
                 if (firstinfo == null)
                 { continue; }
-
                 template_Student.SchoolName = firstinfo.SchoolName;
                 template_Student.SchoolCode = firstinfo.SchoolCode;
                 template_Student.GradeCode = firstinfo.GradeCode;
                 template_Student.GradeName = firstinfo.GradeName;
                 template_Student.ClassCode = firstinfo.ClassCode;
                 template_Student.ClassName = firstinfo.ClassName;
-
-
-
-
                 // 应道人数
                 template_Student.ShouldComeSchoolCount = Db.Student_Info.Where(a => a.ClassCode == classcode)
                                                        .Count();
@@ -75,8 +69,10 @@ namespace Dto.Repository.SmallRoutine
                 //到了发热
                 template_Student.ComeSchoolHotCount = 0;
                 //未到
-                template_Student.NotComeSchoolCount = Db.Student_Info.Where(a => a.ClassCode == classcode)
-                                                       .Count();
+                template_Student.NotComeSchoolCount = Db.Health_Info.Where(a => a.CheckType == "到校前" && a.Student_Info != null && a.IsComeSchool=="否"
+                                                                                 && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                                                                                 && a.Student_Info.ClassCode == classcode
+                                                                     ).Count();
                 //因为发热没到
                 template_Student.NotComeSchoolByHotCount = Db.Health_Info.Where(a => a.CheckType == "到校前" && a.Student_Info != null && Convert.ToDecimal(a.Temperature) >= 37.2m
                                                                                  && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
@@ -106,6 +102,18 @@ namespace Dto.Repository.SmallRoutine
             for (int i = 0; i < dbsetclass.Count(); i++)
             {
                 Template_Student template_Student = new Template_Student();
+                //午检查最晚的时间
+                var maxNoontime = Db.Health_Info.Where(a => a.CheckType == "午"
+                                                        && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                                                        && a.Student_Info != null
+                                                            && a.Student_Info.class_Info.ClassCode == dbsetclass[i].ClassCode
+                                                        ).Select(w => w.Createdate).Max();
+                //午检查后的异常人数
+                var exceptnum = Db.Except_Info_Student.Where(a => a.CreateDate > maxNoontime && a.CreateDate<=DateTime.Now
+                                                && a.student_Info.class_Info.ClassCode == dbsetclass[i].ClassCode).Count();
+
+
+
                 string classcode = dbsetclass[i].ClassCode;
 
 
@@ -120,7 +128,10 @@ namespace Dto.Repository.SmallRoutine
                 template_Student.ClassCode = firstinfo.ClassCode;
                 template_Student.ClassName = firstinfo.ClassName;
 
-
+                if (classcode == "021207")
+                {
+                    var aaa = "123";
+                }
 
                 var dayandNightClass = DbSetDayandNight.FromSql("select Student_DayandNight_Info.* from Student_DayandNight_Info inner join Student_Info on " +
                                                                     "Student_DayandNight_Info.idnumber=Student_Info.idnumber" +
@@ -131,14 +142,15 @@ namespace Dto.Repository.SmallRoutine
                 template_Student.ActualComeSchoolCount = dayandNightClass.Where(a => a.IsComeSchool == "是" && a.AddTimeInterval == "晨"
                                                                                     && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
                                                                                     
-                                                                                    ).Count();
+                                                                                    ).Count()- exceptnum;
                 //到了发热
                 template_Student.ComeSchoolHotCount = dayandNightClass.Where(a => a.IsComeSchool == "是" && a.AddTimeInterval == "晨" &&
                                                                                      a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")&& 
-                                                                                    Convert.ToDecimal(a.Temperature)>=37.2m ).Count();
+                                                                                    Convert.ToDecimal(a.Temperature)>=37.2m ).Count()+ exceptnum;
                 //未到
                 template_Student.NotComeSchoolCount = dayandNightClass.Where(a => a.IsComeSchool == "否" && a.AddTimeInterval == "晨"
-                                                                                        && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")).Count();
+                                                                                        && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")).Count()
+                                                                                        + exceptnum;
                 //因为发热没到
                 template_Student.NotComeSchoolByHotCount = dayandNightClass.Where(a => a.AddTimeInterval == "晨"  && Convert.ToDecimal(a.Temperature) >= 37.2m
                                                                                  && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
@@ -272,8 +284,6 @@ namespace Dto.Repository.SmallRoutine
                 DbSet.Add(template_Student);
             }
         }
-
-
         public void ComtemplateDaySchool()
         {
           

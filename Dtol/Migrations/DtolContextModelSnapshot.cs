@@ -361,6 +361,8 @@ namespace Dtol.Migrations
 
                     b.Property<string>("Temperature");
 
+                    b.Property<string>("tag");
+
                     b.HasKey("id");
 
                     b.ToTable("Student_DayandNight_Info");
@@ -573,7 +575,13 @@ namespace Dtol.Migrations
 
                     b.Property<string>("Idnumber");
 
+                    b.Property<DateTime?>("UpdateDate");
+
+                    b.Property<string>("openid");
+
                     b.Property<string>("password");
+
+                    b.Property<string>("unionid");
 
                     b.HasKey("id");
 

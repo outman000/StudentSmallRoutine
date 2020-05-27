@@ -30,6 +30,15 @@ namespace Dto.Repository.SmallRoutine
 
         public void AddList(List<Student_DayandNight_Info> obj)
         {
+            //for (int i = 0; i < obj.Count; i++)
+            //{
+            //    if (DbSet.FirstOrDefault(a => a.IdNumber == obj[i].IdNumber
+            //                                 && a.AddTimeInterval == obj[i].AddTimeInterval
+            //                                 && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == obj[i].AddCreateDate.Value.ToString("yyyy-MM-dd")
+            //                                )) 
+            //}
+
+
             DbSet.AddRange(obj);
         }
 
@@ -107,6 +116,11 @@ namespace Dto.Repository.SmallRoutine
             predicate = predicate.And(p => p.SchoolName.Contains(dayAndNightSearchViewModel.SchoolName));
             predicate = predicate.And(p => p.Temperature.Contains(dayAndNightSearchViewModel.Temperature));
             predicate = predicate.And(p => p.AddTimeInterval.Contains(dayAndNightSearchViewModel.AddTimeInterval));
+
+        
+            predicate = predicate.And(p => p.tag.Contains(dayAndNightSearchViewModel.tag));
+      
+            
             return predicate;
         }
 
@@ -152,6 +166,16 @@ namespace Dto.Repository.SmallRoutine
         public void Update(Student_DayandNight_Info obj)
         {
             DbSet.Update(obj);
+        }
+
+        public List<Student_DayandNight_Info> getInfoByTag(string tag)
+        {
+            return DbSet.Where(a => a.tag== tag).ToList();
+        }
+
+        public void deleteRange(List<Student_DayandNight_Info> list)
+        {
+            DbSet.RemoveRange(list);
         }
     }
 }

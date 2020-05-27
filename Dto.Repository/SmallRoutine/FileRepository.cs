@@ -26,6 +26,15 @@ namespace Dto.Repository.SmallRoutine
             DbSet.Add(obj);
         }
 
+        public void delete(UploadFile fileInfo)
+        {
+            if (fileInfo == null)
+            {
+                return;
+            }
+            DbSet.Remove(fileInfo);
+        }
+
         public void Dispose()
         {
             throw new NotImplementedException();
@@ -41,11 +50,24 @@ namespace Dto.Repository.SmallRoutine
             throw new NotImplementedException();
         }
 
+        public List<UploadFile> getfilebyIdnumber(string idnumbermd5)
+        {
+             return   DbSet.Where(a=>a.upload_percent==idnumbermd5).OrderByDescending(a=>a.PhysisticName).ToList();
+        }
+
         public int getfileIDByPhy(FileUploadViewModel fileUploadViewModel)
         {
             return DbSet.Single(a => a.PhysisticName.Trim() == fileUploadViewModel.PhysisticName).id;
 
         }
+
+        public UploadFile getfileIDByPhyName(string phyname)
+        {
+            return DbSet.FirstOrDefault(a => a.PhysisticName.Trim() == phyname);
+
+        }
+
+
 
         public void Remove(Guid id)
         {

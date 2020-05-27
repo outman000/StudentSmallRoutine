@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ViewModel.PublicViewModel;
 using ViewModel.SmallRoutine;
+using ViewModel.SmallRoutine.MiddelViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel;
+using ViewModel.SmallRoutine.ResponseViewModel.DayAndNightViewModel;
 
 namespace Dto.IService.SmallRoutine
 {
@@ -44,5 +48,13 @@ namespace Dto.IService.SmallRoutine
         /// <returns></returns>
         int InputWhiteListIntoDataBase_facultystaffInfo(string FilePath, string FileName);
         int InputStudentInfoTimeIntervalIntoDataBase(string filePath, string randomname);
+        List<FIleinfoMiddle> GetFileInfoBy(string idnumber);
+        void deleteDayandNightInfoByFile(DayAndNightDeleteByFIlesViewModel dayAndNightDeleteByFIlesViewModel);
+
+
+        DayAndNightStudentImportResModel InputStudentInfoTimeIntervalIntoDataBaseValide(DayAndNightAddViewModel dayAndNightAddViewModel);
+
+
+        void deletebyfilephyid(string phyname);
     }
 }

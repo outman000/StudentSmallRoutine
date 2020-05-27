@@ -7,6 +7,10 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
     public class StudentAndEmployeeReportMiddles
     {
         /// <summary>
+        /// 学校Code
+        /// </summary>
+        public string SchoolCode { get; set; }
+        /// <summary>
         /// 学校
         /// </summary>
         public string SchoolName { get; set; }

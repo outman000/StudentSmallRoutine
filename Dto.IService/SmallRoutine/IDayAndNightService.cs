@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel;
+using ViewModel.SmallRoutine.ResponseViewModel.DayAndNightViewModel;
 
 namespace Dto.IService.SmallRoutine
 {
@@ -15,5 +16,6 @@ namespace Dto.IService.SmallRoutine
         void RemveIDayAndNightService(List<int> obj);
 
         List<DayandNightInfoMiddle> SearchDayAndNightListService(DayAndNightSearchViewModel dayAndNightSearchViewModel);
+        List<DefaultDayAndNightMiddle> DefaultSearchDayAndNightListService(DayAndNightDefaultSearchViewModel  dayAndNightDefaultSearchViewModel);
     }
 }

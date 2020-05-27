@@ -10,6 +10,7 @@ using System.Linq.Expressions;
 using System.Text;
 using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.MiddelViewModel.SecondMiddleViewModel;
+using ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.FacultystaffViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.StaffClassRelateViewModel;
 
@@ -78,10 +79,10 @@ namespace Dto.Repository.SmallRoutine
                         IsWeak=a.IsWeak,
                         IsAggregate = a.IsAggregate,
                         IsAggregateContain = a.IsAggregateContain,
-                          IsTianJin = a.IsTianJin,
-                         Temperature = a.Temperature,
-                         NotComeSchoolReason=a.NotComeSchoolReason,
-                         IsBulu = a.IsBulu
+                        IsTianJin = a.IsTianJin,
+                        Temperature = a.Temperature,
+                        NotComeSchoolReason=a.NotComeSchoolReason,
+                        IsBulu = a.IsBulu
                      })
                      
                      .ToList();
@@ -89,11 +90,103 @@ namespace Dto.Repository.SmallRoutine
             }
 
 
-            return staffClassMiddleModel.OrderByDescending(o => o.Createdate).Skip(SkipNum)
+            return staffClassMiddleModel.Distinct().OrderByDescending(o => o.Createdate).Skip(SkipNum)
                 .Take(staffClassRelateSearchView.pageViewModel.PageSize)
               .ToList();
 
         }
+
+
+
+        public List<DefaultDayAndNightMiddle> GetDefaultStudentsInfosByStaff(DayAndNightDefaultSearchViewModel dayAndNightDefaultSearchViewModel)
+        {
+            int SkipNum = dayAndNightDefaultSearchViewModel.pageViewModel.CurrentPageNum * dayAndNightDefaultSearchViewModel.pageViewModel.PageSize;
+
+
+            List<DefaultDayAndNightMiddle> staffClassMiddleModel = new List<DefaultDayAndNightMiddle>();
+            
+            var tStudentDefaultpreciate = getStudentDefaultWhere(dayAndNightDefaultSearchViewModel);
+            var DefaultInfoDayAndNight = getDefaultInfoDayAndNightWhere(dayAndNightDefaultSearchViewModel);
+
+
+             staffClassMiddleModel = (from relate in DbSet
+                              .Where(a => a.facultystaff_InfoId == dayAndNightDefaultSearchViewModel.userKey)
+                              .Include(a => a.Class_Info)
+                              join student in Db.Student_Info.Where(tStudentDefaultpreciate) on relate.Class_InfoId equals student.class_InfoId
+                              join dayandnight in Db.Student_DayandNight_Info.Where(DefaultInfoDayAndNight) on student.IdNumber equals dayandnight.IdNumber
+                              into mergeinfo //这里是是班级对应当日的早午晚检查
+                              from result in mergeinfo.DefaultIfEmpty()//以基本信息为基础左关联查询
+                              select new DefaultDayAndNightMiddle
+                              {
+                                  ClassName = student.ClassName,
+                                  GradeName = student.GradeName,
+                                  IdNumber = student.IdNumber,
+                                  ClassCode = student.ClassCode,
+                                  GradeCode = student.GradeCode,
+                                  SchoolCode = student.SchoolCode,
+                                  Name = student.Name,
+                                  SchoolName = student.SchoolName,
+                                  IsComeSchool = result.IsComeSchool == null ? result.IsComeSchool : "",
+                                  IsTianJin = result.IsTianJin == null ? result.IsTianJin : "",
+                                  NotComeJinReason = result.NotComeJinReason == null ? result.NotComeJinReason : "",
+                                  Temperature = result.Temperature == null ? result.Temperature : "",
+                                  AddTimeInterval=result.AddTimeInterval==null? result.AddTimeInterval : "",
+                                  addCreatedate = result.AddCreateDate,
+                                  isup = result.IdNumber == null ? "未上传" : "已上传"
+                              }).OrderBy(o=>o.ClassName).ToList();
+            return staffClassMiddleModel;
+
+        }
+        public Expression<Func<Student_Info, bool>> GeInfoWhere(DayAndNightDefaultSearchViewModel  dayAndNightDefaultSearchViewModel)
+        {
+
+            var predicate = WhereExtension.True<Student_Info>();//初始化where表达式
+                                                                //姓名
+            predicate = predicate.And(p => p.SchoolCode .Contains(dayAndNightDefaultSearchViewModel.SchoolCode));
+            predicate = predicate.And(p => p.ClassName .Contains(dayAndNightDefaultSearchViewModel.ClassCode));
+            predicate = predicate.And(p => p.GradeName.Contains(dayAndNightDefaultSearchViewModel.GradeCode));
+            predicate = predicate.And(p => p.Name.Contains(dayAndNightDefaultSearchViewModel.Name));
+            predicate = predicate.And(p => p.IdNumber.Contains(Dtol.Helper.MD5.Md5Hash(dayAndNightDefaultSearchViewModel.Idnumber)));
+            return predicate;
+        }
+
+        public Expression<Func<Student_Info, bool>> getStudentDefaultWhere(DayAndNightDefaultSearchViewModel dayAndNightDefaultSearchViewModel)
+        {
+
+            var predicate = WhereExtension.True<Student_Info>();//初始化where表达式
+                                                                            //姓名
+                                                                            //predicate = predicate.And(p => p.addCreatedate.Value.ToString("yyyy-MM-dd").Contains(dayAndNightDefaultSearchViewModel.AddCreateDate.Value.ToString("yyyy-MM-dd")));
+                                                                            //predicate = predicate.And(p => p.AddTimeInterval.Contains(dayAndNightDefaultSearchViewModel.AddTimeInterval));
+            predicate = predicate.And(p => p.IdNumber.Contains(Dtol.Helper.MD5.Md5Hash(dayAndNightDefaultSearchViewModel.Idnumber)));
+            predicate = predicate.And(p => p.Name.Contains(dayAndNightDefaultSearchViewModel.Idnumber));
+            predicate = predicate.And(p => p.GradeCode.Contains(dayAndNightDefaultSearchViewModel.GradeCode));
+            predicate = predicate.And(p => p.ClassCode.Contains(dayAndNightDefaultSearchViewModel.ClassCode));
+            predicate = predicate.And(p => p.SchoolCode.Contains(dayAndNightDefaultSearchViewModel.SchoolCode));
+            return predicate;
+        }
+
+        public Expression<Func<Student_DayandNight_Info, bool>> getDefaultInfoDayAndNightWhere(DayAndNightDefaultSearchViewModel dayAndNightDefaultSearchViewModel)
+        {
+
+            var predicate = WhereExtension.True<Student_DayandNight_Info>();//初始化where表达式
+                                                                //姓名
+                                                                //predicate = predicate.And(p => p.addCreatedate.Value.ToString("yyyy-MM-dd").Contains(dayAndNightDefaultSearchViewModel.AddCreateDate.Value.ToString("yyyy-MM-dd")));
+                                                                //predicate = predicate.And(p => p.AddTimeInterval.Contains(dayAndNightDefaultSearchViewModel.AddTimeInterval));
+            predicate = predicate.And(p => p.IdNumber.Contains(Dtol.Helper.MD5.Md5Hash(dayAndNightDefaultSearchViewModel.Idnumber)));
+            if (dayAndNightDefaultSearchViewModel.addCreatedate.Value.ToString() != null || dayAndNightDefaultSearchViewModel.addCreatedate.Value.ToString() != "")
+            {
+                predicate = predicate.And(p => p.AddCreateDate.Value.Year == dayAndNightDefaultSearchViewModel.addCreatedate.Value.Year);
+                predicate = predicate.And(p => p.AddCreateDate.Value.Month == dayAndNightDefaultSearchViewModel.addCreatedate.Value.Month);
+                predicate = predicate.And(p => p.AddCreateDate.Value.Day == dayAndNightDefaultSearchViewModel.addCreatedate.Value.Day);
+            }
+
+      
+            predicate = predicate.And(p => p.AddTimeInterval.Contains(dayAndNightDefaultSearchViewModel.AddTimeInterval));
+            return predicate;
+        }
+
+
+
 
 
 
@@ -189,7 +282,8 @@ namespace Dto.Repository.SmallRoutine
 
         public bool isRepeat(AddRelateFromStaffToClassViewModel model)
         {
-          var result=  DbSet.FirstOrDefault(a => a.ClassCode == model.ClassCode && a.facultystaff_InfoId == model.facultystaff_InfoId);
+          var result=  DbSet.FirstOrDefault(a => a.ClassCode == model.ClassCode && a.facultystaff_InfoId == model.facultystaff_InfoId
+                                                  &&a.Class_InfoId==model.Class_InfoId );
             if (result == null)
             {
                 return true;
@@ -199,6 +293,41 @@ namespace Dto.Repository.SmallRoutine
                 return false;
             }
             
+        }
+
+
+        //获取负责班级
+        public List<string> GetResponsibleClassByIdnumber(String idnumber)
+        {
+            List<string> Responsibleclass = new List<string>();
+           var searchResult = Db.ClassManager_Relate
+                             .Where(a => a.IdNumber== idnumber)
+                                 .Include(a => a.Class_Info).ToList();
+
+            for(int i=0; i<searchResult.Count();i++)
+            {
+                Responsibleclass.Add(int.Parse(searchResult[i].Class_Info.ClassCode.Substring(4, 2)).ToString());
+            }
+            return Responsibleclass;
+        }
+        //获取负责年级
+        public List<string> GetResponsibleGradeByIdnumber(String idnumber)
+        {
+            List<string> Responsiblegrade = new List<string>();
+            var searchResult = Db.ClassManager_Relate
+                              .Where(a => a.IdNumber == idnumber)
+                                  .Include(a => a.Class_Info).ToList();
+
+            for (int i = 0; i < searchResult.Count(); i++)
+            {
+                Responsiblegrade.Add(int.Parse(searchResult[i].Class_Info.ClassCode.Substring(2, 2)).ToString());
+            }
+            return Responsiblegrade;
+        }
+
+        public int GetResponsibleClassPeopleNumber(String ClassCode)
+        {
+            return Db.Student_Info.Where(a => a.ClassCode ==ClassCode).Count(); 
         }
     }
 }

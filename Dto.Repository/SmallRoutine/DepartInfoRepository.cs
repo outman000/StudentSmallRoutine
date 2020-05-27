@@ -35,6 +35,7 @@ namespace Dto.Repository.SmallRoutine
             {
                 if (!tempresult.Exists(a => a.DepartCode == departInsertList[i].DepartCode))//如果数据库存在，就不再插入了
                 {
+
                     realinsertList.Add(departInsertList[i]);
                 }
             }

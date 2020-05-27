@@ -6,7 +6,7 @@ using Dto.IService.SmallRoutine;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ViewModel.PublicViewModel;
-
+using ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.HealthEveryViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel.HealthEveryViewModel;
 
@@ -88,6 +88,27 @@ namespace SmallRoutine.Controllers
             baseViewModel.ResponseCode = 200;
             return Ok(baseViewModel);
         }
+
+        /// <summary>
+        /// 更新每日健康信息
+        /// </summary>
+        /// <param name="healthInfoUpdateViewModel"></param>
+        /// <returns></returns>
+        //[HttpPost("/HealthEveryDayRegister/Update")]
+        //// GET: HealthInfo/Details/5
+        //public ActionResult<BaseViewModel> getDefaultDayAndNight(DayAndNightDefaultSearchViewModel dayAndNightDefaultSearchViewModel )
+        //{
+        //    healthService.getDefaultDayAndNightInfo(dayAndNightDefaultSearchViewModel);
+
+
+        //    BaseViewModel baseViewModel = new BaseViewModel();
+        //    healthService.UpdateHealthEveryRegisterInfo(healthInfoUpdateViewModel);
+        //    baseViewModel.Message = "更新成功";
+        //    baseViewModel.ResponseCode = 200;
+        //    return Ok(baseViewModel);
+        //}
+
+
 
 
     }
