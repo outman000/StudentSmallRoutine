@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Dto.IService.SmallRoutine;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SystemFilter.PublicFilter;
+using ViewModel.PublicViewModel;
+using ViewModel.SmallRoutine.MiddelViewModel;
 using ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel;
 using ViewModel.SmallRoutine.ResponseViewModel.DayAndNightViewModel;
 
@@ -20,7 +23,17 @@ namespace SmallRoutine.Controllers
         {
             this.dayAndNightService = dayAndNightService;
         }
-
+        /// <summary>
+        /// 添加晨午晚检信息
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("/DayAndNight/AddDayAndNightInfo")]
+        [ValidateModel]
+        public ActionResult<BaseViewModel> addDayAndNightInfo(DayAndNightSearchViewModel dayAndNightSearchViewModel)
+        {
+            BaseViewModel viewModel = dayAndNightService.addDayAndNightInfo(dayAndNightSearchViewModel);
+            return viewModel;
+        }
 
         /// <summary>
         /// 获取早午晚检信息
