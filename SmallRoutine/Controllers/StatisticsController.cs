@@ -150,5 +150,82 @@ namespace SmallRoutine.Controllers
                 return NotFound("系统错误，请联系管理员");
             }
         }
+
+        /// <summary>
+        /// 获取学生未到校存在原因的信息
+        /// </summary>
+        /// <param name="SearchViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("report/GetStudentNoComSchool")]
+        public ActionResult<HealthNoComSchoolResModel> GetStudentNoComSchool(HealthEverySearchStatasticViewModel SearchViewModel)
+        {
+            try
+            {
+                HealthNoComSchoolResModel result = new HealthNoComSchoolResModel();
+                var info = _studentReportQueries.GetHealthEverySearchMiddleModels(SearchViewModel, "学生");
+                int totalNum= _studentReportQueries.GetHealthEverySearchMiddleModelsTotal(SearchViewModel, "学生");
+                result.healthEverySearchMiddleModels = info;
+                result.TotalNum = totalNum;
+                result.IsSuccess = true;
+                result.baseViewModel.ResponseCode = 200;
+                result.baseViewModel.Message = "数据查询成功";
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound("系统错误，请联系管理员");
+            }
+        }
+
+        /// <summary>
+        /// 获取教职工未到校存在原因的信息
+        /// </summary>
+        /// <param name="SearchViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("report/GetTeachNoComSchool")]
+        public ActionResult<HealthNoComSchoolResModel> GetTeachNoComSchool(HealthEverySearchStatasticViewModel SearchViewModel)
+        {
+            try
+            {
+                HealthNoComSchoolResModel result = new HealthNoComSchoolResModel();
+                var info = _studentReportQueries.GetHealthEverySearchMiddleModels(SearchViewModel, "教职工");
+                int totalNum = _studentReportQueries.GetHealthEverySearchMiddleModelsTotal(SearchViewModel, "教职工");
+                result.healthEverySearchMiddleModels = info;
+                result.TotalNum = totalNum;
+                result.IsSuccess = true;
+                result.baseViewModel.ResponseCode = 200;
+                result.baseViewModel.Message = "数据查询成功";
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound("系统错误，请联系管理员");
+            }
+        }
+
+        /// <summary>
+        /// 获取学校学生健康信息上报情况
+        /// </summary>
+        /// <param name="SearchViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("report/GetHealthInfoStatasticReportResModel")]
+       public ActionResult<HealthInfoStatasticReportResModel> HealthInfoStatasticReportResModel(StudentStasticSearchViewModel SearchViewModel)
+        {
+            try
+            {
+                HealthInfoStatasticReportResModel result = new HealthInfoStatasticReportResModel();
+                var info = _studentReportQueries.GetHealthInfoStatasticMiddles(SearchViewModel);
+                result.healthInfoStatasticMiddles = info;
+                result.baseViewModel.ResponseCode = 200;
+                result.baseViewModel.Message = "数据查询成功";
+                return Ok(result);
+            }
+            catch(Exception ex)
+            {
+                return NotFound("系统错误，请联系管理员");
+            }
+        }
     }
 }
