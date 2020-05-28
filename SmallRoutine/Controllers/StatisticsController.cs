@@ -103,8 +103,52 @@ namespace SmallRoutine.Controllers
 
         }
 
+        /// <summary>
+        /// 统计头部数据 复课学校、学生、教职工
+        /// </summary>
+        /// <param name="studentStasticSearchViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("reprot/GetSchoolAndStudentTop")]
+        public ActionResult<SchoolAndStudentTopReportResModel> GetSchoolAndStudentTop(StudentStasticSearchViewModel studentStasticSearchViewModel)
+        {
+            try
+            {
+                SchoolAndStudentTopReportResModel result = new SchoolAndStudentTopReportResModel();
+                var info = _studentReportQueries.GetStudentTopReportMiddleModel(studentStasticSearchViewModel);
+                result.IsSuccess = true;
+                result.schoolAndStudentTopReportMiddleModel = info;
+                result.baseViewModel.ResponseCode = 200;
+                result.baseViewModel.Message = "数据查询成功";
+                return Ok(result);
+            }
+            catch(Exception ex)
+            {
+                return NotFound("系统问题请联系管理员");
+            }
+        }
+        /// <summary>
+        /// 统计  健康情况数据 包含健康填报率情况
+        /// </summary>
+        /// <param name="studentStasticSearchViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("report/GetHealStatisticsReport")]
+        public ActionResult<HealthReportResModel> GetHealStatisticsReport(StudentStasticSearchViewModel studentStasticSearchViewModel)
+        {
+            try
+            {
+                HealthReportResModel result = new HealthReportResModel();
+                var info = _studentReportQueries.GetHealthStatisticsMiddleModel(studentStasticSearchViewModel);
+                result.healthStatisticsMiddleModel = info;
+                result.IsSuccess = true;
+                result.baseViewModel.ResponseCode = 200;
+                result.baseViewModel.Message = "数据查询成功";
 
-        
-
+                return Ok(result);
+            }
+            catch(Exception ex)
+            {
+                return NotFound("系统错误，请联系管理员");
+            }
+        }
     }
 }

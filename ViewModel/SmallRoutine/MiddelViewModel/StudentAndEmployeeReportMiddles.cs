@@ -15,10 +15,6 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// </summary>
         public string SchoolName { get; set; }
         /// <summary>
-        /// 学校Code
-        /// </summary>
-        //public string SchoolCode { get; set; }
-        /// <summary>
         /// 学生or教职工
         /// </summary>
         public string Name { get; set; }
@@ -50,5 +46,10 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// 因为其他原因未到校
         /// </summary>
         public int? NotComeSchoolByOtherCount { get; set; }
+
+        /// <summary>
+        /// 健康填报率
+        /// </summary>
+        public string HealthRate { get; set; }
     }
 }

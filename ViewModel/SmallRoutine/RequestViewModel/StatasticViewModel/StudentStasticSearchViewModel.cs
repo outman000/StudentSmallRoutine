@@ -19,7 +19,7 @@ namespace ViewModel.SmallRoutine.RequestViewModel.StatasticViewModel
         /// </summary>
         public string SchoolCode { get; set; }
         /// <summary>
-        /// 到校前 早午晚类型   
+        /// 到校前、天、早、午、晚类型   
         /// </summary>
         public string Type { get; set; }
         /// <summary>
