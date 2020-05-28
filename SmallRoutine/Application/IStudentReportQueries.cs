@@ -12,5 +12,7 @@ namespace SmallRoutine.Application
         List<EmployeeReportMiddleModel> GetEmployeeeReportList(StudentStasticSearchViewModel searchModel);
         List<StudentReportMiddle> GetStudentReportList(StudentStasticSearchViewModel searchModel);
         List<StudentAndEmployeeReportMiddles> GetListBySearchModel(StudentStasticSearchViewModel searchModel);
+        SchoolAndStudentTopReportMiddleModel GetStudentTopReportMiddleModel(StudentStasticSearchViewModel searchModel);
+        HealthStatisticsMiddleModel GetHealthStatisticsMiddleModel(StudentStasticSearchViewModel searchModel);
     }
 }
