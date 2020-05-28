@@ -12,7 +12,7 @@ namespace Dto.IService.SmallRoutine
     public interface IDayAndNightService
     {
         //添加晨午晚检信息 
-        BaseViewModel addDayAndNightInfo(DayAndNightSearchViewModel student);
+        BaseViewModel addDayAndNightInfo(DayAndNightDefaultViewModel student);
         void UpdateIDayAndNightService(DayAndNightUpdateViewModel dayAndNightUpdateViewModel );
 
         void RemveIDayAndNightService(List<int> obj);

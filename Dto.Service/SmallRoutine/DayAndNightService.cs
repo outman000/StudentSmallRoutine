@@ -17,62 +17,66 @@ namespace Dto.Service.SmallRoutine
         private readonly IDayandNightRepository  dayandNightRepository;
         private readonly IStaffClassRelateRepository staffClassRelateRepository;
         private readonly IMapper mapper;
-        private readonly ISchoolInfoRepository _schoolInfoRepository;
-        private readonly IGradeInfoRepository _gradeInfoRepository;
-        private readonly IClassInfoRepository _classInfoRepository;
-        private readonly IUserInfoRepository _userInfoRepository;
 
-        public DayAndNightService(IDayandNightRepository dayandNightRepository, IStaffClassRelateRepository staffClassRelateRepository, IMapper mapper, ISchoolInfoRepository _schoolInfoRepository, IGradeInfoRepository _gradeInfoRepository, IClassInfoRepository _classInfoRepository, IUserInfoRepository _userInfoRepository)
+        public DayAndNightService(IDayandNightRepository dayandNightRepository, IStaffClassRelateRepository staffClassRelateRepository, IMapper mapper)
         {
             this.dayandNightRepository = dayandNightRepository;
             this.staffClassRelateRepository = staffClassRelateRepository;
             this.mapper = mapper;
-            this._schoolInfoRepository = _schoolInfoRepository;
-            this._gradeInfoRepository = _gradeInfoRepository;
-            this._classInfoRepository = _classInfoRepository;
-            this._userInfoRepository = _userInfoRepository;
         }
         //添加晨午晚检信息
-        public BaseViewModel addDayAndNightInfo(DayAndNightSearchViewModel dayAndNightSearchViewModel)
+        public BaseViewModel addDayAndNightInfo(DayAndNightDefaultViewModel dayAndNightSearchViewModel)
         {
             BaseViewModel viewModel = new BaseViewModel();
-            if (String.IsNullOrEmpty(dayAndNightSearchViewModel.SchoolName) || String.IsNullOrEmpty(dayAndNightSearchViewModel.Name) || String.IsNullOrEmpty(dayAndNightSearchViewModel.GradeName) || String.IsNullOrEmpty(dayAndNightSearchViewModel.ClassName) || String.IsNullOrEmpty(dayAndNightSearchViewModel.Temperature) || String.IsNullOrEmpty(dayAndNightSearchViewModel.IsComeSchool) || String.IsNullOrEmpty(dayAndNightSearchViewModel.tag))
+            if (String.IsNullOrEmpty(dayAndNightSearchViewModel.SchoolName) || String.IsNullOrEmpty(dayAndNightSearchViewModel.Name) || String.IsNullOrEmpty(dayAndNightSearchViewModel.GradeName) || String.IsNullOrEmpty(dayAndNightSearchViewModel.ClassName))
             {
                 viewModel.ResponseCode = 2;
                 viewModel.Message = "参数信息为空";
             }
             else
             {
+                if (dayAndNightSearchViewModel.IsComeSchool == "是")
+                {
+                    if (String.IsNullOrEmpty(dayAndNightSearchViewModel.Temperature) || String.IsNullOrEmpty(dayAndNightSearchViewModel.AddTimeInterval))
+                    {
+                        viewModel.ResponseCode = 2;
+                        viewModel.Message = "参数信息为空";
+                        return viewModel;
+                    }
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(dayAndNightSearchViewModel.NotComeJinReason))
+                    {
+                        viewModel.ResponseCode = 2;
+                        viewModel.Message = "参数信息为空";
+                        return viewModel;
+                    }
+                }
                 try
                 {
-                    //验证 学校是否存在
-                    if (_schoolInfoRepository.CheckInfoByname(dayAndNightSearchViewModel.SchoolName))
+                    Student_DayandNight_Info info = new Student_DayandNight_Info();
+
+                    info = mapper.Map<DayAndNightDefaultViewModel, Student_DayandNight_Info>(dayAndNightSearchViewModel);
+                    if (dayAndNightSearchViewModel.IsComeSchool == "否")
                     {
-                        Student_DayandNight_Info info = new Student_DayandNight_Info();
+                        info.Temperature="";
+                        info.AddTimeInterval = "";
+                    }
+                    info.AddCreateDate = DateTime.Now;
+                    dayandNightRepository.Add(info);
 
-                        info = mapper.Map<DayAndNightSearchViewModel, Student_DayandNight_Info>(dayAndNightSearchViewModel);
-                        info.AddTimeInterval = DateTime.Now.ToString();
-                        info.AddCreateDate = DateTime.Now;
-                        dayandNightRepository.Add(info);
-
-                        int i = dayandNightRepository.SaveChanges();
-                        if (i > 0)
-                        {
-                            viewModel.ResponseCode = 0;
-                            viewModel.Message = "晨午晚检信息添加成功";
-                        }
-                        else
-                        {
-                            viewModel.ResponseCode = 1;
-                            viewModel.Message = "晨午晚检信息添加失败";
-                        }
+                    int i = dayandNightRepository.SaveChanges();
+                    if (i > 0)
+                    {
+                        viewModel.ResponseCode = 0;
+                        viewModel.Message = "晨午晚检信息添加成功";
                     }
                     else
                     {
-                        viewModel.ResponseCode = 4;
-                        viewModel.Message = "学校信息不存在";
+                        viewModel.ResponseCode = 1;
+                        viewModel.Message = "晨午晚检信息添加失败";
                     }
-
                 }
                 catch (Exception ex)
                 {

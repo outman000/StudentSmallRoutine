@@ -29,7 +29,7 @@ namespace SmallRoutine.Controllers
         /// <returns></returns>
         [HttpPost("/DayAndNight/AddDayAndNightInfo")]
         [ValidateModel]
-        public ActionResult<BaseViewModel> addDayAndNightInfo(DayAndNightSearchViewModel dayAndNightSearchViewModel)
+        public ActionResult<BaseViewModel> addDayAndNightInfo(DayAndNightDefaultViewModel dayAndNightSearchViewModel)
         {
             BaseViewModel viewModel = dayAndNightService.addDayAndNightInfo(dayAndNightSearchViewModel);
             return viewModel;
