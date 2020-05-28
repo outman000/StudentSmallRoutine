@@ -127,7 +127,7 @@ namespace SmallRoutine.Controllers
             }
         }
         /// <summary>
-        /// 
+        /// 统计  健康情况数据 包含健康填报率情况
         /// </summary>
         /// <param name="studentStasticSearchViewModel"></param>
         /// <returns></returns>
