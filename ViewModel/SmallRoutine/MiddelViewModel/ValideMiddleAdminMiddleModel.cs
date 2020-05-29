@@ -59,6 +59,10 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// </summary>
         public string PermanentAddress { get; set; } = "";
         /// <summary>
+        /// 权限标识 sys、admin、con、per
+        /// </summary>
+        public string RoleID { get; set; } = "sys";
+        /// <summary>
         /// 创建时间
         /// </summary>
         public DateTime? CreateDate { get; set; }
