@@ -68,22 +68,57 @@ namespace SmallRoutine.Controllers
         public ActionResult<LoginValideResModel> UserLoginEmploy(LoginViewModel loginViewModel)
         {
             LoginValideReEmployesModel loginValideResModel = new LoginValideReEmployesModel();
-            var result = _iloginService.LoginEmploy(loginViewModel);
-            if (result != null)
+            var idNum = loginViewModel.Idnumber;
+            if (idNum == "Tedaadmin")
             {
-                loginValideResModel.Data = result;
-                loginValideResModel.baseViewModel.Message = "登录成功";
-                loginValideResModel.baseViewModel.ResponseCode = 200;
-                loginValideResModel.IsSuccess = true;
+                var result = _iloginService.LoginAdmin(loginViewModel);
+                if (result)
+                {
+                    loginValideResModel.Data.IdNumber = "admin";
+                    loginValideResModel.Data.SchoolCode = "admin";
+                    loginValideResModel.Data.Name = "";
+                    loginValideResModel.Data.Sex = "";
+                    loginValideResModel.Data.SchoolName = "";
+                    loginValideResModel.Data.Country = "";
+                    loginValideResModel.Data.DepartCode = "";
+                    loginValideResModel.Data.DepartName = "";
+                    loginValideResModel.Data.StaffCode = "";
+                    loginValideResModel.Data.StaffName = "";
+                    loginValideResModel.Data.PermanentAddress = "";
+                    loginValideResModel.Data.RoleID = "sys";
+                    loginValideResModel.baseViewModel.Message = "登录成功";
+                    loginValideResModel.baseViewModel.ResponseCode = 200;
+                    loginValideResModel.IsSuccess = true;
 
+                }
+                else
+                {
+                    loginValideResModel.Data = null;
+                    loginValideResModel.baseViewModel.Message = "登录失败";
+                    loginValideResModel.baseViewModel.ResponseCode = 210;
+                    loginValideResModel.IsSuccess = false;
+                }
             }
             else
             {
-                loginValideResModel.Data = result;
-                loginValideResModel.baseViewModel.Message = "登录失败";
-                loginValideResModel.baseViewModel.ResponseCode = 210;
-                loginValideResModel.IsSuccess = false;
+                var result = _iloginService.LoginEmploy(loginViewModel);
+                if (result != null)
+                {
+                    loginValideResModel.Data = result;
+                    loginValideResModel.baseViewModel.Message = "登录成功";
+                    loginValideResModel.baseViewModel.ResponseCode = 200;
+                    loginValideResModel.IsSuccess = true;
+
+                }
+                else
+                {
+                    loginValideResModel.Data = result;
+                    loginValideResModel.baseViewModel.Message = "登录失败";
+                    loginValideResModel.baseViewModel.ResponseCode = 210;
+                    loginValideResModel.IsSuccess = false;
+                }
             }
+
 
 
             return Ok(loginValideResModel);

@@ -227,5 +227,27 @@ namespace SmallRoutine.Controllers
                 return NotFound("系统错误，请联系管理员");
             }
         }
+        /// <summary>
+        /// 获取重点关注信息
+        /// </summary>
+        /// <param name="SearchViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("report/GetHealthInfoFollowStatasticReport")]
+        public ActionResult<HealthInfoFollowStatasticResModel> GetHealthInfoFollowStatasticReport(StudentStasticSearchViewModel SearchViewModel)
+        {
+            try
+            {
+                HealthInfoFollowStatasticResModel result = new HealthInfoFollowStatasticResModel();
+                var info = _studentReportQueries.GetHealthInfoFollowStatastic(SearchViewModel);
+                result.Data = info;
+                result.baseViewModel.ResponseCode = 200;
+                result.baseViewModel.Message = "数据查询成功";
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound("系统错误，请联系管理员");
+            }
+        }
     }
 }
