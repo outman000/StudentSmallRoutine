@@ -64,7 +64,7 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// </summary>
         public DateTime? CreateDate { get; set; }
         /// <summary>
-        /// 权限标识 sys、admin、con、per
+        /// 权限标识 sys、admin、con、per   
         /// </summary>
         public string RoleID { get; set; }
 

@@ -102,6 +102,7 @@ namespace SmallRoutine.Controllers
         public ActionResult<LoginValideResModel> UserLoginAdmin(LoginViewModel loginViewModel)
         {
             LoginValideReAdminResModel loginValideResModel = new LoginValideReAdminResModel();
+
             var result = _iloginService.LoginAdmin(loginViewModel);
             if (result)
             {

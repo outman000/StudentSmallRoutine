@@ -61,7 +61,7 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// <summary>
         /// 权限标识 sys、admin、con、per
         /// </summary>
-        public string RoleID { get; set; } = "sys";
+        public string RoleID { get; set; } = "sys";   
         /// <summary>
         /// 创建时间
         /// </summary>
