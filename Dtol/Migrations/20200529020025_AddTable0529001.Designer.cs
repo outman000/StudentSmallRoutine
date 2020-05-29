@@ -4,14 +4,16 @@ using Dtol;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dtol.Migrations
 {
     [DbContext(typeof(DtolContext))]
-    partial class DtolContextModelSnapshot : ModelSnapshot
+    [Migration("20200529020025_AddTable0529001")]
+    partial class AddTable0529001
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -581,8 +583,6 @@ namespace Dtol.Migrations
 
                     b.Property<string>("Name")
                         .HasMaxLength(100);
-
-                    b.Property<string>("StationCodes");
 
                     b.Property<string>("StationNames")
                         .HasMaxLength(500);
