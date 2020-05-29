@@ -162,8 +162,8 @@ namespace SmallRoutine.Controllers
             try
             {
                 HealthNoComSchoolResModel result = new HealthNoComSchoolResModel();
-                var info = _studentReportQueries.GetHealthEverySearchMiddleModels(SearchViewModel, "学生");
-                int totalNum= _studentReportQueries.GetHealthEverySearchMiddleModelsTotal(SearchViewModel, "学生");
+                var info = _studentReportQueries.GetHealthEverySearchMiddleModels(SearchViewModel, "学生", "否", "");
+                int totalNum= _studentReportQueries.GetHealthEverySearchMiddleModelsTotal(SearchViewModel, "学生", "否", "");
                 result.healthEverySearchMiddleModels = info;
                 result.TotalNum = totalNum;
                 result.IsSuccess = true;
@@ -189,8 +189,8 @@ namespace SmallRoutine.Controllers
             try
             {
                 HealthNoComSchoolResModel result = new HealthNoComSchoolResModel();
-                var info = _studentReportQueries.GetHealthEverySearchMiddleModels(SearchViewModel, "教职工");
-                int totalNum = _studentReportQueries.GetHealthEverySearchMiddleModelsTotal(SearchViewModel, "教职工");
+                var info = _studentReportQueries.GetHealthEverySearchMiddleModels(SearchViewModel, "教职工", "否", "");
+                int totalNum = _studentReportQueries.GetHealthEverySearchMiddleModelsTotal(SearchViewModel, "教职工", "否", "");
                 result.healthEverySearchMiddleModels = info;
                 result.TotalNum = totalNum;
                 result.IsSuccess = true;
@@ -204,6 +204,60 @@ namespace SmallRoutine.Controllers
                 return NotFound("系统错误，请联系管理员");
             }
         }
+
+        /// <summary>
+        /// 获取教职工到校发热信息
+        /// </summary>
+        /// <param name="SearchViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("report/GetTeachComSchoolFever")]
+        public ActionResult<HealthNoComSchoolResModel> GetTeachComSchoolFever(HealthEverySearchStatasticViewModel SearchViewModel)
+        {
+            try
+            {
+                HealthNoComSchoolResModel result = new HealthNoComSchoolResModel();
+                var info = _studentReportQueries.GetHealthEverySearchMiddleModels(SearchViewModel, "教职工", "是", "37.2");
+                int totalNum = _studentReportQueries.GetHealthEverySearchMiddleModelsTotal(SearchViewModel, "教职工", "是", "37.2");
+                result.healthEverySearchMiddleModels = info;
+                result.TotalNum = totalNum;
+                result.IsSuccess = true;
+                result.baseViewModel.ResponseCode = 200;
+                result.baseViewModel.Message = "数据查询成功";
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound("系统错误，请联系管理员");
+            }
+        }
+        /// <summary>
+        /// 获取学生到校存到校发热的信息
+        /// </summary>
+        /// <param name="SearchViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("report/GetStudentComSchoolFever")]
+        public ActionResult<HealthNoComSchoolResModel> GetStudentComSchoolFever(HealthEverySearchStatasticViewModel SearchViewModel)
+        {
+            try
+            {
+                HealthNoComSchoolResModel result = new HealthNoComSchoolResModel();
+                var info = _studentReportQueries.GetStudentComeSchoolHealthInfo(SearchViewModel, "学生", "是", "37.2");
+                int totalNum = _studentReportQueries.GetStudentComeSchoolHealthInfoTotal(SearchViewModel, "学生", "是", "37.2");
+                result.healthEverySearchMiddleModels = info;
+                result.TotalNum = totalNum;
+                result.IsSuccess = true;
+                result.baseViewModel.ResponseCode = 200;
+                result.baseViewModel.Message = "数据查询成功";
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound("系统错误，请联系管理员");
+            }
+        }
+
 
         /// <summary>
         /// 获取学校学生健康信息上报情况
@@ -220,6 +274,7 @@ namespace SmallRoutine.Controllers
                 result.healthInfoStatasticMiddles = info;
                 result.baseViewModel.ResponseCode = 200;
                 result.baseViewModel.Message = "数据查询成功";
+                result.IsSuccess = true;
                 return Ok(result);
             }
             catch(Exception ex)
@@ -242,6 +297,7 @@ namespace SmallRoutine.Controllers
                 result.Data = info;
                 result.baseViewModel.ResponseCode = 200;
                 result.baseViewModel.Message = "数据查询成功";
+                result.IsSuccess = true;
                 return Ok(result);
             }
             catch (Exception ex)

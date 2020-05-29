@@ -499,13 +499,21 @@ namespace SmallRoutine.Application
         }
 
 
-        public List<HealthEverySearchMiddleModel> GetHealthEverySearchMiddleModels(HealthEverySearchStatasticViewModel searchModel, string type)
+        public List<HealthEverySearchMiddleModel> GetHealthEverySearchMiddleModels(HealthEverySearchStatasticViewModel searchModel, string type,string IsComeSchool,string Temperature)
         {
             List<HealthEverySearchMiddleModel> result = new List<HealthEverySearchMiddleModel>();
             if (type == "学生")
             {
                 StringBuilder sbSel = new StringBuilder();
-                sbSel.Append("select * from Health_Info where  (IsComeSchool = '否') AND (NotComeSchoolReason IS NOT NULL)");
+                sbSel.Append("select * from Health_Info where 1=1 and CheckType='到校前'");
+                if(IsComeSchool!="")
+                {
+                    sbSel.Append("  and (IsComeSchool = '"+ IsComeSchool + "')");// AND (NotComeSchoolReason IS NOT NULL)
+                }
+                if(Temperature!="")
+                {
+                    sbSel.Append(" where CAST( Temperature as float)>37.2");
+                }
                 if (searchModel.SchoolCode != null && searchModel.SchoolCode != "")
                 {
                     sbSel.Append("and Student_InfoId in (select id from Student_Info where 1=1  and SchoolCode ='" + searchModel.SchoolCode + "')");
@@ -514,12 +522,6 @@ namespace SmallRoutine.Application
                 {
                     sbSel.Append(" and Student_InfoId is not null");
                 }
-                //if (searchModel.StartDate != null && searchModel.EndDate != null)
-                //    sbSel.Append(" and  CreateDate between '" + searchModel.StartDate + "' and '" + searchModel.EndDate + "'");
-                //else if (searchModel.StartDate != null && searchModel.EndDate == null)
-                //    sbSel.Append(" and  CreateDate>'" + searchModel.StartDate + "'");
-                //else if (searchModel.StartDate == null && searchModel.EndDate != null)
-                //    sbSel.Append(" and  CreateDate<'" + searchModel.EndDate + "'");
                 if (searchModel.StartDate != null && searchModel.StartDate.ToString() != "")
                 {
                     sbSel.Append(" and  CONVERT(varchar(100), CreateDate, 23) ='" + DateTime.Parse(searchModel.StartDate.ToString()).ToString("yyyy-MM-dd") + "'");
@@ -529,8 +531,6 @@ namespace SmallRoutine.Application
                     sbSel.Append(" and  CONVERT(varchar(100), CreateDate, 23) ='" + DateTime.Now.ToString("yyyy-MM-dd") + "'");
                 }
 
-                //if (grade != "")
-                //    strSql.Append(" and GradeName in(" + grade + ")");
                 if (searchModel.CheckType != null && searchModel.CheckType != "")
                     sbSel.Append(" and CheckType='" + searchModel.CheckType + "'");
                 sbSel.Append(" order by Createdate desc ");
@@ -546,7 +546,15 @@ namespace SmallRoutine.Application
             else
             {
                 StringBuilder sbSel = new StringBuilder();
-                sbSel.Append("select * from Health_Info where  (IsComeSchool = '否') AND (NotComeSchoolReason IS NOT NULL)");
+                sbSel.Append("select * from Health_Info where 1=1 ");//  (IsComeSchool = '否') AND (NotComeSchoolReason IS NOT NULL)
+                if (IsComeSchool != "")
+                {
+                    sbSel.Append("  and (IsComeSchool = '" + IsComeSchool + "')");// AND (NotComeSchoolReason IS NOT NULL)
+                }
+                if (Temperature != "")
+                {
+                    sbSel.Append(" where CAST( Temperature as float)>37.2");
+                }
                 if (searchModel.SchoolCode != null && searchModel.SchoolCode != "")
                 {
                     sbSel.Append("and facultystaff_InfoId in (select id from facultystaff_Info where 1=1  and SchoolCode ='" + searchModel.SchoolCode + "')");
@@ -555,12 +563,6 @@ namespace SmallRoutine.Application
                 {
                     sbSel.Append(" and facultystaff_InfoId is not null");
                 }
-                //if (searchModel.StartDate != null && searchModel.EndDate != null)
-                //    sbSel.Append(" and  CreateDate between '" + searchModel.StartDate + "' and '" + searchModel.EndDate + "'");
-                //else if (searchModel.StartDate != null && searchModel.EndDate == null)
-                //    sbSel.Append(" and  CreateDate>'" + searchModel.StartDate + "'");
-                //else if (searchModel.StartDate == null && searchModel.EndDate != null)
-                //    sbSel.Append(" and  CreateDate<'" + searchModel.EndDate + "'");
                 if (searchModel.StartDate != null && searchModel.StartDate.ToString() != "")
                 {
                     sbSel.Append(" and  CONVERT(varchar(100), CreateDate, 23) ='" + DateTime.Parse(searchModel.StartDate.ToString()).ToString("yyyy-MM-dd") + "'");
@@ -590,13 +592,21 @@ namespace SmallRoutine.Application
             return result;
         }
 
-        public int GetHealthEverySearchMiddleModelsTotal(HealthEverySearchStatasticViewModel searchModel, string type)
+        public int GetHealthEverySearchMiddleModelsTotal(HealthEverySearchStatasticViewModel searchModel, string type, string IsComeSchool, string Temperature)
         {
             List<HealthEverySearchMiddleModel> result = new List<HealthEverySearchMiddleModel>();
             if (type == "学生")
             {
                 StringBuilder sbSel = new StringBuilder();
-                sbSel.Append("select * from Health_Info where  (IsComeSchool = '否') AND (NotComeSchoolReason IS NOT NULL)");
+                sbSel.Append("select * from Health_Info where 1=1");
+                if (IsComeSchool != "")
+                {
+                    sbSel.Append("  and (IsComeSchool = '" + IsComeSchool + "')");// AND (NotComeSchoolReason IS NOT NULL)
+                }
+                if (Temperature != "")
+                {
+                    sbSel.Append(" where CAST( Temperature as float)>37.2");
+                }
                 if (searchModel.SchoolCode != null && searchModel.SchoolCode != "")
                 {
                     sbSel.Append("and Student_InfoId in (select id from Student_Info where 1=1  and SchoolCode ='" + searchModel.SchoolCode + "')");
@@ -635,7 +645,15 @@ namespace SmallRoutine.Application
             else
             {
                 StringBuilder sbSel = new StringBuilder();
-                sbSel.Append("select * from Health_Info where  (IsComeSchool = '否') AND (NotComeSchoolReason IS NOT NULL)");
+                sbSel.Append("select * from Health_Info where 1=1");
+                if (IsComeSchool != "")
+                {
+                    sbSel.Append("  and (IsComeSchool = '" + IsComeSchool + "')");// AND (NotComeSchoolReason IS NOT NULL)
+                }
+                if (Temperature != "")
+                {
+                    sbSel.Append(" where CAST( Temperature as float)>37.2");
+                }
                 if (searchModel.SchoolCode != null && searchModel.SchoolCode != "")
                 {
                     sbSel.Append("and facultystaff_InfoId in (select id from facultystaff_Info where 1=1  and SchoolCode ='" + searchModel.SchoolCode + "')");
@@ -812,6 +830,85 @@ namespace SmallRoutine.Application
                 connection.Close();
             }
             return result;
+        }
+
+        public List<HealthEverySearchMiddleModel> GetStudentComeSchoolHealthInfo(HealthEverySearchStatasticViewModel searchModel, string type, string IsComeSchool, string Temperature)
+        {
+            List<HealthEverySearchMiddleModel> result = new List<HealthEverySearchMiddleModel>();
+            StringBuilder sbSel = new StringBuilder();
+            sbSel.Append("select id,name,IdNumber,Temperature,IsComeSchool,NotComeJinReason NotComeSchoolReason,AddTimeInterval CheckType,AddCreateDate Createdate from [dbo].[Student_DayandNight_Info] where 1=1");
+            if (IsComeSchool != "")
+            {
+                sbSel.Append("  and (IsComeSchool = '" + IsComeSchool + "')");// AND (NotComeSchoolReason IS NOT NULL)
+            }
+            if (Temperature != "")
+            {
+                sbSel.Append(" and CAST( Temperature as float)>37.2");
+            }
+            if (searchModel.SchoolCode != null && searchModel.SchoolCode != "")
+            {
+                sbSel.Append("and SchoolName in (select SchoolName from School_Info where 1=1  and SchoolCode ='" + searchModel.SchoolCode + "')");
+            }
+            if (searchModel.StartDate != null && searchModel.StartDate.ToString() != "")
+            {
+                sbSel.Append(" and  CONVERT(varchar(100), AddCreateDate, 23) ='" + DateTime.Parse(searchModel.StartDate.ToString()).ToString("yyyy-MM-dd") + "'");
+            }
+            else
+            {
+                sbSel.Append(" and  CONVERT(varchar(100), AddCreateDate, 23) ='" + DateTime.Now.ToString("yyyy-MM-dd") + "'");
+            }
+
+            if (searchModel.CheckType != null && searchModel.CheckType != "")
+                sbSel.Append(" and AddTimeInterval='" + searchModel.CheckType + "'");
+            sbSel.Append(" order by AddCreateDate desc ");
+            sbSel.Append(" offset((" + (searchModel.page.CurrentPageNum + 1) + " - 1) * " + searchModel.page.PageSize + ") rows fetch next " +
+                searchModel.page.PageSize + " rows only ");
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                result = connection.Query<HealthEverySearchMiddleModel>(sbSel.ToString()).ToList();
+                connection.Close();
+            }
+
+            return result;
+        }
+
+        public int GetStudentComeSchoolHealthInfoTotal(HealthEverySearchStatasticViewModel searchModel, string type, string IsComeSchool, string Temperature)
+        {
+            List<HealthEverySearchMiddleModel> result = new List<HealthEverySearchMiddleModel>();
+            StringBuilder sbSel = new StringBuilder();
+            sbSel.Append("select id,name,IdNumber,Temperature,IsComeSchool,NotComeJinReason NotComeSchoolReason,AddTimeInterval CheckType,AddCreateDate Createdate from [dbo].[Student_DayandNight_Info] where 1=1");
+            if (IsComeSchool != "")
+            {
+                sbSel.Append("  and (IsComeSchool = '" + IsComeSchool + "')");// AND (NotComeSchoolReason IS NOT NULL)
+            }
+            if (Temperature != "")
+            {
+                sbSel.Append(" and CAST( Temperature as float)>37.2");
+            }
+            if (searchModel.SchoolCode != null && searchModel.SchoolCode != "")
+            {
+                sbSel.Append("and SchoolName in (select SchoolName from School_Info where 1=1  and SchoolCode ='" + searchModel.SchoolCode + "')");
+            }
+            if (searchModel.StartDate != null && searchModel.StartDate.ToString() != "")
+            {
+                sbSel.Append(" and  CONVERT(varchar(100), AddCreateDate, 23) ='" + DateTime.Parse(searchModel.StartDate.ToString()).ToString("yyyy-MM-dd") + "'");
+            }
+            else
+            {
+                sbSel.Append(" and  CONVERT(varchar(100), AddCreateDate, 23) ='" + DateTime.Now.ToString("yyyy-MM-dd") + "'");
+            }
+
+            if (searchModel.CheckType != null && searchModel.CheckType != "")
+                sbSel.Append(" and AddTimeInterval='" + searchModel.CheckType + "'");
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                result = connection.Query<HealthEverySearchMiddleModel>(sbSel.ToString()).ToList();
+                connection.Close();
+            }
+
+            return result.Count;
         }
     }
 }
