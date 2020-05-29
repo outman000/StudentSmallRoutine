@@ -61,7 +61,7 @@ namespace Dto.Service.SmallRoutine
                 var employInfo = _facultystaffInfoRepository.GetStudentInfoAndHealthInfo(decodeloginInfp.Idnumber);
                 result = _IMapper.Map<facultystaff_Info, ValideMiddleEmployMiddleModel>(employInfo);
                 result.RoleID = GetRoleID(result.DepartName);
-                return _IMapper.Map<facultystaff_Info, ValideMiddleEmployMiddleModel>(employInfo);
+                return result;
             }
             else
             {
