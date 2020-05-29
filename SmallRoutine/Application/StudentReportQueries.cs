@@ -512,7 +512,7 @@ namespace SmallRoutine.Application
                 }
                 if(Temperature!="")
                 {
-                    sbSel.Append(" where CAST( Temperature as float)>37.2");
+                    sbSel.Append(" and CAST( Temperature as float)>37.2");
                 }
                 if (searchModel.SchoolCode != null && searchModel.SchoolCode != "")
                 {
@@ -553,7 +553,7 @@ namespace SmallRoutine.Application
                 }
                 if (Temperature != "")
                 {
-                    sbSel.Append(" where CAST( Temperature as float)>37.2");
+                    sbSel.Append(" and CAST( Temperature as float)>37.2");
                 }
                 if (searchModel.SchoolCode != null && searchModel.SchoolCode != "")
                 {
@@ -605,7 +605,7 @@ namespace SmallRoutine.Application
                 }
                 if (Temperature != "")
                 {
-                    sbSel.Append(" where CAST( Temperature as float)>37.2");
+                    sbSel.Append(" and CAST( Temperature as float)>37.2");
                 }
                 if (searchModel.SchoolCode != null && searchModel.SchoolCode != "")
                 {
@@ -652,7 +652,7 @@ namespace SmallRoutine.Application
                 }
                 if (Temperature != "")
                 {
-                    sbSel.Append(" where CAST( Temperature as float)>37.2");
+                    sbSel.Append(" and CAST( Temperature as float)>37.2");
                 }
                 if (searchModel.SchoolCode != null && searchModel.SchoolCode != "")
                 {
