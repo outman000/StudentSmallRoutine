@@ -132,6 +132,7 @@ namespace Dto.Service.AutoMapper.SmallRoutine
             CreateMap<Student_DayandNight_Info, DayandNightInfoMiddle>();
 
             CreateMap<DayAndNightDefaultViewModel, Student_DayandNight_Info>();
+            CreateMap<DayAndNightAddListMiddle, Student_DayandNight_Info>();
 
             CreateMap<DayAndNightUpdateViewModel, Student_DayandNight_Info>();
 
