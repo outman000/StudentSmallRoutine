@@ -28,5 +28,7 @@ namespace SmallRoutine.Application
         HealthInfoFollowStatasticMiddleModel GetHealthInfoFollowStatastic(StudentStasticSearchViewModel searchModel);
         List<HealthEverySearchMiddleModel> GetStudentComeSchoolHealthInfo(HealthEverySearchStatasticViewModel searchModel, string type, string IsComeSchool, string Temperature);
         int GetStudentComeSchoolHealthInfoTotal(HealthEverySearchStatasticViewModel searchModel, string type, string IsComeSchool, string Temperature);
+
+        List<SchoolSituationStatisticsMiddle> GetSchoolSituationStatistics(StudentStasticSearchViewModel searchModel, string type);
     }
 }

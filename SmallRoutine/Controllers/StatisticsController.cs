@@ -305,5 +305,58 @@ namespace SmallRoutine.Controllers
                 return NotFound("系统错误，请联系管理员");
             }
         }
+
+        /// <summary>
+        /// 各校人员未到校情况  学生
+        /// </summary>
+        /// <param name="SearchViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("report/GetSchoolStudentSituation")]
+        public ActionResult<SchoolSituationStatisticsResModel> GetSchoolSituation(StudentStasticSearchViewModel SearchViewModel)
+        {
+            try
+            {
+                SchoolSituationStatisticsResModel result = new SchoolSituationStatisticsResModel();
+                var date = _studentReportQueries.GetSchoolSituationStatistics(SearchViewModel, "学生");
+                result.IsSuccess = true;
+                result.Data = date;
+                result.baseViewModel.ResponseCode = 200;
+                result.baseViewModel.Message = "数据获取成功";
+
+
+                return Ok(result);
+            }
+           catch(Exception ex)
+            {
+                return NotFound("系统问题请联系管理员");
+            }
+        }
+
+        /// <summary>
+        /// 各校人员未到校情况  教职工
+        /// </summary>
+        /// <param name="SearchViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("report/GetSchoolTeachSituation")]
+        public ActionResult<SchoolSituationStatisticsResModel> GetSchoolTeachSituation(StudentStasticSearchViewModel SearchViewModel)
+        {
+            try
+            {
+                SchoolSituationStatisticsResModel result = new SchoolSituationStatisticsResModel();
+                var date = _studentReportQueries.GetSchoolSituationStatistics(SearchViewModel, "教职工");
+                result.IsSuccess = true;
+                result.Data = date;
+                result.baseViewModel.ResponseCode = 200;
+                result.baseViewModel.Message = "数据获取成功";
+
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound("系统问题请联系管理员");
+            }
+        }
+
     }
 }
