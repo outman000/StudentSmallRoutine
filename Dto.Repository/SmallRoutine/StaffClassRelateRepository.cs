@@ -82,7 +82,8 @@ namespace Dto.Repository.SmallRoutine
                         IsTianJin = a.IsTianJin,
                         Temperature = a.Temperature,
                         NotComeSchoolReason=a.NotComeSchoolReason,
-                        IsBulu = a.IsBulu
+                        IsBulu = a.IsBulu,
+                        Student_InfoId = a.Student_Info.id
                      })
                      
                      .ToList();
