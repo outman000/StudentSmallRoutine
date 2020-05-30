@@ -327,7 +327,9 @@ namespace SmallRoutine.Application
         private double GetStudenCount(string SchoolCode)
         {
             StringBuilder sbSelSudent = new StringBuilder();
-            sbSelSudent.Append("select * from Student_Info where SchoolCode='" + SchoolCode + "'");
+            sbSelSudent.Append("select * from Student_Info where 1=1");
+            if (SchoolCode != "")
+                sbSelSudent.Append(" and  SchoolCode='" + SchoolCode + "'");
             double studentCount = 0;
             using (var connection = new SqlConnection(_connectionString))
             {
