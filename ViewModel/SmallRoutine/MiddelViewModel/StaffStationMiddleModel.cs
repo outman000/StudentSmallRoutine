@@ -97,5 +97,9 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// 补录
         /// </summary>
         public string IsBulu { get; set; }
+        /// <summary>
+        /// 登陆人的标识id
+        /// </summary>
+        public int Student_InfoId { get; set; }
     }
 }

@@ -98,8 +98,8 @@ namespace Dto.Repository.SmallRoutine
                           IsTianJin = a.IsTianJin,
                           IsAggregateContain = a.IsAggregateContain,
                           NotComeSchoolReason = a.NotComeSchoolReason,
-                          IsBulu = a.IsBulu
-
+                          IsBulu = a.IsBulu,
+                          Student_InfoId = a.facultystaff_Info.id
                       })
                      ;
                 staffStationMiddleModel.AddRange(tempresult);
