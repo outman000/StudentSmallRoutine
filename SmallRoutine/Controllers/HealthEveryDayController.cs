@@ -83,7 +83,7 @@ namespace SmallRoutine.Controllers
         public ActionResult<BaseViewModel> UpdateHealthRegister(HealthEveryUpdateViewModel healthInfoUpdateViewModel)
         {
             BaseViewModel baseViewModel = new BaseViewModel();
-            healthService.UpdateHealthEveryRegisterInfo (healthInfoUpdateViewModel);
+            healthService.UpdateHealthEveryRegisterInfo(healthInfoUpdateViewModel);
             baseViewModel.Message = "更新成功";
             baseViewModel.ResponseCode = 200;
             return Ok(baseViewModel);

@@ -20,6 +20,7 @@ namespace Dto.IService.SmallRoutine
         void RemveIDayAndNightService(List<int> obj);
 
         List<DayandNightInfoMiddle> SearchDayAndNightListService(DayAndNightSearchViewModel dayAndNightSearchViewModel);
+        List<DayandNightInfoMiddle> CheckDayAndNightListService(DayAndNightSearchViewModel dayAndNightSearchViewModel);
         List<DefaultDayAndNightMiddle> DefaultSearchDayAndNightListService(DayAndNightDefaultSearchViewModel  dayAndNightDefaultSearchViewModel);
     }
 }

@@ -8,6 +8,10 @@ namespace ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel
     public  class DayAndNightSearchViewModel
     {
         /// <summary>
+        /// 填报时间 
+        /// </summary>
+        public DateTime? AddCreateDate { get; set; }
+        /// <summary>
         /// 教师唯一主键
         /// </summary>
         public int userKey { get; set; }
@@ -40,7 +44,7 @@ namespace ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel
         /// </summary>
         public string IsComeSchool { get; set; }
         /// <summary>
-        /// 填报时间
+        /// 填报时段
         /// </summary>
         public string AddTimeInterval { get; set; }
 

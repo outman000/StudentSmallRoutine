@@ -156,6 +156,12 @@ namespace Dto.Service.SmallRoutine
             var result = mapper.Map<List<Student_DayandNight_Info>, List<DayandNightInfoMiddle>>(searchResult);
             return result;
         }
+        public List<DayandNightInfoMiddle> CheckDayAndNightListService(DayAndNightSearchViewModel dayAndNightSearchViewModel)
+        {
+            var searchResult = dayandNightRepository.CheckDayAndNightList(dayAndNightSearchViewModel);
+            var result = mapper.Map<List<Student_DayandNight_Info>, List<DayandNightInfoMiddle>>(searchResult);
+            return result;
+        }
         public void UpdateIDayAndNightService(DayAndNightUpdateViewModel dayAndNightUpdateViewModel)
         {
             var update= mapper.Map<DayAndNightUpdateViewModel, Student_DayandNight_Info>(dayAndNightUpdateViewModel);
