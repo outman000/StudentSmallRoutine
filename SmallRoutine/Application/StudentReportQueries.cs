@@ -604,7 +604,7 @@ namespace SmallRoutine.Application
             if (type == "学生")
             {
                 StringBuilder sbSel = new StringBuilder();
-                sbSel.Append("select h.*,s.IdNumber from Health_Info h left join Student_Info s on h.Student_InfoId=s.id where 1=1 and Student_InfoId is not null ");// and CheckType='到校前'
+                sbSel.Append("select h.*,s.IdNumber,s.SchoolName from Health_Info h left join Student_Info s on h.Student_InfoId=s.id where 1=1 and Student_InfoId is not null ");// and CheckType='到校前'
                 if (IsComeSchool != "")
                 {
                     sbSel.Append("  and (h.IsComeSchool = '" + IsComeSchool + "')");// AND (NotComeSchoolReason IS NOT NULL)
@@ -636,7 +636,7 @@ namespace SmallRoutine.Application
             else
             {
                 StringBuilder sbSel = new StringBuilder();
-                sbSel.Append("select  h.*,f.IdNumber from Health_Info h left join facultystaff_Info f on h.facultystaff_InfoId=f.id where 1=1 and facultystaff_InfoId is not null ");//  (IsComeSchool = '否') AND (NotComeSchoolReason IS NOT NULL)
+                sbSel.Append("select  h.*,f.IdNumber,f.SchoolName from Health_Info h left join facultystaff_Info f on h.facultystaff_InfoId=f.id where 1=1 and facultystaff_InfoId is not null ");//  (IsComeSchool = '否') AND (NotComeSchoolReason IS NOT NULL)
                 if (IsComeSchool != "")
                 {
                     sbSel.Append("  and (h.IsComeSchool = '" + IsComeSchool + "')");// AND (NotComeSchoolReason IS NOT NULL)

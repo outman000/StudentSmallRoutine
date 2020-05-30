@@ -87,5 +87,9 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// 联系电话
         /// </summary>
         public string Telephone { get; set; }
+        /// <summary>
+        /// 学校名称
+        /// </summary>
+        public string SchoolName { get; set; }
     }
 }
