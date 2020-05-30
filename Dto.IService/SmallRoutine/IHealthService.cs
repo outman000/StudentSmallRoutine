@@ -9,6 +9,7 @@ namespace Dto.IService.SmallRoutine
     public interface IHealthService
     {
         void addHealthEveryRegisterInfo(HealthEveryAddViewModel  healthEveryAddViewModel);
+        void collectionHealthEveryRegisterInfo(HealthEveryCollectionViewModel healthEveryAddViewModel);
 
         void DeleteHealthEveryRegisterInfo(HealthEveryDeleteViewModel  healthEveryDeleteViewModel);
 

@@ -67,7 +67,7 @@ namespace SmallRoutine.Controllers
         /// <param name="dayAndNightSearchViewModel"></param>
         /// <returns></returns>
         [HttpPost("/DayAndNight/DayAndNightInfoCheck")]
-        public ActionResult<DayAndNightSearchResViewModel> getDayAndNightInfoCheck(DayAndNightSearchViewModel dayAndNightSearchViewModel)
+        public ActionResult<DayAndNightSearchResViewModel> getDayAndNightInfoCheck(DayAndNightCheckViewModel dayAndNightSearchViewModel)
         {
             DayAndNightSearchResViewModel dayAndNightSearchResViewModel = new DayAndNightSearchResViewModel();
             

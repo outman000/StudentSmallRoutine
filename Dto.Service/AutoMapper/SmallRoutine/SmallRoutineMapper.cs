@@ -79,9 +79,11 @@ namespace Dto.Service.AutoMapper.SmallRoutine
 
 
             CreateMap<HealthEveryAddViewModel, Health_Info>()
+                 .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.IdNumber))); 
+            CreateMap<HealthEveryCollectionViewModel, Health_Info>()
                  .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.IdNumber)));
 
-            
+
             CreateMap< Health_Info, HealthEverySearchMiddleModel>()
                  .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.IdNumber)));
 
