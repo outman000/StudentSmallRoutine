@@ -354,30 +354,33 @@ namespace SmallRoutine.Application
         private double GetActualStudentCount(StudentStasticSearchViewModel searchModel, string SchoolCode, string grade, string IsComeSchool, string temperature)
         {
             StringBuilder sbSelHealth = new StringBuilder();
-            sbSelHealth.Append("select * from Health_Info where 1=1");
+            sbSelHealth.Append("select h.* from Health_Info h left join Student_Info s on h.Student_InfoId=s.id where 1=1 and h.Student_InfoId is not null");
             if (IsComeSchool != null && IsComeSchool != "")
-                sbSelHealth.Append("  and IsComeSchool='" + IsComeSchool + "'");
+                sbSelHealth.Append("  and h.IsComeSchool='" + IsComeSchool + "'");
             if (SchoolCode != null && SchoolCode != "")
             {
-                sbSelHealth.Append("and Student_InfoId in (");
-                sbSelHealth.Append("select id from Student_Info where SchoolCode='" + SchoolCode + "'");
-                if (grade != null && grade != "")
-                    sbSelHealth.Append(" and GradeName in(" + grade + ")");
-                sbSelHealth.Append(")");
+                //sbSelHealth.Append("and Student_InfoId in (");
+                //sbSelHealth.Append("select id from Student_Info where SchoolCode='" + SchoolCode + "'");
+                //if (grade != null && grade != "")
+                //    sbSelHealth.Append(" and GradeName in(" + grade + ")");
+                //sbSelHealth.Append(")");
+                sbSelHealth.Append(" and s.SchoolCode='" + SchoolCode + "'");
             }
-            else
-                sbSelHealth.Append("and Student_InfoId is not null");
+            if (grade != null && grade != "")
+                sbSelHealth.Append(" and s.GradeName in(" + grade + ")");
+            //else
+            //    sbSelHealth.Append("and Student_InfoId is not null");
             if (searchModel.StartDate != null && searchModel.StartDate.ToString() != "")
             {
-                sbSelHealth.Append(" and  CONVERT(varchar(100), CreateDate, 23) ='" + DateTime.Parse(searchModel.StartDate.ToString()).ToString("yyyy-MM-dd") + "'");
+                sbSelHealth.Append(" and  CONVERT(varchar(100), h.CreateDate, 23) ='" + DateTime.Parse(searchModel.StartDate.ToString()).ToString("yyyy-MM-dd") + "'");
             }
             else
             {
-                sbSelHealth.Append(" and  CONVERT(varchar(100), CreateDate, 23) ='" + DateTime.Now.ToString("yyyy-MM-dd") + "'");
+                sbSelHealth.Append(" and  CONVERT(varchar(100), h.CreateDate, 23) ='" + DateTime.Now.ToString("yyyy-MM-dd") + "'");
 
             }
             if (temperature != "")
-                sbSelHealth.Append(" and CAST( Temperature as float)>37.2");
+                sbSelHealth.Append(" and CAST( h.Temperature as float)>37.2");
             double healthCount = 0;//每日健康数据统计
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -924,7 +927,7 @@ namespace SmallRoutine.Application
         public List<SchoolSituationStatisticsMiddle> GetSchoolSituationStatistics(StudentStasticSearchViewModel searchModel, string type)
         {
             List<SchoolSituationStatisticsMiddle> result = new List<SchoolSituationStatisticsMiddle>();
-            string sqlSel = "select * from School_Info where 1=1 and SchoolCode is not null";
+            string sqlSel = "select distinct SchoolCode,SchoolName from School_Info where 1=1 and SchoolCode is not null";
             if (searchModel.SchoolCode != null && searchModel.SchoolCode != "")
             {
                 sqlSel += " and SchoolCode='" + searchModel.SchoolCode + "'";
