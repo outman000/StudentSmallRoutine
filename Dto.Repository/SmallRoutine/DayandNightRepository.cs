@@ -105,6 +105,37 @@ namespace Dto.Repository.SmallRoutine
 
             return Student_DayandNight_Infos.AsQueryable().Where(precateresult).ToList();
         }
+        public List<Student_DayandNight_Info> CheckDayAndNightList(DayAndNightCheckViewModel dayAndNightSearchViewModel)
+        {
+            var preciate = GetByModelWherecheck(dayAndNightSearchViewModel);
+            var precateresult = GetByModelChildResultWherecheck(dayAndNightSearchViewModel);
+
+            var searchResult = Db.ClassManager_Relate
+          .Where(a => a.facultystaff_InfoId == dayAndNightSearchViewModel.userKey)
+          .Include(a => a.Class_Info).ToList();
+
+            List<Student_DayandNight_Info> Student_DayandNight_Infos = new List<Student_DayandNight_Info>();
+            for (int i = 0; i < searchResult.Count(); i++)
+            {
+
+
+                var gradeName = int.Parse(searchResult[i].Class_Info.ClassCode.Substring(2, 2)).ToString();
+                var className = int.Parse(searchResult[i].Class_Info.ClassCode.Substring(4, 2)).ToString();
+                var preciatechild = GetByModelChildWhere(className, gradeName);
+                var tempresult = Db.Student_DayandNight_Info.Where(preciate);
+                tempresult = tempresult.Where(preciatechild);
+                //.Where(a => a.SchoolName == dayAndNightSearchViewModel.SchoolName
+                //  && a.GradeName == gradeName
+                //   && a.ClassName == dayAndNightSearchViewModel.ClassName
+                //).ToList();
+
+                Student_DayandNight_Infos.AddRange(tempresult.ToList());
+            }
+
+
+
+            return Student_DayandNight_Infos.AsQueryable().Where(precateresult).ToList();
+        }
 
         public Expression<Func<Student_DayandNight_Info, bool>> GetByModelWhere(DayAndNightSearchViewModel  dayAndNightSearchViewModel)
         {
@@ -117,13 +148,30 @@ namespace Dto.Repository.SmallRoutine
             predicate = predicate.And(p => p.Temperature.Contains(dayAndNightSearchViewModel.Temperature));
             predicate = predicate.And(p => p.AddTimeInterval.Contains(dayAndNightSearchViewModel.AddTimeInterval));
 
-        
+
             predicate = predicate.And(p => p.tag.Contains(dayAndNightSearchViewModel.tag));
       
             
             return predicate;
         }
+        public Expression<Func<Student_DayandNight_Info, bool>> GetByModelWherecheck(DayAndNightCheckViewModel dayAndNightSearchViewModel)
+        {
+            var predicate = WhereExtension.True<Student_DayandNight_Info>();//初始化where表达式SchoolName
+                                                                            //姓          
+            predicate = predicate.And(p => p.GradeName.Contains(dayAndNightSearchViewModel.GradeName));
+            predicate = predicate.And(p => p.IsComeSchool.Contains(dayAndNightSearchViewModel.IsComeSchool));
+            predicate = predicate.And(p => p.Name.Contains(dayAndNightSearchViewModel.Name));
+            predicate = predicate.And(p => p.SchoolName.Contains(dayAndNightSearchViewModel.SchoolName));
+            predicate = predicate.And(p => p.Temperature.Contains(dayAndNightSearchViewModel.Temperature));
+            predicate = predicate.And(p => p.AddTimeInterval.Contains(dayAndNightSearchViewModel.AddTimeInterval));
+            predicate = predicate.And(p => p.AddCreateDate >= Convert.ToDateTime(Convert.ToDateTime(dayAndNightSearchViewModel.AddCreateDate).ToString("yyyy-MM-dd 00:00:00")) && p.AddCreateDate <= Convert.ToDateTime(Convert.ToDateTime(dayAndNightSearchViewModel.AddCreateDate).ToString("yyyy-MM-dd 23:59:59")));
 
+
+            predicate = predicate.And(p => p.tag.Contains(dayAndNightSearchViewModel.tag));
+
+
+            return predicate;
+        }
         public Expression<Func<Student_DayandNight_Info, bool>> GetByModelChildWhere(String ClassName,String GradeName)
         {
             var predicate = WhereExtension.True<Student_DayandNight_Info>();//初始化where表达式SchoolName
@@ -148,7 +196,20 @@ namespace Dto.Repository.SmallRoutine
           
             return predicate;
         }
+        public Expression<Func<Student_DayandNight_Info, bool>> GetByModelChildResultWherecheck(DayAndNightCheckViewModel dayAndNightSearchViewModel)
+        {
+            var predicate = WhereExtension.True<Student_DayandNight_Info>();//初始化where表达式SchoolName
+            if (dayAndNightSearchViewModel.GradeName != "")
+            {
+                predicate = predicate.And(p => p.GradeName == dayAndNightSearchViewModel.GradeName);
+            }
+            if (dayAndNightSearchViewModel.ClassName != "")
+            {
+                predicate = predicate.And(p => p.ClassName == dayAndNightSearchViewModel.ClassName);
+            }
 
+            return predicate;
+        }
         //public int GetComeSchoolCount()
         //{
         //    DbSet.Where(a=>a.IsComeSchool=="是")

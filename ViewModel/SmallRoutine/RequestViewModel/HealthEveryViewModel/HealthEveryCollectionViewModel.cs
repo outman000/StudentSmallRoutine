@@ -2,28 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ViewModel.SmallRoutine.MiddelViewModel
+namespace ViewModel.SmallRoutine.RequestViewModel.HealthEveryViewModel
 {
-    public class StaffStationMiddleModel
+    public  class HealthEveryCollectionViewModel
     {
         /// <summary>
-        /// 部门
+        /// 姓名
         /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// 部门
-        /// </summary>
-        public string DepartName { get; set; }
-    
-        /// <summary>
-        /// 岗位
-        /// </summary>
-        public string StaffName { get; set; }
-        /// <summary>
-        /// id
-        /// </summary>
-        public int id { get; set; }
         /// <summary>
         /// 身份证号
         /// </summary>
@@ -52,10 +38,21 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// 家庭人员乏力
         /// </summary>
         public string IsFamilyWeakt { get; set; }
+
+
+        public string CheckType { get; set; }//晨午晚
         /// <summary>
-        /// 创建日期
+        /// 登陆人的标识id(学生)
         /// </summary>
-        public DateTime? Createdate { get; set; }
+        public int? Student_InfoId { get; set; }
+        /// <summary>
+        /// 员工标识id
+        /// </summary>
+        public int? facultystaff_InfoId { get; set; }
+        /// <summary>
+        /// 体温
+        /// </summary>
+        public string Temperature { get; set; }//体温
 
         /// <summary>
         /// 是否到校
@@ -66,18 +63,14 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// </summary>
         public string NotComeSchoolReason { get; set; }
         /// <summary>
+        /// 是否在天津
+        /// </summary>
+
+        public string IsTianJin { get; set; }
+        /// <summary>
         /// 是否接触
         /// </summary>
         public string IsTouch { get; set; }
-
-        /// <summary>
-        /// 早午晚
-        /// </summary>
-        public string CheckType { get; set; }
-        /// <summary>
-        /// 体温
-        /// </summary>
-        public string Temperature { get; set; }
         /// <summary>
         /// 是否参加聚合
         /// </summary>
@@ -87,23 +80,12 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// </summary>
         public string IsAggregateContain { get; set; }
         /// <summary>
-        /// 是否在天津
-        /// </summary>
-
-        public string IsTianJin { get; set; }
-
-
-        /// <summary>
         /// 补录
         /// </summary>
         public string IsBulu { get; set; }
         /// <summary>
-        /// 学生的标识id
+        /// 补录时间
         /// </summary>
-        public int Student_InfoId { get; set; }
-        /// <summary>
-        /// 员工的标识id
-        /// </summary>
-        public int facultystaff_InfoId { get; set; }
+        public DateTime? Createdate { get; set; }
     }
 }

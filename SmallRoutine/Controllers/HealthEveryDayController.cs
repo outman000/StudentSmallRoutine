@@ -39,6 +39,21 @@ namespace SmallRoutine.Controllers
             return Ok(baseViewModel);
         }
         /// <summary>
+        /// 补录每日健康登记信息
+        /// </summary>
+        /// <param name="healthViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("/HealthEveryDayRegister/Collection")]
+        // GET: HealthInfo/Details/5
+        public ActionResult<BaseViewModel> AddHealthRegisterCollection(HealthEveryCollectionViewModel healthViewModel)
+        {
+            BaseViewModel baseViewModel = new BaseViewModel();
+            healthService.collectionHealthEveryRegisterInfo(healthViewModel);
+            baseViewModel.Message = "补录成功";
+            baseViewModel.ResponseCode = 200;
+            return Ok(baseViewModel);
+        }
+        /// <summary>
         /// 删除每日健康登记信息
         /// </summary>
         /// <param name="healthInfoDeleteViewModel"></param>
@@ -83,7 +98,7 @@ namespace SmallRoutine.Controllers
         public ActionResult<BaseViewModel> UpdateHealthRegister(HealthEveryUpdateViewModel healthInfoUpdateViewModel)
         {
             BaseViewModel baseViewModel = new BaseViewModel();
-            healthService.UpdateHealthEveryRegisterInfo (healthInfoUpdateViewModel);
+            healthService.UpdateHealthEveryRegisterInfo(healthInfoUpdateViewModel);
             baseViewModel.Message = "更新成功";
             baseViewModel.ResponseCode = 200;
             return Ok(baseViewModel);

@@ -14,5 +14,6 @@ namespace Dto.IRepository.SmallRoutine
         List<Health_Info> SearchHealthEveryRegisterInfo(HealthEverySearchViewModel healthEverySearchViewModel);
         Health_Info getByidNumber(string idNumber);
         bool existhealthInfo(HealthEveryAddViewModel healthEveryAddViewModel);
+        bool collectionexisthealthInfo(HealthEveryCollectionViewModel healthEveryAddViewModel);
     }
 }

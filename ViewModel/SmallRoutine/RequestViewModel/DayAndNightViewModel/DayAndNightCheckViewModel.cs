@@ -5,8 +5,12 @@ using ViewModel.PublicViewModel;
 
 namespace ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel
 {
-    public  class DayAndNightSearchViewModel
+    public  class DayAndNightCheckViewModel
     {
+        /// <summary>
+        /// 填报时间 
+        /// </summary>
+        public DateTime? AddCreateDate { get; set; }
         /// <summary>
         /// 教师唯一主键
         /// </summary>
@@ -57,7 +61,7 @@ namespace ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel
         /// <summary>
         /// 构造方法
         /// </summary>
-        DayAndNightSearchViewModel()
+        DayAndNightCheckViewModel()
         {
             pageViewModel = new PageViewModel();
         }
