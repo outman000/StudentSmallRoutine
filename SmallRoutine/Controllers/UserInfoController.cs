@@ -76,7 +76,7 @@ namespace SmallRoutine.Controllers
                 {
                     loginValideResModel.Data.IdNumber = "admin";
                     loginValideResModel.Data.SchoolCode = "admin";
-                    loginValideResModel.Data.Name = "";
+                    loginValideResModel.Data.Name = "总管理员";
                     loginValideResModel.Data.Sex = "";
                     loginValideResModel.Data.SchoolName = "";
                     loginValideResModel.Data.Country = "";
