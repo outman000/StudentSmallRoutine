@@ -80,7 +80,7 @@ namespace Dto.Repository.SmallRoutine
             var precateresult = GetByModelChildResultWhere(dayAndNightSearchViewModel);
             
             var searchResult = Db.ClassManager_Relate
-          .Where(a => dayAndNightSearchViewModel.roleID.Equals("sys")? true : a.facultystaff_InfoId == dayAndNightSearchViewModel.userKey)
+          .Where(a => dayAndNightSearchViewModel.RoleID.Equals("sys")? true : a.facultystaff_InfoId == dayAndNightSearchViewModel.userKey)
           .Include(a => a.Class_Info).ToList();
 
             List<Student_DayandNight_Info> Student_DayandNight_Infos = new List<Student_DayandNight_Info>();

@@ -10,7 +10,7 @@ namespace ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel
         /// <summary>
         /// 角色id
         /// </summary>
-        public string roleID { get; set; }
+        public string RoleID { get; set; }
         /// <summary>
         /// 教师唯一主键
         /// </summary>
