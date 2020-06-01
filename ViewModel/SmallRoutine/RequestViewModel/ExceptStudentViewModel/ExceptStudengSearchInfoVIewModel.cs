@@ -40,6 +40,10 @@ namespace ViewModel.SmallRoutine.RequestViewModel.ExceptStudentViewModel
         /// 学校编号
         /// </summary>
         public string SchoolCode { get; set; }
+        /// <summary>
+        /// 权限ID  登录时获取的RoleID
+        /// </summary>
+        public string RoleID { get; set; }
 
         /// <summary>
         /// 构造方法

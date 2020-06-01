@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ViewModel.SmallRoutine.MiddelViewModel
 {
-  public  class ExceptStudentSearchMiddle
+    public class ExceptStudentSearchMiddle
     {
         /// <summary>
         /// id
@@ -41,7 +41,7 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// <summary>
         /// 个人信息唯一标识
         /// </summary>
-         public int? student_InfoId { get; set; }
+        public int? student_InfoId { get; set; }
 
         /// <summary>
         /// 上传图片的url
@@ -49,7 +49,7 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         public string Url { get; set; }
 
 
-           public int? facultystaff_InfoId { get; set; }
+        public int? facultystaff_InfoId { get; set; }
 
         public int? UserFiles_InfoId { get; set; }
     }

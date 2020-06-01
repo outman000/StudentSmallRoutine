@@ -799,9 +799,9 @@ namespace SmallRoutine.Application
             int teachNoComSchoolFever = Convert.ToInt32(GetActualFacultystaffCount(searchModel, searchModel.SchoolCode, searchModel.Type, "否", "37.2"));
             int teachNoComSchool = Convert.ToInt32(GetActualFacultystaffCount(searchModel, searchModel.SchoolCode, searchModel.Type, "否", ""));
 
-            result.FollowPerson = studentNoComSchool + studentComSchoolFever + teachNoComSchool + teachComSchoolFever;
             result.IsComSchoolPerson = studentComSchoolFever + teachComSchoolFever;
             result.NoCoSchoolPerson = studentNoComSchool + teachNoComSchool;
+            result.FollowPerson = result.IsComSchoolPerson + result.NoCoSchoolPerson;
 
             return result;
         }
