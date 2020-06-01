@@ -36,18 +36,21 @@ namespace Dto.Service.SmallRoutine
             var insertInfo= _IMapper.Map<HealthInfoAddViewModel, StudentRegisterHeath_Info>(healthViewModel);
             healthRegisterRepository.Add(insertInfo);
             healthRegisterRepository.SaveChanges();//保存数据
-            var insertHealth = healthRegisterRepository.getByidNumber(insertInfo.Idnumber);//查询插入的 mapper中加密
+            //var insertHealth = healthRegisterRepository.getByidNumber(insertInfo.Idnumber);//查询插入的 mapper中加密
             var facultystaff = facultystaffInfoRepository.getByidNumber(insertInfo.Idnumber);//查询白绑定的基础信息
-            var studentInfo = studentInfoRepository.getByidNumber(insertInfo.Idnumber);
             if (facultystaff != null)//不为空复制键值
             {
                 facultystaff.StudentRegisterHeath_InfoId = insertInfo.id;
                 facultystaffInfoRepository.Update(facultystaff);
             }
-            if (studentInfo != null)
+            else
             {
-                studentInfo.StudentRegisterHeath_InfoId = insertInfo.id;
-                studentInfoRepository.Update(studentInfo);
+                var studentInfo = studentInfoRepository.getByidNumber(insertInfo.Idnumber);
+                if (studentInfo != null)
+                {
+                    studentInfo.StudentRegisterHeath_InfoId = insertInfo.id;
+                    studentInfoRepository.Update(studentInfo);
+                }
             }
             healthRegisterRepository.SaveChanges();
         }
