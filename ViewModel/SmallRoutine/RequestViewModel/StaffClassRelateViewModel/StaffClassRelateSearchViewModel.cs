@@ -38,6 +38,10 @@ namespace ViewModel.SmallRoutine.RequestViewModel.StaffClassRelateViewModel
         public PageViewModel pageViewModel { get; set; }
         public String Name { get; set; }
         public String IdNumber { get; set; }
+        /// <summary>
+        /// 权限ID  登录时获取的RoleID
+        /// </summary>
+        public string RoleID { get; set; }
 
         /// <summary>
         /// 构造方法

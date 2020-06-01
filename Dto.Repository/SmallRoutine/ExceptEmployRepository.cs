@@ -62,19 +62,28 @@ namespace Dto.Repository.SmallRoutine
         public List<Except_Info_Employ> searchEmployinfo(ExceptEmploySearchViewModel exceptEmploySearchViewModel)
         {
             var preciate = GetByModelWhere(exceptEmploySearchViewModel);
-            //先找到这个人所负责的所有班级
-            var searchResult = Db.StaffStation_Relate
-            .Where(a => a.facultystaff_InfoId == exceptEmploySearchViewModel.userKey)
-            .Include(a => a.Station_Info).ToList();
-
-
-            List<Except_Info_Employ > Except_Info_Employs = new List<Except_Info_Employ>();
-            for (int i = 0; i < searchResult.Count(); i++)//通过班级code查询
+            List<Except_Info_Employ> Except_Info_Employs = new List<Except_Info_Employ>();
+            if (exceptEmploySearchViewModel.RoleID == "sys")
             {
-
-                var tempresult = DbSet.Where(a => a.facultystaff_Info.StaffCode == searchResult[i].Station_Info.StaffCode)
-                    .Where(preciate).Include(a=>a.facultystaff_Info).Include(m=>m.UserFiles_Info).ToList();
+                var tempresult = DbSet.Where(preciate).Include(a => a.facultystaff_Info).Include(m => m.UserFiles_Info).ToList();
                 Except_Info_Employs.AddRange(tempresult);
+
+            }
+            else
+            {
+                //先找到这个人所负责的所有班级
+                var searchResult = Db.StaffStation_Relate
+                .Where(a => a.facultystaff_InfoId == exceptEmploySearchViewModel.userKey)
+                .Include(a => a.Station_Info).ToList();
+
+
+                for (int i = 0; i < searchResult.Count(); i++)//通过班级code查询
+                {
+
+                    var tempresult = DbSet.Where(a => a.facultystaff_Info.StaffCode == searchResult[i].Station_Info.StaffCode)
+                        .Where(preciate).Include(a => a.facultystaff_Info).Include(m => m.UserFiles_Info).ToList();
+                    Except_Info_Employs.AddRange(tempresult);
+                }
             }
             return Except_Info_Employs.OrderByDescending(a => a.CreateDate).ToList();
         }
