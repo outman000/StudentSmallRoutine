@@ -232,7 +232,7 @@ namespace SmallRoutine.Controllers
             }
         }
         /// <summary>
-        /// 获取学生到校存到校发热的信息
+        /// 获取学生到校存在发热的信息
         /// </summary>
         /// <param name="SearchViewModel"></param>
         /// <returns></returns>
@@ -242,10 +242,20 @@ namespace SmallRoutine.Controllers
             try
             {
                 HealthNoComSchoolResModel result = new HealthNoComSchoolResModel();
-                var info = _studentReportQueries.GetStudentComeSchoolHealthInfo(SearchViewModel, "学生", "是", "37.2");
-                int totalNum = _studentReportQueries.GetStudentComeSchoolHealthInfoTotal(SearchViewModel, "学生", "是", "37.2");
-                result.healthEverySearchMiddleModels = info;
-                result.TotalNum = totalNum;
+                if (SearchViewModel.CheckType == "到校前")
+                {
+                    var info = _studentReportQueries.GetHealthEverySearchMiddleModels(SearchViewModel, "学生", "是", "37.2");
+                    int totalNum = _studentReportQueries.GetHealthEverySearchMiddleModelsTotal(SearchViewModel, "学生", "是", "37.2");
+                    result.healthEverySearchMiddleModels = info;
+                    result.TotalNum = totalNum;
+                }
+                else
+                {
+                    var info = _studentReportQueries.GetStudentComeSchoolHealthInfo(SearchViewModel, "学生", "是", "37.2");
+                    int totalNum = _studentReportQueries.GetStudentComeSchoolHealthInfoTotal(SearchViewModel, "学生", "是", "37.2");
+                    result.healthEverySearchMiddleModels = info;
+                    result.TotalNum = totalNum;
+                }
                 result.IsSuccess = true;
                 result.baseViewModel.ResponseCode = 200;
                 result.baseViewModel.Message = "数据查询成功";

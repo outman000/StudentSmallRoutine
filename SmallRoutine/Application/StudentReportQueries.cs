@@ -405,13 +405,16 @@ namespace SmallRoutine.Application
         private double GetActualFacultystaffCount(StudentStasticSearchViewModel searchModel, string SchoolCode, string CheckType, string IsComeSchool, string Temperature)
         {
             StringBuilder sbSelHealth = new StringBuilder();
-            sbSelHealth.Append("select * from Health_Info where 1=1");
+            sbSelHealth.Append("select h.* from Health_Info h left join facultystaff_Info f on h.facultystaff_InfoId =f.id  where 1=1 and h.facultystaff_InfoId is not null");
             if (IsComeSchool != null && IsComeSchool != "")
-                sbSelHealth.Append(" and IsComeSchool='" + IsComeSchool + "'");
+                sbSelHealth.Append(" and h.IsComeSchool='" + IsComeSchool + "'");
             if (CheckType != null && CheckType != "")
-                sbSelHealth.Append(" and CheckType='" + CheckType + "' ");
+                sbSelHealth.Append(" and h.CheckType='" + CheckType + "' ");
             if (SchoolCode != null && SchoolCode != "")
-                sbSelHealth.Append("and facultystaff_InfoId in (select id from facultystaff_Info where SchoolCode='" + SchoolCode + "')");
+            {
+                //sbSelHealth.Append("and facultystaff_InfoId in (select id from facultystaff_Info where SchoolCode='" + SchoolCode + "')");
+                sbSelHealth.Append(" and f.SchoolCode='" + SchoolCode + "'");
+            }
             //if (searchModel.StartDate != null && searchModel.EndDate != null)
             //    sbSelHealth.Append(" and  CreateDate between '" + searchModel.StartDate + "' and '" + searchModel.EndDate + "'");
             //else if (searchModel.StartDate != null && searchModel.EndDate == null)
@@ -420,16 +423,16 @@ namespace SmallRoutine.Application
             //    sbSelHealth.Append(" and  CreateDate<'" + searchModel.EndDate + "'");
             if (searchModel.StartDate != null && searchModel.StartDate.ToString() != "")
             {
-                sbSelHealth.Append(" and  CONVERT(varchar(100), CreateDate, 23) ='" + DateTime.Parse(searchModel.StartDate.ToString()).ToString("yyyy-MM-dd") + "'");
+                sbSelHealth.Append(" and  CONVERT(varchar(100), h.CreateDate, 23) ='" + DateTime.Parse(searchModel.StartDate.ToString()).ToString("yyyy-MM-dd") + "'");
             }
             else
             {
-                sbSelHealth.Append(" and  CONVERT(varchar(100), CreateDate, 23) ='" + DateTime.Now.ToString("yyyy-MM-dd") + "'");
+                sbSelHealth.Append(" and  CONVERT(varchar(100), h.CreateDate, 23) ='" + DateTime.Now.ToString("yyyy-MM-dd") + "'");
 
             }
             if (Temperature != "")
             {
-                sbSelHealth.Append(" and CAST( Temperature as float)>37.2");
+                sbSelHealth.Append(" and CAST( h.Temperature as float)>37.2");
             }
             double healthCount = 0;//每日健康数据统计
             using (var connection = new SqlConnection(_connectionString))
@@ -483,7 +486,7 @@ namespace SmallRoutine.Application
 
         public HealthStatisticsMiddleModel GetHealthStatisticsMiddleModel(StudentStasticSearchViewModel searchModel)
         {
-            double StudentHealthCount = GetActualStudentCount(searchModel, searchModel.SchoolCode, "", "", "");
+            double StudentHealthCount = GetActualStudentCount(searchModel, searchModel.SchoolCode, "'1','2','3','3','4','5','6'，'7','8','9','10','11','12'", "", "");
             double FacultystaffHealthCount = GetActualFacultystaffCount(searchModel, searchModel.SchoolCode, searchModel.Type, "", "");
             HealthStatisticsMiddleModel result = new HealthStatisticsMiddleModel();
             result.StudentHealthCount = Convert.ToInt32(StudentHealthCount);
@@ -796,7 +799,7 @@ namespace SmallRoutine.Application
             int teachNoComSchoolFever = Convert.ToInt32(GetActualFacultystaffCount(searchModel, searchModel.SchoolCode, searchModel.Type, "否", "37.2"));
             int teachNoComSchool = Convert.ToInt32(GetActualFacultystaffCount(searchModel, searchModel.SchoolCode, searchModel.Type, "否", ""));
 
-            result.FollowPerson = studentNoComSchoolFever + studentComSchoolFever + teachNoComSchoolFever + teachComSchoolFever;
+            result.FollowPerson = studentNoComSchool + studentComSchoolFever + teachNoComSchool + teachComSchoolFever;
             result.IsComSchoolPerson = studentComSchoolFever + teachComSchoolFever;
             result.NoCoSchoolPerson = studentNoComSchool + teachNoComSchool;
 
@@ -806,33 +809,36 @@ namespace SmallRoutine.Application
         private double GetStudentComSchool(StudentStasticSearchViewModel searchModel, string Temperature)
         {
             double result = 0;
-            StringBuilder sbSql = new StringBuilder();
-            sbSql.Append("select * from [dbo].[Student_DayandNight_Info] where 1=1");
-            if (searchModel.SchoolCode != null && searchModel.SchoolCode != "")
+            if (searchModel.Type != null && searchModel.Type != "" && searchModel.Type != "到校前")
             {
-                sbSql.Append(" and SchoolName in (select SchoolName from School_Info where SchoolCode='" + searchModel.SchoolCode + "')");
-            }
-            if (searchModel.Type != null && searchModel.Type != "")
-                sbSql.Append(" and AddTimeInterval='" + searchModel.Type + "'");
-            if (searchModel.StartDate != null && searchModel.StartDate.ToString() != "")
-            {
-                sbSql.Append(" and  CONVERT(varchar(100), AddCreateDate, 23) ='" + DateTime.Parse(searchModel.StartDate.ToString()).ToString("yyyy-MM-dd") + "'");
-            }
-            else
-            {
-                sbSql.Append(" and  CONVERT(varchar(100), AddCreateDate, 23) ='" + DateTime.Now.ToString("yyyy-MM-dd") + "'");
-            }
-            if (Temperature != "")
-            {
-                sbSql.Append(" and  CAST( Temperature as float)>37.2");
-            }
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                var list = connection.Query<dynamic>(sbSql.ToString()).ToList();
-                if (list.Count > 0)
-                    result = list.Count;
-                connection.Close();
+                StringBuilder sbSql = new StringBuilder();
+                sbSql.Append("select * from [dbo].[Student_DayandNight_Info] where 1=1");
+                if (searchModel.SchoolCode != null && searchModel.SchoolCode != "")
+                {
+                    sbSql.Append(" and SchoolName in (select SchoolName from School_Info where SchoolCode='" + searchModel.SchoolCode + "')");
+                }
+                if (searchModel.Type != null && searchModel.Type != "")
+                    sbSql.Append(" and AddTimeInterval='" + searchModel.Type + "'");
+                if (searchModel.StartDate != null && searchModel.StartDate.ToString() != "")
+                {
+                    sbSql.Append(" and  CONVERT(varchar(100), AddCreateDate, 23) ='" + DateTime.Parse(searchModel.StartDate.ToString()).ToString("yyyy-MM-dd") + "'");
+                }
+                else
+                {
+                    sbSql.Append(" and  CONVERT(varchar(100), AddCreateDate, 23) ='" + DateTime.Now.ToString("yyyy-MM-dd") + "'");
+                }
+                if (Temperature != "")
+                {
+                    sbSql.Append(" and  CAST( Temperature as float)>37.2");
+                }
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    var list = connection.Query<dynamic>(sbSql.ToString()).ToList();
+                    if (list.Count > 0)
+                        result = list.Count;
+                    connection.Close();
+                }
             }
             return result;
         }
