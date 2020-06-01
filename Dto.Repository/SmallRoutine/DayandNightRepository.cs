@@ -78,16 +78,22 @@ namespace Dto.Repository.SmallRoutine
         {
             var preciate = GetByModelWhere(dayAndNightSearchViewModel);
             var precateresult = GetByModelChildResultWhere(dayAndNightSearchViewModel);
-
+            
             var searchResult = Db.ClassManager_Relate
-          .Where(a => a.facultystaff_InfoId == dayAndNightSearchViewModel.userKey)
+          .Where(a => dayAndNightSearchViewModel.roleID.Equals("sys")? true : a.facultystaff_InfoId == dayAndNightSearchViewModel.userKey)
           .Include(a => a.Class_Info).ToList();
 
             List<Student_DayandNight_Info> Student_DayandNight_Infos = new List<Student_DayandNight_Info>();
-            for (int i = 0; i < searchResult.Count(); i++)
+            for (int i = 0; i < 2; i++)
             {
-                
-
+                if(searchResult[i].Class_Info==null)
+                {
+                    continue;
+                }
+                if(searchResult[i].Class_Info.ClassCode.Equals("string") || searchResult[i].Class_Info.ClassCode.Equals(""))
+                {
+                    continue;
+                }
                 var gradeName =int.Parse(searchResult[i].Class_Info.ClassCode.Substring(2, 2)).ToString() ;
                 var className = int.Parse(searchResult[i].Class_Info.ClassCode.Substring(4, 2)).ToString();
                 var preciatechild = GetByModelChildWhere(className,gradeName);

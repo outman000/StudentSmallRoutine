@@ -8,6 +8,10 @@ namespace ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel
     public  class DayAndNightSearchViewModel
     {
         /// <summary>
+        /// 角色id
+        /// </summary>
+        public string roleID { get; set; }
+        /// <summary>
         /// 教师唯一主键
         /// </summary>
         public int userKey { get; set; }
