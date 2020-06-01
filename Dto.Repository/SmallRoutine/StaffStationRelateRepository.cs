@@ -65,45 +65,79 @@ namespace Dto.Repository.SmallRoutine
         {
             int SkipNum = staffStationRelateSearchViewModel.pageViewModel.CurrentPageNum * staffStationRelateSearchViewModel.pageViewModel.PageSize;
             var preciaateStudent = GetByModelWhere(staffStationRelateSearchViewModel);
- 
-            List<Health_Info> Health_Info = new List<Health_Info>();
             List<StaffStationMiddleModel> staffStationMiddleModel = new List<StaffStationMiddleModel>();
-            var searchResult = DbSet
-                .Where(a => a.facultystaff_InfoId == staffStationRelateSearchViewModel.UserKeyId)
-                .Include(a => a.Station_Info).ToList();
-
-            for (int i = 0; i < searchResult.Count(); i++)
+            if(staffStationRelateSearchViewModel.RoleID=="sys")
             {
-                var tempresult = Db.Health_Info.Where(a => a.facultystaff_Info.station_InfoId == searchResult[i].Station_InfoId)
-                     .Where(preciaateStudent)
-                      .Select(a => new StaffStationMiddleModel
-                      {
-                          StaffName = a.facultystaff_Info.StaffName,
-                          DepartName = a.facultystaff_Info.DepartName,
-                          Name = a.facultystaff_Info.Name,
-                          Createdate = a.Createdate,
-                          IsComeSchool = a.IsComeSchool,
-                          IdNumber = Dtol.Helper.MD5.Decrypt(a.IdNumber),
-                          id = a.id,
-                          IsFamilyHot = a.IsFamilyHot,
-                          IsFamilyThroat = a.IsFamilyThroat,
-                          IsFamilyWeakt = a.IsFamilyWeakt,
-                          IsHot = a.IsHot,
-                          IsThroat = a.IsThroat,
-                          IsTouch = a.IsTouch,
-                          IsWeak = a.IsWeak,
-                          CheckType = a.CheckType,
-                          Temperature = a.Temperature,
-                          IsAggregate = a.IsAggregate,
-                          IsTianJin = a.IsTianJin,
-                          IsAggregateContain = a.IsAggregateContain,
-                          NotComeSchoolReason = a.NotComeSchoolReason,
-                          IsBulu = a.IsBulu,
-                          facultystaff_InfoId = a.facultystaff_Info.id
-                      })
-                     ;
+                var tempresult = Db.Health_Info.Where(preciaateStudent).Where(info=>info.facultystaff_InfoId !=null)
+                    .Select(a => new StaffStationMiddleModel
+                    {
+                        StaffName = a.facultystaff_Info.StaffName,
+                        DepartName = a.facultystaff_Info.DepartName,
+                        Name = a.facultystaff_Info.Name,
+                        Createdate = a.Createdate,
+                        IsComeSchool = a.IsComeSchool,
+                        IdNumber = Dtol.Helper.MD5.Decrypt(a.IdNumber),
+                        id = a.id,
+                        IsFamilyHot = a.IsFamilyHot,
+                        IsFamilyThroat = a.IsFamilyThroat,
+                        IsFamilyWeakt = a.IsFamilyWeakt,
+                        IsHot = a.IsHot,
+                        IsThroat = a.IsThroat,
+                        IsTouch = a.IsTouch,
+                        IsWeak = a.IsWeak,
+                        CheckType = a.CheckType,
+                        Temperature = a.Temperature,
+                        IsAggregate = a.IsAggregate,
+                        IsTianJin = a.IsTianJin,
+                        IsAggregateContain = a.IsAggregateContain,
+                        NotComeSchoolReason = a.NotComeSchoolReason,
+                        IsBulu = a.IsBulu,
+                        facultystaff_InfoId = a.facultystaff_Info.id
+                    })
+                    ;
                 staffStationMiddleModel.AddRange(tempresult);
             }
+            else
+            {
+                var searchResult = DbSet
+                    .Where(a => a.facultystaff_InfoId == staffStationRelateSearchViewModel.UserKeyId)
+                    .Include(a => a.Station_Info).ToList();
+
+                for (int i = 0; i < searchResult.Count(); i++)
+                {
+                    var tempresult = Db.Health_Info.Where(a => a.facultystaff_Info.station_InfoId == searchResult[i].Station_InfoId)
+                         .Where(preciaateStudent)
+                          .Select(a => new StaffStationMiddleModel
+                          {
+                              StaffName = a.facultystaff_Info.StaffName,
+                              DepartName = a.facultystaff_Info.DepartName,
+                              Name = a.facultystaff_Info.Name,
+                              Createdate = a.Createdate,
+                              IsComeSchool = a.IsComeSchool,
+                              IdNumber = Dtol.Helper.MD5.Decrypt(a.IdNumber),
+                              id = a.id,
+                              IsFamilyHot = a.IsFamilyHot,
+                              IsFamilyThroat = a.IsFamilyThroat,
+                              IsFamilyWeakt = a.IsFamilyWeakt,
+                              IsHot = a.IsHot,
+                              IsThroat = a.IsThroat,
+                              IsTouch = a.IsTouch,
+                              IsWeak = a.IsWeak,
+                              CheckType = a.CheckType,
+                              Temperature = a.Temperature,
+                              IsAggregate = a.IsAggregate,
+                              IsTianJin = a.IsTianJin,
+                              IsAggregateContain = a.IsAggregateContain,
+                              NotComeSchoolReason = a.NotComeSchoolReason,
+                              IsBulu = a.IsBulu,
+                              facultystaff_InfoId = a.facultystaff_Info.id
+                          })
+                         ;
+                    staffStationMiddleModel.AddRange(tempresult);
+                }
+
+            }
+            //List<Health_Info> Health_Info = new List<Health_Info>();
             return staffStationMiddleModel.Distinct().OrderByDescending(o => o.Createdate).Skip(SkipNum)
                 .Take(staffStationRelateSearchViewModel.pageViewModel.PageSize)
                 .ToList();
@@ -114,12 +148,12 @@ namespace Dto.Repository.SmallRoutine
 
             var predicate = WhereExtension.True<Health_Info>();//初始化where表达式
                                                                //姓名
-
             predicate = predicate.And(p => p.facultystaff_Info.DepartCode .Contains(staffStationRelateSearchViewModel.DepartCode));
             predicate = predicate.And(p => p.facultystaff_Info.StaffCode.Contains(staffStationRelateSearchViewModel.StationCode));
 
             predicate = predicate.And(p => p.Name .Contains( staffStationRelateSearchViewModel.Name));
-            predicate = predicate.And(p => p.IdNumber .Contains(Dtol.Helper.MD5.Md5Hash(staffStationRelateSearchViewModel.IdNumber)));
+            if (staffStationRelateSearchViewModel.RoleID != "sys")
+                predicate = predicate.And(p => p.IdNumber.Contains(Dtol.Helper.MD5.Md5Hash(staffStationRelateSearchViewModel.IdNumber)));
 
             predicate = predicate.And(p => p.IsHot.Contains(staffStationRelateSearchViewModel.IsHot));
             predicate = predicate.And(p => p.IsComeSchool.Contains(staffStationRelateSearchViewModel.isSchool));
