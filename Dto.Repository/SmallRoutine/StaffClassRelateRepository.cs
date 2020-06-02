@@ -130,7 +130,90 @@ namespace Dto.Repository.SmallRoutine
 
         }
 
+        public List<StaffSchoolClassMiddleModel> GetStudentsByStaffSchool(StaffSchoolClassRelateSearchViewModel staffClassRelateSearchView)
+        {
+            int SkipNum = staffClassRelateSearchView.pageViewModel.CurrentPageNum * staffClassRelateSearchView.pageViewModel.PageSize;
+            var preciaateStudent = GetBySchoolModelWhere(staffClassRelateSearchView);
+            List<StaffSchoolClassMiddleModel> staffClassMiddleModel = new List<StaffSchoolClassMiddleModel>();
 
+            //List<Student_Info> student_Infos = new List<Student_Info>();
+            //List<Health_Info> Health_Info = new List<Health_Info>();
+            if (staffClassRelateSearchView.RoleID == "sys")
+            {
+                var tempresult = Db.Health_Info.Where(preciaateStudent).Where(info => info.Student_InfoId != null)
+                    .Select(a => new StaffSchoolClassMiddleModel
+                    {
+                        SchoolCode=a.Student_Info.SchoolCode,
+                        ClassName = a.Student_Info.ClassName,
+                        GradeName = a.Student_Info.GradeName,
+                        Name = a.Student_Info.Name,
+                        Createdate = a.Createdate,
+                        IsComeSchool = a.IsComeSchool,
+                        IdNumber = Dtol.Helper.MD5.Decrypt(a.IdNumber),
+                        id = a.id,
+                        IsFamilyHot = a.IsFamilyHot,
+                        IsFamilyThroat = a.IsFamilyThroat,
+                        IsFamilyWeakt = a.IsFamilyWeakt,
+                        IsHot = a.IsHot,
+                        IsThroat = a.IsThroat,
+                        IsTouch = a.IsTouch,
+                        IsWeak = a.IsWeak,
+                        IsAggregate = a.IsAggregate,
+                        IsAggregateContain = a.IsAggregateContain,
+                        IsTianJin = a.IsTianJin,
+                        Temperature = a.Temperature,
+                        NotComeSchoolReason = a.NotComeSchoolReason,
+                        IsBulu = a.IsBulu,
+                        Student_InfoId = a.Student_Info.id
+                    })
+                    .ToList();
+                staffClassMiddleModel.AddRange(tempresult);
+            }
+            else
+            {
+                var searchResult = DbSet
+                    .Where(a => a.facultystaff_InfoId == staffClassRelateSearchView.UserKeyId)
+                    .Include(a => a.Class_Info).ToList();
+                for (int i = 0; i < searchResult.Count(); i++)
+                {
+                    var tempresult = Db.Health_Info.Where(a => a.Student_Info.class_InfoId == searchResult[i].Class_InfoId)
+                         .Where(preciaateStudent)
+                         .Select(a => new StaffSchoolClassMiddleModel
+                         {
+                             SchoolCode = a.Student_Info.SchoolCode,
+                             ClassName = a.Student_Info.ClassName,
+                             GradeName = a.Student_Info.GradeName,
+                             Name = a.Student_Info.Name,
+                             Createdate = a.Createdate,
+                             IsComeSchool = a.IsComeSchool,
+                             IdNumber = Dtol.Helper.MD5.Decrypt(a.IdNumber),
+                             id = a.id,
+                             IsFamilyHot = a.IsFamilyHot,
+                             IsFamilyThroat = a.IsFamilyThroat,
+                             IsFamilyWeakt = a.IsFamilyWeakt,
+                             IsHot = a.IsHot,
+                             IsThroat = a.IsThroat,
+                             IsTouch = a.IsTouch,
+                             IsWeak = a.IsWeak,
+                             IsAggregate = a.IsAggregate,
+                             IsAggregateContain = a.IsAggregateContain,
+                             IsTianJin = a.IsTianJin,
+                             Temperature = a.Temperature,
+                             NotComeSchoolReason = a.NotComeSchoolReason,
+                             IsBulu = a.IsBulu,
+                             Student_InfoId = a.Student_Info.id
+                         })
+
+                         .ToList();
+                    staffClassMiddleModel.AddRange(tempresult);
+                }
+            }
+
+            return staffClassMiddleModel.Distinct().OrderByDescending(o => o.Createdate).Skip(SkipNum)
+                .Take(staffClassRelateSearchView.pageViewModel.PageSize)
+              .ToList();
+
+        }
 
         public List<DefaultDayAndNightMiddle> GetDefaultStudentsInfosByStaff(DayAndNightDefaultSearchViewModel dayAndNightDefaultSearchViewModel)
         {
@@ -261,7 +344,22 @@ namespace Dto.Repository.SmallRoutine
             return predicate;
         }
 
+        public Expression<Func<Health_Info, bool>> GetBySchoolModelWhere(StaffSchoolClassRelateSearchViewModel staffClassRelateSearchView)
+        {
 
+            var predicate = WhereExtension.True<Health_Info>();//初始化where表达式
+                                                               //姓名
+            predicate = predicate.And(p => p.Student_Info.SchoolCode.Contains(staffClassRelateSearchView.SchoolCode));
+            predicate = predicate.And(p => p.Student_Info.ClassCode.Contains(staffClassRelateSearchView.ClassCode));
+            predicate = predicate.And(p => p.Student_Info.GradeCode.Contains(staffClassRelateSearchView.GradeCode));
+            predicate = predicate.And(p => p.Name.Contains(staffClassRelateSearchView.Name));
+            predicate = predicate.And(p => p.IdNumber.Contains(Dtol.Helper.MD5.Md5Hash(staffClassRelateSearchView.IdNumber)));
+
+            predicate = predicate.And(p => p.IsHot.Contains(staffClassRelateSearchView.IsHot));
+            predicate = predicate.And(p => p.IsComeSchool.Contains(staffClassRelateSearchView.isSchool));
+            predicate = predicate.And(p => p.Createdate.ToString().Contains(staffClassRelateSearchView.CreateDate == null ? "" : staffClassRelateSearchView.CreateDate.Value.ToString("yyyy-MM-dd")));
+            return predicate;
+        }
 
 
         public void Remove(Guid id)

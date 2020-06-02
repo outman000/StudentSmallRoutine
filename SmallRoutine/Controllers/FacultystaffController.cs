@@ -142,7 +142,25 @@ namespace SmallRoutine.Controllers
 
             return Ok(staffClassRelateResModel);
         }
+        /// <summary>
+        /// 根据学校查询所有管理的学生的每日健康信息
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("/RelateStaffToClass/GetInfoByClassAndHeathEveryInfoSchool")]
 
+        public ActionResult<StaffSchoolClassRelateResModel> getSchoolRelateFromStaffToClass(StaffSchoolClassRelateSearchViewModel staffClassRelateSearchView)
+        {
+            StaffSchoolClassRelateResModel staffClassRelateResModel = new StaffSchoolClassRelateResModel();
+            var result = _facultystaffService.GetRelateToSchoolClassInfo(staffClassRelateSearchView);
+
+            staffClassRelateResModel.IsSuccess = true;
+            staffClassRelateResModel.staffClassMiddleModels = result;
+            staffClassRelateResModel.TotalNum = result.Count();
+            staffClassRelateResModel.baseViewModel.Message = "查询成功";
+            staffClassRelateResModel.baseViewModel.ResponseCode = 200;
+
+            return Ok(staffClassRelateResModel);
+        }
 
         /// <summary>
         /// 根据当前人分管的岗位获取员工每日健康信息

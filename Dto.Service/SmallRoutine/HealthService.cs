@@ -30,7 +30,7 @@ namespace Dto.Service.SmallRoutine
         {
 
             var insertInfo = _IMapper.Map<HealthEveryAddViewModel, Health_Info>(healthEveryAddViewModel);
-            var isexist = false;// healthRepository.existhealthInfo(healthEveryAddViewModel);
+            var isexist = healthRepository.existhealthInfo(healthEveryAddViewModel);
 
             if (!isexist)
             {
