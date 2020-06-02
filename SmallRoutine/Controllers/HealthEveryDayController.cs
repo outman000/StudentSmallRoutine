@@ -33,9 +33,17 @@ namespace SmallRoutine.Controllers
         public ActionResult<BaseViewModel> AddHealthRegisterAdd(HealthEveryAddViewModel healthViewModel)
         {
             BaseViewModel baseViewModel = new BaseViewModel();
-            healthService.addHealthEveryRegisterInfo(healthViewModel);
-            baseViewModel.Message = "增加成功";
-            baseViewModel.ResponseCode = 200;
+            if (healthViewModel.IdNumber.Equals("") || healthViewModel.IdNumber.Equals(null) || healthViewModel.Name.Equals("") || healthViewModel.Name.Equals(null))
+            {
+                baseViewModel.Message = "增加失败";
+                baseViewModel.ResponseCode = 210;
+            }
+            else
+            {
+                healthService.addHealthEveryRegisterInfo(healthViewModel);
+                baseViewModel.Message = "增加成功";
+                baseViewModel.ResponseCode = 200;
+            }
             return Ok(baseViewModel);
         }
         /// <summary>
@@ -78,14 +86,22 @@ namespace SmallRoutine.Controllers
         public ActionResult<HealthInfoEverySearchResModel> SearchHealthRegister(HealthEverySearchViewModel healthInfoSearchViewModel)
         {
             HealthInfoEverySearchResModel healthInfoSearchResModel = new HealthInfoEverySearchResModel();
-            var result = healthService.SearchHealthEveryRegisterInfo(healthInfoSearchViewModel);
-
-            healthInfoSearchResModel.healthEverySearchMiddleModels = result;
-            healthInfoSearchResModel.TotalNum = result.Count();
-            healthInfoSearchResModel.IsSuccess = true;
-            healthInfoSearchResModel.baseViewModel.Message = "查询成功";
-            healthInfoSearchResModel.baseViewModel.ResponseCode = 200;
-
+            if (healthInfoSearchViewModel.IdNumber.Equals("") || healthInfoSearchViewModel.IdNumber.Equals(null))
+            {
+                healthInfoSearchResModel.TotalNum = 0;
+                healthInfoSearchResModel.IsSuccess = false;
+                healthInfoSearchResModel.baseViewModel.Message = "参数为空";
+                healthInfoSearchResModel.baseViewModel.ResponseCode = 210;
+            }
+            else
+            {
+                var result = healthService.SearchHealthEveryRegisterInfo(healthInfoSearchViewModel);
+                healthInfoSearchResModel.healthEverySearchMiddleModels = result;
+                healthInfoSearchResModel.TotalNum = result.Count();
+                healthInfoSearchResModel.IsSuccess = true;
+                healthInfoSearchResModel.baseViewModel.Message = "查询成功";
+                healthInfoSearchResModel.baseViewModel.ResponseCode = 200;
+            }
             return Ok(healthInfoSearchResModel);
         }
         /// <summary>

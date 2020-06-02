@@ -149,8 +149,10 @@ namespace Dto.Repository.SmallRoutine
             //predicate = predicate.And(p => p.SchoolName.Contains(dayAndNightSearchViewModel.SchoolName));
             predicate = predicate.And(p => p.Temperature.Contains(dayAndNightSearchViewModel.Temperature));
             predicate = predicate.And(p => p.AddTimeInterval.Contains(dayAndNightSearchViewModel.AddTimeInterval));
-
-
+            if (dayAndNightSearchViewModel.AddCreateDate != null && !dayAndNightSearchViewModel.AddCreateDate.Equals(""))
+            {
+                predicate = predicate.And(p => p.AddCreateDate.Value.ToString("yyyy-MM-dd") == dayAndNightSearchViewModel.AddCreateDate.Value.ToString("yyyy-MM-dd"));//hc加日期条件
+            }
             predicate = predicate.And(p => p.tag.Contains(dayAndNightSearchViewModel.tag));
       
             

@@ -49,9 +49,9 @@ namespace Dtol
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var loggerFactory = new LoggerFactory();
-            loggerFactory.AddProvider(new EFLoggerProvider());
-            optionsBuilder.UseLoggerFactory(loggerFactory);
+            //var loggerFactory = new LoggerFactory();
+            //loggerFactory.AddProvider(new EFLoggerProvider());
+            //optionsBuilder.UseLoggerFactory(loggerFactory);
         }
     } 
 }
