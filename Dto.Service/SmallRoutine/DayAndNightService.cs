@@ -17,12 +17,15 @@ namespace Dto.Service.SmallRoutine
         private readonly IDayandNightRepository  dayandNightRepository;
         private readonly IStaffClassRelateRepository staffClassRelateRepository;
         private readonly IMapper mapper;
+        private readonly ISchoolInfoRepository schoolInfoRepository;
 
-        public DayAndNightService(IDayandNightRepository dayandNightRepository, IStaffClassRelateRepository staffClassRelateRepository, IMapper mapper)
+        public DayAndNightService(IDayandNightRepository dayandNightRepository, IStaffClassRelateRepository staffClassRelateRepository
+            , IMapper mapper, ISchoolInfoRepository schoolInfo)
         {
             this.dayandNightRepository = dayandNightRepository;
             this.staffClassRelateRepository = staffClassRelateRepository;
             this.mapper = mapper;
+            schoolInfoRepository = schoolInfo;
         }
         //添加晨午晚检信息
         public BaseViewModel addDayAndNightInfo(DayAndNightDefaultViewModel dayAndNightSearchViewModel)
@@ -152,6 +155,9 @@ namespace Dto.Service.SmallRoutine
         }
         public List<DayandNightInfoMiddle> SearchDayAndNightListService(DayAndNightSearchViewModel dayAndNightSearchViewModel)
         {
+            var schoolInfo= schoolInfoRepository.GetSchoolNameByCode(dayAndNightSearchViewModel.SchoolCode);
+            if (schoolInfo != null)
+                dayAndNightSearchViewModel.SchoolName = schoolInfo.SchoolName;
             var searchResult= dayandNightRepository.SearchDayAndNightList(dayAndNightSearchViewModel);
             var result = mapper.Map<List<Student_DayandNight_Info>, List<DayandNightInfoMiddle>>(searchResult);
             return result;

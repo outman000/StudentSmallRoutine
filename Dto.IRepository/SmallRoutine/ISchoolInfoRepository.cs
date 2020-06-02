@@ -16,6 +16,13 @@ namespace Dto.IRepository.SmallRoutine
 
         bool CheckInfoByname(string name);
         School_Info GetSchoolCodeByName(string v);
-      
+        /// <summary>
+        /// 根据code查学校
+        /// </summary>
+        /// <param name="schoolCode"></param>
+        /// <returns></returns>
+        School_Info GetSchoolNameByCode(string schoolCode);
+
+
     }
 }

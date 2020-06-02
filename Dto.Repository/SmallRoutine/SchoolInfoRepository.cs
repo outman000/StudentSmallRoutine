@@ -122,7 +122,11 @@ namespace Dto.Repository.SmallRoutine
         {
             return DbSet.FirstOrDefault(a => a.SchoolName == v);
         }
+        public School_Info GetSchoolNameByCode(string schoolCode)
+        {
+            return DbSet.FirstOrDefault(a => a.SchoolCode == schoolCode);
+        }
 
-     
+
     }
 }
