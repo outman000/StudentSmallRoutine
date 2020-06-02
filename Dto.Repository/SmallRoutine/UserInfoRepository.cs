@@ -88,7 +88,7 @@ namespace Dto.Repository.SmallRoutine
             var res = new User_Info();
             //查询条件
             var predicate = WhereExtension.True<User_Info>();//初始化where表达式
-            Console.WriteLine("aaaaaaaa" + idnumber);
+            //Console.WriteLine("aaaaaaaa" + idnumber);这什么玩意
             if (!String.IsNullOrEmpty(idnumber))
             {
                 predicate = predicate.And(p => Dtol.Helper.MD5.Decrypt(p.Idnumber).Equals(idnumber));

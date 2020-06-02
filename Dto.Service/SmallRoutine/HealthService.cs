@@ -97,6 +97,10 @@ namespace Dto.Service.SmallRoutine
         public List<HealthEverySearchMiddleModel> SearchHealthEveryRegisterInfo(HealthEverySearchViewModel healthEverySearchViewModel)
         {
             var result = healthRepository.SearchHealthEveryRegisterInfo(healthEverySearchViewModel);
+            if (result == null)
+            {
+                return null;
+            }
             var searchresult = _IMapper.Map<List<Health_Info>, List<HealthEverySearchMiddleModel>>(result);
             return searchresult;
         }
