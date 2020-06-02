@@ -154,7 +154,8 @@ namespace Dto.Repository.SmallRoutine
             predicate = predicate.And(p => p.Name .Contains( staffStationRelateSearchViewModel.Name));
             if (staffStationRelateSearchViewModel.RoleID != "sys")
                 predicate = predicate.And(p => p.IdNumber.Contains(Dtol.Helper.MD5.Md5Hash(staffStationRelateSearchViewModel.IdNumber)));
-
+            if (staffStationRelateSearchViewModel.SchoolCode != null && staffStationRelateSearchViewModel.SchoolCode != "")
+                predicate = predicate.And(p => p.facultystaff_Info.SchoolCode.Equals(staffStationRelateSearchViewModel.SchoolCode));
             predicate = predicate.And(p => p.IsHot.Contains(staffStationRelateSearchViewModel.IsHot));
             predicate = predicate.And(p => p.IsComeSchool.Contains(staffStationRelateSearchViewModel.isSchool));
             predicate = predicate.And(p => p.CheckType.Contains(staffStationRelateSearchViewModel.CheckType));
