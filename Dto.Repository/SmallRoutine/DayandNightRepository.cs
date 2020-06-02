@@ -84,13 +84,9 @@ namespace Dto.Repository.SmallRoutine
           .Include(a => a.Class_Info).ToList();
 
             List<Student_DayandNight_Info> Student_DayandNight_Infos = new List<Student_DayandNight_Info>();
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < searchResult.Count; i++)
             {
-                if(searchResult[i].Class_Info==null)
-                {
-                    continue;
-                }
-                if(searchResult[i].Class_Info.ClassCode.Equals("string") || searchResult[i].Class_Info.ClassCode.Equals(""))
+                if(searchResult[i].Class_Info==null || searchResult[i].Class_Info.ClassCode.Equals("string") || searchResult[i].Class_Info.ClassCode.Equals(""))
                 {
                     continue;
                 }
@@ -107,9 +103,9 @@ namespace Dto.Repository.SmallRoutine
                 Student_DayandNight_Infos.AddRange(tempresult.ToList());
             }
 
-           
 
-            return Student_DayandNight_Infos.AsQueryable().Where(precateresult).ToList();
+            return Student_DayandNight_Infos.AsQueryable().Where(precateresult).OrderByDescending(a => a.AddCreateDate).ToList();
+            //return Student_DayandNight_Infos.AsQueryable().Where(precateresult).ToList();
         }
         public List<Student_DayandNight_Info> CheckDayAndNightList(DayAndNightCheckViewModel dayAndNightSearchViewModel)
         {
@@ -150,7 +146,7 @@ namespace Dto.Repository.SmallRoutine
             predicate = predicate.And(p => p.GradeName.Contains(dayAndNightSearchViewModel.GradeName));
             predicate = predicate.And(p => p.IsComeSchool.Contains(dayAndNightSearchViewModel.IsComeSchool));
             predicate = predicate.And(p => p.Name.Contains(dayAndNightSearchViewModel.Name));
-            predicate = predicate.And(p => p.SchoolName.Contains(dayAndNightSearchViewModel.SchoolName));
+            //predicate = predicate.And(p => p.SchoolName.Contains(dayAndNightSearchViewModel.SchoolName));
             predicate = predicate.And(p => p.Temperature.Contains(dayAndNightSearchViewModel.Temperature));
             predicate = predicate.And(p => p.AddTimeInterval.Contains(dayAndNightSearchViewModel.AddTimeInterval));
 
