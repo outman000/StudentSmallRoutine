@@ -7,9 +7,13 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
     public  class DayAndNightAddListMiddle
     {
         /// <summary>
-        /// 提交人身份证号
+        /// 学生身份证号
         /// </summary>
         public string IdNumber { get; set; }
+        /// <summary>
+        /// 提交人身份证号
+        /// </summary>
+        public string tag { get; set; }
         /// <summary>
         /// 学校名称
         /// </summary>
