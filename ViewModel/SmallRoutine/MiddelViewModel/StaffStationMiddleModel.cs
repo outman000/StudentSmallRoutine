@@ -7,6 +7,10 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
     public class StaffStationMiddleModel
     {
         /// <summary>
+        /// 学校
+        /// </summary>
+        public string SchoolName { get; set; }
+        /// <summary>
         /// 部门
         /// </summary>
         public string Name { get; set; }

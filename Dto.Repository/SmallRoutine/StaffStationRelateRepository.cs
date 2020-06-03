@@ -71,6 +71,7 @@ namespace Dto.Repository.SmallRoutine
                 var tempresult = Db.Health_Info.Where(preciaateStudent).Where(info=>info.facultystaff_InfoId !=null)
                     .Select(a => new StaffStationMiddleModel
                     {
+                        SchoolName=a.facultystaff_Info.SchoolName,
                         StaffName = a.facultystaff_Info.StaffName,
                         DepartName = a.facultystaff_Info.DepartName,
                         Name = a.facultystaff_Info.Name,
@@ -109,6 +110,7 @@ namespace Dto.Repository.SmallRoutine
                          .Where(preciaateStudent)
                           .Select(a => new StaffStationMiddleModel
                           {
+                              SchoolName = a.facultystaff_Info.SchoolName,
                               StaffName = a.facultystaff_Info.StaffName,
                               DepartName = a.facultystaff_Info.DepartName,
                               Name = a.facultystaff_Info.Name,

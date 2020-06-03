@@ -178,9 +178,10 @@ namespace Dto.Repository.SmallRoutine
             predicate = predicate.And(p => p.SchoolName.Contains(dayAndNightSearchViewModel.SchoolName));
             predicate = predicate.And(p => p.Temperature.Contains(dayAndNightSearchViewModel.Temperature));
             predicate = predicate.And(p => p.AddTimeInterval.Contains(dayAndNightSearchViewModel.AddTimeInterval));
-            if (dayAndNightSearchViewModel.AddCreateDate != null && !dayAndNightSearchViewModel.AddCreateDate.Equals(""))
+            
+            if (dayAndNightSearchViewModel.AddCreateDate != null && !dayAndNightSearchViewModel.AddCreateDate.Equals("") && dayAndNightSearchViewModel.AddCreateDateT != null && !dayAndNightSearchViewModel.AddCreateDateT.Equals(""))
             {
-                predicate = predicate.And(p => p.AddCreateDate.Value.ToString("yyyy-MM-dd") == dayAndNightSearchViewModel.AddCreateDate.Value.ToString("yyyy-MM-dd"));//hc加日期条件
+                predicate = predicate.And(p => p.AddCreateDate >= Convert.ToDateTime(Convert.ToDateTime(dayAndNightSearchViewModel.AddCreateDate).ToString("yyyy-MM-dd 00:00:00")) && p.AddCreateDate <= Convert.ToDateTime(Convert.ToDateTime(dayAndNightSearchViewModel.AddCreateDateT).ToString("yyyy-MM-dd 23:59:59")));//hc加日期条件
             }
             predicate = predicate.And(p => p.tag.Contains(dayAndNightSearchViewModel.tag));
 
@@ -197,7 +198,10 @@ namespace Dto.Repository.SmallRoutine
             predicate = predicate.And(p => p.SchoolName.Contains(dayAndNightSearchViewModel.SchoolName));
             predicate = predicate.And(p => p.Temperature.Contains(dayAndNightSearchViewModel.Temperature));
             predicate = predicate.And(p => p.AddTimeInterval.Contains(dayAndNightSearchViewModel.AddTimeInterval));
-            predicate = predicate.And(p => p.AddCreateDate >= Convert.ToDateTime(Convert.ToDateTime(dayAndNightSearchViewModel.AddCreateDate).ToString("yyyy-MM-dd 00:00:00")) && p.AddCreateDate <= Convert.ToDateTime(Convert.ToDateTime(dayAndNightSearchViewModel.AddCreateDate).ToString("yyyy-MM-dd 23:59:59")));
+            if (dayAndNightSearchViewModel.AddCreateDate != null && !dayAndNightSearchViewModel.AddCreateDate.Equals(""))
+            {
+                predicate = predicate.And(p => p.AddCreateDate >= Convert.ToDateTime(Convert.ToDateTime(dayAndNightSearchViewModel.AddCreateDate).ToString("yyyy-MM-dd 00:00:00")) && p.AddCreateDate <= Convert.ToDateTime(Convert.ToDateTime(dayAndNightSearchViewModel.AddCreateDate).ToString("yyyy-MM-dd 23:59:59")));
+            }
 
 
             predicate = predicate.And(p => p.tag.Contains(dayAndNightSearchViewModel.tag));

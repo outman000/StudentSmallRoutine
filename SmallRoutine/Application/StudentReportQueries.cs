@@ -486,7 +486,7 @@ namespace SmallRoutine.Application
 
         public HealthStatisticsMiddleModel GetHealthStatisticsMiddleModel(StudentStasticSearchViewModel searchModel)
         {
-            double StudentHealthCount = GetActualStudentCount(searchModel, searchModel.SchoolCode, "'1','2','3','3','4','5','6'，'7','8','9','10','11','12'", "", "");
+            double StudentHealthCount = GetActualStudentCount(searchModel, searchModel.SchoolCode, "'1','2','3','3','4','5','6','7','8','9','10','11','12'", "", "");
             double FacultystaffHealthCount = GetActualFacultystaffCount(searchModel, searchModel.SchoolCode, searchModel.Type, "", "");
             HealthStatisticsMiddleModel result = new HealthStatisticsMiddleModel();
             result.StudentHealthCount = Convert.ToInt32(StudentHealthCount);

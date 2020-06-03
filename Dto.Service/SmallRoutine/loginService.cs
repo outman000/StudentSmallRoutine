@@ -34,6 +34,10 @@ namespace Dto.Service.SmallRoutine
         {
             //加密信息
             var decodeloginInfp = _IMapper.Map<LoginViewModel, LoginViewModel>(loginViewModel);
+            if (decodeloginInfp == null)
+            {
+                return null;
+            }
             //验证是否通过
             var isSuccess = _userInfoRepository.Login(decodeloginInfp);
             //通过获取相关数据

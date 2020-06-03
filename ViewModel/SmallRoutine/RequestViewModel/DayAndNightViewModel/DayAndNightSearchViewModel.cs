@@ -52,9 +52,13 @@ namespace ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel
         /// </summary>
         public string AddTimeInterval { get; set; }
         /// <summary>
-        /// 填报时间
+        /// 填报时间起
         /// </summary>
         public DateTime? AddCreateDate { get; set; }
+        /// <summary>
+        /// 填报时间止
+        /// </summary>
+        public DateTime? AddCreateDateT { get; set; }
 
         /// <summary>
         /// 标签

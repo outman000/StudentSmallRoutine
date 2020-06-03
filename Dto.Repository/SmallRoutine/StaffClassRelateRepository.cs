@@ -60,6 +60,7 @@ namespace Dto.Repository.SmallRoutine
                 var tempresult = Db.Health_Info.Where(preciaateStudent).Where(info => info.Student_InfoId != null)
                     .Select(a => new StaffClassMiddleModel
                     {
+                        SchoolName=a.Student_Info.SchoolName,
                         ClassName = a.Student_Info.ClassName,
                         GradeName = a.Student_Info.GradeName,
                         Name = a.Student_Info.Name,
@@ -96,6 +97,7 @@ namespace Dto.Repository.SmallRoutine
                          .Where(preciaateStudent)
                          .Select(a => new StaffClassMiddleModel
                          {
+                             SchoolName = a.Student_Info.SchoolName,
                              ClassName = a.Student_Info.ClassName,
                              GradeName = a.Student_Info.GradeName,
                              Name = a.Student_Info.Name,
@@ -143,7 +145,8 @@ namespace Dto.Repository.SmallRoutine
                 var tempresult = Db.Health_Info.Where(preciaateStudent).Where(info => info.Student_InfoId != null)
                     .Select(a => new StaffSchoolClassMiddleModel
                     {
-                        SchoolCode=a.Student_Info.SchoolCode,
+                        SchoolName = a.Student_Info.SchoolName,
+                        SchoolCode =a.Student_Info.SchoolCode,
                         ClassName = a.Student_Info.ClassName,
                         GradeName = a.Student_Info.GradeName,
                         Name = a.Student_Info.Name,
@@ -180,6 +183,7 @@ namespace Dto.Repository.SmallRoutine
                          .Where(preciaateStudent)
                          .Select(a => new StaffSchoolClassMiddleModel
                          {
+                             SchoolName = a.Student_Info.SchoolName,
                              SchoolCode = a.Student_Info.SchoolCode,
                              ClassName = a.Student_Info.ClassName,
                              GradeName = a.Student_Info.GradeName,
