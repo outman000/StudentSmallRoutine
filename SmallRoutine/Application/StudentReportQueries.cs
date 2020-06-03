@@ -35,8 +35,10 @@ namespace SmallRoutine.Application
                 result.AddRange(gz);
                 var cz = GetStudentListBySearchModel(searchModel, "'7','8','9'", "初中");
                 result.AddRange(cz);
-                var xx = GetStudentListBySearchModel(searchModel, "'1','2','3','3','4','5','6'", "小学");
+                var xx = GetStudentListBySearchModel(searchModel, "'1','2','3','4','5','6'", "小学");
                 result.AddRange(xx);
+                var yey= GetStudentListBySearchModel(searchModel, "'大班','中班','小班','小小班','混龄班'", "幼儿园");
+                result.AddRange(yey);
             }
 
             return result;
@@ -847,7 +849,7 @@ namespace SmallRoutine.Application
         {
             List<HealthEverySearchMiddleModel> result = new List<HealthEverySearchMiddleModel>();
             StringBuilder sbSel = new StringBuilder();
-            sbSel.Append("select id,name,IdNumber,Temperature,IsComeSchool,NotComeJinReason NotComeSchoolReason,AddTimeInterval CheckType,AddCreateDate Createdate from [dbo].[Student_DayandNight_Info] where 1=1");
+            sbSel.Append("select id,name,tag IdNumber,Temperature,IsComeSchool,NotComeJinReason NotComeSchoolReason,AddTimeInterval CheckType,AddCreateDate Createdate from [dbo].[Student_DayandNight_Info] where 1=1");
             if (IsComeSchool != "")
             {
                 sbSel.Append("  and (IsComeSchool = '" + IsComeSchool + "')");// AND (NotComeSchoolReason IS NOT NULL)
