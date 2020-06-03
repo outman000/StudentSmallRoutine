@@ -129,6 +129,7 @@ namespace Dto.Service.SmallRoutine
                         info.AddTimeInterval = "";
                     }
                     info.IdNumber = Dtol.Helper.MD5.Md5Hash(info.IdNumber);
+                    info.tag = Dtol.Helper.MD5.Md5Hash(info.tag);
                     info.AddCreateDate = DateTime.Now;
                     dayandNightRepository.Add(info);
                     if (dayandNightRepository.SaveChanges() <= 0)
