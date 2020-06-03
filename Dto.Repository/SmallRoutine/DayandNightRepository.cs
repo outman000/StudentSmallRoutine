@@ -97,21 +97,22 @@ namespace Dto.Repository.SmallRoutine
                         continue;
                     }
                     var gradeName = int.Parse(searchResult[i].Class_Info.ClassCode.Substring(2, 2)).ToString();
-                    switch(gradeName)
+                    int gradaCode = Convert.ToInt32(searchResult[i].Class_Info.ClassCode.Substring(2, 2)); 
+                    switch(gradaCode)
                     {
-                        case "13":
+                        case 13:
                             gradeName = "大班";
                             break;
-                        case "14":
+                        case 14:
                             gradeName = "中班";
                             break;
-                        case "15":
+                        case 15:
                             gradeName = "小班";
                             break;
-                        case "16":
+                        case 16:
                             gradeName = "小小班";
                             break;
-                        case "17":
+                        case 17:
                             gradeName = "混龄班";
                             break;
                         default:break;

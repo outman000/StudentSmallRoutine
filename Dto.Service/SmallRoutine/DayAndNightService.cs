@@ -155,7 +155,7 @@ namespace Dto.Service.SmallRoutine
         }
         public List<DayandNightInfoMiddle> SearchDayAndNightListService(DayAndNightSearchViewModel dayAndNightSearchViewModel)
         {
-            var schoolInfo= schoolInfoRepository.GetSchoolNameByCode(dayAndNightSearchViewModel.SchoolCode);
+            var schoolInfo = schoolInfoRepository.GetSchoolNameByCode(dayAndNightSearchViewModel.SchoolCode);
             if (schoolInfo != null)
                 dayAndNightSearchViewModel.SchoolName = schoolInfo.SchoolName;
             var searchResult= dayandNightRepository.SearchDayAndNightList(dayAndNightSearchViewModel);
