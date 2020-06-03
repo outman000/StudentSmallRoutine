@@ -217,8 +217,8 @@ namespace Dto.Repository.SmallRoutine
         public Expression<Func<Student_DayandNight_Info, bool>> GetByModelChildWhereNew(String ClassName, String GradeName)
         {
             var predicate = WhereExtension.True<Student_DayandNight_Info>();//初始化where表达式SchoolName
-            predicate = predicate.And(p => p.GradeName.Equals(GradeName));
-            predicate = predicate.And(p => p.ClassName.Equals(ClassName));
+            predicate = predicate.And(p => p.GradeName.Contains(GradeName));
+            predicate = predicate.And(p => p.ClassName.Contains(ClassName));
             return predicate;
         }
 
