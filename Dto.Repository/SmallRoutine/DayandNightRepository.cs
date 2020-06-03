@@ -124,7 +124,7 @@ namespace Dto.Repository.SmallRoutine
                         default:break;
                     }
                     //var className = int.Parse(searchResult[i].Class_Info.ClassCode.Substring(4, 2)).ToString();
-                    var className = int.Parse(searchResult[i].Class_Info.ClassName).ToString();
+                    var className = searchResult[i].Class_Info.ClassName.ToString();
                     var preciatechild = GetByModelChildWhereNew(className, gradeName);
                     if(result)
                         preciatechild = GetByModelChildWhere(className, gradeName);
