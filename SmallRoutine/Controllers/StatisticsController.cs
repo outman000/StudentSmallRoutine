@@ -264,7 +264,7 @@ namespace SmallRoutine.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound("系统错误，请联系管理员"+ ex.ToString());
+                return NotFound("系统错误，请联系管理员");
             }
         }
 

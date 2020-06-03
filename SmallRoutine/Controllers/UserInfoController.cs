@@ -36,7 +36,7 @@ namespace SmallRoutine.Controllers
             if (loginViewModel.Idnumber.Equals("") || loginViewModel.Idnumber.Equals(null) || loginViewModel.Password.Equals("") || loginViewModel.Password.Equals(null) || loginViewModel.Password.Equals("string"))
             {
                 loginValideResModel.Data = null;
-                loginValideResModel.baseViewModel.Message = "登录失败";
+                loginValideResModel.baseViewModel.Message = "参数为空";
                 loginValideResModel.baseViewModel.ResponseCode = 210;
                 loginValideResModel.IsSuccess = false;
             }
@@ -46,7 +46,7 @@ namespace SmallRoutine.Controllers
                 if (result != null)
                 {
                     loginValideResModel.Data = result;
-                    loginValideResModel.baseViewModel.Message = "参数为空";
+                    loginValideResModel.baseViewModel.Message = "登录成功";
                     loginValideResModel.baseViewModel.ResponseCode = 200;
                     loginValideResModel.IsSuccess = true;
 
@@ -54,7 +54,7 @@ namespace SmallRoutine.Controllers
                 else
                 {
                     loginValideResModel.Data = result;
-                    loginValideResModel.baseViewModel.Message = "登录失败";
+                    loginValideResModel.baseViewModel.Message = "登录失败:";
                     loginValideResModel.baseViewModel.ResponseCode = 210;
                     loginValideResModel.IsSuccess = false;
                 }
