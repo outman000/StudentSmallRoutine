@@ -191,7 +191,8 @@ namespace Dtol.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("NotComeSchoolReason");
+                    b.Property<string>("NotComeSchoolReason")
+                        .HasMaxLength(100);
 
                     b.Property<string>("PermanentAddress");
 
@@ -563,6 +564,53 @@ namespace Dtol.Migrations
                     b.HasKey("id");
 
                     b.ToTable("UserFiles_Info");
+                });
+
+            modelBuilder.Entity("Dtol.dtol.User_Group", b =>
+                {
+                    b.Property<string>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime?>("Creatdate");
+
+                    b.Property<string>("CreateUser");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("StationCodes");
+
+                    b.Property<string>("StationNames")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("Status");
+
+                    b.Property<string>("UpdateUser");
+
+                    b.Property<DateTime?>("Updatedate");
+
+                    b.Property<string>("bak1")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("bak2")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("bak3")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("bak4")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("bak5")
+                        .HasMaxLength(1000);
+
+                    b.HasKey("ID");
+
+                    b.ToTable("User_Group");
                 });
 
             modelBuilder.Entity("Dtol.dtol.User_Info", b =>

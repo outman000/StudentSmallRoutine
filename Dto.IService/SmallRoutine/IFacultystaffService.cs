@@ -38,6 +38,8 @@ namespace Dto.IService.SmallRoutine
 
         List<StaffClassMiddleModel> GetRelateToClassInfo(StaffClassRelateSearchViewModel staffClassRelateSearchView);
 
+        List<StaffSchoolClassMiddleModel> GetRelateToSchoolClassInfo(StaffSchoolClassRelateSearchViewModel staffClassRelateSearchView);
+
         //教职工和岗位  关系表增加
         void AddRelateToStation(AddRelateFromStaffToStation model);
         //教职工和岗位   关系表删除

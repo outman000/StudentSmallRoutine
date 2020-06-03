@@ -83,5 +83,13 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// 补录
         /// </summary>
         public string IsBulu { get; set; }
+        /// <summary>
+        /// 联系电话
+        /// </summary>
+        public string Telephone { get; set; }
+        /// <summary>
+        /// 学校名称
+        /// </summary>
+        public string SchoolName { get; set; }
     }
 }

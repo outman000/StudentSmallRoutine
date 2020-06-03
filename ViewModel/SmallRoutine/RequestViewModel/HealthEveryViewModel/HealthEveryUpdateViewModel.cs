@@ -40,9 +40,13 @@ namespace ViewModel.SmallRoutine.RequestViewModel.HealthEveryViewModel
         /// </summary>
         public string IsFamilyWeakt { get; set; }
         /// <summary>
-        /// 登陆人的标识id
+        /// 学生的标识id
         /// </summary>
         public int Student_InfoId { get; set; }
+        /// <summary>
+        /// 员工的标识id
+        /// </summary>
+        public int facultystaff_InfoId { get; set; }
 
         /// <summary>
         /// 是否到校

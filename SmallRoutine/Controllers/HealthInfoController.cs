@@ -33,9 +33,17 @@ namespace SmallRoutine.Controllers
         public ActionResult<BaseViewModel> AddHealthRegisterAdd(HealthInfoAddViewModel healthViewModel)
         {
             BaseViewModel baseViewModel = new BaseViewModel();
-            healthRegisterService.addHealthRegisterInfo(healthViewModel);
-            baseViewModel.Message = "增加成功";
-            baseViewModel.ResponseCode = 200;
+            if (healthViewModel.Idnumber.Equals("") || healthViewModel.Idnumber.Equals(null) || healthViewModel.Name.Equals("") || healthViewModel.Name.Equals(null))
+            {
+                baseViewModel.Message = "增加失败";
+                baseViewModel.ResponseCode = 210;
+            }
+            else
+            {
+                healthRegisterService.addHealthRegisterInfo(healthViewModel);
+                baseViewModel.Message = "增加成功";
+                baseViewModel.ResponseCode = 200;
+            }
             return Ok(baseViewModel);
         }
         /// <summary>

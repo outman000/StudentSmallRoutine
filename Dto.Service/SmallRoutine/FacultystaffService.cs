@@ -199,8 +199,13 @@ namespace Dto.Service.SmallRoutine
             //var result = _IMapper.Map<List<Health_Info>, List<StaffClassMiddleModel>>(searchResult);
             return staffClassRelateRepository.GetStudentsByStaff(staffClassRelateSearchView); 
         }
-
-
+        //根据学校人分管的班级查询所管理的学生的每日健康信息
+        public List<StaffSchoolClassMiddleModel> GetRelateToSchoolClassInfo(StaffSchoolClassRelateSearchViewModel staffClassRelateSearchView)
+        {
+            //var searchResult = staffClassRelateRepository.GetStudentsByStaff(staffClassRelateSearchView);
+            //var result = _IMapper.Map<List<Health_Info>, List<StaffClassMiddleModel>>(searchResult);
+            return staffClassRelateRepository.GetStudentsByStaffSchool(staffClassRelateSearchView);
+        }
 
         //教职工和岗位  关系表增加
         public void AddRelateToStation(AddRelateFromStaffToStation model)

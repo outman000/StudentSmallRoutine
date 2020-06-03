@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Dtol.dtol
@@ -20,7 +21,7 @@ namespace Dtol.dtol
         public string IsComeSchool { get; set; }
 
         public string IsTianJin { get; set; }
-
+        [StringLength(100)]
         public string NotComeSchoolReason { get; set; }
 
         public string IsTouch { get; set; }

@@ -186,7 +186,7 @@ namespace SmallRoutine
                 .As<IStudentReportQueries>()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterLogger(autowireProperties: true);
+            //builder.RegisterLogger(autowireProperties: true);压力问题注释
             //将services填充到Autofac容器生成器中
             builder.Populate(services);
             //使用已进行的组件登记创建新容器
@@ -236,17 +236,17 @@ namespace SmallRoutine
             });
 
 
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetRequiredService<DtolContext>();
-                context.Database.Migrate();
-            }
+            //using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())压力问题注释
+            //{
+            //    var context = serviceScope.ServiceProvider.GetRequiredService<DtolContext>();
+            //    context.Database.Migrate();
+            //}
 
 
-         //   app.UseHttpsRedirection();
+            //   app.UseHttpsRedirection();
             app.UseMvc();
 
-            ContextSeed.SeedAsync(app, loggerFactory).Wait();
+            //ContextSeed.SeedAsync(app, loggerFactory).Wait();压力问题注释
         }
 
 

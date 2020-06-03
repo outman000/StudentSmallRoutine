@@ -110,7 +110,7 @@ namespace Dto.Repository.SmallRoutine
         {
             return DbSet.FirstOrDefault(a => a.IdNumber == idNumber);
         }
-
+        
         public bool existhealthInfo(HealthEveryAddViewModel healthEveryAddViewModel)
         {
            
@@ -118,6 +118,23 @@ namespace Dto.Repository.SmallRoutine
                                         && a.CheckType == healthEveryAddViewModel.CheckType
                                          && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
                                         );
+            if (temp == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+        public bool collectionexisthealthInfo(HealthEveryCollectionViewModel healthEveryAddViewModel)
+        {
+
+            var temp = DbSet.FirstOrDefault(a => a.IdNumber == Dtol.Helper.MD5.Md5Hash(healthEveryAddViewModel.IdNumber)
+                                        && a.CheckType == healthEveryAddViewModel.CheckType
+                                         && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                                         );
             if (temp == null)
             {
                 return false;

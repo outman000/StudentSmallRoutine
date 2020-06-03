@@ -11,7 +11,10 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// </summary>
         public string Name { get; set; }
 
-
+        /// <summary>
+        /// 学校
+        /// </summary>
+        public string SchoolName { get; set; }
         /// <summary>
         /// 年级
         /// </summary>
@@ -91,6 +94,9 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// 补录
         /// </summary>
         public string IsBulu { get; set; }
-
+        /// <summary>
+        /// 登陆人的标识id
+        /// </summary>
+        public int Student_InfoId { get; set; }
     }
 }

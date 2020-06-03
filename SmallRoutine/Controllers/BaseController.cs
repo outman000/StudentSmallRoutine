@@ -234,7 +234,7 @@ namespace SmallRoutine.Controllers
         /// <param name="idNumber"></param>
         /// <returns></returns>
         [HttpPost("/StudentInfoDayAndNightUploadValide")]
-        public ActionResult UploadFile_StudentInfoTimeIntervalValide(IFormFile file, String idNumber)
+        public ActionResult UploadFile_StudentInfoTimeIntervalValide(DayAndNightAddViewModel dayAndNightAddViewModel)
         {
             FileUploadViewModel fileUploadViewModel = new FileUploadViewModel();
             var files = Request.Form.Files;
@@ -244,34 +244,10 @@ namespace SmallRoutine.Controllers
             {
                 throw new ArgumentException("找不到上传的文件");
             }
-            // full path to file in temp location
-            foreach (var formFile in files)
-            {
-                string randomname = _fileService.fileRandName(formFile.FileName);
-                filePath = Directory.GetCurrentDirectory() + "\\files\\" + randomname;
-                if (formFile.Length > 0)
-                {
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        formFile.CopyTo(stream);
-                    }
-                }
-                fileUploadViewModel.FileName = formFile.FileName;
-                //fileUploadViewModel.Url = "http://60.28.108.84:3000/toufiles/" + formFile.FileName;
-                //fileUploadViewModel.Url = "https://bhteda.com.cn/toufiles/" + formFile.FileName;
-                fileUploadViewModel.PhysisticName = randomname;
-                fileUploadViewModel.upload_percent = Dtol.Helper.MD5.Md5Hash(idNumber);
-                var model= _fileService.SaveFileInfo(fileUploadViewModel);
-                var result=  _fileService.InputStudentInfoTimeIntervalIntoDataBaseValide(filePath, randomname, idNumber);
-                if (!result.IsSuccess)
-                {
-                    _fileService.deletebyfilephyid(model.PhysisticName);
-                }
-
-                
-                return Ok(result);
-
-            }
+            
+       
+                var result=  _fileService.InputStudentInfoTimeIntervalIntoDataBaseValide(dayAndNightAddViewModel);
+       
             return Ok("未找到文件");
 
         }

@@ -39,6 +39,10 @@ namespace ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel
         /// </summary>
         public string IsComeSchool { get; set; }
         /// <summary>
+        /// 是否在津
+        /// </summary>
+        public string IsTianJin { get; set; }
+        /// <summary>
         /// 填报时间
         /// </summary>
         public string AddTimeInterval { get; set; }

@@ -31,7 +31,7 @@ namespace Dto.Repository.SmallRoutine
         {
             for (int i = 0; i < deleteList.Count; i++)
             {
-              var deletemodel=  DbSet.FirstOrDefault(a => a.Id == deleteList[i]);
+                var deletemodel = DbSet.FirstOrDefault(a => a.Id == deleteList[i]);
 
                 DbSet.Remove(deletemodel);
 
@@ -66,23 +66,33 @@ namespace Dto.Repository.SmallRoutine
         public List<Except_Info_Student> searchByemploytoclass(ExceptStudengSearchInfoVIewModel exceptStudentSearchInfoVIewModel)
         {
             var preciate = GetByModelWhere(exceptStudentSearchInfoVIewModel);
-            //先找到这个人所负责的所有班级
-            var searchResult = Db.ClassManager_Relate
-            .Where(a => a.facultystaff_InfoId == exceptStudentSearchInfoVIewModel.userKey)
-            .Include(a => a.Class_Info).ToList();
-
-
-            List<Except_Info_Student > Except_Info_Students = new List<Except_Info_Student>();
-            for (int i = 0; i < searchResult.Count(); i++)//通过班级code查询
+            List<Except_Info_Student> Except_Info_Students = new List<Except_Info_Student>();
+            if (exceptStudentSearchInfoVIewModel.RoleID == "sys")
             {
-         
-                var tempresult = DbSet.Where(a=>a.student_Info.ClassCode== searchResult[i].Class_Info.ClassCode)
-                    .Where(preciate).Include(a=>a.student_Info).Include(m=>m.UserFiles_Info).ToList();
+                var tempresult = DbSet.Where(preciate).Include(a => a.student_Info).Include(m => m.UserFiles_Info).ToList();
                 Except_Info_Students.AddRange(tempresult);
             }
-            return Except_Info_Students.OrderByDescending(a=>a.CreateDate).ToList();
+            else
+            {
+                var searchResult = Db.ClassManager_Relate
+                .Where(a => a.facultystaff_InfoId == exceptStudentSearchInfoVIewModel.userKey)
+                .Include(a => a.Class_Info).ToList();
+
+
+
+                for (int i = 0; i < searchResult.Count(); i++)//通过班级code查询
+                {
+
+                    var tempresult = DbSet.Where(a => a.student_Info.ClassCode == searchResult[i].Class_Info.ClassCode)
+                        .Where(preciate).Include(a => a.student_Info).Include(m => m.UserFiles_Info).ToList();
+                    Except_Info_Students.AddRange(tempresult);
+                }
+
+            }
+            //先找到这个人所负责的所有班级
+            return Except_Info_Students.OrderByDescending(a => a.CreateDate).ToList();
         }
-        public Expression<Func<Except_Info_Student, bool>> GetByModelWhere(ExceptStudengSearchInfoVIewModel  exceptStudengSearchInfoVIewModel)
+        public Expression<Func<Except_Info_Student, bool>> GetByModelWhere(ExceptStudengSearchInfoVIewModel exceptStudengSearchInfoVIewModel)
         {
             var predicate = WhereExtension.True<Except_Info_Student>();//初始化where表达式SchoolName
                                                                        //姓          

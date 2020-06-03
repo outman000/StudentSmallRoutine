@@ -40,6 +40,7 @@ namespace Dtol
         public DbSet<User_Rights> User_Rights { get; set; }
         public DbSet<Template_Employment> Template_Employment { get; set; }
         public DbSet<Template_Student> Template_Student { get; set; }
+        public DbSet<User_Group> User_Group { get; set; }
 
         public DtolContext(DbContextOptions<DtolContext> options)
        : base(options)
@@ -48,9 +49,9 @@ namespace Dtol
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var loggerFactory = new LoggerFactory();
-            loggerFactory.AddProvider(new EFLoggerProvider());
-            optionsBuilder.UseLoggerFactory(loggerFactory);
+            //var loggerFactory = new LoggerFactory();
+            //loggerFactory.AddProvider(new EFLoggerProvider());
+            //optionsBuilder.UseLoggerFactory(loggerFactory);
         }
     } 
 }

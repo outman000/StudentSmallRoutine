@@ -43,6 +43,14 @@ namespace ViewModel.SmallRoutine.RequestViewModel.StaffStationRelateViewModel
         public string CheckType { get; set; }
         public string Name { get; set; }
         public string IdNumber { get; set; }
+        /// <summary>
+        /// 学校编号
+        /// </summary>
+        public string SchoolCode { get; set; }
+        /// <summary>
+        /// 权限ID  登录时获取的RoleID
+        /// </summary>
+        public string RoleID { get; set; }
 
 
 

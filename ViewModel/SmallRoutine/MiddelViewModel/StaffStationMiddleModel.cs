@@ -7,6 +7,10 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
     public class StaffStationMiddleModel
     {
         /// <summary>
+        /// 学校
+        /// </summary>
+        public string SchoolName { get; set; }
+        /// <summary>
         /// 部门
         /// </summary>
         public string Name { get; set; }
@@ -97,5 +101,13 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// 补录
         /// </summary>
         public string IsBulu { get; set; }
+        /// <summary>
+        /// 学生的标识id
+        /// </summary>
+        public int Student_InfoId { get; set; }
+        /// <summary>
+        /// 员工的标识id
+        /// </summary>
+        public int facultystaff_InfoId { get; set; }
     }
 }
