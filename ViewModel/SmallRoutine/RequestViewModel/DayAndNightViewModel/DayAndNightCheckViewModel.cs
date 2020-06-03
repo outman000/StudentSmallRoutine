@@ -24,6 +24,10 @@ namespace ViewModel.SmallRoutine.RequestViewModel.DayAndNightViewModel
         /// </summary>
         public string SchoolName { get; set; }
         /// <summary>
+        /// 学校code
+        /// </summary>
+        public string SchoolCode { get; set; }
+        /// <summary>
         /// 姓名
         /// </summary>
         public string Name { get; set; }
