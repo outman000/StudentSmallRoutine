@@ -94,7 +94,7 @@ namespace Dto.Repository.SmallRoutine
                         NotComeSchoolReason = a.NotComeSchoolReason,
                         IsBulu = a.IsBulu,
                         facultystaff_InfoId = a.facultystaff_Info.id
-                    })
+                    }).Distinct()
                     ;
                 staffStationMiddleModel.AddRange(tempresult);
             }
