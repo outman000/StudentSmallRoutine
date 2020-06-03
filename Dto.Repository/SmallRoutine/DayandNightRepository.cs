@@ -98,36 +98,37 @@ namespace Dto.Repository.SmallRoutine
                     }
                     var gradeName = int.Parse(searchResult[i].Class_Info.ClassCode.Substring(2, 2)).ToString();
                     int gradaCode = Convert.ToInt32(searchResult[i].Class_Info.ClassCode.Substring(2, 2));
-                    bool result = false;
+                    bool result = true;
                     switch(gradaCode)
                     {
                         case 13:
                             gradeName = "大班";
-                            result = true;
+                            result = false;
                             break;
                         case 14:
                             gradeName = "中班";
-                            result = true;
+                            result = false;
                             break;
                         case 15:
                             gradeName = "小班";
-                            result = true;
+                            result = false;
                             break;
                         case 16:
                             gradeName = "小小班";
-                            result = true;
+                            result = false;
                             break;
                         case 17:
                             gradeName = "混龄班";
-                            result = true;
+                            result = false;
                             break;
                         default:break;
                     }
                     //var className = int.Parse(searchResult[i].Class_Info.ClassCode.Substring(4, 2)).ToString();
                     var className = int.Parse(searchResult[i].Class_Info.ClassName).ToString();
-                    var preciatechild = GetByModelChildWhere(className, gradeName);
+                    var preciatechild = GetByModelChildWhereNew(className, gradeName);
                     if(result)
-                        preciatechild = GetByModelChildWhereNew(className, gradeName);
+                        preciatechild = GetByModelChildWhere(className, gradeName);
+
                     var tempresult = Db.Student_DayandNight_Info.Where(preciate);
                     tempresult = tempresult.Where(preciatechild);
 
