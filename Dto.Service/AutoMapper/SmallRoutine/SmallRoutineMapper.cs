@@ -148,6 +148,7 @@ namespace Dto.Service.AutoMapper.SmallRoutine
             CreateMap<Except_Info_Student, ExceptStudentSearchMiddle>()
                  .ForMember(a => a.UserFiles_InfoId, opt => opt.MapFrom(src => src.UserFiles_Info.id))
                   .ForMember(a => a.Url, opt => opt.MapFrom(src => src.UserFiles_Info.Url))
+                  .ForMember(a => a.SchoolName, opt => opt.MapFrom(src => src.student_Info.SchoolName))
                 .ForMember(a => a.ClassName, opt => opt.MapFrom(src => src.student_Info.ClassName))
                   .ForMember(a => a.GradeName, opt => opt.MapFrom(src => src.student_Info.GradeName))
                 .ForMember(a => a.Idnumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.Idnumber)));
@@ -159,6 +160,7 @@ namespace Dto.Service.AutoMapper.SmallRoutine
             CreateMap<Except_Info_Employ, ExceptEmploySearchMiddle>()
                   .ForMember(a => a.UserFiles_InfoId, opt => opt.MapFrom(src => src.UserFiles_Info.id))
                    .ForMember(a => a.Url, opt => opt.MapFrom(src => src.UserFiles_Info.Url))
+                   .ForMember(a => a.SchoolName, opt => opt.MapFrom(src => src.facultystaff_Info.SchoolName))
                  .ForMember(a => a.StaffCode, opt => opt.MapFrom(src =>src.facultystaff_Info.StaffCode ))
                   .ForMember(a => a.DepartName, opt => opt.MapFrom(src => src.facultystaff_Info.DepartName))
                 .ForMember(a => a.Idnumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.Idnumber)));

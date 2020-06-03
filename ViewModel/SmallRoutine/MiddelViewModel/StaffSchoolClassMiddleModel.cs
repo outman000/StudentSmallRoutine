@@ -10,7 +10,10 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// 年级
         /// </summary>
         public string Name { get; set; }
-
+        /// <summary>
+        /// 学校
+        /// </summary>
+        public string SchoolName { get; set; }
         /// <summary>
         /// 学校code
         /// </summary>

@@ -15,6 +15,10 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// </summary>
         public string Name { get; set; }
         /// <summary>
+        /// 学校名称
+        /// </summary>
+        public string SchoolName { get; set; }
+        /// <summary>
         /// 部门名称
         /// </summary>
         public string DepartName { get; set; }
