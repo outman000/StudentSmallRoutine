@@ -97,7 +97,27 @@ namespace Dto.Repository.SmallRoutine
                         continue;
                     }
                     var gradeName = int.Parse(searchResult[i].Class_Info.ClassCode.Substring(2, 2)).ToString();
-                    var className = int.Parse(searchResult[i].Class_Info.ClassCode.Substring(4, 2)).ToString();
+                    switch(gradeName)
+                    {
+                        case "13":
+                            gradeName = "大班";
+                            break;
+                        case "14":
+                            gradeName = "中班";
+                            break;
+                        case "15":
+                            gradeName = "小班";
+                            break;
+                        case "16":
+                            gradeName = "小小班";
+                            break;
+                        case "17":
+                            gradeName = "混龄班";
+                            break;
+                        default:break;
+                    }
+                    //var className = int.Parse(searchResult[i].Class_Info.ClassCode.Substring(4, 2)).ToString();
+                    var className = int.Parse(searchResult[i].Class_Info.ClassName).ToString();
                     var preciatechild = GetByModelChildWhere(className, gradeName);
                     var tempresult = Db.Student_DayandNight_Info.Where(preciate);
                     tempresult = tempresult.Where(preciatechild);
