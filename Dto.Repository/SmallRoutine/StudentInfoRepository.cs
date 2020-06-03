@@ -109,11 +109,11 @@ namespace Dto.Repository.SmallRoutine
         public Student_Info GetStudentInfoAndHealthInfo(string Idnumber)
         {
             return DbSet.Where(a => a.IdNumber == Idnumber).Include(a=>a.StudentRegisterHeath_Info).FirstOrDefault();
-          
+
         }
 
 
-
+        
         //根据id获取学生信息
         public Student_Info getbyID(int id)
         {
