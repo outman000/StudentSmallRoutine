@@ -84,9 +84,5 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// </summary>
         public string PermanentAddress { get; set; }
 
-        /// <summary>
-        /// 学校名称
-        /// </summary>
-        public string SchoolName { get; set; }
     }
 }
