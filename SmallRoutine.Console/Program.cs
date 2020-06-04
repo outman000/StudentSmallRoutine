@@ -13,11 +13,12 @@ namespace SmallRoutine.ConsoleGeneral
             var timecontext = context.getDbContext();
             IStudentComtemlateRepository studentComtemlateRepository = new StudentComtemlateRepository(timecontext);
             IEmployComtemplateRepository employComtemplateRepository = new EmployComtemplateRepository(timecontext);
+
+            //计算学生每日 每时段填报情况
             studentComtemlateRepository.CompTemplateStudent();
-           // employComtemplateRepository.CompTemplateEmploy();
-            Console.WriteLine("当天计算成功\n");
-            Console.WriteLine("输入任意键停止");
-            Console.ReadLine();
+            //计算教职工 每 每时段填报情况
+            employComtemplateRepository.CompTemplateEmploy();
+         
 
         }
     }

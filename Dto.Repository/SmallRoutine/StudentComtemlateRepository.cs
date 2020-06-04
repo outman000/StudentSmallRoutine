@@ -33,18 +33,29 @@ namespace Dto.Repository.SmallRoutine
 
         public void CompTemplateStudent()
         {
-            ComtemplateNotComeSchool();
-            ComtemplateMorningSchool();
-            ComtemplatenoonSchool();
-            ComtemplateNightSchool();
-            ComtemplateDaySchool();
+            //第二天凌晨 统计前一天数据
+            string time = DateTime.Now.AddDays(-2).ToString("yyyy-MM-dd");
+            
+            //到校前
+            ComtemplateNotComeSchool(time);
+            //早检
+            ComtemplateMorningSchool(time);
+            //午检
+            ComtemplatenoonSchool(time);
+            //晚检
+            ComtemplateNightSchool(time);
+
+            //统计当天的 20200603 开始作废不统计
+            //ComtemplateDaySchool(); 
             Db.SaveChanges();
         }
 
-        public void ComtemplateNotComeSchool()
+
+        //到校前
+        public void ComtemplateNotComeSchool(string time)
         {
             var dbsetclass = DbSetClass.ToList();
-            //所有班级生成早午晚见
+            //所有班级生成到校前 健康信息填报
             for (int i = 0; i < dbsetclass.Count(); i++)
             {
                 Template_Student template_Student = new Template_Student();
@@ -65,112 +76,121 @@ namespace Dto.Repository.SmallRoutine
                 template_Student.ShouldComeSchoolCount = Db.Student_Info.Where(a => a.ClassCode == classcode)
                                                        .Count();
                 //实到
-                template_Student.ActualComeSchoolCount = 0;
+                template_Student.ActualComeSchoolCount = Db.Health_Info.Where(a => a.CheckType == "到校前" && a.Student_Info != null && a.IsComeSchool == "是"
+                                                                                 && a.Createdate.Value.ToString("yyyy-MM-dd") == time
+                                                                                 && a.Student_Info.ClassCode == classcode
+                                                                     ).Count();
                 //到了发热
-                template_Student.ComeSchoolHotCount = 0;
+                template_Student.ComeSchoolHotCount = Db.Health_Info.Where(a => a.CheckType == "到校前" && a.Student_Info != null && Convert.ToDouble(a.Temperature) >= 37.2
+                                                                                 && a.Createdate.Value.ToString("yyyy-MM-dd") == time && a.IsComeSchool == "是"
+                                                                                 && a.Student_Info.ClassCode == classcode
+                                                                     ).Count();
                 //未到
                 template_Student.NotComeSchoolCount = Db.Health_Info.Where(a => a.CheckType == "到校前" && a.Student_Info != null && a.IsComeSchool=="否"
-                                                                                 && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                                                                                 && a.Createdate.Value.ToString("yyyy-MM-dd") == time 
                                                                                  && a.Student_Info.ClassCode == classcode
                                                                      ).Count();
                 //因为发热没到
-                template_Student.NotComeSchoolByHotCount = Db.Health_Info.Where(a => a.CheckType == "到校前" && a.Student_Info != null && Convert.ToDecimal(a.Temperature) >= 37.2m
-                                                                                 && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                template_Student.NotComeSchoolByHotCount = Db.Health_Info.Where(a => a.CheckType == "到校前" && a.Student_Info != null && Convert.ToDouble(a.Temperature) >= 37.2
+                                                                                 && a.Createdate.Value.ToString("yyyy-MM-dd") == time && a.IsComeSchool == "否"
                                                                                  && a.Student_Info.ClassCode == classcode
                                                                      ).Count();
                 //其他原因没到      
                 template_Student.NotComeSchoolByOtherCount = Db.Health_Info.Where(a => a.CheckType == "到校前" && a.Student_Info != null && a.NotComeSchoolReason == "其他"
-                                                                                   && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                                                                                   && a.Createdate.Value.ToString("yyyy-MM-dd") == time && a.IsComeSchool == "否"
                                                                                      && a.Student_Info.ClassCode == classcode
                                                                                 ).Count();
                 //因为在外地没到
-                template_Student.NotComeSchoolByOutCount = Db.Health_Info.Where(a => a.CheckType == "到校前" && a.Student_Info != null && a.IsTianJin == "未在津"
-                                                                                && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                template_Student.NotComeSchoolByOutCount = Db.Health_Info.Where(a => a.CheckType == "到校前" && a.Student_Info != null && a.IsTianJin == "否"
+                                                                                && a.Createdate.Value.ToString("yyyy-MM-dd") == time && a.IsComeSchool == "否"
                                                                                   && a.Student_Info.ClassCode == classcode
                                                                              ).Count();
 
                 template_Student.type = "到校前";
-                template_Student.CreateDate = DateTime.Now;
+                template_Student.CreateDate = DateTime.Now.AddDays(-1);
                 DbSet.Add(template_Student);
             }
         }
-        public void ComtemplateMorningSchool()
+
+        //晨检
+        public void ComtemplateMorningSchool(string time)
         {
            
             var dbsetclass = DbSetClass.ToList();
-            //所有班级生成早午晚见
+            //所有班级生成早检
             for (int i = 0; i < dbsetclass.Count(); i++)
             {
+             
                 Template_Student template_Student = new Template_Student();
-                //午检查最晚的时间
-                var maxNoontime = Db.Health_Info.Where(a => a.CheckType == "午"
-                                                        && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
-                                                        && a.Student_Info != null
-                                                            && a.Student_Info.class_Info.ClassCode == dbsetclass[i].ClassCode
-                                                        ).Select(w => w.Createdate).Max();
-                //午检查后的异常人数
-                var exceptnum = Db.Except_Info_Student.Where(a => a.CreateDate > maxNoontime && a.CreateDate<=DateTime.Now
-                                                && a.student_Info.class_Info.ClassCode == dbsetclass[i].ClassCode).Count();
+                ////午检查最晚的时间
+                //var maxNoontime = Db.Health_Info.Where(a => a.CheckType == "午"
+                //                                        && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                //                                        && a.Student_Info != null
+                //                                            && a.Student_Info.class_Info.ClassCode == dbsetclass[i].ClassCode
+                //                                        ).Select(w => w.Createdate).Max();
+                ////午检查后的异常人数
+                //var exceptnum = Db.Except_Info_Student.Where(a => a.CreateDate > maxNoontime && a.CreateDate<=DateTime.Now
+                //                                && a.student_Info.class_Info.ClassCode == dbsetclass[i].ClassCode).Count();
 
 
 
                 string classcode = dbsetclass[i].ClassCode;
 
+            
+                    var studentsInfoClass = Db.Student_Info.Where(a => a.ClassCode == classcode).ToList();
+                    var firstinfo = studentsInfoClass.FirstOrDefault();//一个班的班级都是一样的
+                    if (firstinfo == null)
+                    { continue; }
+                    template_Student.SchoolName = firstinfo.SchoolName;
+                    template_Student.SchoolCode = firstinfo.SchoolCode;
+                    template_Student.GradeCode = firstinfo.GradeCode;
+                    template_Student.GradeName = firstinfo.GradeName;
+                    template_Student.ClassCode = firstinfo.ClassCode;
+                    template_Student.ClassName = firstinfo.ClassName;
 
-                var studentsInfoClass = Db.Student_Info.Where(a => a.ClassCode == classcode).ToList();
-                var firstinfo = studentsInfoClass.FirstOrDefault();//一个班的班级都是一样的
-                if (firstinfo == null)
-                { continue; }
-                template_Student.SchoolName = firstinfo.SchoolName;
-                template_Student.SchoolCode = firstinfo.SchoolCode;
-                template_Student.GradeCode = firstinfo.GradeCode;
-                template_Student.GradeName = firstinfo.GradeName;
-                template_Student.ClassCode = firstinfo.ClassCode;
-                template_Student.ClassName = firstinfo.ClassName;
+              
+                    var dayandNightClass = DbSetDayandNight.FromSql("select Student_DayandNight_Info.* from Student_DayandNight_Info inner join Student_Info on " +
+                                                                        "Student_DayandNight_Info.idnumber=Student_Info.idnumber" +
+                                                                        " where Student_Info.ClassCode={0} ", classcode);
+                    // 应道人数
+                    template_Student.ShouldComeSchoolCount = studentsInfoClass.Count();
+                    //实到
+                    template_Student.ActualComeSchoolCount = dayandNightClass.Where(a => a.IsComeSchool == "是" && a.AddTimeInterval == "晨"
+                                                                                        && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time
 
-                if (classcode == "021207")
-                {
-                    var aaa = "123";
-                }
+                                                                                        ).Count();
+                    //到了发热
+                    template_Student.ComeSchoolHotCount = dayandNightClass.Where(a => a.IsComeSchool == "是" && a.AddTimeInterval == "晨" &&
+                                                                                         a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time &&
+                                                                                        Convert.ToDouble(a.Temperature) >= 37.2).Count();
+                    //未到
+                    template_Student.NotComeSchoolCount = dayandNightClass.Where(a => a.IsComeSchool == "否" && a.AddTimeInterval == "晨"
+                                                                                            && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time).Count();
+                    //因为发热没到
+                    template_Student.NotComeSchoolByHotCount = dayandNightClass.Where(a => a.AddTimeInterval == "晨" && Convert.ToDouble(a.Temperature) >= 37.2
+                                                                                     && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time
+                                                                                     && a.IsComeSchool == "否"
+                                                                         ).Count();
+                    //其他原因没到      
+                    template_Student.NotComeSchoolByOtherCount = dayandNightClass.Where(a => a.AddTimeInterval == "晨" && a.NotComeJinReason == "其他"
+                                                                                     && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time
+                                                                                     && a.IsComeSchool == "否"
+                                                                         ).Count();
+                    //因为在外地没到
+                    template_Student.NotComeSchoolByOutCount = dayandNightClass.Where(a => a.AddTimeInterval == "晨" && a.IsTianJin == "否"
+                                                                                    && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time
+                                                                                 ).Count();
+                    template_Student.type = "晨";
+                    template_Student.CreateDate = DateTime.Now.AddDays(-1);
+                    DbSet.Add(template_Student);
 
-                var dayandNightClass = DbSetDayandNight.FromSql("select Student_DayandNight_Info.* from Student_DayandNight_Info inner join Student_Info on " +
-                                                                    "Student_DayandNight_Info.idnumber=Student_Info.idnumber" +
-                                                                    " where Student_Info.ClassCode={0} ", classcode);
-                // 应道人数
-                template_Student.ShouldComeSchoolCount = studentsInfoClass.Count();
-                //实到
-                template_Student.ActualComeSchoolCount = dayandNightClass.Where(a => a.IsComeSchool == "是" && a.AddTimeInterval == "晨"
-                                                                                    && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
-                                                                                    
-                                                                                    ).Count()- exceptnum;
-                //到了发热
-                template_Student.ComeSchoolHotCount = dayandNightClass.Where(a => a.IsComeSchool == "是" && a.AddTimeInterval == "晨" &&
-                                                                                     a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")&& 
-                                                                                    Convert.ToDecimal(a.Temperature)>=37.2m ).Count()+ exceptnum;
-                //未到
-                template_Student.NotComeSchoolCount = dayandNightClass.Where(a => a.IsComeSchool == "否" && a.AddTimeInterval == "晨"
-                                                                                        && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")).Count()
-                                                                                        + exceptnum;
-                //因为发热没到
-                template_Student.NotComeSchoolByHotCount = dayandNightClass.Where(a => a.AddTimeInterval == "晨"  && Convert.ToDecimal(a.Temperature) >= 37.2m
-                                                                                 && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
-                                                                                 && a.IsComeSchool == "否"
-                                                                     ).Count();
-                //其他原因没到      
-                template_Student.NotComeSchoolByOtherCount = dayandNightClass.Where(a => a.AddTimeInterval == "晨"  && a.NotComeJinReason=="其他"
-                                                                                 && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
-                                                                                 && a.IsComeSchool == "否"
-                                                                     ).Count(); 
-                //因为在外地没到
-                template_Student.NotComeSchoolByOutCount = dayandNightClass.Where(a => a.AddTimeInterval == "晨" &&  a.IsTianJin == "未在津"
-                                                                                && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
-                                                                             ).Count();
-                template_Student.type = "晨";
-                template_Student.CreateDate = DateTime.Now;
-                DbSet.Add(template_Student);
+              
+                   
             }
         }
-        public void ComtemplatenoonSchool()
+
+        //午检
+        public void ComtemplatenoonSchool(string time)
         {
           
             var dbsetclass = DbSetClass.ToList();
@@ -197,37 +217,39 @@ namespace Dto.Repository.SmallRoutine
                                                                      " where Student_Info.ClassCode={0} ", classcode);
                 // 应道人数
                 template_Student.ShouldComeSchoolCount = studentsInfoClass.Count();
-                //实到 （实到-异常上报）
+                //实到 
                 template_Student.ActualComeSchoolCount = dayandNightClass.Where(a => a.IsComeSchool == "是" && a.AddTimeInterval == "午"
-                                                                                    && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                                                                                    && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time
                                                                                    ).Count();
                 //到了发热
                 template_Student.ComeSchoolHotCount = dayandNightClass.Where(a => a.IsComeSchool == "是" && a.AddTimeInterval == "午" &&
-                                                                                     a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd") &&
-                                                                                    Convert.ToDecimal(a.Temperature) >= 37.2m).Count();
-                //未到 （未到+异常上报）
+                                                                                     a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time &&
+                                                                                    Convert.ToDouble(a.Temperature) >= 37.2).Count();
+                //未到  
                 template_Student.NotComeSchoolCount = dayandNightClass.Where(a => a.IsComeSchool == "否" && a.AddTimeInterval == "午"
-                                                                                        && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")).Count();
+                                                                                        && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time).Count();
                 //因为发热没到
-                template_Student.NotComeSchoolByHotCount = dayandNightClass.Where(a => a.AddTimeInterval == "午" && Convert.ToDecimal(a.Temperature) >= 37.2m
-                                                                                 && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                template_Student.NotComeSchoolByHotCount = dayandNightClass.Where(a => a.AddTimeInterval == "午" && Convert.ToDouble(a.Temperature) >= 37.2
+                                                                                 && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time
                                                                                  && a.IsComeSchool == "否"
                                                                      ).Count();
                 //其他原因没到      
                 template_Student.NotComeSchoolByOtherCount = dayandNightClass.Where(a => a.AddTimeInterval == "午" && a.NotComeJinReason == "其他"
-                                                                                 && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                                                                                 && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time
                                                                                  && a.IsComeSchool == "否"
                                                                      ).Count();
                 //因为在外地没到
-                template_Student.NotComeSchoolByOutCount = dayandNightClass.Where(a => a.AddTimeInterval == "午" && a.IsTianJin == "未在津"
-                                                                                && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                template_Student.NotComeSchoolByOutCount = dayandNightClass.Where(a => a.AddTimeInterval == "午" && a.IsTianJin == "否"
+                                                                                && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time  
                                                                              ).Count();
                 template_Student.type = "午";
-                template_Student.CreateDate = DateTime.Now;
+                template_Student.CreateDate = DateTime.Now.AddDays(-1);
                 DbSet.Add(template_Student);
             }
         }
-        public void ComtemplateNightSchool()
+
+        //晚检
+        public void ComtemplateNightSchool(string time)
         {
           
             var dbsetclass = DbSetClass.ToList();
@@ -256,34 +278,36 @@ namespace Dto.Repository.SmallRoutine
                 template_Student.ShouldComeSchoolCount = studentsInfoClass.Count();
                 //实到
                 template_Student.ActualComeSchoolCount = dayandNightClass.Where(a => a.IsComeSchool == "是" && a.AddTimeInterval == "晚"
-                                                                                    && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                                                                                    && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time
                                                                                    ).Count();
                 //到了发热
                 template_Student.ComeSchoolHotCount = dayandNightClass.Where(a => a.IsComeSchool == "是" && a.AddTimeInterval == "晚" &&
-                                                                                     a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd") &&
-                                                                                    Convert.ToDecimal(a.Temperature) >= 37.2m).Count();
+                                                                                     a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time &&
+                                                                                    Convert.ToDouble(a.Temperature) >= 37.2).Count();
                 //未到
                 template_Student.NotComeSchoolCount = dayandNightClass.Where(a => a.IsComeSchool == "否" && a.AddTimeInterval == "晚"
-                                                                                        && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")).Count();
+                                                                                        && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time).Count();
                 //因为发热没到
-                template_Student.NotComeSchoolByHotCount = dayandNightClass.Where(a => a.AddTimeInterval == "晚" && Convert.ToDecimal(a.Temperature) >= 37.2m
-                                                                                 && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                template_Student.NotComeSchoolByHotCount = dayandNightClass.Where(a => a.AddTimeInterval == "晚" && Convert.ToDouble(a.Temperature) >= 37.2
+                                                                                 && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time
                                                                                  && a.IsComeSchool == "否"
                                                                      ).Count();
                 //其他原因没到      
                 template_Student.NotComeSchoolByOtherCount = dayandNightClass.Where(a => a.AddTimeInterval == "晚" && a.NotComeJinReason == "其他"
-                                                                                 && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                                                                                 && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time
                                                                                  && a.IsComeSchool == "否"
                                                                      ).Count();
                 //因为在外地没到
-                template_Student.NotComeSchoolByOutCount = dayandNightClass.Where(a => a.AddTimeInterval == "晚" && a.IsTianJin == "未在津"
-                                                                                && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+                template_Student.NotComeSchoolByOutCount = dayandNightClass.Where(a => a.AddTimeInterval == "晚" && a.IsTianJin == "否"
+                                                                                && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time  
                                                                              ).Count();
                 template_Student.type = "晚";
-                template_Student.CreateDate = DateTime.Now;
+                template_Student.CreateDate = DateTime.Now.AddDays(-1);
                 DbSet.Add(template_Student);
             }
         }
+
+        //每日最终统计  20200603 作废
         public void ComtemplateDaySchool()
         {
           
@@ -318,12 +342,12 @@ namespace Dto.Repository.SmallRoutine
                 //到了发热
                 template_Student.ComeSchoolHotCount = dayandNightClass.Where(a => a.IsComeSchool == "是"  &&
                                                                                      a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd") &&
-                                                                                    Convert.ToDecimal(a.Temperature) >= 37.2m).Count();
+                                                                                    Convert.ToDouble(a.Temperature) >= 37.2).Count();
                 //未到
                 template_Student.NotComeSchoolCount = dayandNightClass.Where(a => a.IsComeSchool == "否" 
                                                                                         && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")).Count();
                 //因为发热没到
-                template_Student.NotComeSchoolByHotCount = dayandNightClass.Where(a =>  Convert.ToDecimal(a.Temperature) >= 37.2m
+                template_Student.NotComeSchoolByHotCount = dayandNightClass.Where(a =>  Convert.ToDouble(a.Temperature) >= 37.2
                                                                                  && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
                                                                                  && a.IsComeSchool == "否"
                                                                      ).Count();
