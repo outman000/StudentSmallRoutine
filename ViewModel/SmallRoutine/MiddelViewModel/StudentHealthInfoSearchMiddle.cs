@@ -79,5 +79,10 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// 户籍地址
         /// </summary>
         public string PermanentAddress { get; set; }
+
+        /// <summary>
+        /// 学校名称
+        /// </summary>
+        public string SchoolName { get; set; }
     }
 }

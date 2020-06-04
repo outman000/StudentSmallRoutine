@@ -58,5 +58,6 @@ namespace Dto.IRepository.SmallRoutine
 
         List<StudentIdnumberDTO> GetByAllIdnumbers();
         List<Student_Info> getAllClassByCode(string classCode);
+        Student_Info GetStudentByStudentRegisterHeath_InfoId(int StudentRegisterHeath_InfoId);
     }
 }

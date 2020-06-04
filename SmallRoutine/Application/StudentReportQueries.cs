@@ -260,8 +260,8 @@ namespace SmallRoutine.Application
                 double studentCount = GetFacultystaffCount(SchoolCode);//应到校教职工数
                 if (studentCount != 0)
                 {
-                    double rate = healthCount / studentCount;
-                    healthRate = rate.ToString("f4");
+                    double rate = healthCount / studentCount * 100;
+                    healthRate = rate.ToString("f4") + "%";
                 }
             }
             else
@@ -288,8 +288,8 @@ namespace SmallRoutine.Application
                 double studentCount = GetStudenCount(SchoolCode);//应到校学生
                 if (studentCount != 0)
                 {
-                    double rate = healthCount / studentCount;
-                    healthRate = rate.ToString("f4");
+                    double rate = healthCount / studentCount * 100;
+                    healthRate = rate.ToString("f4") + "%";
                 }
 
             }
@@ -498,12 +498,12 @@ namespace SmallRoutine.Application
             result.HighCount = Convert.ToInt32(GetActualStudentCount(searchModel, searchModel.SchoolCode, "'10','11','12'", "", ""));
 
             double StudentCount = GetStudenCount(searchModel.SchoolCode);
-            double studentRate = StudentHealthCount / StudentCount;
-            string healthRateStudent = studentRate.ToString("f4");
+            double studentRate = StudentHealthCount / StudentCount * 100;
+            string healthRateStudent = studentRate.ToString("f4") + "%";
             result.StudentHealthRate = healthRateStudent;
             double FacultystaffCount = GetFacultystaffCount(searchModel.SchoolCode);
-            double FacultystaffRate = FacultystaffHealthCount / FacultystaffCount;
-            string healthRateFacultystaff = FacultystaffRate.ToString("f4");
+            double FacultystaffRate = FacultystaffHealthCount / FacultystaffCount * 100; ;
+            string healthRateFacultystaff = FacultystaffRate.ToString("f4") + "%";
             result.FacultystaffHealthRate = healthRateFacultystaff;
             return result;
         }

@@ -79,10 +79,12 @@ namespace Dto.Repository.SmallRoutine
 
                 for (int i = 0; i < searchResult.Count(); i++)//通过班级code查询
                 {
-
-                    var tempresult = DbSet.Where(a => a.facultystaff_Info.StaffCode == searchResult[i].Station_Info.StaffCode)
-                        .Where(preciate).Include(a => a.facultystaff_Info).Include(m => m.UserFiles_Info).ToList();
-                    Except_Info_Employs.AddRange(tempresult);
+                    if(searchResult[i].Station_Info.StaffCode != null)
+                    {
+                        var tempresult = DbSet.Where(a => a.facultystaff_Info.StaffCode == searchResult[i].Station_Info.StaffCode)
+                            .Where(preciate).Include(a => a.facultystaff_Info).Include(m => m.UserFiles_Info).ToList();
+                        Except_Info_Employs.AddRange(tempresult);
+                    }
                 }
             }
             return Except_Info_Employs.OrderByDescending(a => a.CreateDate).ToList();
