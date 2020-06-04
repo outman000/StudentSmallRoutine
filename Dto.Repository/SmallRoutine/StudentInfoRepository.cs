@@ -116,7 +116,6 @@ namespace Dto.Repository.SmallRoutine
         {
             return DbSet.Where(a => a.StudentRegisterHeath_InfoId == StudentRegisterHeath_InfoId).Include(a => a.StudentRegisterHeath_Info).FirstOrDefault();
         }
-
         //根据id获取学生信息
         public Student_Info getbyID(int id)
         {

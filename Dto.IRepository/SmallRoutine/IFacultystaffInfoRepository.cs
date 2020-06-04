@@ -26,7 +26,8 @@ namespace Dto.IRepository.SmallRoutine
         /// <returns></returns>
         List<StationInfoServiceDTO> GetStationlList();
         facultystaff_Info GetStudentInfoAndHealthInfo(string Idnumber);
-
+        facultystaff_Info GetStudentByfacultystaffRegisterHeath_InfoId(int StudentRegisterHeath_InfoId);
+        
         //根据id获取教职工信息
         facultystaff_Info getbyID(int id);
          
