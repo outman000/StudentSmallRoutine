@@ -134,7 +134,7 @@ namespace Dto.Repository.SmallRoutine
             List<StudentRegisterHeath_Info> studentRegisterHeath_Infos = new List<StudentRegisterHeath_Info>();
             var preciate = StudentSearchLineWhere(studentSearchHealthInfo);
             //需要从学生信息差
-            var result= Db.Student_Info.Include(a => a.StudentRegisterHeath_Info).Where(preciate).ToList();
+            var result= Db.Student_Info.Include(a => a.StudentRegisterHeath_Info).Where(preciate).ToList();//.Include(a => a.SchoolName)
 
             for (int i = 0; i < result.Count; i++)
             {
@@ -165,7 +165,7 @@ namespace Dto.Repository.SmallRoutine
             List<StudentRegisterHeath_Info> studentRegisterHeath_Infos = new List<StudentRegisterHeath_Info>();
             var preciate = EmploySearchLineWhere(employSearchHealthInfo);
             //需要从学生信息差
-            var result = Db.facultystaff_Info.Include(a => a.StudentRegisterHeath_Info).Where(preciate).ToList();
+            var result = Db.facultystaff_Info.Include(a => a.StudentRegisterHeath_Info).Where(preciate).ToList();//.Include(a => a.SchoolName)
 
             for (int i = 0; i < result.Count; i++)
             {

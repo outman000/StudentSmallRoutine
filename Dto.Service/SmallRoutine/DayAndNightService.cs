@@ -125,7 +125,7 @@ namespace Dto.Service.SmallRoutine
                             viewModel.Message = "未到校原因信息为空";
                             return viewModel;
                         }
-                        info.Temperature = "";
+                        info.Temperature = "0";
                         info.AddTimeInterval = "";
                     }
                     info.IdNumber = Dtol.Helper.MD5.Md5Hash(info.IdNumber);

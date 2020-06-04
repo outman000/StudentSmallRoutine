@@ -122,6 +122,7 @@ namespace Dto.Service.AutoMapper.SmallRoutine
 
 
             CreateMap<StudentRegisterHeath_Info, EmployHealthInfoSearchMiddle>()
+                .ForMember(a => a.SchoolName, opt => opt.MapFrom(src => src.student_Info.SchoolName))
                 .ForMember(a => a.Idnumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.Idnumber)));
 
 
