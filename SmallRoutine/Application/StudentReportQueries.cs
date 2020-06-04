@@ -458,8 +458,15 @@ namespace SmallRoutine.Application
             SchoolAndStudentTopReportMiddleModel result = new SchoolAndStudentTopReportMiddleModel();
             result.SchoolCount = GetSchoolCount(searchModel.SchoolCode);
             result.StudentCount = Convert.ToInt32(GetStudenCount(searchModel.SchoolCode));
-            result.StudentActualCount = Convert.ToInt32(GetActualStudentCount(searchModel, searchModel.SchoolCode, "", "是", ""));
-            result.FacultystaffCount = Convert.ToInt32(GetFacultystaffCount(searchModel.SchoolCode));
+            var studentModel = GetStudentListBySearchModel(searchModel, "", "");
+            //result.StudentActualCount = Convert.ToInt32(GetActualStudentCount(searchModel, searchModel.SchoolCode, "", "是", ""));
+            if (studentModel.Count > 0)
+                result.StudentActualCount = Convert.ToInt32(studentModel[0].ActualComeSchoolCount);
+            var emplyeeList= GetEmployeeListBySearchModel(searchModel);
+            //result.FacultystaffCount = Convert.ToInt32(GetFacultystaffCount(searchModel.SchoolCode));
+            if (emplyeeList.Count > 0)
+                result.FacultystaffCount = Convert.ToInt32(emplyeeList[0].ActualComeSchoolCount);
+
             result.FacultystaffActualCount = Convert.ToInt32(GetActualFacultystaffCount(searchModel, searchModel.SchoolCode, searchModel.Type, "", ""));
 
             return result;

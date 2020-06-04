@@ -51,7 +51,7 @@ namespace SmallRoutine.Controllers
         }
 
         /// <summary>
-        /// 获取某一个学校下的教职员工和学生数据
+        /// 获取某一个学校下的教职员工和学生数据  健康信息上报情况
         /// </summary>
         /// <param name="studentStasticSearchViewModel">查询模型</param>
         /// <returns></returns>
@@ -78,7 +78,7 @@ namespace SmallRoutine.Controllers
         }
 
         /// <summary>
-        /// 获取教职员工及学生总体数据
+        /// 获取教职员工及学生总体数据 各学校疫情复课整体情况
         /// </summary>
         /// <param name="studentStasticSearchViewModel">查询模型</param>
         /// <returns></returns>
