@@ -79,12 +79,13 @@ namespace Dto.Repository.SmallRoutine
 
                 for (int i = 0; i < searchResult.Count(); i++)//通过班级code查询
                 {
-                    if(searchResult[i].Station_Info.StaffCode != null)
+                    if (searchResult[i].Station_Info.StaffCode.Equals(""))
                     {
-                        var tempresult = DbSet.Where(a => a.facultystaff_Info.StaffCode == searchResult[i].Station_Info.StaffCode)
-                            .Where(preciate).Include(a => a.facultystaff_Info).Include(m => m.UserFiles_Info).ToList();
-                        Except_Info_Employs.AddRange(tempresult);
+                        continue;
                     }
+                    var tempresult = DbSet.Where(a => a.facultystaff_Info.StaffCode == searchResult[i].Station_Info.StaffCode)
+                        .Where(preciate).Include(a => a.facultystaff_Info).Include(m => m.UserFiles_Info).ToList();
+                    Except_Info_Employs.AddRange(tempresult);
                 }
             }
             return Except_Info_Employs.OrderByDescending(a => a.CreateDate).ToList();
@@ -93,13 +94,31 @@ namespace Dto.Repository.SmallRoutine
         public Expression<Func<Except_Info_Employ, bool>> GetByModelWhere(ExceptEmploySearchViewModel exceptEmploySearchViewModel)
         {
             var predicate = WhereExtension.True<Except_Info_Employ>();//初始化where表达式SchoolName
-                                                                       //姓          
-            predicate = predicate.And(p => p.facultystaff_Info.SchoolCode.Contains(exceptEmploySearchViewModel.SchoolCode));
-            predicate = predicate.And(p => p.facultystaff_Info.DepartCode.Contains(exceptEmploySearchViewModel.DepartCode));
-            predicate = predicate.And(p => p.facultystaff_Info.StaffCode.Contains(exceptEmploySearchViewModel.StaffCode));
-            predicate = predicate.And(p => p.CreateDate.ToString().Contains(exceptEmploySearchViewModel.CreateDate));
-            predicate = predicate.And(p => p.Name.Contains(exceptEmploySearchViewModel.Name));
-            predicate = predicate.And(p => p.Temperature.Contains(exceptEmploySearchViewModel.Temperature));
+                                                                      //姓        
+            if (!exceptEmploySearchViewModel.SchoolCode.Equals(""))
+            {
+                predicate = predicate.And(p => p.facultystaff_Info.SchoolCode.Contains(exceptEmploySearchViewModel.SchoolCode));
+            }
+            if (!exceptEmploySearchViewModel.DepartCode.Equals(""))
+            {
+                predicate = predicate.And(p => p.facultystaff_Info.DepartCode.Contains(exceptEmploySearchViewModel.DepartCode));
+            }
+            if (!exceptEmploySearchViewModel.StaffCode.Equals(""))
+            {
+                predicate = predicate.And(p => p.facultystaff_Info.StaffCode.Contains(exceptEmploySearchViewModel.StaffCode));
+            }
+            if (!exceptEmploySearchViewModel.CreateDate.Equals(""))
+            {
+                predicate = predicate.And(p => p.CreateDate.ToString().Contains(exceptEmploySearchViewModel.CreateDate));
+            }
+            if (!exceptEmploySearchViewModel.Name.Equals(""))
+            {
+                predicate = predicate.And(p => p.Name.Contains(exceptEmploySearchViewModel.Name));
+            }
+            if (!exceptEmploySearchViewModel.Temperature.Equals(""))
+            {
+                predicate = predicate.And(p => p.Temperature.Contains(exceptEmploySearchViewModel.Temperature));
+            }
             return predicate;
         }
 

@@ -142,21 +142,50 @@ namespace Dto.Repository.SmallRoutine
         {
             var preciate = GetByModelWherecheck(dayAndNightSearchViewModel);
             var precateresult = GetByModelChildResultWherecheck(dayAndNightSearchViewModel);
-
-            var searchResult = Db.ClassManager_Relate
-          .Where(a => a.facultystaff_InfoId == dayAndNightSearchViewModel.userKey)
-          .Include(a => a.Class_Info).ToList();
-
             List<Student_DayandNight_Info> Student_DayandNight_Infos = new List<Student_DayandNight_Info>();
-            for (int i = 0; i < searchResult.Count(); i++)
+            var searchResult = Db.ClassManager_Relate
+                    .Where(a => a.facultystaff_InfoId == dayAndNightSearchViewModel.userKey)
+                    .Include(a => a.Class_Info).ToList();
+
+            for (int i = 0; i < searchResult.Count; i++)
             {
                 if (searchResult[i].Class_Info == null || searchResult[i].Class_Info.ClassCode.Equals("string") || searchResult[i].Class_Info.ClassCode.Equals(""))
                 {
                     continue;
                 }
                 var gradeName = int.Parse(searchResult[i].Class_Info.ClassCode.Substring(2, 2)).ToString();
-                var className = int.Parse(searchResult[i].Class_Info.ClassCode.Substring(4, 2)).ToString();
-                var preciatechild = GetByModelChildWhere(className, gradeName);
+                int gradaCode = Convert.ToInt32(searchResult[i].Class_Info.ClassCode.Substring(2, 2));
+                bool result = true;
+                switch (gradaCode)
+                {
+                    case 13:
+                        gradeName = "大班";
+                        result = false;
+                        break;
+                    case 14:
+                        gradeName = "中班";
+                        result = false;
+                        break;
+                    case 15:
+                        gradeName = "小班";
+                        result = false;
+                        break;
+                    case 16:
+                        gradeName = "小小班";
+                        result = false;
+                        break;
+                    case 17:
+                        gradeName = "混龄班";
+                        result = false;
+                        break;
+                    default: break;
+                }
+                //var className = int.Parse(searchResult[i].Class_Info.ClassCode.Substring(4, 2)).ToString();
+                var className = searchResult[i].Class_Info.ClassName.ToString();
+                var preciatechild = GetByModelChildWhereNew(className, gradeName);
+                if (result)
+                    preciatechild = GetByModelChildWhere(className, gradeName);
+
                 var tempresult = Db.Student_DayandNight_Info.Where(preciate);
                 tempresult = tempresult.Where(preciatechild);
 

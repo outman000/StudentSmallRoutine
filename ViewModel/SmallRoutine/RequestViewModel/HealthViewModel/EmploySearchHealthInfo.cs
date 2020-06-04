@@ -7,7 +7,7 @@ namespace ViewModel.SmallRoutine.RequestViewModel.HealthViewModel
     public  class EmploySearchHealthInfo
     {
         /// <summary>
-        /// 年级
+        /// 学校code
         /// </summary>
         public string SchoolCode { get; set; }
         /// <summary>

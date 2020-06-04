@@ -125,10 +125,11 @@ namespace Dto.Service.SmallRoutine
                             viewModel.Message = "未到校原因信息为空";
                             return viewModel;
                         }
-                        info.Temperature = "";
+                        info.Temperature = "0";
                         info.AddTimeInterval = "";
                     }
                     info.IdNumber = Dtol.Helper.MD5.Md5Hash(info.IdNumber);
+                    info.tag = Dtol.Helper.MD5.Md5Hash(info.tag);
                     info.AddCreateDate = DateTime.Now;
                     dayandNightRepository.Add(info);
                     if (dayandNightRepository.SaveChanges() <= 0)
@@ -165,6 +166,9 @@ namespace Dto.Service.SmallRoutine
         }
         public List<DayandNightInfoMiddle> CheckDayAndNightListService(DayAndNightCheckViewModel dayAndNightSearchViewModel)
         {
+            var schoolInfo = schoolInfoRepository.GetSchoolNameByCode(dayAndNightSearchViewModel.SchoolCode);
+            if (schoolInfo != null)
+                dayAndNightSearchViewModel.SchoolName = schoolInfo.SchoolName;
             var searchResult = dayandNightRepository.CheckDayAndNightList(dayAndNightSearchViewModel);
             var result = mapper.Map<List<Student_DayandNight_Info>, List<DayandNightInfoMiddle>>(searchResult);
             return result;
