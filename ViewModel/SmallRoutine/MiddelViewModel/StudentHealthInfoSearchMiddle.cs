@@ -7,6 +7,10 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
     public class StudentHealthInfoSearchMiddle
     {
         /// <summary>
+        /// 学校名称
+        /// </summary>
+        public string SchoolName { get; set; }
+        /// <summary>
         /// 姓名
         /// </summary>
         public string name { get; set; }

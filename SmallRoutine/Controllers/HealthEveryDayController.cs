@@ -33,7 +33,7 @@ namespace SmallRoutine.Controllers
         public ActionResult<BaseViewModel> AddHealthRegisterAdd(HealthEveryAddViewModel healthViewModel)
         {
             BaseViewModel baseViewModel = new BaseViewModel();
-            if (DateTime.Now.Hour >= 22 && DateTime.Now.Minute > 0)
+            if (DateTime.Now.Hour >= 8 && DateTime.Now.Minute > 0)
             {
                 baseViewModel.Message = "增加失败 ，超出时间";
                 baseViewModel.ResponseCode = 210;
