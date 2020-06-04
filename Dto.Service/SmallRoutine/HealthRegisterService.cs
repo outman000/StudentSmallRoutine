@@ -115,7 +115,11 @@ namespace Dto.Service.SmallRoutine
         {
            var searchResult = healthRegisterRepository.searchHealthByStudentInfo(studentSearchHealthInfo);
            var searchresult= _IMapper.Map<List<StudentRegisterHeath_Info>, List<StudentHealthInfoSearchMiddle>>(searchResult);
-
+            foreach(var item in searchresult)
+            {
+                var modelStudent = studentInfoRepository.GetStudentByStudentRegisterHeath_InfoId(item.id);
+                item.SchoolName = modelStudent.SchoolName;
+            }
             return searchresult;
         }
 
@@ -124,6 +128,11 @@ namespace Dto.Service.SmallRoutine
             var searchResult = healthRegisterRepository.searchHealthByEmployInfo(employSearchHealthInfo);
 
             var searchresult = _IMapper.Map<List<StudentRegisterHeath_Info>, List<EmployHealthInfoSearchMiddle>>(searchResult);
+            foreach (var item in searchresult)
+            {
+                var modelStudent = facultystaffInfoRepository.GetStudentByfacultystaffRegisterHeath_InfoId(item.id);
+                item.SchoolName = modelStudent.SchoolName;
+            }
             return searchresult;
 
         }

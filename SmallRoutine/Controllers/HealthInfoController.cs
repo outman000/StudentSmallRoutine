@@ -94,9 +94,9 @@ namespace SmallRoutine.Controllers
         public ActionResult<StudentHealthInfoSearchResModel> StudentSearchHealthRegister(StudentSearchHealthInfo  studentSearchHealthInfo)
         {
             StudentHealthInfoSearchResModel studentHealthInfoSearchResModel = new StudentHealthInfoSearchResModel();
-
-            studentHealthInfoSearchResModel.healthInfoSearchMiddles = healthRegisterService.StudentSearchHealthRegisterInfo(studentSearchHealthInfo);
-            studentHealthInfoSearchResModel.TotalNum = healthRegisterService.StudentSearchHealthRegisterInfo(studentSearchHealthInfo).Count();
+            var data= healthRegisterService.StudentSearchHealthRegisterInfo(studentSearchHealthInfo);
+            studentHealthInfoSearchResModel.healthInfoSearchMiddles = data;
+            studentHealthInfoSearchResModel.TotalNum = data.Count();
             studentHealthInfoSearchResModel.IsSuccess = true;
             studentHealthInfoSearchResModel.baseViewModel.Message = "查询成功";
             studentHealthInfoSearchResModel.baseViewModel.ResponseCode = 200;

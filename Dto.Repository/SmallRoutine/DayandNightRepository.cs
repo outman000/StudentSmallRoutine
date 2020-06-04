@@ -97,55 +97,95 @@ namespace Dto.Repository.SmallRoutine
                         continue;
                     }
                     var gradeName = int.Parse(searchResult[i].Class_Info.ClassCode.Substring(2, 2)).ToString();
-                    switch(gradeName)
+                    int gradaCode = Convert.ToInt32(searchResult[i].Class_Info.ClassCode.Substring(2, 2));
+                    bool result = true;
+                    switch(gradaCode)
                     {
-                        case "13":
+                        case 13:
                             gradeName = "大班";
+                            result = false;
                             break;
-                        case "14":
+                        case 14:
                             gradeName = "中班";
+                            result = false;
                             break;
-                        case "15":
+                        case 15:
                             gradeName = "小班";
+                            result = false;
                             break;
-                        case "16":
+                        case 16:
                             gradeName = "小小班";
+                            result = false;
                             break;
-                        case "17":
+                        case 17:
                             gradeName = "混龄班";
+                            result = false;
                             break;
                         default:break;
                     }
                     //var className = int.Parse(searchResult[i].Class_Info.ClassCode.Substring(4, 2)).ToString();
-                    var className = int.Parse(searchResult[i].Class_Info.ClassName).ToString();
-                    var preciatechild = GetByModelChildWhere(className, gradeName);
+                    var className = searchResult[i].Class_Info.ClassName.ToString();
+                    var preciatechild = GetByModelChildWhereNew(className, gradeName);
+                    if(result)
+                        preciatechild = GetByModelChildWhere(className, gradeName);
+
                     var tempresult = Db.Student_DayandNight_Info.Where(preciate);
                     tempresult = tempresult.Where(preciatechild);
 
                     Student_DayandNight_Infos.AddRange(tempresult.ToList());
                 }
             }
+
             return Student_DayandNight_Infos.AsQueryable().Where(precateresult).OrderByDescending(a => a.AddCreateDate).ToList();
         }
         public List<Student_DayandNight_Info> CheckDayAndNightList(DayAndNightCheckViewModel dayAndNightSearchViewModel)
         {
             var preciate = GetByModelWherecheck(dayAndNightSearchViewModel);
             var precateresult = GetByModelChildResultWherecheck(dayAndNightSearchViewModel);
-
-            var searchResult = Db.ClassManager_Relate
-          .Where(a => a.facultystaff_InfoId == dayAndNightSearchViewModel.userKey)
-          .Include(a => a.Class_Info).ToList();
-
             List<Student_DayandNight_Info> Student_DayandNight_Infos = new List<Student_DayandNight_Info>();
-            for (int i = 0; i < searchResult.Count(); i++)
+            var searchResult = Db.ClassManager_Relate
+                    .Where(a => a.facultystaff_InfoId == dayAndNightSearchViewModel.userKey)
+                    .Include(a => a.Class_Info).ToList();
+
+            for (int i = 0; i < searchResult.Count; i++)
             {
                 if (searchResult[i].Class_Info == null || searchResult[i].Class_Info.ClassCode.Equals("string") || searchResult[i].Class_Info.ClassCode.Equals(""))
                 {
                     continue;
                 }
                 var gradeName = int.Parse(searchResult[i].Class_Info.ClassCode.Substring(2, 2)).ToString();
-                var className = int.Parse(searchResult[i].Class_Info.ClassCode.Substring(4, 2)).ToString();
-                var preciatechild = GetByModelChildWhere(className, gradeName);
+                int gradaCode = Convert.ToInt32(searchResult[i].Class_Info.ClassCode.Substring(2, 2));
+                bool result = true;
+                switch (gradaCode)
+                {
+                    case 13:
+                        gradeName = "大班";
+                        result = false;
+                        break;
+                    case 14:
+                        gradeName = "中班";
+                        result = false;
+                        break;
+                    case 15:
+                        gradeName = "小班";
+                        result = false;
+                        break;
+                    case 16:
+                        gradeName = "小小班";
+                        result = false;
+                        break;
+                    case 17:
+                        gradeName = "混龄班";
+                        result = false;
+                        break;
+                    default: break;
+                }
+                //var className = int.Parse(searchResult[i].Class_Info.ClassCode.Substring(4, 2)).ToString();
+                var className = searchResult[i].Class_Info.ClassName.ToString();
+                var preciatechild = GetByModelChildWhereNew(className, gradeName);
+                if (result)
+                    preciatechild = GetByModelChildWhere(className, gradeName);
+
                 var tempresult = Db.Student_DayandNight_Info.Where(preciate);
                 tempresult = tempresult.Where(preciatechild);
 
@@ -203,6 +243,15 @@ namespace Dto.Repository.SmallRoutine
             predicate = predicate.And(p => p.ClassName == int.Parse(ClassName).ToString());
             return predicate;
         }
+
+        public Expression<Func<Student_DayandNight_Info, bool>> GetByModelChildWhereNew(String ClassName, String GradeName)
+        {
+            var predicate = WhereExtension.True<Student_DayandNight_Info>();//初始化where表达式SchoolName
+            predicate = predicate.And(p => p.GradeName.Contains(GradeName));
+            predicate = predicate.And(p => p.ClassName.Contains(ClassName));
+            return predicate;
+        }
+
 
         public Expression<Func<Student_DayandNight_Info, bool>> GetByModelChildWhereYEY(String ClassName)
         {

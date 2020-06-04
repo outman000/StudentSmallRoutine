@@ -35,8 +35,10 @@ namespace SmallRoutine.Application
                 result.AddRange(gz);
                 var cz = GetStudentListBySearchModel(searchModel, "'7','8','9'", "初中");
                 result.AddRange(cz);
-                var xx = GetStudentListBySearchModel(searchModel, "'1','2','3','3','4','5','6'", "小学");
+                var xx = GetStudentListBySearchModel(searchModel, "'1','2','3','4','5','6'", "小学");
                 result.AddRange(xx);
+                var yey= GetStudentListBySearchModel(searchModel, "'大班','中班','小班','小小班','混龄班'", "幼儿园");
+                result.AddRange(yey);
             }
 
             return result;
@@ -258,8 +260,8 @@ namespace SmallRoutine.Application
                 double studentCount = GetFacultystaffCount(SchoolCode);//应到校教职工数
                 if (studentCount != 0)
                 {
-                    double rate = healthCount / studentCount;
-                    healthRate = rate.ToString("f4");
+                    double rate = healthCount / studentCount * 100;
+                    healthRate = rate.ToString("f4") + "%";
                 }
             }
             else
@@ -286,8 +288,8 @@ namespace SmallRoutine.Application
                 double studentCount = GetStudenCount(SchoolCode);//应到校学生
                 if (studentCount != 0)
                 {
-                    double rate = healthCount / studentCount;
-                    healthRate = rate.ToString("f4");
+                    double rate = healthCount / studentCount * 100;
+                    healthRate = rate.ToString("f4") + "%";
                 }
 
             }
@@ -456,8 +458,15 @@ namespace SmallRoutine.Application
             SchoolAndStudentTopReportMiddleModel result = new SchoolAndStudentTopReportMiddleModel();
             result.SchoolCount = GetSchoolCount(searchModel.SchoolCode);
             result.StudentCount = Convert.ToInt32(GetStudenCount(searchModel.SchoolCode));
-            result.StudentActualCount = Convert.ToInt32(GetActualStudentCount(searchModel, searchModel.SchoolCode, "", "是", ""));
-            result.FacultystaffCount = Convert.ToInt32(GetFacultystaffCount(searchModel.SchoolCode));
+            var studentModel = GetStudentListBySearchModel(searchModel, "", "");
+            //result.StudentActualCount = Convert.ToInt32(GetActualStudentCount(searchModel, searchModel.SchoolCode, "", "是", ""));
+            if (studentModel.Count > 0)
+                result.StudentActualCount = Convert.ToInt32(studentModel[0].ActualComeSchoolCount);
+            var emplyeeList= GetEmployeeListBySearchModel(searchModel);
+            //result.FacultystaffCount = Convert.ToInt32(GetFacultystaffCount(searchModel.SchoolCode));
+            if (emplyeeList.Count > 0)
+                result.FacultystaffCount = Convert.ToInt32(emplyeeList[0].ActualComeSchoolCount);
+
             result.FacultystaffActualCount = Convert.ToInt32(GetActualFacultystaffCount(searchModel, searchModel.SchoolCode, searchModel.Type, "", ""));
 
             return result;
@@ -496,12 +505,12 @@ namespace SmallRoutine.Application
             result.HighCount = Convert.ToInt32(GetActualStudentCount(searchModel, searchModel.SchoolCode, "'10','11','12'", "", ""));
 
             double StudentCount = GetStudenCount(searchModel.SchoolCode);
-            double studentRate = StudentHealthCount / StudentCount;
-            string healthRateStudent = studentRate.ToString("f4");
+            double studentRate = StudentHealthCount / StudentCount * 100;
+            string healthRateStudent = studentRate.ToString("f4") + "%";
             result.StudentHealthRate = healthRateStudent;
             double FacultystaffCount = GetFacultystaffCount(searchModel.SchoolCode);
-            double FacultystaffRate = FacultystaffHealthCount / FacultystaffCount;
-            string healthRateFacultystaff = FacultystaffRate.ToString("f4");
+            double FacultystaffRate = FacultystaffHealthCount / FacultystaffCount * 100; ;
+            string healthRateFacultystaff = FacultystaffRate.ToString("f4") + "%";
             result.FacultystaffHealthRate = healthRateFacultystaff;
             return result;
         }
@@ -847,7 +856,7 @@ namespace SmallRoutine.Application
         {
             List<HealthEverySearchMiddleModel> result = new List<HealthEverySearchMiddleModel>();
             StringBuilder sbSel = new StringBuilder();
-            sbSel.Append("select id,name,IdNumber,Temperature,IsComeSchool,NotComeJinReason NotComeSchoolReason,AddTimeInterval CheckType,AddCreateDate Createdate from [dbo].[Student_DayandNight_Info] where 1=1");
+            sbSel.Append("select id,name,tag IdNumber,Temperature,IsComeSchool,NotComeJinReason NotComeSchoolReason,AddTimeInterval CheckType,AddCreateDate Createdate from [dbo].[Student_DayandNight_Info] where 1=1");
             if (IsComeSchool != "")
             {
                 sbSel.Append("  and (IsComeSchool = '" + IsComeSchool + "')");// AND (NotComeSchoolReason IS NOT NULL)

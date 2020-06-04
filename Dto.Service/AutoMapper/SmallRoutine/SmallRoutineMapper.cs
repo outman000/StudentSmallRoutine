@@ -63,7 +63,7 @@ namespace Dto.Service.AutoMapper.SmallRoutine
                 ;
 
 
-            CreateMap<StudentRegisterHeath_Info, StudentRegisterHeathInfoViewModel>();
+            CreateMap<StudentRegisterHeath_Info, StudentRegisterHeathInfoViewModel>(); 
             CreateMap<StudentRegisterHeath_Info, HealthInfoSearchMiddle>()
 
                 .ForMember(a => a.Idnumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Decrypt(src.Idnumber)));

@@ -78,7 +78,10 @@ namespace Dto.Repository.SmallRoutine
         {
             return DbSet.Where(a => a.IdNumber == Idnumber).Include(a => a.StudentRegisterHeath_Info).FirstOrDefault();
         }
-
+        public facultystaff_Info GetStudentByfacultystaffRegisterHeath_InfoId(int StudentRegisterHeath_InfoId)
+        {
+            return DbSet.Where(a => a.StudentRegisterHeath_InfoId == StudentRegisterHeath_InfoId).Include(a => a.StudentRegisterHeath_Info).FirstOrDefault();
+        }
         public void Remove(Guid id)
         {
             throw new NotImplementedException();

@@ -113,8 +113,12 @@ namespace Dto.Repository.SmallRoutine
         
         public bool existhealthInfo(HealthEveryAddViewModel healthEveryAddViewModel)
         {
-           
-           var temp=  DbSet.FirstOrDefault (a => a.IdNumber == Dtol.Helper.MD5.Md5Hash(healthEveryAddViewModel.IdNumber)
+
+            if(healthEveryAddViewModel.CheckType.Equals(""))
+            {
+                return true;
+            }
+            var temp=  DbSet.FirstOrDefault (a => a.IdNumber == Dtol.Helper.MD5.Md5Hash(healthEveryAddViewModel.IdNumber)
                                         && a.CheckType == healthEveryAddViewModel.CheckType
                                          && a.Createdate.Value.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
                                         );

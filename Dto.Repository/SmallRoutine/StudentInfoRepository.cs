@@ -112,8 +112,10 @@ namespace Dto.Repository.SmallRoutine
 
         }
 
-
-        
+        public Student_Info GetStudentByStudentRegisterHeath_InfoId(int StudentRegisterHeath_InfoId)
+        {
+            return DbSet.Where(a => a.StudentRegisterHeath_InfoId == StudentRegisterHeath_InfoId).Include(a => a.StudentRegisterHeath_Info).FirstOrDefault();
+        }
         //根据id获取学生信息
         public Student_Info getbyID(int id)
         {
