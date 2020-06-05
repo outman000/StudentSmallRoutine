@@ -229,7 +229,7 @@ namespace SmallRoutine.Application
             }
             foreach (var item in result)
             {
-                item.HealthRate = GetHealthRate(searchModel, item.Name, item.SchoolCode) + "%";
+                item.HealthRate = GetHealthRate(searchModel, item.Name, item.SchoolCode);// +"%"
             }
             return result;
         }
@@ -261,7 +261,7 @@ namespace SmallRoutine.Application
                 if (studentCount != 0)
                 {
                     double rate = healthCount / studentCount * 100;
-                    healthRate = rate.ToString("f4") + "%";
+                    healthRate = rate.ToString("f2") + "%";
                 }
             }
             else
@@ -289,7 +289,7 @@ namespace SmallRoutine.Application
                 if (studentCount != 0)
                 {
                     double rate = healthCount / studentCount * 100;
-                    healthRate = rate.ToString("f4") + "%";
+                    healthRate = rate.ToString("f2") + "%";
                 }
 
             }
