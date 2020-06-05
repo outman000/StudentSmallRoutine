@@ -461,12 +461,27 @@ namespace SmallRoutine.Application
             var studentModel = GetStudentListBySearchModel(searchModel, "", "");
             //result.StudentActualCount = Convert.ToInt32(GetActualStudentCount(searchModel, searchModel.SchoolCode, "", "是", ""));
             if (studentModel.Count > 0)
-                result.StudentActualCount = Convert.ToInt32(studentModel[0].ActualComeSchoolCount);
+            {
+                int StudentActualCount = 0;
+                foreach(var item in studentModel)
+                {
+                    StudentActualCount += Convert.ToInt32(studentModel[0].ActualComeSchoolCount);
+                }
+                result.StudentActualCount = StudentActualCount;
+            }
             var emplyeeList= GetEmployeeListBySearchModel(searchModel);
             result.FacultystaffCount = Convert.ToInt32(GetFacultystaffCount(searchModel.SchoolCode));
             if (emplyeeList.Count > 0)
+            {
                 //result.FacultystaffCount = Convert.ToInt32(emplyeeList[0].ActualComeSchoolCount);
-                result.FacultystaffActualCount = Convert.ToInt32(emplyeeList[0].ActualComeSchoolCount);
+                int FacultystaffActualCount = 0;
+                foreach(var item in emplyeeList)
+                {
+                    FacultystaffActualCount += Convert.ToInt32(emplyeeList[0].ActualComeSchoolCount);
+                }
+                result.FacultystaffActualCount = FacultystaffActualCount;
+            }
+
             //result.FacultystaffActualCount = Convert.ToInt32(GetActualFacultystaffCount(searchModel, searchModel.SchoolCode, searchModel.Type, "", ""));
 
             return result;
