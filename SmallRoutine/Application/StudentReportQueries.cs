@@ -465,7 +465,7 @@ namespace SmallRoutine.Application
                 int StudentActualCount = 0;
                 foreach(var item in studentModel)
                 {
-                    StudentActualCount += Convert.ToInt32(studentModel[0].ActualComeSchoolCount);
+                    StudentActualCount += Convert.ToInt32(item.ActualComeSchoolCount);
                 }
                 result.StudentActualCount = StudentActualCount;
             }
@@ -477,7 +477,7 @@ namespace SmallRoutine.Application
                 int FacultystaffActualCount = 0;
                 foreach(var item in emplyeeList)
                 {
-                    FacultystaffActualCount += Convert.ToInt32(emplyeeList[0].ActualComeSchoolCount);
+                    FacultystaffActualCount += Convert.ToInt32(item.ActualComeSchoolCount);
                 }
                 result.FacultystaffActualCount = FacultystaffActualCount;
             }
