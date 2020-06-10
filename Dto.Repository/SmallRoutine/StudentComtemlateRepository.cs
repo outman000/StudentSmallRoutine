@@ -33,21 +33,36 @@ namespace Dto.Repository.SmallRoutine
 
         public void CompTemplateStudent()
         {
-            //第二天凌晨 统计前一天数据
-            string time = DateTime.Now.AddDays(-2).ToString("yyyy-MM-dd");
-            
-            //到校前
-            ComtemplateNotComeSchool(time);
-            //早检
-            ComtemplateMorningSchool(time);
-            //午检
-            ComtemplatenoonSchool(time);
-            //晚检
-            ComtemplateNightSchool(time);
+             
+            string time = DateTime.Now.ToString("yyyy-MM-dd");
 
+            if (DateTime.Now.Hour == 8)
+            {
+                //到校前  时段 00:00到8:00
+                ComtemplateNotComeSchool(time);
+                Db.SaveChanges();
+            }
+            if (DateTime.Now.Hour == 11)
+            {
+                //早检  时段 8：01到10：30；
+                ComtemplateMorningSchool(time);
+                Db.SaveChanges();
+            }
+            if (DateTime.Now.Hour == 14)
+            {
+                //午检 时段 10：31到14:00；
+                ComtemplatenoonSchool(time);
+                Db.SaveChanges();
+            }
+            if (DateTime.Now.Hour == 23)
+            {
+                //晚检 时段 14:01到24:00。
+                ComtemplateNightSchool(time);
+                Db.SaveChanges();
+            }
             //统计当天的 20200603 开始作废不统计
             //ComtemplateDaySchool(); 
-            Db.SaveChanges();
+
         }
 
 
@@ -107,7 +122,7 @@ namespace Dto.Repository.SmallRoutine
                                                                              ).Count();
 
                 template_Student.type = "到校前";
-                template_Student.CreateDate = DateTime.Now.AddDays(-1);
+                template_Student.CreateDate = DateTime.Parse(time);
                 DbSet.Add(template_Student);
             }
         }
@@ -181,8 +196,8 @@ namespace Dto.Repository.SmallRoutine
                                                                                     && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time
                                                                                  ).Count();
                     template_Student.type = "晨";
-                    template_Student.CreateDate = DateTime.Now.AddDays(-1);
-                    DbSet.Add(template_Student);
+                    template_Student.CreateDate = DateTime.Parse(time);
+                   DbSet.Add(template_Student);
 
               
                    
@@ -243,7 +258,7 @@ namespace Dto.Repository.SmallRoutine
                                                                                 && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time  
                                                                              ).Count();
                 template_Student.type = "午";
-                template_Student.CreateDate = DateTime.Now.AddDays(-1);
+                template_Student.CreateDate = DateTime.Parse(time);
                 DbSet.Add(template_Student);
             }
         }
@@ -302,7 +317,7 @@ namespace Dto.Repository.SmallRoutine
                                                                                 && a.AddCreateDate.Value.ToString("yyyy-MM-dd") == time  
                                                                              ).Count();
                 template_Student.type = "晚";
-                template_Student.CreateDate = DateTime.Now.AddDays(-1);
+                template_Student.CreateDate = DateTime.Parse(time);
                 DbSet.Add(template_Student);
             }
         }
