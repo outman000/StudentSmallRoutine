@@ -229,7 +229,7 @@ namespace SmallRoutine.Application
             }
             foreach (var item in result)
             {
-                item.HealthRate = GetHealthRate(searchModel, item.Name, item.SchoolCode) + "%";
+                item.HealthRate = GetHealthRate(searchModel, item.Name, item.SchoolCode);// +"%"
             }
             return result;
         }
@@ -261,7 +261,7 @@ namespace SmallRoutine.Application
                 if (studentCount != 0)
                 {
                     double rate = healthCount / studentCount * 100;
-                    healthRate = rate.ToString("f4") + "%";
+                    healthRate = rate.ToString("f2") + "%";
                 }
             }
             else
@@ -289,7 +289,7 @@ namespace SmallRoutine.Application
                 if (studentCount != 0)
                 {
                     double rate = healthCount / studentCount * 100;
-                    healthRate = rate.ToString("f4") + "%";
+                    healthRate = rate.ToString("f2") + "%";
                 }
 
             }
@@ -461,13 +461,34 @@ namespace SmallRoutine.Application
             var studentModel = GetStudentListBySearchModel(searchModel, "", "");
             //result.StudentActualCount = Convert.ToInt32(GetActualStudentCount(searchModel, searchModel.SchoolCode, "", "是", ""));
             if (studentModel.Count > 0)
-                result.StudentActualCount = Convert.ToInt32(studentModel[0].ActualComeSchoolCount);
+            {
+                int StudentActualCount = 0;
+                int StudentCount = 0;
+                foreach (var item in studentModel)
+                {
+                    StudentActualCount += Convert.ToInt32(item.ActualComeSchoolCount);
+                    StudentCount+= Convert.ToInt32(item.ShouldComeSchoolCount);
+                }
+                result.StudentActualCount = StudentActualCount;
+                result.StudentCount = StudentCount;
+            }
             var emplyeeList= GetEmployeeListBySearchModel(searchModel);
-            //result.FacultystaffCount = Convert.ToInt32(GetFacultystaffCount(searchModel.SchoolCode));
+            result.FacultystaffCount = Convert.ToInt32(GetFacultystaffCount(searchModel.SchoolCode));
             if (emplyeeList.Count > 0)
-                result.FacultystaffCount = Convert.ToInt32(emplyeeList[0].ActualComeSchoolCount);
+            {
+                //result.FacultystaffCount = Convert.ToInt32(emplyeeList[0].ActualComeSchoolCount);
+                int FacultystaffActualCount = 0;
+                int FacultystaffCount = 0;
+                foreach (var item in emplyeeList)
+                {
+                    FacultystaffActualCount += Convert.ToInt32(item.ActualComeSchoolCount);
+                    FacultystaffCount += Convert.ToInt32(item.ShouldComeSchoolCount);
+                }
+                result.FacultystaffActualCount = FacultystaffActualCount;
+                result.FacultystaffCount = FacultystaffCount;
+            }
 
-            result.FacultystaffActualCount = Convert.ToInt32(GetActualFacultystaffCount(searchModel, searchModel.SchoolCode, searchModel.Type, "", ""));
+            //result.FacultystaffActualCount = Convert.ToInt32(GetActualFacultystaffCount(searchModel, searchModel.SchoolCode, searchModel.Type, "", ""));
 
             return result;
         }
