@@ -71,7 +71,7 @@ namespace Dto.Repository.SmallRoutine
         public string GetOpenidByUnionid(string unionid)
         {
             string serviceOpenid = "";
-            string connectionnew = "Server=D41ICKRFDL1HRNM;Database=TedaEasyDB;uid=sa;pwd=App1234;";
+            string connectionnew = "Server=10.128.20.60;Database=TedaEasyDB;uid=sa;pwd=P@ssw0rd#2020;";
 
             using (var connection2 = new SqlConnection(connectionnew))
             {
