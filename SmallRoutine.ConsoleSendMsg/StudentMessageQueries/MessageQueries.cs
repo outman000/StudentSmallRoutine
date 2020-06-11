@@ -166,7 +166,7 @@ namespace SmallRoutine.ConsoleSendMsg.StudentMessageQueries
 
 
 
-        //教职工  9：30 提醒未进行晨检情况填报的 教职工 填写体温等健康信息
+        //教职工  10：00 提醒未进行晨检情况填报的 教职工 填写体温等健康信息
         public void GetListsJZGMorningSend()
         {
 
@@ -213,7 +213,7 @@ namespace SmallRoutine.ConsoleSendMsg.StudentMessageQueries
 
                                     string abc = GetPage(url, postData);
 
-                                    Console.WriteLine("教职工信息当天9:30计算成功:" + item.Idnumber + ";获取openid=" + serviceOpenid + "推送结果：" + abc);
+                                    Console.WriteLine("教职工信息当天10：00计算成功:" + item.Idnumber + ";获取openid=" + serviceOpenid + "推送结果：" + abc);
                                 }
                               
                             }
