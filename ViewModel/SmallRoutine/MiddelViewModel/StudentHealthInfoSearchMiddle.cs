@@ -83,9 +83,5 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// 户籍地址
         /// </summary>
         public string PermanentAddress { get; set; }
-<<<<<<< HEAD
-     
-=======
->>>>>>> 1b8cfd1fd84d6094d1fa602e6207646c5e9ae755
     }
 }
