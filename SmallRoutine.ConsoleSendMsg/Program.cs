@@ -23,9 +23,9 @@ namespace SmallRoutine.ConsoleSendMsg
                 // 7:30 提醒未进行健康信息情况填报的教职员工填写体温等健康信息
                 service.GetListsJZGBeforeToSchoolSend();
             }
-            else if (hour == 9 && Minute == 30)
+            else if (hour == 10 && Minute == 0)
             {
-                //教职工  9：30 提醒未进行晨检情况填报的 教职工 填写体温等健康信息
+                //教职工  10：00 提醒未进行晨检情况填报的 教职工 填写体温等健康信息
                 service.GetListsJZGMorningSend();
             }
             else if (hour == 13 && Minute == 30)

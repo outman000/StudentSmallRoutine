@@ -21,31 +21,31 @@ namespace ViewModel.SmallRoutine.MiddelViewModel
         /// <summary>
         /// 应到校人数
         /// </summary>
-        public int? ShouldComeSchoolCount { get; set; }
+        public double ShouldComeSchoolCount { get; set; }
         /// <summary>
         /// 实际到校人数
         /// </summary>
-        public int? ActualComeSchoolCount { get; set; }
+        public double ActualComeSchoolCount { get; set; }
         /// <summary>
         /// 到校后发热学生
         /// </summary>
-        public int? ComeSchoolHotCount { get; set; }
+        public double ComeSchoolHotCount { get; set; }
         /// <summary>
         /// 未到校人数
         /// </summary>
-        public int? NotComeSchoolCount { get; set; }
+        public double NotComeSchoolCount { get; set; }
         /// <summary>
         /// 因为在外地所以未到校的人数
         /// </summary>
-        public int? NotComeSchoolByOutCount { get; set; }
+        public double NotComeSchoolByOutCount { get; set; }
         /// <summary>
         /// 因为发热未到校
         /// </summary>
-        public int? NotComeSchoolByHotCount { get; set; }
+        public double NotComeSchoolByHotCount { get; set; }
         /// <summary>
         /// 因为其他原因未到校
         /// </summary>
-        public int? NotComeSchoolByOtherCount { get; set; }
+        public double NotComeSchoolByOtherCount { get; set; }
 
         /// <summary>
         /// 健康填报率
