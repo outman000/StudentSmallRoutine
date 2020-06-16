@@ -23,6 +23,8 @@ using SystemFilter.PublicFilter;
 using Microsoft.Extensions.Logging;
 using ViewModel.SmallRoutine.MiddelViewModel;
 using SmallRoutine.Application;
+using Dto.Repository.SmallRoutine;
+using Dto.IRepository.SmallRoutine;
 
 namespace SmallRoutine
 {
@@ -185,6 +187,12 @@ namespace SmallRoutine
             builder.Register(c=>new StudentReportQueries(connection))
                 .As<IStudentReportQueries>()
                 .InstancePerLifetimeScope();
+
+
+            //20191108  直接SQL实现
+            builder.Register(c => new SQLRepository(connection))
+                 .As<ISQLRepository>()
+                 .InstancePerLifetimeScope();
 
             //builder.RegisterLogger(autowireProperties: true);压力问题注释
             //将services填充到Autofac容器生成器中

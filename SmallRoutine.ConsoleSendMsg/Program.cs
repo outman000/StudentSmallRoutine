@@ -2,6 +2,7 @@
 using SmallRoutine.ConsoleSendMsg.StudentMessageQueries;
 using System;
 using System.Collections.Generic;
+using ViewModel.SmallRoutine.RequestViewModel;
 
 namespace SmallRoutine.ConsoleSendMsg
 {
@@ -9,16 +10,31 @@ namespace SmallRoutine.ConsoleSendMsg
     {
         static void Main(string[] args)
         {
-            //测试 7:30 提醒未进行健康信息情况填报的教职员工和学生家长 填写体温等健康信息
-            var aa = new MessageQueries();
-            List<string> list1 = aa.GetListsBeforeToSchool();
-            foreach (var item in list1)
+            
+            var service = new MessageQueries();
+
+            int hour = DateTime.Now.Hour;
+            int Minute = DateTime.Now.Minute;
+
+            if (hour == 7 && Minute == 30)
             {
-                Console.WriteLine("当天7:30计算成功" + item.ToString());
+                // 7:30 提醒未进行健康信息情况填报的学生家长 填写体温等健康信息
+                service.GetListsXSBeforeToSchoolSend();
+                // 7:30 提醒未进行健康信息情况填报的教职员工填写体温等健康信息
+                service.GetListsJZGBeforeToSchoolSend();
             }
+            else if (hour == 10 && Minute == 0)
+            {
+                //教职工  10：00 提醒未进行晨检情况填报的 教职工 填写体温等健康信息
+                service.GetListsJZGMorningSend();
+            }
+            else if (hour == 13 && Minute == 30)
+            {
+                //教职工  13：30 提醒未进行午检情况填报的 教职工 填写体温等健康信息
+                service.GetListsJZGNoonSend();
+            }
+          
  
-            Console.WriteLine("输入任意键停止");
-            Console.ReadLine();
   
         }
     }
