@@ -83,7 +83,7 @@ namespace SmallRoutine.Controllers
                 {
                     loginValideResModel.Data.IdNumber = "admin";
                     loginValideResModel.Data.SchoolCode = "admin";
-                    loginValideResModel.Data.Name = "总管理员";
+                    loginValideResModel.Data.Name = "教育科管理员";
                     loginValideResModel.Data.Sex = "";
                     loginValideResModel.Data.SchoolName = "";
                     loginValideResModel.Data.Country = "";
@@ -96,7 +96,6 @@ namespace SmallRoutine.Controllers
                     loginValideResModel.baseViewModel.Message = "登录成功";
                     loginValideResModel.baseViewModel.ResponseCode = 200;
                     loginValideResModel.IsSuccess = true;
-
                 }
                 else
                 {
