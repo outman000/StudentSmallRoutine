@@ -229,7 +229,9 @@ namespace SmallRoutine.Application
             }
             foreach (var item in result)
             {
-                item.HealthRate = GetHealthRate(searchModel, item.Name, item.SchoolCode);// +"%"
+                //item.HealthRate = GetHealthRate(searchModel, item.Name, item.SchoolCode);// +"%"
+                double rate = item.ActualComeSchoolCount / item.ShouldComeSchoolCount * 100;
+                item.HealthRate= rate.ToString("f2") + "%";
             }
             return result;
         }
