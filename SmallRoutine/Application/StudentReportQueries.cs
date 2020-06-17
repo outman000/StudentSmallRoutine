@@ -879,7 +879,7 @@ namespace SmallRoutine.Application
         {
             List<HealthEverySearchMiddleModel> result = new List<HealthEverySearchMiddleModel>();
             StringBuilder sbSel = new StringBuilder();
-            sbSel.Append("select id,name,tag IdNumber,Temperature,IsComeSchool,NotComeJinReason NotComeSchoolReason,AddTimeInterval CheckType,AddCreateDate Createdate from [dbo].[Student_DayandNight_Info] where 1=1");
+            sbSel.Append("select id,name,tag IdNumber,Temperature,IsComeSchool,NotComeJinReason NotComeSchoolReason,AddTimeInterval CheckType,AddCreateDate Createdate,SchoolName  from [dbo].[Student_DayandNight_Info] where 1=1");
             if (IsComeSchool != "")
             {
                 sbSel.Append("  and (IsComeSchool = '" + IsComeSchool + "')");// AND (NotComeSchoolReason IS NOT NULL)
