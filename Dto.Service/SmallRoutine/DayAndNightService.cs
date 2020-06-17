@@ -126,7 +126,6 @@ namespace Dto.Service.SmallRoutine
                             return viewModel;
                         }
                         info.Temperature = "0";
-                        info.AddTimeInterval = "";
                     }
                     info.IdNumber = Dtol.Helper.MD5.Md5Hash(info.IdNumber);
                     info.tag = Dtol.Helper.MD5.Md5Hash(info.tag);
