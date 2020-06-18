@@ -14,6 +14,7 @@ namespace Dto.IRepository.SmallRoutine
          
         List<Student_DayandNight_Info> SearchDayAndNightList(DayAndNightSearchViewModel dayAndNightSearchViewModel); 
         List<Student_DayandNight_Info> CheckDayAndNightList(DayAndNightCheckViewModel dayAndNightSearchViewModel);
+        List<Student_DayandNight_Info> CheckDayAndNightList(string IdNumber, string GradeName, string IsComeSchool, string Name, string SchoolName, string Temperature, string AddTimeInterval, string AddCreateDate);
         List<Student_DayandNight_Info> getInfoByTag(string tag);
         void deleteRange(List<Student_DayandNight_Info> list);
     }

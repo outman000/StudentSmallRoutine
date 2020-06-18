@@ -149,6 +149,84 @@ namespace Dto.Service.SmallRoutine
             }
             return viewModel;
         }
+        //批量添加晨午晚检信息New
+        public BaseViewModel addDayAndNightInfoListNew(DayAndNightAddListViewModel model)
+        {
+            BaseViewModel viewModel = new BaseViewModel();
+            bool isok = true;
+            List<DayAndNightAddListMiddle> list = model.dayAndNightAddListMiddles;
+            #region 先循环验证一下要导入的信息是否已有数据
+            for (int i = 0; i < list.Count; i++)
+            {
+                Student_DayandNight_Info info = new Student_DayandNight_Info();
+                info = mapper.Map<DayAndNightAddListMiddle, Student_DayandNight_Info>(list[i]);
+                if (String.IsNullOrEmpty(info.SchoolName) || String.IsNullOrEmpty(info.Name) || String.IsNullOrEmpty(info.GradeName) || String.IsNullOrEmpty(info.ClassName))
+                {
+                    viewModel.ResponseCode = 2;
+                    viewModel.Message = "参数信息为空";
+                    return viewModel;
+                }
+                else
+                {
+                    if (info.IsComeSchool != "是")
+                    {
+                        info.Temperature = "0";
+                    }
+                    info.AddCreateDate = DateTime.Now;
+                    var searchResult = dayandNightRepository.CheckDayAndNightList(Dtol.Helper.MD5.Md5Hash(info.IdNumber), info.GradeName, info.IsComeSchool, info.Name, info.SchoolName, info.Temperature, info.AddTimeInterval, info.AddCreateDate.ToString());
+                    if (searchResult != null)
+                    {
+                        viewModel.ResponseCode = 2;
+                        viewModel.Message = "已有数据，不可重复导入";
+                        return viewModel;
+                    }
+                }
+            }
+            #endregion
+            for (int i = 0; i < list.Count; i++)
+            {
+                Student_DayandNight_Info info = new Student_DayandNight_Info();
+                info = mapper.Map<DayAndNightAddListMiddle, Student_DayandNight_Info>(list[i]);
+                if (info.IsComeSchool == "是")
+                {
+                    if (String.IsNullOrEmpty(info.Temperature) || String.IsNullOrEmpty(info.AddTimeInterval))
+                    {
+                        viewModel.ResponseCode = 2;
+                        viewModel.Message = "体温或填报时段信息为空";
+                        return viewModel;
+                    }
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(info.NotComeJinReason))
+                    {
+                        viewModel.ResponseCode = 2;
+                        viewModel.Message = "未到校原因信息为空";
+                        return viewModel;
+                    }
+                    info.Temperature = "0";
+                }
+                info.IdNumber = Dtol.Helper.MD5.Md5Hash(info.IdNumber);
+                info.tag = Dtol.Helper.MD5.Md5Hash(info.tag);
+                info.AddCreateDate = DateTime.Now;
+                dayandNightRepository.Add(info);
+                if (dayandNightRepository.SaveChanges() <= 0)
+                {
+                    isok = false;
+                }
+            }
+            if (isok)
+            {
+                viewModel.ResponseCode = 0;
+                viewModel.Message = "晨午晚检信息添加成功";
+            }
+            else
+            {
+                viewModel.ResponseCode = 1;
+                viewModel.Message = "晨午晚检信息添加失败";
+            }
+            return viewModel;
+        }
         public void RemveIDayAndNightService(List<int> obj)
         {
             dayandNightRepository.RemoveList(obj);

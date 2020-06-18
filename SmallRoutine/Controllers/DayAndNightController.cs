@@ -35,6 +35,17 @@ namespace SmallRoutine.Controllers
         //    return viewModel;
         //}
         /// <summary>
+        /// 批量添加晨午晚检信息(新)
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("/DayAndNight/AddDayAndNightInfoListNew")]
+        [ValidateModel]
+        public ActionResult<BaseViewModel> addDayAndNightInfoListNew(DayAndNightAddListViewModel model)
+        {
+            BaseViewModel viewModel = dayAndNightService.addDayAndNightInfoListNew(model);
+            return viewModel;
+        }
+        /// <summary>
         /// 批量添加晨午晚检信息
         /// </summary>
         /// <returns></returns>
