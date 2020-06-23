@@ -79,7 +79,7 @@ namespace Dto.Repository.SmallRoutine
             var preciate = GetByModelWhere(dayAndNightSearchViewModel);
             var precateresult = GetByModelChildResultWhere(dayAndNightSearchViewModel);
             List<Student_DayandNight_Info> Student_DayandNight_Infos = new List<Student_DayandNight_Info>();
-            if (dayAndNightSearchViewModel.RoleID.Equals("sys"))
+            if (dayAndNightSearchViewModel.RoleID.Equals("sys") || dayAndNightSearchViewModel.RoleID.Equals("con") || dayAndNightSearchViewModel.RoleID.Equals("admin"))//总管理员、校医、校长默认查看学校所有
             {
                 var tempresult = Db.Student_DayandNight_Info.Where(preciate);
                 Student_DayandNight_Infos.AddRange(tempresult.ToList());
@@ -201,10 +201,8 @@ namespace Dto.Repository.SmallRoutine
             var predicate = WhereExtension.True<Student_DayandNight_Info>();//初始化where表达式  
             predicate = predicate.And(p => p.IdNumber.Contains(IdNumber));
             predicate = predicate.And(p => p.GradeName.Contains(GradeName));
-            predicate = predicate.And(p => p.IsComeSchool.Contains(IsComeSchool));
             predicate = predicate.And(p => p.Name.Contains(Name));
             predicate = predicate.And(p => p.SchoolName.Contains(SchoolName));
-            predicate = predicate.And(p => p.Temperature.Contains(Temperature));
             predicate = predicate.And(p => p.AddTimeInterval.Contains(AddTimeInterval));
             if (AddCreateDate != null && !AddCreateDate.Equals(""))
             {

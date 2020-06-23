@@ -166,21 +166,21 @@ namespace Dto.Service.SmallRoutine
                     viewModel.Message = "参数信息为空";
                     return viewModel;
                 }
-                else
-                {
-                    if (info.IsComeSchool != "是")
-                    {
-                        info.Temperature = "0";
-                    }
-                    info.AddCreateDate = DateTime.Now;
-                    var searchResult = dayandNightRepository.CheckDayAndNightList(Dtol.Helper.MD5.Md5Hash(info.IdNumber), info.GradeName, info.IsComeSchool, info.Name, info.SchoolName, info.Temperature, info.AddTimeInterval, info.AddCreateDate.ToString());
-                    if (searchResult != null)
-                    {
-                        viewModel.ResponseCode = 2;
-                        viewModel.Message = "已有数据，不可重复导入";
-                        return viewModel;
-                    }
-                }
+                //else
+                //{
+                //    if (info.IsComeSchool != "是")
+                //    {
+                //        info.Temperature = "0";
+                //    }
+                //    info.AddCreateDate = DateTime.Now;
+                //    var searchResult = dayandNightRepository.CheckDayAndNightList(Dtol.Helper.MD5.Md5Hash(info.IdNumber), info.GradeName, info.IsComeSchool, info.Name, info.SchoolName, info.Temperature, info.AddTimeInterval, info.AddCreateDate.ToString());
+                //    if (searchResult != null)
+                //    {
+                //        viewModel.ResponseCode = 2;
+                //        viewModel.Message = "已有数据，不可重复导入";
+                //        return viewModel;
+                //    }
+                //}
             }
             #endregion
             for (int i = 0; i < list.Count; i++)
@@ -226,6 +226,52 @@ namespace Dto.Service.SmallRoutine
                 viewModel.Message = "晨午晚检信息添加失败";
             }
             return viewModel;
+        }
+        //批量添加晨午晚检信息前验证New
+        public BaseViewModel addCheckDayAndNightInfoListNew(DayAndNightAddListViewModel model)
+        {
+            BaseViewModel viewModel = new BaseViewModel();
+            List<DayAndNightAddListMiddle> list = model.dayAndNightAddListMiddles;
+            if (list.Count > 0)
+            {
+                #region 先循环验证一下要导入的信息是否已有数据
+                for (int i = 0; i < list.Count; i++)
+                {
+                    Student_DayandNight_Info info = new Student_DayandNight_Info();
+                    info = mapper.Map<DayAndNightAddListMiddle, Student_DayandNight_Info>(list[i]);
+                    if (String.IsNullOrEmpty(info.SchoolName) || String.IsNullOrEmpty(info.Name) || String.IsNullOrEmpty(info.GradeName) || String.IsNullOrEmpty(info.ClassName))
+                    {
+                        viewModel.ResponseCode = 2;
+                        viewModel.Message = "参数信息为空";
+                        return viewModel;
+                    }
+                    else
+                    {
+                        if (info.IsComeSchool != "是")
+                        {
+                            info.Temperature = "0";
+                        }
+                        info.AddCreateDate = DateTime.Now;
+                        var searchResult = dayandNightRepository.CheckDayAndNightList(Dtol.Helper.MD5.Md5Hash(info.IdNumber), info.GradeName, info.IsComeSchool, info.Name, info.SchoolName, info.Temperature, info.AddTimeInterval, info.AddCreateDate.ToString());
+                        if (searchResult != null)
+                        {
+                            viewModel.ResponseCode = 2;
+                            viewModel.Message = "已有数据，不可重复导入";
+                            return viewModel;
+                        }
+                    }
+                }
+                viewModel.ResponseCode = 0;
+                viewModel.Message = "验证通过";
+                return viewModel;
+                #endregion
+            }
+            else
+            {
+                viewModel.ResponseCode = 2;
+                viewModel.Message = "参数信息为空";
+                return viewModel;
+            }
         }
         public void RemveIDayAndNightService(List<int> obj)
         {
