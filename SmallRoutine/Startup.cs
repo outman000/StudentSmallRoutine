@@ -209,52 +209,50 @@ namespace SmallRoutine
         {
             if (env.IsDevelopment())
             {
-             
+                // app.UseAuthentication();//启用验证
 
-                app.UseDeveloperExceptionPage();
+                //允许所有的域
+                app.UseCors(builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+
+                app.UseDefaultFiles();
+                app.UseStaticFiles();
+                //  app.UseHttpsRedirection();
+
+                //，启用中间件为生成的 JSON 文档和 Swagger UI 提供服务
+                // Enable middleware to serve generated Swagger as a JSON endpoint.
+                app.UseSwagger();
+
+                // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+                // specifying the Swagger JSON endpoint.
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "用户管理文档 V1");
+                    c.RoutePrefix = string.Empty;
+                });
+
+
+                //using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())压力问题注释
+                //{
+                //    var context = serviceScope.ServiceProvider.GetRequiredService<DtolContext>();
+                //    context.Database.Migrate();
+                //}
+
+
+                //   app.UseHttpsRedirection();
+                app.UseMvc();
+
+                //ContextSeed.SeedAsync(app, loggerFactory).Wait();压力问题注释
             }
             else
             {
 
-                app.UseDeveloperExceptionPage();
-                app.UseHsts();
+                //app.UseDeveloperExceptionPage();
+                //app.UseHsts();
             }
-            // app.UseAuthentication();//启用验证
-
-            //允许所有的域
-            app.UseCors(builder =>
-            {
-                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-            });
-
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
-          //  app.UseHttpsRedirection();
-
-            //，启用中间件为生成的 JSON 文档和 Swagger UI 提供服务
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
-            // specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "用户管理文档 V1");
-                c.RoutePrefix = string.Empty;
-            });
-
-
-            //using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())压力问题注释
-            //{
-            //    var context = serviceScope.ServiceProvider.GetRequiredService<DtolContext>();
-            //    context.Database.Migrate();
-            //}
-
-
-            //   app.UseHttpsRedirection();
-            app.UseMvc();
-
-            //ContextSeed.SeedAsync(app, loggerFactory).Wait();压力问题注释
+            
         }
 
 
