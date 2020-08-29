@@ -42,6 +42,11 @@ namespace Dtol
         public DbSet<Template_Student> Template_Student { get; set; }
         public DbSet<User_Group> User_Group { get; set; }
 
+        //删除的学生基本信息 备份保存表
+        public DbSet<Student_Info_Delete> Student_Info_Delete { get; set; }
+        
+
+
         public DtolContext(DbContextOptions<DtolContext> options)
        : base(options)
         {

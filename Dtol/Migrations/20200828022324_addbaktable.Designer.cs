@@ -4,14 +4,16 @@ using Dtol;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dtol.Migrations
 {
     [DbContext(typeof(DtolContext))]
-    partial class DtolContextModelSnapshot : ModelSnapshot
+    [Migration("20200828022324_addbaktable")]
+    partial class addbaktable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -453,15 +455,19 @@ namespace Dtol.Migrations
 
                     b.Property<string>("Sex");
 
-                    b.Property<int>("StudentRegisterHeath_InfoId");
+                    b.Property<int?>("StudentRegisterHeath_InfoId");
 
                     b.Property<int>("Student_id");
 
-                    b.Property<int>("class_InfoId");
+                    b.Property<int?>("class_InfoId");
 
                     b.Property<string>("tag");
 
                     b.HasKey("id");
+
+                    b.HasIndex("StudentRegisterHeath_InfoId");
+
+                    b.HasIndex("class_InfoId");
 
                     b.ToTable("Student_Info_Delete");
                 });
@@ -888,6 +894,17 @@ namespace Dtol.Migrations
 
                     b.HasOne("Dtol.dtol.Class_Info", "class_Info")
                         .WithMany("Student_Info")
+                        .HasForeignKey("class_InfoId");
+                });
+
+            modelBuilder.Entity("Dtol.dtol.Student_Info_Delete", b =>
+                {
+                    b.HasOne("Dtol.dtol.StudentRegisterHeath_Info", "StudentRegisterHeath_Info")
+                        .WithMany()
+                        .HasForeignKey("StudentRegisterHeath_InfoId");
+
+                    b.HasOne("Dtol.dtol.Class_Info", "class_Info")
+                        .WithMany()
                         .HasForeignKey("class_InfoId");
                 });
 

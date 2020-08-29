@@ -27,7 +27,15 @@ namespace Dto.IService.SmallRoutine
         List<StudentMiddle> GetListByParas(StudentSearchModel model);
 
 
+        //根据 id 批量删除 学生信息
+        BaseViewModel batchdelStudentInfo(List<int> ids, string memo);
 
+
+        //根据 id 批量学生 信息批量 升班
+        BaseViewModel BatchChangeStudentInfo(StudentChangeInfo model);
+
+        //获取该年级班级的 学生总数
+        BaseViewModel GetStudentTotalByGC(string GradeCode, string ClassCode);
 
     }
 }

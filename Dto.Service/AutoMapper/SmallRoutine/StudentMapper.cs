@@ -31,6 +31,8 @@ namespace Dto.Service.AutoMapper.SmallRoutine
             CreateMap<StudentMiddle, Student_Info>()
                 .ForMember(a => a.IdNumber, opt => opt.MapFrom(src => Dtol.Helper.MD5.Md5Hash(src.IdNumber)));
 
+            CreateMap<Student_Info, Student_Info_Delete>();
+            CreateMap<Student_Info_Delete, Student_Info>();
 
         }
     }

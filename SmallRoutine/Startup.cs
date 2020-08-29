@@ -222,6 +222,10 @@ namespace SmallRoutine
                 });
             }
 
+         
+
+
+
             //允许所有的域
             app.UseCors(builder =>
             {

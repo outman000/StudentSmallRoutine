@@ -15,5 +15,9 @@ namespace Dto.IRepository.SmallRoutine
         bool CheckInfo(string code, string name);
         List<Class_Info> getclassInfoBycode(string code);
         Class_Info GetClassCodeByGradeCode(Grade_Info gradeCode, string v);
+
+
+        //根据code查找name 20200828
+         Class_Info getNameInfoBycode(string code);
     }
 }

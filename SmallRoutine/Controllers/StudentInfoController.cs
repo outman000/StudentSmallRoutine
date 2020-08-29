@@ -86,5 +86,47 @@ namespace SmallRoutine.Controllers
             return resModel;
         }
 
+
+        /// <summary>
+        /// 批量删除学生基础信息new
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("/StudentInfo/BatchDelete")]
+        [ValidateModel]
+        public ActionResult<BaseViewModel> batchdelStudentInfo(BaseListByInt model)
+        {
+            List<int> idsNew = model.ids;
+            BaseViewModel viewModel = _studentService.batchdelStudentInfo(idsNew, model.memo);
+            return viewModel;
+        }
+
+
+        /// <summary>
+        /// 学生 信息批量 升班
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("/StudentInfo/BatchChange")]
+        [ValidateModel]
+        public ActionResult<BaseViewModel> BatchChangeStudentInfo(StudentChangeInfo model)
+        {
+            BaseViewModel viewModel = new BaseViewModel();
+            viewModel = _studentService.BatchChangeStudentInfo(model);
+            return viewModel;
+        }
+
+
+        /// <summary>
+        /// 获取该年级班级的 学生总数
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("/StudentInfo/GetStudentNum")]
+        [ValidateModel]
+        public ActionResult<BaseViewModel> GetStudentTotal(string GradeCode, string ClassCode)
+        {
+            BaseViewModel viewModel = new BaseViewModel();
+            viewModel = _studentService.GetStudentTotalByGC(GradeCode, ClassCode);
+            return viewModel;
+        }
+
     }
 }

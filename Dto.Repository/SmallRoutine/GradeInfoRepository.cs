@@ -111,6 +111,28 @@ namespace Dto.Repository.SmallRoutine
             return result;
         }
 
+
+        //根据code查找name 20200828
+        public  Grade_Info  getnameInfoBycode(string code)
+        {
+            //查询条件
+            var predicate = WhereExtension.True<Grade_Info>();//初始化where表达式
+
+            predicate = predicate.And(p => p.GradeCode.Equals(code));
+
+            var result = DbSet.Where(predicate).OrderBy(a => a.GradeCode).ToList();
+            if (result.Count > 0)
+            {
+                return result.First();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+
         public Grade_Info GetGradeCodeBySchoolCode(School_Info school_Info, string v)
         {
             if (school_Info == null)
